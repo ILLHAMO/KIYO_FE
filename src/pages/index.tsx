@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 import HomeTest from 'app.feature/home/HomeTest';
 
 const Home: NextPage = () => {
@@ -6,7 +6,7 @@ const Home: NextPage = () => {
     <div>
       <HomeTest />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
