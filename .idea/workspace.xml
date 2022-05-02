@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="49526bdd-cd37-41c9-a48e-28920da1ff9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.feature/home/HomeStoreFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/home/HomeStoreFilter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.styled/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.styled/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/home/HomeHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/home/HomeHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

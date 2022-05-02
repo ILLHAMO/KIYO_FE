@@ -19,7 +19,7 @@ const HomeHeader = () => {
 export default HomeHeader;
 
 const StyledWrapper = styled.div`
-  padding: 0 20px;
+  padding: 0 20px 0 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
