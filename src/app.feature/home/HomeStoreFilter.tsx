@@ -56,8 +56,8 @@ const StyledWrapper = styled.div`
     gap: 24px;
     width: 100%;
     overflow-x: scroll;
-
-    overflow-y: visible;
+    overflow-y: hidden;
+    
     &::-webkit-scrollbar {
       display: none;
     }
