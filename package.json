@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "6.2.1",
     "next": "12.1.5",
+    "next-compose-plugins": "2.2.1",
+    "next-transpile-modules": "9.0.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "styled-components": "5.3.5"
+    "styled-components": "5.3.5",
+    "urlencoded-body-parser": "3.0.0"
   },
   "devDependencies": {
+    "@types/node": "17.0.31",
     "@types/react": "18.0.6",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",

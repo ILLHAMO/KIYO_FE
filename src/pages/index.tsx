@@ -5,6 +5,7 @@ import HomeHeader from 'app.feature/home/HomeHeader';
 import HomeBanner from 'app.feature/home/HomeBanner';
 import HomeStoreFilter from 'app.feature/home/HomeStoreFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
+import HomeConvenienceFilter from 'app.feature/home/ HomeConvenienceFilter';
 
 const PageHome = () => {
   return (
@@ -14,6 +15,7 @@ const PageHome = () => {
       <HomeStoreFilter />
       <HomeStoreList />
       <NavigationBar />
+      {/* <HomeConvenienceFilter /> */}
     </StyledWrapper>
   );
 };
