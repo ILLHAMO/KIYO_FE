@@ -1,12 +1,12 @@
-import MyPageInquiryHeader from 'app.feature/mypage/inquiry/MyPageInquiryHeader';
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Header from 'app.components/Header/Header';
 
 const PageMyPageInquiry = () => {
   return (
     <StyledWrapper>
-      <MyPageInquiryHeader />
+      <Header title='1:1 문의' />
       <Link href="/mypage/inquiry/my">
         <div className="list-item">내가 작성한 문의</div>
       </Link>

@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-const MyPageInquiryMyHeader = () => {
+type TProps = {
+  title: React.ReactNode;
+};
+
+const Header: React.FC<TProps> = ({ title }) => {
   const router = useRouter();
 
   return (
@@ -11,12 +15,12 @@ const MyPageInquiryMyHeader = () => {
         src="/images/mypage/back_button_black.png"
         onClick={() => router.back()}
       />
-      내가 작성한 문의
+      {title}
     </StyledWrapper>
   );
 };
 
-export default MyPageInquiryMyHeader;
+export default Header;
 
 const StyledWrapper = styled.div`
   padding: 8px;
