@@ -8,7 +8,10 @@ const MyPageReviewList = () => {
         <div className="card-top">
           <div className="user">
             <div className="profile"></div>
-            <div className="name">연지맘</div>
+            <div className="store">
+              <div className='name'>홍길동네 돼지 국밥</div>
+              <div className='address'>용인시 기흥구</div>
+            </div>
           </div>
           <div className="method-button">
             <div className="edit-button">수정</div>
@@ -32,28 +35,10 @@ const MyPageReviewList = () => {
         <div className="card-top">
           <div className="user">
             <div className="profile"></div>
-            <div className="name">파워맘</div>
-          </div>
-          <div className="method-button">
-            <div className="declare-button">신고</div>
-          </div>
-        </div>
-        <div className="card-bottom">
-          <div className="review-title neutral">
-            <img src="/images/common/neutral.png" />
-            평범해요!
-          </div>
-          <div className="review-content">
-            매장도 깨끗하고 키즈메뉴도 아이가 잘 먹었습니다!
-          </div>
-          <div className="review-date">2022-04-09</div>
-        </div>
-      </div>
-      <div className="review-card">
-        <div className="card-top">
-          <div className="user">
-            <div className="profile"></div>
-            <div className="name">프로불편러</div>
+            <div className="store">
+              <div className='name'>홍길동네 돼지 국밥</div>
+              <div className='address'>용인시 기흥구</div>
+            </div>
           </div>
           <div className="method-button">
             <div className="edit-button">수정</div>
@@ -61,15 +46,16 @@ const MyPageReviewList = () => {
           </div>
         </div>
         <div className="card-bottom">
-          <div className="review-title novisit">
-            <img src="/images/common/novisit.png" />
-            재방문 의사 없어요!
+          <div className="review-title revisit">
+            <img src="/images/common/revisit.png" />
+            재방문 의사 있어요!
           </div>
           <div className="review-content">
-            키즈메뉴가 있음에도 불구하고 아이들을 데려오기에는 부적절한 식당
-            선택이었던 것 같습니다
+            아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수
+            있는 키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고 무엇보다
+            맛있었습니다!
           </div>
-          <div className="review-date">2022-04-05</div>
+          <div className="review-date">2022-05-03</div>
         </div>
       </div>
     </StyledWrapper>
@@ -108,7 +94,15 @@ const StyledWrapper = styled.div`
           border-radius: 50%;
         }
 
-        .name {
+        .store {
+          .name {
+            margin-bottom: 4px;
+          }
+          
+          .address {
+            font-size: 12px;
+            color: var(--color-gray-300);
+          }
         }
       }
 

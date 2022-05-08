@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-const MyPageReviewHeader = () => {
+const MyPageStoreHeader = () => {
   const router = useRouter();
 
   return (
@@ -11,12 +11,12 @@ const MyPageReviewHeader = () => {
         src="/images/mypage/back_button_black.png"
         onClick={() => router.back()}
       />
-      내가 쓴 리뷰
+      내가 등록한 식당
     </StyledWrapper>
   );
 };
 
-export default MyPageReviewHeader;
+export default MyPageStoreHeader;
 
 const StyledWrapper = styled.div`
   padding: 8px;

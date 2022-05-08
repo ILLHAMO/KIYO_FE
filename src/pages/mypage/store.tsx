@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import MyPageReviewList from 'app.feature/mypage/review/MyPageReviewList';
-import MyPageReviewHeader from 'app.feature/mypage/review/MyPageReviewHeader';
+import MyPageStoreHeader from 'app.feature/mypage/store/MyPageStoreHeader';
+import MyPageStoreList from 'app.feature/mypage/store/MyPageStoreList';
 
 const PageMyPageReview = () => {
   return (
     <StyledWrapper>
-      <MyPageReviewHeader />
-      <MyPageReviewList />
+      <MyPageStoreHeader />
+      <MyPageStoreList />
     </StyledWrapper>
   );
-};
+}
 
 export default PageMyPageReview;
 
