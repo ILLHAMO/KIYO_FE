@@ -9,6 +9,8 @@ const MyPageList = () => {
     router.push(`/mypage/${link}`);
   };
 
+
+
   return (
     <StyledWrapper>
       <div className="route-list" onClick={() => onClickRouteList('review')}>
@@ -17,7 +19,7 @@ const MyPageList = () => {
       <div className="route-list" onClick={() => onClickRouteList('store')}>
         내가 등록한 식당
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('qna')}>
+      <div className="route-list" onClick={() => onClickRouteList('inquiry')}>
         1:1 문의
       </div>
       <div className="route-list" onClick={() => onClickRouteList('declare')}>
@@ -41,7 +43,9 @@ export default MyPageList;
 const StyledWrapper = styled.div`
   .route-list {
     cursor: pointer;
-    padding: 16px 20px;
+    padding: 0 20px;
+    height: 48px;
+    line-height: 48px;
     border-bottom: 0.5px solid var(--color-gray-100);
 
     &:last-child {

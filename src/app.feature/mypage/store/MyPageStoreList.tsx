@@ -6,10 +6,10 @@ const MyPageStoreList = () => {
     <StyledWrapper>
       <div className="store-card">
         <div className="store-info">
-          <div className='store-img' />
+          <div className="store-img" />
           <div className="store">
-            <div className='name'>홍길동네 돼지 국밥</div>
-            <div className='address'>용인시 기흥구</div>
+            <div className="name">홍길동네 돼지 국밥</div>
+            <div className="address">용인시 기흥구</div>
           </div>
         </div>
         <div className="button-wrap">
@@ -19,10 +19,10 @@ const MyPageStoreList = () => {
       </div>
       <div className="store-card">
         <div className="store-info">
-          <div className='store-img' />
+          <div className="store-img" />
           <div className="store">
-            <div className='name'>홍길동네 돼지 국밥</div>
-            <div className='address'>용인시 기흥구</div>
+            <div className="name">홍길동네 돼지 국밥</div>
+            <div className="address">용인시 기흥구</div>
           </div>
         </div>
         <div className="button-wrap">
@@ -44,16 +44,16 @@ const StyledWrapper = styled.div`
     justify-content: space-between;
     padding: 8px 0;
     border-bottom: 0.5px solid var(--color-gray-100);
-    
+
     &:last-child {
       border-bottom: 0;
     }
-    
+
     .store-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       .store-img {
         width: 36px;
         height: 36px;
@@ -61,7 +61,7 @@ const StyledWrapper = styled.div`
         background-color: #ffe9ef;
         border-radius: 50%;
       }
-      
+
       .store {
         .name {
           margin-bottom: 4px;
@@ -74,7 +74,7 @@ const StyledWrapper = styled.div`
       }
     }
   }
-  
+
   .button-wrap {
     display: flex;
     align-items: center;
