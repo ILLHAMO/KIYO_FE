@@ -20,11 +20,17 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   ${resetCSS};
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   // 백그라운스 스크롤 방지 스타일
   body.__modal_background_scroll_stop {
     overflow: hidden !important;
   }
+  
+  
 
   .win-max-width {
     max-width: 664px;
