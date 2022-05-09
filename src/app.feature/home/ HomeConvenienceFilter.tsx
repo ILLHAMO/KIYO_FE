@@ -36,9 +36,9 @@ const HomeConvenienceFilter = () => {
         <img src="/images/common/close_gray.png" />
         <div className='apply-button'>적용</div>
       </div>
-      
+
       <div className='title'>편의사항</div>
-      <div className="filter-wrap true">
+      <div className="filter-wrap">
         {CONVENIENCE_CATEGORY.map((item, idx) => (
           <div className="filter-item" key={`filter-${idx}`}>
             <div className="item-container">
@@ -61,7 +61,8 @@ const StyledWrapper = styled.div`
   max-width: 664px;
   width: 100%;
   border-top: 1px solid var(--color-gray-300);
-  
+  overflow: hidden;
+
   .filter-header {
     display: flex;
     justify-content: space-between;
@@ -140,10 +141,7 @@ const StyledWrapper = styled.div`
       height: 32px;
     }
 
-    &.true {
-      .item-title {
-        color: var(--color-main);
-      }
+    .filter-item.true {
 
       .item-container {
         border: 6px double var(--color-main);
@@ -152,6 +150,10 @@ const StyledWrapper = styled.div`
       svg {
         fill: var(--color-main);
       }
+    }
+
+    .item-title.true {
+      color: var(--color-main);
     }
   }
 
