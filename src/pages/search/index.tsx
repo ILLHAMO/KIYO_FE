@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SearchHeader from 'app.feature/search/SearchHeader';
 import SearchRecent from 'app.feature/search/SearchRecent';
 import SearchRecommend from 'app.feature/search/SearchRecommend';
+import SearchSearching from 'app.feature/search/SearchSearching';
 
 const PageSearch = () => {
   return (
@@ -10,6 +11,7 @@ const PageSearch = () => {
       <SearchHeader />
       <SearchRecent />
       <SearchRecommend />
+      {/* <SearchSearching /> */}
     </StyledWrapper>
   );
 };

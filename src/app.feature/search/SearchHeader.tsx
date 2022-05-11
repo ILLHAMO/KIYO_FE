@@ -53,7 +53,6 @@ const StyledWrapper = styled.div`
     position: absolute;
     top: 11px;
     right: 11px;
-  }
-  
+  }  
   
   `;

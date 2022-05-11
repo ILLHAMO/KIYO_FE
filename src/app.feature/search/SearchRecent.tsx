@@ -9,12 +9,8 @@ const SearchRecent = () => {
 					최근 입력한 검색어가 없습니다.
 				</div>
 				<div className="item-container">
-					<div className="item-title">
-						돈까스
-					</div>
-					<div className="item-title">
-						케이크
-					</div>
+					<div className="item-title">돈까스</div>
+					<div className="item-title">케이크</div>
 				</div>
 
 			</div>
@@ -27,9 +23,7 @@ const SearchRecent = () => {
 					<img src="/images/search/toggle_off.png" alt="" className="toggle-off" />
 					<div className="toggle-text">자동 저장 OFF</div>
 				</div>
-				<div className="remove-botton">
-					전체 삭제
-				</div>
+				<div className="remove-botton true">전체 삭제</div>
 			</div>
     </StyledWrapper>
   );
