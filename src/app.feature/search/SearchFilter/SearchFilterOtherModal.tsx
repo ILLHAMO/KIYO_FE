@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ConvenienceFilter from 'app.components/Filter/ConvenienceFilter';
 import StoreFilter from 'app.components/Filter/StoreFilter';
+import ButtonSquare from 'app.components/Button/ButtonSquare';
 
 const SearchFilterOtherModal = () => {
   return (
@@ -22,19 +23,11 @@ const SearchFilterOtherModal = () => {
         <div className="filter-container">
           <div className ="title">운영 방식</div>
           <div className="kidszone-filter">
-            <div className="kidszone-filter__item">
-              <img src="/images/search/check.png" alt="" />
-              키즈존
-              </div>
-            <div className="kidszone-filter__item">
-              <img src="/images/search/check.png" alt="" />
-              일반 식당
-              </div>
+            <ButtonSquare name="키즈존" />
+            <ButtonSquare name="일반 식당" />
+          </div>
           </div>
         </div>
-      </div>
-
-
     </StyledWrapper>
   );
 };
@@ -101,43 +94,10 @@ const StyledWrapper = styled.div`
   }
 
   .kidszone-filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
     padding: 0 10% 0;
-
-    img {
-      display: none;
-    }
-
-    .kidszone-filter__item {
-      cursor: pointer;
-      position: relative;
-      width: 49%;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 2px solid var(--color-gray-100);
-      color: var(--color-gray-100);
-
-      &.true {
-        color: var(--color-main);
-        border: 2px solid var(--color-main);
-        
-        img {
-          display: block;
-          position: absolute;
-          top: -6px;
-          right: -5px;
-          width: 24px;
-          height: 18.3px;
-        }
-      }
-    }
   }
 
-  
-  
 `;

@@ -13,7 +13,7 @@ const PageSearchResult = () => {
 			<SearchFilter />
 			<HomeStoreList />
 			<NavigationBar />
-			{/* <SearchFilterOtherModal /> */}
+			<SearchFilterOtherModal />
     </StyledWrapper>
   );
 };
