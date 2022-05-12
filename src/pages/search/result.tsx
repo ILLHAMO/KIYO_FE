@@ -5,6 +5,7 @@ import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
 import SearchFilter from 'app.feature/search/SearchFilter/SearchFilter';
 import SearchFilterOtherModal from 'app.feature/search/SearchFilter/SearchFilterOtherModal';
+import SearchFilterLocalModal from 'app.feature/search/SearchFilter/SearchFilterLocalModal';
 
 const PageSearchResult = () => {
   return (
@@ -13,7 +14,8 @@ const PageSearchResult = () => {
 			<SearchFilter />
 			<HomeStoreList />
 			<NavigationBar />
-			<SearchFilterOtherModal />
+			{/* <SearchFilterOtherModal /> */}
+      {/* <SearchFilterLocalModal /> */}
     </StyledWrapper>
   );
 };
