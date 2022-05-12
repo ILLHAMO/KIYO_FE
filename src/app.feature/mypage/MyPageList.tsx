@@ -5,11 +5,9 @@ import { useRouter } from 'next/router';
 const MyPageList = () => {
   const router = useRouter();
 
-  const onClickRouteList = (link) => {
+  const onClickRouteList = (link: string) => {
     router.push(`/mypage/${link}`);
   };
-
-
 
   return (
     <StyledWrapper>
@@ -28,10 +26,10 @@ const MyPageList = () => {
       <div className="route-list" onClick={() => onClickRouteList('settings')}>
         설정
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('info')}>
-        키즈존 가요 정보{' '}
+      <div className="route-list" >
+        키즈존 가요 정보
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('sponsor')}>
+      <div className="route-list">
         키즈존 가요 후원하기
       </div>
     </StyledWrapper>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MyPageStoreHeader from 'app.feature/mypage/store/MyPageStoreHeader';
 import MyPageStoreList from 'app.feature/mypage/store/MyPageStoreList';
 
-const PageMyPageReview = () => {
+const PageMyPageStore = () => {
   return (
     <StyledWrapper>
       <MyPageStoreHeader />
@@ -12,7 +12,7 @@ const PageMyPageReview = () => {
   );
 }
 
-export default PageMyPageReview;
+export default PageMyPageStore;
 
 const StyledWrapper = styled.div`
   height: 100vh;

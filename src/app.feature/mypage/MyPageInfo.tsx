@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const MypageInfo = () => {
   return (
@@ -10,9 +11,11 @@ const MypageInfo = () => {
           <span>홍길동</span>님
         </div>
       </div>
-      <div className="edit-button">
-        <img src="/images/mypage/edit_black.png" />
-      </div>
+      <Link href="/mypage/edit">
+        <div className="edit-button">
+          <img src="/images/mypage/edit_black.png" />
+        </div>
+      </Link>
     </StyledWrapper>
   );
 };
@@ -25,7 +28,7 @@ const StyledWrapper = styled.div`
   justify-content: space-between;
   padding: 32px;
   //margin-bottom: 40px;
-  
+
   .user-profile {
     display: flex;
     align-items: center;
@@ -51,9 +54,10 @@ const StyledWrapper = styled.div`
       }
     }
   }
-  
+
   .edit-button {
     width: 24px;
     height: 24px;
+    cursor: pointer;
   }
 `;

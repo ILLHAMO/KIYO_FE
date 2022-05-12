@@ -28,6 +28,7 @@ const StyledWrapper = styled.div`
   align-items: center;
 
   img {
+    cursor: pointer;
     margin-right: 8px;
     width: 24px;
     height: 24px;

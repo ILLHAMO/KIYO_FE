@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from 'app.components/Header/Header';
-import MyPageDeclareList from 'app.feature/mypage/declare/MyPageDeclareList';
+import MyPageEdit from 'app.feature/mypage/edit/MyPageEdit';
 
-const PageMyPageDeclare = () => {
+const PageMyPageEdit = () => {
   return (
     <StyledWrapper>
-      <Header title="공지사항" />
-      <MyPageDeclareList />
+      <Header title="내 정보 수정" />
+      <MyPageEdit />
     </StyledWrapper>
   );
 };
 
-export default PageMyPageDeclare;
+export default PageMyPageEdit;
 
 const StyledWrapper = styled.div`
   height: 100vh;
