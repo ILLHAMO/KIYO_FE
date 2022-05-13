@@ -1,8 +1,10 @@
 import type { AppProps } from 'next/app';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 
 function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return <div className=''><Component {...pageProps} />
+  <NavigationBar /></div>;
 }
 
 export default App;

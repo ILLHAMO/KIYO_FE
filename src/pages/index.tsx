@@ -14,7 +14,6 @@ const PageHome = () => {
       <HomeBanner />
       <HomeStoreFilter />
       <HomeStoreList />
-      <NavigationBar />
       {/* <HomeConvenienceFilter /> */}
     </StyledWrapper>
   );
