@@ -116,9 +116,11 @@ const StyledWrapper = styled.div`
       .bookmark,
       .review {
         display: flex;
+        align-items: center;
 
         img {
           width: 12px;
+          height: 12px;
           margin-right: 4px;
         }
       }
