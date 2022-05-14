@@ -1,35 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const NavigationBar = () => {
   const router = useRouter();
+  const getActiveNumber = (pathname) => {
+    if (router.pathname === '/') return 0;
+    else if (router.pathname === '/map') return 1;
+    else if (router.pathname === '/bookmark') return 3;
+    else if (router.pathname === '/mypage') return 4;
+    else return 5;
+  };
+
+  const [active, setActive] = useState(getActiveNumber(router.pathname));
+
+  useEffect(() => {
+    setActive(getActiveNumber(router.pathname));
+  }, [router.pathname]);
+
+  if (
+    router.pathname !== '/' &&
+    router.pathname !== '/map' &&
+    router.pathname !== '/bookmark' &&
+    router.pathname !== '/mypage'
+  )
+    return null;
 
   return (
-    <StyledWrapper active={0}>
-      <div className={`menu-wrap ${router.pathname === '/'}`}>
-        <img
-          src={`images/common/home_${
-            router.pathname === '/' ? 'green' : 'gray'
-          }.png`}
-        />
-        <div className="title">메인홈</div>
-      </div>
-      <div className="menu-wrap">
-        <img src="images/common/map_gray.png" />
-        <div className="title">지도탐색</div>
-      </div>
+    <StyledWrapper active={active}>
+      <Link href="/">
+        <div className={`menu-wrap ${router.pathname === '/'}`}>
+          <img
+            src={`images/common/home_${
+              router.pathname === '/' ? 'green' : 'gray'
+            }.png`}
+          />
+          <div className="title">메인홈</div>
+        </div>
+      </Link>
+      <Link href="/map">
+        <div className={`menu-wrap ${router.pathname === '/map'}`}>
+          <img
+            src={`images/common/map_${
+              router.pathname === '/map' ? 'green' : 'gray'
+            }.png`}
+          />
+          <div className="title">지도탐색</div>
+        </div>
+      </Link>
       <div className="menu-wrap">
         <img src="images/common/add_green.png" className="add-button" />
       </div>
-      <div className="menu-wrap">
+      <div className={`menu-wrap ${router.pathname === '/bookmark'}`}>
         <img src="images/common/bookmark_gray.png" />
         <div className="title">북마크</div>
       </div>
-      <div className="menu-wrap">
-        <img src="images/common/mypage_gray.png" />
-        <div className="title">내 정보</div>
-      </div>
+      <Link href="/mypage">
+        <div className={`menu-wrap ${router.pathname === '/mypage'}`}>
+          <img
+            src={`images/common/mypage_${
+              router.pathname === '/mypage' ? 'green' : 'gray'
+            }.png`}
+          />
+          <div className="title">내 정보</div>
+        </div>
+      </Link>
     </StyledWrapper>
   );
 };
@@ -49,8 +85,10 @@ const StyledWrapper = styled.div`
     height: 64px;
     border-top: 4px solid var(--color-gray-200);
     background-color: white;
-    
+    transition: all 200ms;
+
     &::after {
+      transition: all 200ms;
       content: '';
       position: absolute;
       top: -4px;
