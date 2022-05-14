@@ -6,6 +6,7 @@ import HomeBanner from 'app.feature/home/HomeBanner';
 import HomeStoreFilter from 'app.feature/home/HomeStoreFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
 import HomeConvenienceFilter from 'app.feature/home/ HomeConvenienceFilter';
+import RegisterModal from 'app.feature/register/RegisterModal';
 
 const PageHome = () => {
   return (
@@ -16,6 +17,7 @@ const PageHome = () => {
       <HomeStoreList />
       <NavigationBar />
       {/* <HomeConvenienceFilter /> */}
+      {/* <RegisterModal /> */}
     </StyledWrapper>
   );
 };
