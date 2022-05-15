@@ -29,7 +29,7 @@ class _AppDocument extends Document {
           {this.props.styleTags}
           <link rel="stylesheet" type="text/css" href="/fonts/fonts.css" />
         </Head>
-        <body data-env={process.env.FIELD_TRIP_NODE_ENV}>
+        <body data-env={process.env.KIYO_ENV}>
           <Main />
           <NextScript />
         </body>
