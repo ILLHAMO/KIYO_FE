@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const NavigationBar = () => {
   const router = useRouter();
-  
+
   const getActiveNumber = (pathname) => {
     if (router.pathname === '/') return 0;
     else if (router.pathname === '/map') return 1;
