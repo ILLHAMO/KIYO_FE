@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const NavigationBar = () => {
   const router = useRouter();
+  
   const getActiveNumber = (pathname) => {
     if (router.pathname === '/') return 0;
     else if (router.pathname === '/map') return 1;
@@ -52,10 +53,14 @@ const NavigationBar = () => {
       <div className="menu-wrap">
         <img src="images/common/add_green.png" className="add-button" />
       </div>
-      <div className={`menu-wrap ${router.pathname === '/bookmark'}`}>
-        <img src="images/common/bookmark_gray.png" />
-        <div className="title">북마크</div>
-      </div>
+      <Link href="/bookmark">
+        <div className={`menu-wrap ${router.pathname === '/bookmark'}`}>
+          <img src={`images/common/bookmark_${
+            router.pathname === '/bookmark' ? 'green' : 'gray'
+          }.png`} />
+          <div className="title">북마크</div>
+        </div>
+      </Link>
       <Link href="/mypage">
         <div className={`menu-wrap ${router.pathname === '/mypage'}`}>
           <img
