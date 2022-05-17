@@ -59,14 +59,6 @@ const StyledWrapper = styled.div`
       width: 48px;
       height: 24px;
 
-      &:focus {
-        display: none;
-      }
-      
-      &:active{
-        //border: none;
-      }
-
       &:checked {
         background-color: var(--color-main);
         border-color: var(--color-main);

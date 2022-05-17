@@ -30,12 +30,13 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden !important;
   }
   
-  
-
   .win-max-width {
     max-width: 664px;
   }
-  
+
+  body {
+    margin: 0 auto !important;
+  }
 `;
 
 export const GlobalStyleHeight100 = createGlobalStyle`

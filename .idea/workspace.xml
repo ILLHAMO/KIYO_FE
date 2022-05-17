@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="49526bdd-cd37-41c9-a48e-28920da1ff9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.components/Button/ButtonTest.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.feature/home/HomeHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/home/HomeHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/settings/MyPageSettingsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/settings/MyPageSettingsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.styled/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.styled/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/mypage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/search/result.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search/result.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +58,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/common" />
       <recent name="$PROJECT_DIR$/public/images/home" />
       <recent name="$PROJECT_DIR$/public/images/enter" />
       <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/src/pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images/common" />

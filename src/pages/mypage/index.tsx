@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MyPageInfo from 'app.feature/mypage/MyPageInfo';
-import MyPageList from 'app.feature/mypage/MypageList';
+import MyPageList from 'app.feature/mypage/MyPageList';
 
 const PageMyPage = () => {
   return (
