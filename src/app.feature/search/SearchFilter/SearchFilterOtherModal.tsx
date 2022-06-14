@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ConvenienceFilter from 'app.components/Filter/ConvenienceFilter';
-import StoreFilter from 'app.components/Filter/StoreFilter';
+import FilterConvenience from 'app.components/Filter/FilteConvenience';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
+import FilterCategory from 'app.components/Filter/FilterCategory';
 
 const SearchFilterOtherModal = () => {
   return (
@@ -14,11 +14,11 @@ const SearchFilterOtherModal = () => {
       <div className="filter-body">
         <div className="filter-container">
           <div className="title">장소 종류</div>
-          <StoreFilter />
+          <FilterCategory />
         </div>
         <div className="filter-container">
           <div className="title">편의 사항</div>
-          <ConvenienceFilter />
+          <FilterConvenience />
         </div>
         <div className="filter-container">
           <div className ="title">운영 방식</div>

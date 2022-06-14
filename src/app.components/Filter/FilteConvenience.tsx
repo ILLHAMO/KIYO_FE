@@ -29,16 +29,16 @@ const CONVENIENCE_CATEGORY = [
   { src: <SVGpacking /> , title: '포장가능' }
 ];
 
-const ConvenienceFilter = () => {
+const FilterConvenience = () => {
   return (
-    <StyledWrapper>
-      <div className="filter-wrap">
+    <StyledWrapper className='convenience-filter'>
+      <div className="convenience-filter__filter-wrap">
         {CONVENIENCE_CATEGORY.map((item, idx) => (
-          <div className="filter-item" key={`filter-${idx}`}>
-            <div className="item-container">
+          <div className="convenience-filter__filter-item" key={`filter-${idx}`}>
+            <div className="convenience-filter__item-container">
               <>{item.src}</>
             </div>
-            <div className="item-title">{item.title}</div>
+            <div className="convenience-filter__item-title">{item.title}</div>
           </div>
         ))}
       </div>
@@ -46,16 +46,16 @@ const ConvenienceFilter = () => {
   );
 };
 
-export default ConvenienceFilter;
+export default FilterConvenience;
 
 const StyledWrapper = styled.div`
-  .filter-wrap {
+  .convenience-filter__filter-wrap {
     display: flex;
     flex-wrap: wrap;
     padding: 0 40px 0;
     width: 100%;
     
-    .filter-item {
+    .convenience-filter__filter-item {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -66,46 +66,45 @@ const StyledWrapper = styled.div`
       @media only screen and (max-width: 374px) {
         width: 33.3%;
       }
-    }
-    .item-title {
-      word-break: keep-all;
+
+      .convenience-filter__item-container {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 16px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        border: 2px solid var(--color-gray-100);
+        background-color: white;
+
+        svg {
+          fill: var(--color-gray-100);
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .convenience-filter__item-title {
+        word-break: keep-all;
+      }
     }
   
-    .item-container {
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 8px;
-      font-size: 16px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50px;
-      border: 2px solid var(--color-gray-100);
-      background-color: white;
-    }
-  
-    svg {
-      fill: var(--color-gray-100);
-      width: 32px;
-      height: 32px;
-    }
+    .convenience-filter__filter-item.convenience-filter__filter-item--on {
 
-    .filter-item.true {
-
-      .item-container {
+      .convenience-filter__item-container {
         border: 6px double var(--color-main);
       }
 
       svg {
         fill: var(--color-main);
       }
-    }
 
-    .item-title.true {
-      color: var(--color-main);
+      .convenience-filter__item-title {
+        color: var(--color-main);
+      }
     }
-  }
-
   `;
 
