@@ -1,6 +1,6 @@
-import Filter from 'app.components/Filter/Filter';
 import React from 'react';
 import styled from 'styled-components';
+import FilterIcon from 'app.components/Filter/FilterIcon';
 
 const MapHeader = () => {
   return (
@@ -16,7 +16,7 @@ const MapHeader = () => {
           전체 지역
           <img src="/images/map/expand_more_gray.png" />
         </div>
-        <Filter />
+        <FilterIcon />
         <div className="filter"></div>
       </div>
     </StyledWrapper>

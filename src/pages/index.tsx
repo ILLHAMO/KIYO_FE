@@ -5,7 +5,7 @@ import HomeHeader from 'app.feature/home/HomeHeader';
 import HomeBanner from 'app.feature/home/HomeBanner';
 import HomeCategoryFilter from 'app.feature/home/HomeCategoryFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
-import HomeConvenienceFilter from 'app.feature/home/ HomeConvenienceFilter';
+import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 
 const PageHome = () => {
