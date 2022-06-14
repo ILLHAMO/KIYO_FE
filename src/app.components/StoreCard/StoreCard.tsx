@@ -3,31 +3,39 @@ import styled from 'styled-components';
 
 const StoreCard = () => {
   return (
-    <StyledWrapper>
-      <div className="store-img-wrap">
-        <div className="store-img" />
-        <div className="bookmark">
-          <img src="/images/common/bookmark_on.png" />
-          {/*<img src='/images/common/bookmark_off.png' />*/}
+    <StyledWrapper className="store-card">
+      <div className="store-card__image-container">
+        <div className="store-card__image">
+          <img src='/images/sample/food_img.png' />
         </div>
-        <div className="kidszone">
+        <div className="store-card__bookmark">
+          <img
+            src="/images/common/bookmark_on.png"
+            className="store-card__bookmark-btn store-card__bookmark-btn--on"
+          />
+          {/*<img*/}
+          {/*  src="/images/common/bookmark_off.png"*/}
+          {/*  className="store-card__bookmark-btn store-card__bookmark-btn--off"*/}
+          {/*/>*/}
+        </div>
+        <div className="store-card__kidszone">
           <img src="/images/common/kidszone_badge.png" />
         </div>
       </div>
-      <div className="store-info-wrap">
-        <div className="store-info">
-          <div className="location">남양주시 다산동</div>
-          <div className="name">
+      <div className="store-card__info-container">
+        <div className="store-card__info">
+          <div className="store-card__location">남양주시 다산동</div>
+          <div className="store-card__name">
             이름이 길다면이름이 길다면이름이 길다면이름이 길다면이름이
             길다면이름이 길다면이름이 길다면
           </div>
         </div>
-        <div className="user-score">
-          <div className="bookmark">
+        <div className="store-card__user-score">
+          <div className="store-card__bookmark">
             <img src="/images/common/bookmark_on.png" />
             58
           </div>
-          <div className="review">
+          <div className="store-card__review">
             <img src="/images/common/revisit.png" />
             32
           </div>
@@ -44,17 +52,27 @@ const StyledWrapper = styled.div`
   width: 100%;
   cursor: pointer;
 
-  .store-img-wrap {
+  .store-card__image-container {
     position: relative;
 
-    .store-img {
+    .store-card__image {
       width: 100%;
       padding: 50%;
-      background-color: #ffe9ef;
-      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      
+      img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        border-radius: 10px;
+      }
     }
 
-    .bookmark {
+    .store-card__bookmark {
       position: absolute;
       top: 8px;
       right: 8px;
@@ -64,26 +82,27 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .kidszone {
+    .store-card__kidszone {
       position: absolute;
       bottom: 4px;
       right: 4px;
-      
+
       img {
         width: 52px;
       }
     }
   }
 
-  .store-info-wrap {
+  .store-card__info-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 4px;
 
-    .store-info {
+    .store-card__info {
       margin-right: 8px;
-      .location {
+
+      .store-card__location {
         margin-bottom: 4px;
         font-size: 12px;
         color: var(--color-gray-300);
@@ -95,7 +114,7 @@ const StyledWrapper = styled.div`
         word-break: break-all;
       }
 
-      .name {
+      .store-card__name {
         font-size: 16px;
         word-wrap: break-word;
         display: -webkit-box;
@@ -106,15 +125,15 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .user-score {
+    .store-card__user-score {
       font-size: 12px;
 
-      .bookmark {
+      .store-card__bookmark {
         margin-bottom: 4px;
       }
 
-      .bookmark,
-      .review {
+      .store-card__bookmark,
+      .store-card__review {
         display: flex;
         align-items: center;
 

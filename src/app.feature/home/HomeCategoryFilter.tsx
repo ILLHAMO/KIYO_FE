@@ -1,30 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Filter from 'app.components/Filter/Filter';
 
 const STORE_CATEGORY = [
-  '카페',
-  '한식',
-  '일식',
-  '중식',
-  '양식',
-  '아시안',
-  '비건',
-  '주점',
+  { src: 'cafe', title: '카페' },
+  { src: 'korean', title: '한식' },
+  { src: 'japanese', title: '일식' },
+  { src: 'chinese', title: '중식' },
+  { src: 'western', title: '양식' },
+  { src: 'asian', title: '아시안' },
+  { src: 'vegan', title: '비건' },
+  { src: 'bar', title: '주점' },
 ];
 
-const HomeStoreFilter = () => {
+const HomeCategoryFilter = () => {
   return (
-    <StyledWrapper>
-      <div className="filter-top">
-        <div className="title">어디로 가시겠어요?</div>
+    <StyledWrapper className="home-store-filter">
+      <div className="home-store-filter__top">
+        <div className="home-store-filter__title">어디로 가시겠어요?</div>
         <Filter />
       </div>
-      <div className="category-wrap">
+      <div className="home-store-filter__category">
         {STORE_CATEGORY.map((item, idx) => (
           <div className="category-item" key={`category-${idx}`}>
-            <div className="category-img" />
-            {item}
+            <div className="category-item__img">
+              <img src={`/images/sample/category_${item.src}.png`} />
+            </div>
+            {item.title}
           </div>
         ))}
       </div>
@@ -32,32 +34,32 @@ const HomeStoreFilter = () => {
   );
 };
 
-export default HomeStoreFilter;
+export default HomeCategoryFilter;
 
 const StyledWrapper = styled.div`
   width: 100%;
   margin-bottom: 16px;
-  
-  .filter-top {
+
+  .home-store-filter__top {
     padding: 0 8px 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
 
-    title {
+    .home-store-filter__title {
       font-size: 16px;
     }
   }
 
-  .category-wrap {
+  .home-store-filter__category {
     display: flex;
     padding: 0 20px;
     gap: 24px;
     width: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
-    
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -69,12 +71,14 @@ const StyledWrapper = styled.div`
       justify-content: center;
       flex-direction: column;
 
-      .category-img {
+      .category-item__img {
         border-radius: 50%;
         background-color: #ffe9ef;
         width: 60px;
         height: 60px;
         margin-bottom: 8px;
+        overflow: hidden;
+        object-fit: cover;
       }
     }
   }
