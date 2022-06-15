@@ -4,17 +4,17 @@ import Link from 'next/link';
 
 const SearchHeader = () => {
   return (
-    <StyledWrapper>
-      <input className="search-input" placeholder="  검색어를 입력 해 보세요" />
+    <StyledWrapper className='search-header'>
+      <input className="search-header__input" placeholder="  검색어를 입력 해 보세요" />
       <Link href="/">
         <img
-          className="back-botton"
+          className="search-header__back"
           src="/images/search/arrow.png"
           alt="뒤로가기 버튼"
         />
       </Link>
       <img
-        className="search-botton"
+        className="search-header__search"
         src="/images/search/search.png"
         alt="검색하기 버튼"
       />
@@ -36,7 +36,7 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
 
-  .search-input {
+  .search-header__input {
     box-sizing: border-box;
     max-width: 664px;
     caret-color: var(--color-main);
@@ -47,7 +47,7 @@ const StyledWrapper = styled.div`
     font-size: 16px;
   }
 
-  .back-botton {
+  .search-header__back {
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -56,7 +56,7 @@ const StyledWrapper = styled.div`
     left: 8px;
   }
 
-  .search-botton {
+  .search-header__search {
     cursor: pointer;
     width: 18px;
     height: 18px;

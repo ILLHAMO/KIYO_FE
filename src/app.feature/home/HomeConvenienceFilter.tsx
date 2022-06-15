@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterConvenience from 'app.components/Filter/FilteConvenience';
+import FilterConvenience from 'app.components/Filter/FilterConvenience';
 
 const HomeConvenienceFilter = () => {
   return (

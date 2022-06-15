@@ -1,23 +1,20 @@
 import Filter from 'app.components/Filter/Filter';
 import React from 'react';
 import styled from 'styled-components';
+import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
 
 const MapHeader = () => {
   return (
-    <StyledWrapper>
-      <div className="location-wrap">
+    <StyledWrapper className='map-header'>
+      <div className="map-header__location-wrap">
         <div>현재 보고 있는 곳은</div>
-        <div className="location">
+        <div className="map-header__location">
           <span>남양주시</span> 입니다.
         </div>
       </div>
-      <div className="filter-wrap">
-        <div className="location-select">
-          전체 지역
-          <img src="/images/map/expand_more_gray.png" />
-        </div>
+      <div className="map-header__filter-wrap">
+        <FilterLocalButton />
         <Filter />
-        <div className="filter"></div>
       </div>
     </StyledWrapper>
   );
@@ -31,7 +28,7 @@ const StyledWrapper = styled.div`
   justify-content: space-between;
   padding: 16px;
 
-  .location-wrap {
+  .map-header__location-wrap {
     font-size: 12px;
     line-height: 16px;
 
@@ -42,20 +39,12 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .filter-wrap {
+  .map-header__filter-wrap {
     display: flex;
     align-items: center;
-
-    .location-select {
+    
+    .filter-local-button {
       margin-right: 8px;
-      font-weight: 400;
-      font-size: 12px;
-      color: var(--color-gray-300);
-
-      img {
-        width: 20px;
-        height: 20px;
-      }
     }
   }
 `;
