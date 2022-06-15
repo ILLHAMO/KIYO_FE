@@ -57,7 +57,7 @@ const ReviewForm = () => {
           label="직접 방문한 경험과 사실을 기반으로 작성한 리뷰입니다."
         />
       </div>
-      <div className="review-form__create-btn">리뷰 등록하기</div>
+      <div className="review-form__create-button">리뷰 등록하기</div>
     </StyledWrapper>
   );
 };
@@ -194,11 +194,10 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .review-form__create-btn {
+  .review-form__create-button {
     cursor: pointer;
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
     height: 48px;
     display: flex;
@@ -208,5 +207,7 @@ const StyledWrapper = styled.div`
     color: var(--color-white);
     font-weight: 500;
     font-size: 18px;
+    max-width: 664px;
+    margin-left: -20px;
   }
 `;

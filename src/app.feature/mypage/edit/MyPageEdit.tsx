@@ -14,7 +14,7 @@ const MyPageEdit = () => {
         <div className="mypage-edit__input-label">닉네임</div>
         <input />
       </div>
-      <div className="mypage-edit__edit-btn">수정하기</div>
+      <div className="mypage-edit__edit-button">수정하기</div>
     </StyledWrapper>
   );
 };
@@ -75,12 +75,13 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .mypage-edit__edit-btn {
+  .mypage-edit__edit-button {
     cursor: pointer;
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 48px;
+    max-width: 664px;
     display: flex;
     align-items: center;
     justify-content: center;

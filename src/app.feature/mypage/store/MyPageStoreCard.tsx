@@ -28,6 +28,14 @@ const StyledWrapper = styled.div`
   padding: 8px 0;
   border-bottom: 0.5px solid var(--color-gray-100);
 
+  @media only screen and (max-width: 375px) {
+    padding: 16px 0;
+  }
+  
+  &:first-child {
+    padding-top: 0;
+  }
+  
   &:last-child {
     border-bottom: 0;
   }
@@ -39,7 +47,9 @@ const StyledWrapper = styled.div`
 
     .mypage-store-card__img {
       width: 36px;
+      min-width: 36px;
       height: 36px;
+      min-height: 36px;
       margin-right: 16px;
       background-color: #ffe9ef;
       border-radius: 50%;
@@ -48,6 +58,7 @@ const StyledWrapper = styled.div`
     .mypage-store-card__store {
       .mypage-store-card__name {
         margin-bottom: 4px;
+        margin-right: 8px;
       }
 
       .mypage-store-card__address {
@@ -63,7 +74,14 @@ const StyledWrapper = styled.div`
     justify-content: center;
     gap: 16px;
 
+    @media only screen and (max-width: 375px) {
+      flex-direction: column;
+      justify-content: end;
+      gap: 8px;
+    }
+
     div {
+      min-width: 40px;
       cursor: pointer;
       border-radius: 10px;
       font-size: 12px;
