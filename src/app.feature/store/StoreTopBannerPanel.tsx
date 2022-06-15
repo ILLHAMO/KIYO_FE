@@ -3,37 +3,37 @@ import styled from 'styled-components';
 
 const StoreTopBannerPanel = () => {
   return (
-    <StyledWrapper>
-      <div className="name">홍길동네 돼지국밥</div>
-      <div className="sub-name">홍길동네 돼지국밥</div>
-      <div className="info">
+    <StyledWrapper className='store-top-banner-panel'>
+      <div className="store-top-banner-panel__name">홍길동네 돼지국밥</div>
+      <div className="store-top-banner-panel__sub-name">홍길동네 돼지국밥</div>
+      <div className="store-top-banner-panel__info">
         <div className="food">돼지국밥</div>
         <div className="location">용인시 기흥구</div>
       </div>
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}
-      <div className="func-wrap">
-        <div className="func-item">
+      <div className="store-top-banner-panel__func-wrap">
+        <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/place_black.png" />
-            <div className="text">길찾기</div>
+            <div className="store-top-banner-panel__text">길찾기</div>
           </div>
         </div>
-        <div className="func-item">
+        <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/call_black.png" />
-            <div className="text">전화</div>
+            <div className="store-top-banner-panel__text">전화</div>
           </div>
         </div>
-        <div className="func-item">
+        <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/bookmark_black_off.png" />
-            <div className="text">찜</div>
+            <div className="store-top-banner-panel__text">찜</div>
           </div>
         </div>
-        <div className="func-item">
+        <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/share_black.png" />
-            <div className="text">공유</div>
+            <div className="store-top-banner-panel__text">공유</div>
           </div>
         </div>
       </div>
@@ -54,17 +54,17 @@ const StyledWrapper = styled.div`
   border-radius: 15px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.03);
 
-  .name {
+  .store-top-banner-panel__name {
     font-size: 18px;
     margin-bottom: 4px;
   }
 
-  .sub-name {
+  .store-top-banner-panel__sub-name {
     font-size: 12px;
     margin-bottom: 8px;
   }
 
-  .info {
+  .store-top-banner-panel__info {
     font-size: 12px;
     display: flex;
     margin-bottom: 16px;
@@ -84,7 +84,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .func-wrap {
+  .store-top-banner-panel__func-wrap {
     display: flex;
 
     img {
@@ -93,7 +93,7 @@ const StyledWrapper = styled.div`
       margin-right: 4px;
     }
 
-    .func-item {
+    .store-top-banner-panel__func-item {
       width: 25%;
       display: flex;
       align-items: center;
@@ -107,7 +107,7 @@ const StyledWrapper = styled.div`
 
       }
       
-      .text {
+      .store-top-banner-panel__text {
         font-size: 12px;
       }
     }

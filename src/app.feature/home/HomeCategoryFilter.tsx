@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Filter from 'app.components/Filter/Filter';
+import FilterIcon from 'app.components/Filter/FilterIcon';
 
 const STORE_CATEGORY = [
   { src: 'cafe', title: '카페' },
@@ -18,7 +18,7 @@ const HomeCategoryFilter = () => {
     <StyledWrapper className="home-store-filter">
       <div className="home-store-filter__top">
         <div className="home-store-filter__title">어디로 가시겠어요?</div>
-        <Filter />
+        <FilterIcon />
       </div>
       <div className="home-store-filter__category">
         {STORE_CATEGORY.map((item, idx) => (

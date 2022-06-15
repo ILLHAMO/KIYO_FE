@@ -1,7 +1,7 @@
-import Filter from 'app.components/Filter/Filter';
 import React from 'react';
 import styled from 'styled-components';
 import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
+import FilterIcon from 'app.components/Filter/FilterIcon';
 
 const MapHeader = () => {
   return (
@@ -14,7 +14,7 @@ const MapHeader = () => {
       </div>
       <div className="map-header__filter-wrap">
         <FilterLocalButton />
-        <Filter />
+        <FilterIcon />
       </div>
     </StyledWrapper>
   );

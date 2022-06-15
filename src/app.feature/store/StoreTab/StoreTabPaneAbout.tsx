@@ -18,43 +18,45 @@ const SERVICE_OBJ = [
 
 const StoreTabPaneAbout = () => {
   return (
-    <StyledWrapper>
-      <div className="menu-title">About</div>
-      <div className="about">
+    <StyledWrapper className="store-tab-pane-about">
+      <div className="store-tab-pane-about__title">About</div>
+      <div className="store-tab-pane-about__about">
         생생 정보통에 나왔던 국밥 맛집입니다. 돼지국밥을 시키면 수육을 서비스로
         주는 혜자 맛집입니다.
       </div>
       <div className="divider" />
-      <div className="about-info address">
-        <div className="title address">Address</div>
-        <div className="content address">
+      <div className="store-info">
+        <div className="store-info__title address">Address</div>
+        <div className="store-info__content address">
           경기도 용인시 기흥구 기흥중앙로 80안길 101
         </div>
       </div>
       <div className="divider" />
-      <div className="about-info photo">
-        <div className="title photo">Photo</div>
-        <div className="photo-slide">
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
+      <div className="store-info">
+        <div className="store-info__title store-info__title--photo">Photo</div>
+        <div className="store-info__photo-slide">
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
+          <div className="store-info__photo-item"></div>
         </div>
       </div>
       <div className="divider" />
-      <div className="about-info service">
-        <div className="title service">Service</div>
-        <div className="service-slide">
+      <div className="store-info">
+        <div className="store-info__title store-info__title--service">
+          Service
+        </div>
+        <div className="store-info__service-slide">
           {SERVICE_OBJ.map((service, idx) => (
-            <div className="service-item" key={`service-${idx}`}>
+            <div className="store-info__service-item" key={`service-${idx}`}>
               <img src={`/images/common/${service.src}.png`} />
-              <div className="text">{service.title}</div>
+              <div className="store-info__text">{service.title}</div>
             </div>
           ))}
         </div>
@@ -72,7 +74,7 @@ const StyledWrapper = styled.div`
   padding: 16px 20px;
   border-bottom: 0.5px solid var(--color-gray-100);
 
-  .menu-title {
+  .store-tab-pane-about__title {
     letter-spacing: 0.29em;
     font-weight: 700;
     font-size: 16px;
@@ -80,7 +82,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 8px;
   }
 
-  .about {
+  .store-tab-pane-about__about {
   }
 
   .divider {
@@ -90,12 +92,12 @@ const StyledWrapper = styled.div`
     height: 1px;
   }
 
-  .about-info {
-    .title {
+  .store-info {
+    .store-info__title {
       margin-bottom: 8px;
     }
 
-    .photo-slide {
+    .store-info__photo-slide {
       width: 100% + 20px;
       margin: 0 -20px;
       padding: 0 20px;
@@ -106,7 +108,7 @@ const StyledWrapper = styled.div`
         display: none;
       }
 
-      .photo-item {
+      .store-info__photo-item {
         background-color: #ffe9ef;
         min-width: 80px;
         min-height: 80px;
@@ -114,7 +116,7 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .service-slide {
+    .store-info__service-slide {
       width: 100% + 20px;
       margin: 0 -20px;
       padding: 0 20px;
@@ -126,16 +128,16 @@ const StyledWrapper = styled.div`
         display: none;
       }
 
-      .service-item {
+      .store-info__service-item {
         width: 100%;
-        
+
         img {
           width: 40px;
           min-width: 40px;
           min-height: 40px;
         }
-        
-        .text {
+
+        .store-info__text {
           line-height: 16px;
           display: flex;
           align-items: center;

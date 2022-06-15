@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const EnterSigninNickname = () => {
   const ErrorAlert = () => {
     return (
-      <div className="alert error">
+      <div className="enter-sign-nickname__alert enter-sign-nickname__alert--error">
         <img src="/images/enter/error_outline.png" />
         사용할 수 없는 닉네임입니다.
       </div>
@@ -13,7 +13,7 @@ const EnterSigninNickname = () => {
 
   const SuccessAlert = () => {
     return (
-      <div className="alert success">
+      <div className="enter-sign-nickname__alert enter-sign-nickname__alert--success">
         <img src="/images/enter/check_circle.png" />
         사용 가능한 닉네임입니다.
       </div>
@@ -21,9 +21,9 @@ const EnterSigninNickname = () => {
   };
 
   return (
-    <StyledWrapper>
-      <div className="nickname-label">닉네임을 입력해주세요.</div>
-      <input className="nickname-input" />
+    <StyledWrapper className="enter-sign-nickname">
+      <div className="enter-sign-nickname__label">닉네임을 입력해주세요.</div>
+      <input className="enter-sign-nickname__input" />
     </StyledWrapper>
   );
 };
@@ -31,13 +31,13 @@ const EnterSigninNickname = () => {
 export default EnterSigninNickname;
 
 const StyledWrapper = styled.div`
-  .nickname-label {
+  .enter-sign-nickname__label {
     color: var(--color-gray-300);
     font-size: 16px;
     margin-bottom: 8px;
   }
 
-  .nickname-input {
+  .enter-sign-nickname__input {
     caret-color: var(--color-main);
     width: 100%;
     height: 40px;
@@ -45,7 +45,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 8px;
   }
 
-  .alert {
+  .enter-sign-nickname__alert {
     font-size: 12px;
     height: 24px;
     padding: 0 8px;
@@ -61,11 +61,11 @@ const StyledWrapper = styled.div`
       margin-right: 12px;
     }
 
-    &.success {
+    &.enter-sign-nickname__alert--success {
       background-color: var(--color-success);
     }
 
-    &.error {
+    &.enter-sign-nickname__alert--error {
       background-color: var(--color-error);
     }
   }

@@ -4,15 +4,15 @@ import Link from 'next/link';
 
 const MypageInfo = () => {
   return (
-    <StyledWrapper>
-      <div className="user-profile">
-        <div className="profile-img"></div>
-        <div className="name">
+    <StyledWrapper className="mypage-info">
+      <div className="mypage-info__profile">
+        <div className="mypage-info__profile-img"></div>
+        <div className="mypage-info__profile-name">
           <span>홍길동</span>님
         </div>
       </div>
       <Link href="/mypage/edit">
-        <div className="edit-button">
+        <div className="mypage-info__edit-btn">
           <img src="/images/mypage/edit_black.png" />
         </div>
       </Link>
@@ -29,12 +29,12 @@ const StyledWrapper = styled.div`
   padding: 32px;
   //margin-bottom: 40px;
 
-  .user-profile {
+  .mypage-info__profile {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .profile-img {
+    .mypage-info__profile-img {
       width: 100px;
       height: 100px;
       min-width: 100px;
@@ -44,7 +44,7 @@ const StyledWrapper = styled.div`
       border-radius: 50%;
     }
 
-    .name {
+    .mypage-info__profile-name {
       font-size: 12px;
 
       span {
@@ -55,9 +55,11 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .edit-button {
+  .mypage-info__edit-btn {
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     cursor: pointer;
   }
 `;

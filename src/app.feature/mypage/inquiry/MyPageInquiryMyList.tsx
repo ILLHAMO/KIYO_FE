@@ -4,7 +4,7 @@ import { Accordion } from 'react-bootstrap';
 
 const MyPageInquiryMyList = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className='mypage-inquiry-mylist'>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>

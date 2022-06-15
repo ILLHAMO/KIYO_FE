@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Filter from 'app.components/Filter/Filter';
+import FilterIcon from 'app.components/Filter/FilterIcon';
 import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
 const SearchFilter = () => {
   return (
     <StyledWrapper className='search-filter'>
 			<div className="search-filter__button-container">
 				<FilterLocalButton />
-				<Filter />
+				<FilterIcon />
 			</div>
     </StyledWrapper>
   );
@@ -23,5 +23,4 @@ const StyledWrapper = styled.div`
 		align-items: center;
 		padding: 0 10px 0 20px;
 	}
-
 `;

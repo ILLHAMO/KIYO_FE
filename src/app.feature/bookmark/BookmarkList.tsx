@@ -4,9 +4,9 @@ import StoreCard from 'app.components/StoreCard/StoreCard';
 
 const BookmarkList = () => {
   return (
-    <StyledWrapper>
-      <div className="title">내가 저장한 장소</div>
-      <div className="bookmark-list-wrap">
+    <StyledWrapper className="bookmark-list">
+      <div className="bookmark-list__title">내가 저장한 장소</div>
+      <div className="bookmark-list__list-container">
         <StoreCard />
         <StoreCard />
         <StoreCard />
@@ -24,14 +24,14 @@ export default BookmarkList;
 
 const StyledWrapper = styled.div`
   padding: 20px;
-  .title {
+  .bookmark-list__title {
     font-weight: 700;
     font-size: 24px;
     line-height: 35px;
     color: var(--color-black);
   }
 
-  .bookmark-list-wrap {
+  .bookmark-list__list-container {
     display: grid;
     gap: 16px;
     grid-template-columns: repeat(2, 1fr);
