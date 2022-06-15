@@ -3,59 +3,59 @@ import styled from 'styled-components';
 
 const MyPageReviewList = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className="mypage-review-list">
       <div className="review-card">
-        <div className="card-top">
-          <div className="user">
-            <div className="profile"></div>
-            <div className="store">
-              <div className='name'>홍길동네 돼지 국밥</div>
-              <div className='address'>용인시 기흥구</div>
+        <div className="review-card-top">
+          <div className="review-card-top__user">
+            <div className="review-card-top__profile"></div>
+            <div className="review-card-top__store">
+              <div className="name">홍길동네 돼지 국밥</div>
+              <div className="address">용인시 기흥구</div>
             </div>
           </div>
-          <div className="method-button">
+          <div className="review-card-top__method-button">
             <div className="edit-button">수정</div>
             <div className="remove-button">삭제</div>
           </div>
         </div>
-        <div className="card-bottom">
-          <div className="review-title revisit">
+        <div className="review-card-bottom">
+          <div className="review-card-bottom__title review-card-bottom__title--revisit">
             <img src="/images/common/revisit.png" />
             재방문 의사 있어요!
           </div>
-          <div className="review-content">
+          <div className="review-card-bottom__content">
             아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수
             있는 키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고 무엇보다
             맛있었습니다!
           </div>
-          <div className="review-date">2022-05-03</div>
+          <div className="review-card-bottom__date">2022-05-03</div>
         </div>
       </div>
       <div className="review-card">
-        <div className="card-top">
-          <div className="user">
-            <div className="profile"></div>
-            <div className="store">
-              <div className='name'>홍길동네 돼지 국밥</div>
-              <div className='address'>용인시 기흥구</div>
+        <div className="review-card-top">
+          <div className="review-card-top__user">
+            <div className="review-card-top__profile"></div>
+            <div className="review-card-top__store">
+              <div className="name">홍길동네 돼지 국밥</div>
+              <div className="address">용인시 기흥구</div>
             </div>
           </div>
-          <div className="method-button">
+          <div className="review-card-top__method-button">
             <div className="edit-button">수정</div>
             <div className="remove-button">삭제</div>
           </div>
         </div>
-        <div className="card-bottom">
-          <div className="review-title revisit">
+        <div className="review-card-bottom">
+          <div className="review-card-bottom__title review-card-bottom__title--revisit">
             <img src="/images/common/revisit.png" />
             재방문 의사 있어요!
           </div>
-          <div className="review-content">
+          <div className="review-card-bottom__content">
             아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수
             있는 키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고 무엇보다
             맛있었습니다!
           </div>
-          <div className="review-date">2022-05-03</div>
+          <div className="review-card-bottom__date">2022-05-03</div>
         </div>
       </div>
     </StyledWrapper>
@@ -66,7 +66,7 @@ export default MyPageReviewList;
 
 const StyledWrapper = styled.div`
   padding: 20px;
-  
+
   .review-card {
     padding: 8px 0;
     border-bottom: 0.5px solid var(--color-gray-100);
@@ -75,18 +75,18 @@ const StyledWrapper = styled.div`
       border-bottom: 0;
     }
 
-    .card-top {
+    .review-card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 8px;
 
-      .user {
+      .review-card-top__user {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .profile {
+        .review-card-top__profile {
           width: 36px;
           height: 36px;
           margin-right: 16px;
@@ -94,11 +94,11 @@ const StyledWrapper = styled.div`
           border-radius: 50%;
         }
 
-        .store {
+        .review-card-top__store {
           .name {
             margin-bottom: 4px;
           }
-          
+
           .address {
             font-size: 12px;
             color: var(--color-gray-300);
@@ -106,7 +106,7 @@ const StyledWrapper = styled.div`
         }
       }
 
-      .method-button {
+      .review-card-top__method-button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -133,12 +133,12 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .card-bottom {
+    .review-card-bottom {
       font-size: 12px;
       line-height: 16px;
       padding-left: 16px;
 
-      .review-title {
+      .review-card-bottom__title {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
@@ -149,24 +149,24 @@ const StyledWrapper = styled.div`
           margin-right: 4px;
         }
 
-        &.revisit {
+        &.review-card-bottom__title--revisit {
           color: var(--color-yellow);
         }
 
-        &.normal {
+        &.review-card-bottom__title--normal {
           color: var(--color-blue);
         }
 
-        &.novisit {
+        &.review-card-bottom__title--novisit {
           color: var(--color-red);
         }
       }
 
-      .review-content {
+      .review-card-bottom__content {
         margin-bottom: 4px;
       }
 
-      .review-date {
+      .review-card-bottom__date {
         color: var(--color-gray-300);
         text-align: right;
       }

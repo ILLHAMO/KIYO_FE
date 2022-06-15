@@ -4,12 +4,12 @@ import { Accordion } from 'react-bootstrap';
 
 const MyPageDeclareList = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className='mypage-declare-list'>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <img src="/images/declare/declare.png" />
-            <div className="title">v 1.0.2 업데이트 수정 관련 공지입니다.</div>
+            <div className="mypage-declare-list__declare-title">v 1.0.2 업데이트 수정 관련 공지입니다.</div>
           </Accordion.Header>
           <Accordion.Body>
             업데이트된 버전의 수정사항은 아래와 같습니다.
@@ -18,7 +18,7 @@ const MyPageDeclareList = () => {
         <Accordion.Item eventKey="1">
           <Accordion.Header>
             <img src="/images/declare/declare.png" />
-            <div className="title">
+            <div className="mypage-declare-list__declare-title">
               v 1.0.1 업데이트 수정 관련 공지가 맞을까요 아닐까요?
             </div>
           </Accordion.Header>
@@ -79,7 +79,7 @@ const StyledWrapper = styled.div`
         background-image: url('/images/mypage/expand_more.png');
       }
 
-      .title {
+      .mypage-declare-list__declare-title {
         word-wrap: break-word;
         display: -webkit-box;
         -webkit-line-clamp: 1;

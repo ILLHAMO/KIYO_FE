@@ -10,28 +10,39 @@ const MyPageList = () => {
   };
 
   return (
-    <StyledWrapper>
-      <div className="route-list" onClick={() => onClickRouteList('review')}>
+    <StyledWrapper className="mypage-list">
+      <div
+        className="mypage-list__route"
+        onClick={() => onClickRouteList('review')}
+      >
         내가 쓴 리뷰
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('store')}>
+      <div
+        className="mypage-list__route"
+        onClick={() => onClickRouteList('store')}
+      >
         내가 등록한 식당
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('inquiry')}>
+      <div
+        className="mypage-list__route"
+        onClick={() => onClickRouteList('inquiry')}
+      >
         1:1 문의
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('declare')}>
+      <div
+        className="mypage-list__route"
+        onClick={() => onClickRouteList('declare')}
+      >
         공지사항
       </div>
-      <div className="route-list" onClick={() => onClickRouteList('settings')}>
+      <div
+        className="mypage-list__route"
+        onClick={() => onClickRouteList('settings')}
+      >
         설정
       </div>
-      <div className="route-list" >
-        키즈존 가요 정보
-      </div>
-      <div className="route-list">
-        키즈존 가요 후원하기
-      </div>
+      <div className="mypage-list__route">키즈존 가요 정보</div>
+      <div className="mypage-list__route">키즈존 가요 후원하기</div>
     </StyledWrapper>
   );
 };
@@ -39,7 +50,7 @@ const MyPageList = () => {
 export default MyPageList;
 
 const StyledWrapper = styled.div`
-  .route-list {
+  .mypage-list__route {
     cursor: pointer;
     padding: 0 20px;
     height: 48px;

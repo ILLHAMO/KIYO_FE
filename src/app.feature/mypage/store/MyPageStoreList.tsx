@@ -3,29 +3,29 @@ import styled from 'styled-components';
 
 const MyPageStoreList = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className="mypage-store-list">
       <div className="store-card">
-        <div className="store-info">
-          <div className="store-img" />
-          <div className="store">
+        <div className="store-card__info">
+          <div className="store-card__img" />
+          <div className="store-card__store">
             <div className="name">홍길동네 돼지 국밥</div>
             <div className="address">용인시 기흥구</div>
           </div>
         </div>
-        <div className="button-wrap">
+        <div className="store-card__button">
           <div className="watch-button">보기</div>
           <div className="remove-button">삭제</div>
         </div>
       </div>
       <div className="store-card">
-        <div className="store-info">
-          <div className="store-img" />
-          <div className="store">
+        <div className="store-card__info">
+          <div className="store-card__img" />
+          <div className="store-card__store">
             <div className="name">홍길동네 돼지 국밥</div>
             <div className="address">용인시 기흥구</div>
           </div>
         </div>
-        <div className="button-wrap">
+        <div className="store-card__button">
           <div className="watch-button">보기</div>
         </div>
       </div>
@@ -49,12 +49,12 @@ const StyledWrapper = styled.div`
       border-bottom: 0;
     }
 
-    .store-info {
+    .store-card__info {
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .store-img {
+      .store-card__img {
         width: 36px;
         height: 36px;
         margin-right: 16px;
@@ -62,7 +62,7 @@ const StyledWrapper = styled.div`
         border-radius: 50%;
       }
 
-      .store {
+      .store-card__store {
         .name {
           margin-bottom: 4px;
         }
@@ -75,7 +75,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .button-wrap {
+  .store-card__button {
     display: flex;
     align-items: center;
     justify-content: center;
