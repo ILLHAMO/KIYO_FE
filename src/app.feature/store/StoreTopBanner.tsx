@@ -11,8 +11,8 @@ const StoreTopBanner = () => {
       <div className="store-top-banner__image"></div>
       <StoreTopBannerPanel />
       <div className="store-top-banner__operating-time">
-        <div className="title">운영시간</div>
-        <div className="time">
+        <div className="store-top-banner__title">운영시간</div>
+        <div className="store-top-banner__time">
           <div>월 ~ 금 12:00 ~ 22:00</div>
           <div>토 12:00 ~ 22:00</div>
           <div>일 12:00 ~ 22:00</div>
@@ -53,7 +53,7 @@ const StyledWrapper = styled.div`
     line-height: 16px;
 
 
-    .title {
+    .store-top-banner__title {
       margin-right: 8px;
     }
   }

@@ -15,25 +15,25 @@ const StoreTopBannerPanel = () => {
         <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/place_black.png" />
-            <div className="text">길찾기</div>
+            <div className="store-top-banner-panel__text">길찾기</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/call_black.png" />
-            <div className="text">전화</div>
+            <div className="store-top-banner-panel__text">전화</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/bookmark_black_off.png" />
-            <div className="text">찜</div>
+            <div className="store-top-banner-panel__text">찜</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
           <div>
             <img src="/images/store/share_black.png" />
-            <div className="text">공유</div>
+            <div className="store-top-banner-panel__text">공유</div>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ const StyledWrapper = styled.div`
 
       }
       
-      .text {
+      .store-top-banner-panel__text {
         font-size: 12px;
       }
     }

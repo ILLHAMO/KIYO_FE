@@ -3,38 +3,38 @@ import styled from 'styled-components';
 
 const StoreTabPaneMenu = () => {
   return (
-    <StyledWrapper className="store-tab-pane__menu">
-      <div className="title">Menu</div>
-      <div className="menu">
-        <div className="menu__category">
+    <StyledWrapper className="store-tab-pane-menu">
+      <div className="store-tab-pane-menu__title">Menu</div>
+      <div className="store-tab-pane-menu__menu">
+        <div className="store-tab-pane-menu__category">
           <div>식사류</div>
           <img src={`/images/store/expand_${false ? 'more' : 'less'}.png`} />
         </div>
-        <div className="menu__item-wrap menu__item-wrap--on">
-          <div className="menu__item">국밥1</div>
-          <div className="menu__item">국밥2</div>
-          <div className="menu__item">국밥3</div>
+        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--on">
+          <div className="store-tab-pane-menu__item">국밥1</div>
+          <div className="store-tab-pane-menu__item">국밥2</div>
+          <div className="store-tab-pane-menu__item">국밥3</div>
         </div>
       </div>
-      <div className="menu">
-        <div className="menu__category">
+      <div className="store-tab-pane-menu__menu">
+        <div className="store-tab-pane-menu__category">
           <div>음료</div>
           <img src={`/images/store/expand_${true ? 'more' : 'less'}.png`} />
         </div>
-        <div className="menu__item-wrap menu__item-wrap--off">
-          <div className="menu__item">콜라</div>
-          <div className="menu__item">사이다</div>
-          <div className="menu__item">소주</div>
-          <div className="menu__item">맥주</div>
+        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--off">
+          <div className="store-tab-pane-menu__item">콜라</div>
+          <div className="store-tab-pane-menu__item">사이다</div>
+          <div className="store-tab-pane-menu__item">소주</div>
+          <div className="store-tab-pane-menu__item">맥주</div>
         </div>
       </div>
-      <div className="menu">
-        <div className="menu__category">
+      <div className="store-tab-pane-menu__menu">
+        <div className="store-tab-pane-menu__category">
           <div>키즈메뉴</div>
           <img src={`/images/store/expand_${true ? 'more' : 'less'}.png`} />
         </div>
-        <div className="menu__item-wrap menu__item-wrap--off">
-          <div className="menu__item">어린이 돈까스</div>
+        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--off">
+          <div className="store-tab-pane-menu__item">어린이 돈까스</div>
         </div>
       </div>
     </StyledWrapper>
@@ -50,7 +50,7 @@ const StyledWrapper = styled.div`
   padding: 16px 20px;
   border-bottom: 0.5px solid var(--color-gray-100);
 
-  .title {
+  .store-tab-pane-menu__title {
     letter-spacing: 0.29em;
     font-weight: 700;
     font-size: 16px;
@@ -58,8 +58,8 @@ const StyledWrapper = styled.div`
     margin-bottom: 8px;
   }
 
-  .menu {
-    .menu__category {
+  .store-tab-pane-menu__menu {
+    .store-tab-pane-menu__category {
       padding: 8px 0;
       border-bottom: 0.5px solid var(--color-gray-100);
       display: flex;
@@ -72,15 +72,15 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .menu__item-wrap {
+    .store-tab-pane-menu__menu-wrap {
       padding: 8px;
       border-bottom: 0.5px solid var(--color-gray-100);
       
-      &.menu__item-wrap--off {
+      &.store-tab-pane-menu__menu-wrap--off {
         display: none;
       }
 
-      .menu__item {
+      .store-tab-pane-menu__item {
         font-size: 12px;
       }
     }
