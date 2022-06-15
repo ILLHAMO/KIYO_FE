@@ -3,78 +3,78 @@ import styled from 'styled-components';
 
 const StoreTabPaneReview = () => {
   return (
-    <StyledWrapper>
-      <div className="menu-title">
+    <StyledWrapper className='store-tab-pane__review'>
+      <div className="menu">
         <div>Review</div>
-        <div className="plus">+</div>
+        <div className="menu__plus-btn">+</div>
       </div>
       <div className="review-card-wrap">
         <div className="review-card">
-          <div className="card-top">
-            <div className="user">
-              <div className="profile"></div>
-              <div className="name">연지맘</div>
+          <div className="review-card-top">
+            <div className="review-card-top__user">
+              <div className="review-card-top__profile"></div>
+              <div className="review-card-top__name">연지맘</div>
             </div>
-            <div className="method-button">
-              <div className="edit-button">수정</div>
-              <div className="remove-button">삭제</div>
+            <div className="review-card-top__method-button">
+              <div className="review-card-top__edit-button">수정</div>
+              <div className="review-card-top__remove-button">삭제</div>
             </div>
           </div>
-          <div className="card-bottom">
-            <div className="review-title revisit">
+          <div className="review-card-bottom">
+            <div className="review-card-bottom__title review-card-bottom__title--revisit">
               <img src="/images/common/revisit.png" />
               재방문 의사 있어요!
             </div>
-            <div className="review-content">
+            <div className="review-card-bottom__content">
               아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수
               있는 키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고
               무엇보다 맛있었습니다!
             </div>
-            <div className="review-date">2022-05-03</div>
+            <div className="review-card-bottom__content">2022-05-03</div>
           </div>
         </div>
         <div className="review-card">
-          <div className="card-top">
-            <div className="user">
-              <div className="profile"></div>
-              <div className="name">파워맘</div>
+          <div className="review-card-top">
+            <div className="review-card-top__user">
+              <div className="review-card-top__profile"></div>
+              <div className="review-card-top__name">파워맘</div>
             </div>
-            <div className="method-button">
-              <div className="declare-button">신고</div>
+            <div className="review-card-top__method-button">
+              <div className="review-card-top__decalre-button">신고</div>
             </div>
           </div>
-          <div className="card-bottom">
-            <div className="review-title neutral">
+          <div className="review-card-bottom">
+            <div className="review-card-bottom__title review-card-bottom__title--neutral">
               <img src="/images/common/neutral.png" />
               평범해요!
             </div>
-            <div className="review-content">
+            <div className="review-card-bottom__content">
               매장도 깨끗하고 키즈메뉴도 아이가 잘 먹었습니다!
             </div>
-            <div className="review-date">2022-04-09</div>
+            <div className="review-card-bottom__content">2022-04-09</div>
           </div>
         </div>
         <div className="review-card">
-          <div className="card-top">
-            <div className="user">
-              <div className="profile"></div>
-              <div className="name">프로불편러</div>
+          <div className="review-card-top">
+            <div className="review-card-top__user">
+              <div className="review-card-top__profile"></div>
+              <div className="review-card-top__name">프로불편러</div>
             </div>
-            <div className="method-button">
-              <div className="edit-button">수정</div>
-              <div className="remove-button">삭제</div>
+            <div className="review-card-top__method-button">
+              <div className="review-card-top__edit-button">수정</div>
+              <div className="review-card-top__remove-button">삭제</div>
             </div>
           </div>
-          <div className="card-bottom">
-            <div className="review-title novisit">
+          <div className="review-card-bottom">
+            <div className="review-card-bottom__title review-card-bottom__title--novisit">
               <img src="/images/common/novisit.png" />
               재방문 의사 없어요!
             </div>
-            <div className="review-content">
+            <div className="review-card-bottom__content">
               키즈메뉴가 있음에도 불구하고 아이들을 데려오기에는 부적절한 식당
               선택이었던 것 같습니다
             </div>
-            <div className="review-date">2022-04-05</div>
+            <div className="review-card-bottom__date">2022-04-05</div>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ const StyledWrapper = styled.div`
   font-size: 16px;
   padding: 16px 20px;
 
-  .menu-title {
+  .menu {
     letter-spacing: 0.29em;
     font-weight: 700;
     font-size: 16px;
@@ -99,7 +99,7 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    .plus {
+    .menu__plus-btn {
       cursor: pointer;
       font-family: 'Noto Sans';
       font-style: normal;
@@ -117,18 +117,18 @@ const StyledWrapper = styled.div`
         border-bottom: 0;
       }
 
-      .card-top {
+      .review-card-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 8px;
 
-        .user {
+        .review-card-top__user {
           display: flex;
           align-items: center;
           justify-content: center;
 
-          .profile {
+          .review-card-top__profile {
             width: 36px;
             height: 36px;
             margin-right: 16px;
@@ -136,11 +136,11 @@ const StyledWrapper = styled.div`
             border-radius: 50%;
           }
 
-          .name {
+          .review-card-top__name {
           }
         }
 
-        .method-button {
+        .review-card-top__method-button {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -154,25 +154,25 @@ const StyledWrapper = styled.div`
             padding: 4px 8px;
           }
 
-          .edit-button {
+          .review-card-top__edit-button {
             border: 1px solid var(--color-gray-300);
             color: var(--color-gray-300);
           }
 
-          .remove-button,
-          .declare-button {
+          .review-card-top__remove-button,
+          .review-card-top__decalre-button {
             border: 1px solid var(--color-error);
             color: var(--color-error);
           }
         }
       }
 
-      .card-bottom {
+      .review-card-bottom {
         font-size: 12px;
         line-height: 16px;
         padding-left: 16px;
 
-        .review-title {
+        .review-card-bottom__title {
           display: flex;
           align-items: center;
           margin-bottom: 8px;
@@ -183,24 +183,24 @@ const StyledWrapper = styled.div`
             margin-right: 4px;
           }
 
-          &.revisit {
+          &.review-card-bottom__title--revisit {
             color: var(--color-yellow);
           }
 
-          &.normal {
+          &.review-card-bottom__title--normal {
             color: var(--color-blue);
           }
 
-          &.novisit {
+          &.review-card-bottom__title--novisit {
             color: var(--color-red);
           }
         }
         
-        .review-content {
+        .review-card-bottom__content {
           margin-bottom: 4px;
         }
         
-        .review-date {
+        .review-card-bottom__date {
           color: var(--color-gray-300);
           text-align: right;
         }

@@ -5,7 +5,7 @@ import StoreTabPane from './StoreTabPane';
 
 const StoreTab = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className='store-tab'>
       <StoreTabBar />
       <StoreTabPane />
     </StyledWrapper>

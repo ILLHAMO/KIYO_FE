@@ -4,13 +4,13 @@ import StoreTopBannerPanel from './StoreTopBannerPanel';
 
 const StoreTopBanner = () => {
   return (
-    <StyledWrapper>
-      <div className="back-button">
+    <StyledWrapper className='store-top-banner'>
+      <div className="store-top-banner__back-button">
         <img src="/images/store/back_button.png" />
       </div>
-      <div className="store-img-wrap"></div>
+      <div className="store-top-banner__image"></div>
       <StoreTopBannerPanel />
-      <div className="operating-time">
+      <div className="store-top-banner__operating-time">
         <div className="title">운영시간</div>
         <div className="time">
           <div>월 ~ 금 12:00 ~ 22:00</div>
@@ -27,7 +27,7 @@ export default StoreTopBanner;
 const StyledWrapper = styled.div`
   position: relative;
   
-  .back-button {
+  .store-top-banner__back-button {
     position: absolute;
     width: 100%;
     top: 0;
@@ -40,14 +40,14 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .store-img-wrap {
+  .store-top-banner__image {
     width: 100%;
     height: 280px;
     background-color: #ffe9ef;
     margin-bottom: 48px;
   }
   
-  .operating-time {
+  .store-top-banner__operating-time {
     display: flex;
     padding: 0 20px;      font-size: 12px;
     line-height: 16px;
