@@ -4,11 +4,11 @@ import { Form } from 'react-bootstrap';
 
 const ReviewForm = () => {
   return (
-    <StyledWrapper>
-      <div className="store-name">홍길동네 돼지국밥</div>
-      <div className="store-address">용인시 기흥구</div>
-      <div className="review-score">
-        <div className="score-item">
+    <StyledWrapper className="review-form">
+      <div className="review-form__store-name">홍길동네 돼지국밥</div>
+      <div className="review-form__store-address">용인시 기흥구</div>
+      <div className="review-form__review-score">
+        <div className="review-form__score-item">
           <img src="/images/common/revisit.png" />
           <div className="title yellow">
             재방문 의사
@@ -16,11 +16,11 @@ const ReviewForm = () => {
             있어요!
           </div>
         </div>
-        <div className="score-item">
+        <div className="review-form__score-item">
           <img src="/images/common/neutral.png" />
           <div className="title blue">괜찮아요!</div>
         </div>
-        <div className="score-item">
+        <div className="review-form__score-item">
           <img src="/images/common/novisit.png" />
           <div className="title red">
             재방문 의사
@@ -30,19 +30,19 @@ const ReviewForm = () => {
         </div>
       </div>
       <textarea placeholder="사실과 다르거나 비방목적의 글을 작성할 경우 처벌을 받을 수 있습니다." />
-      <div className="review-photo-wrap">
-        <div className="title">사진 추가하기</div>
-        <div className="review-photo-slide">
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
-          <div className="photo-item"></div>
+      <div className="review-form__photo">
+        <div className="review-form__title">사진 추가하기</div>
+        <div className="review-form__photo-slide">
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
+          <div className="review-form__photo-item"></div>
         </div>
-        <div className="review-warn">
+        <div className="review-form__warn">
           <li>
             리뷰에 업로드해주신 사진은 키요의 식당 상세페이지에서 사용될 수
             있습니다.
@@ -50,14 +50,14 @@ const ReviewForm = () => {
           <li>사진은 10개까지 등록하실 수 있습니다.</li>
         </div>
       </div>
-      <div className="review-check">
+      <div className="review-form__check">
         <Form.Check
           type="checkbox"
           id="review-check"
           label="직접 방문한 경험과 사실을 기반으로 작성한 리뷰입니다."
         />
       </div>
-      <div className='create-button'>리뷰 등록하기</div>
+      <div className="review-form__create-btn">리뷰 등록하기</div>
     </StyledWrapper>
   );
 };
@@ -67,23 +67,23 @@ export default ReviewForm;
 const StyledWrapper = styled.div`
   padding: 20px;
 
-  .store-name {
+  .review-form__store-name {
     line-height: 26px;
   }
 
-  .store-address {
+  .review-form__store-address {
     line-height: 17px;
     font-size: 12px;
     color: var(--color-gray-300);
     margin-bottom: 12px;
   }
 
-  .review-score {
+  .review-form__review-score {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 
-    .score-item {
+    .review-form__score-item {
       width: calc(100% / 3);
       text-align: center;
 
@@ -130,23 +130,23 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .review-photo-wrap {
+  .review-form__photo {
     margin-bottom: 32px;
 
-    .title {
+    .review-form__title {
       margin-bottom: 8px;
       font-size: 16px;
       line-height: 23px;
     }
 
-    .review-photo-slide {
+    .review-form__photo-slide {
       display: flex;
       align-items: center;
       overflow: auto;
       margin: 0 -20px 8px;
       padding: 0 20px;
 
-      .photo-item {
+      .review-form__photo-item {
         min-width: 80px;
         border: 1px solid var(--color-black);
         border-right: none;
@@ -160,14 +160,14 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .review-warn {
+    .review-form__warn {
       font-size: 12px;
       line-height: 17px;
       color: var(--color-gray-300);
     }
   }
 
-  .review-check {
+  .review-form__check {
     margin-bottom: 32px;
 
     .form-check {
@@ -193,8 +193,8 @@ const StyledWrapper = styled.div`
       }
     }
   }
-  
-  .create-button {
+
+  .review-form__create-btn {
     cursor: pointer;
     position: fixed;
     bottom: 0;
