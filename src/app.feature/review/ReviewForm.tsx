@@ -10,7 +10,7 @@ const ReviewForm = () => {
       <div className="review-form__review-score">
         <div className="review-form__score-item">
           <img src="/images/common/revisit.png" />
-          <div className="title yellow">
+          <div className="review-form__score-title review-form__score-title--yellow">
             재방문 의사
             <br />
             있어요!
@@ -18,11 +18,11 @@ const ReviewForm = () => {
         </div>
         <div className="review-form__score-item">
           <img src="/images/common/neutral.png" />
-          <div className="title blue">괜찮아요!</div>
+          <div className="review-form__score-title review-form__score-title--blue">괜찮아요!</div>
         </div>
         <div className="review-form__score-item">
           <img src="/images/common/novisit.png" />
-          <div className="title red">
+          <div className="review-form__score-title review-form__score-title--red">
             재방문 의사
             <br />
             없어요!
@@ -92,21 +92,21 @@ const StyledWrapper = styled.div`
         height: 60px;
       }
 
-      .title {
+      .review-form__score-title {
         text-align: center;
         font-weight: 700;
         font-size: 12px;
         line-height: 17px;
 
-        &.yellow {
+        &.review-form__score-title--yellow {
           color: var(--color-yellow);
         }
 
-        &.blue {
+        &.review-form__score-title--blue {
           color: var(--color-blue);
         }
 
-        &.red {
+        &.review-form__score-title--red {
           color: var(--color-red);
         }
       }

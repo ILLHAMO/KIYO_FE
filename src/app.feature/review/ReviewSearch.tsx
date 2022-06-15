@@ -12,8 +12,8 @@ const ReviewSearch = () => {
         <div className="review-search__result-item">
           <div className="review-search__store-image"></div>
           <div className="review-search__store-info">
-            <div className="name">홍길동네 돼지국밥</div>
-            <div className="address">용인시 기흥구</div>
+            <div className="review-search__name">홍길동네 돼지국밥</div>
+            <div className="review-search__address">용인시 기흥구</div>
           </div>
         </div>
       </div>
@@ -73,11 +73,11 @@ const StyledWrapper = styled.div`
       }
 
       .review-search__store-info {
-        .name {
+        .review-search__name {
           line-height: 23px;
         }
 
-        .address {
+        .review-search__address {
           line-height: 17px;
           font-size: 12px;
           color: var(--color-gray-300);
