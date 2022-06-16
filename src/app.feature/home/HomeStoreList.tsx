@@ -4,7 +4,7 @@ import StoreCard from 'app.components/StoreCard/StoreCard';
 
 const HomeStoreList = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className="home-store-list">
       <StoreCard />
       <StoreCard />
       <StoreCard />

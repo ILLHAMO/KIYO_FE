@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchFilterLocalButton from 'app.feature/search/SearchFilter/SearchFilterLocalButton';
-import Filter from 'app.components/Filter/Filter';
-
+import FilterIcon from 'app.components/Filter/FilterIcon';
+import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
 const SearchFilter = () => {
   return (
-    <StyledWrapper>
-			<div className="button-container">
-				<SearchFilterLocalButton />
-				<Filter />
+    <StyledWrapper className='search-filter'>
+			<div className="search-filter__button-container">
+				<FilterLocalButton />
+				<FilterIcon />
 			</div>
-
     </StyledWrapper>
   );
 };
@@ -18,12 +16,11 @@ const SearchFilter = () => {
 export default SearchFilter;
 
 const StyledWrapper = styled.div`
-	.button-container {
+	.search-filter__button-container {
 		height: 40px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 10px 0 20px;
 	}
-
 `;

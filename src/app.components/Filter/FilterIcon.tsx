@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SVGfilter from '../../../public/images/common/filter.svg';
 
 
-const Filter = () => {
+const FilterIcon = () => {
   return (
     <StyledWrapper>
       <div className="filter-container">
@@ -15,7 +15,7 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default FilterIcon;
 
 const StyledWrapper = styled.div`
   .filter-container {

@@ -1,28 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import ConvenienceFilter from 'app.components/Filter/ConvenienceFilter';
-import StoreFilter from 'app.components/Filter/StoreFilter';
+import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
+import FilterCategory from 'app.components/Filter/FilterCategory';
 
 const SearchFilterOtherModal = () => {
   return (
-    <StyledWrapper>
-      <div className='filter-header'>
+    <StyledWrapper className='search-filter-other-modal'>
+      <div className='search-filter-other-modal__header'>
         <img src="/images/common/close_gray.png" />
-        <div className='apply-button'>적용</div>
+        <div className='search-filter-other-modal__apply-button'>적용</div>
       </div>
-      <div className="filter-body">
-        <div className="filter-container">
-          <div className="title">장소 종류</div>
-          <StoreFilter />
+      <div className="search-filter-other-modal__body">
+        <div className="search-filter-other-modal__container">
+          <div className="search-filter-other-modal__title">장소 종류</div>
+          <FilterCategory />
         </div>
-        <div className="filter-container">
-          <div className="title">편의 사항</div>
-          <ConvenienceFilter />
+        <div className="search-filter-other-modal__container">
+          <div className="search-filter-other-modal__title">편의 사항</div>
+          <FilterConvenience />
         </div>
-        <div className="filter-container">
-          <div className ="title">운영 방식</div>
-          <div className="kidszone-filter">
+        <div className="search-filter-other-modal__container">
+          <div className ="search-filter-other-modal__title">운영 방식</div>
+          <div className="search-filter-other-modal__kidszone-filter">
             <ButtonSquare name="키즈존" />
             <ButtonSquare name="일반 식당" />
           </div>
@@ -45,7 +45,7 @@ const StyledWrapper = styled.div`
   border-top: 1px solid var(--color-gray-300);
   overflow: auto;
 
-  .filter-header {
+  .search-filter-other-modal__header {
     display: flex;
     position: fixed;
     justify-content: space-between;
@@ -63,7 +63,7 @@ const StyledWrapper = styled.div`
       height: 24px;
     }
 
-    .apply-button {
+    .search-filter-other-modal__apply-button {
       cursor: pointer;
       width: 56px;
       height: 24px;
@@ -76,11 +76,11 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .filter-body {
+  .search-filter-other-modal__body {
     padding-top: 40px;
   }
 
-  .title {
+  .search-filter-other-modal__title {
     fontsize: 16px;
     color: var(--color-gray-300);
     width: 100%;
@@ -88,12 +88,12 @@ const StyledWrapper = styled.div`
     padding: 24px 0;
   }
 
-  .filter-container {
+  .search-filter-other-modal__container {
     padding-bottom: 24px;
     border-bottom: 1px solid var(--color-gray-100);
   }
 
-  .kidszone-filter {
+  .search-filter-other-modal__kidszone-filter {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;

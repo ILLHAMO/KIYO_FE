@@ -3,27 +3,26 @@ import styled from 'styled-components';
 
 const SearchRecent = () => {
   return (
-    <StyledWrapper>
-			<div className="recent-search-item">
-				<div className="item-none true">
+    <StyledWrapper className='search-recent'>
+			<div className="search-recent__upper">
+				<div className="search-recent__no-item--true">
 					최근 입력한 검색어가 없습니다.
 				</div>
-				<div className="item-container">
-					<div className="item-title">돈까스</div>
-					<div className="item-title">케이크</div>
+				<div className="search-recent__item-container">
+					<div className="search-recent__item">돈까스</div>
+					<div className="search-recent__item">케이크</div>
 				</div>
-
 			</div>
-			<div className="bottom">
-				<div className="save-toggle-on true">
+			<div className="search-recent__bottom">
+				<div className="search-recent__save-toggle search-recent__save-toggle--on">
 					<img src="/images/search/toggle_on.png" alt="" className="toggle-on" />
 					<div className="toggle-text">자동 저장 ON</div>
 				</div>
-				<div className="save-toggle-off">
+				<div className="search-recent__save-toggle">
 					<img src="/images/search/toggle_off.png" alt="" className="toggle-off" />
 					<div className="toggle-text">자동 저장 OFF</div>
 				</div>
-				<div className="remove-botton true">전체 삭제</div>
+				<div className="search-recent__remove-botton search-recent__remove-botton--on">전체 삭제</div>
 			</div>
     </StyledWrapper>
   );
@@ -32,11 +31,11 @@ const SearchRecent = () => {
 export default SearchRecent;
 
 const StyledWrapper = styled.div`
-	.item-none {
+	.search-recent__no-item--false {
 		display: none;
 	}
 
-	.item-none.true{
+	.search-recent__no-item--true{
 		display: block;
 		height: 240px;
 		display: flex;
@@ -44,20 +43,20 @@ const StyledWrapper = styled.div`
 		align-items: center;
 	}
 
-	.item-container {
+	.search-recent__item-container {
 		display: none;
 	}
 
-	.item-container.true {
+	.search-recent__item-container.true {
 		display: block;
 		margin: 16px 20px 0 20px;
 	}
 
-	.item-title {
-		margin-bottom: 16px;
+	.search-recent__item {
+		margin-search-recent__bottom: 16px;
 	}
 
-	.bottom {
+	.search-recent__bottom {
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -73,28 +72,24 @@ const StyledWrapper = styled.div`
 			margin: 0 8px 0;
 		}
 
-		.save-toggle-on.true {
+		.search-recent__save-toggle.true {
 			display: flex;
 			align-items: center;
 		}
-		.save-toggle-on {
+		.search-recent__save-toggle {
 			display: none;
 		}
 
-		.save-toggle-off.true {
+		.search-recent__save-toggle.search-recent__save-toggle--on {
 			display: flex;
 			align-items: center;
 		}
 
-		.save-toggle-off{
+		.search-recent__remove-botton {
 			display: none;
 		}
 
-		.remove-botton {
-			display: none;
-		}
-
-		.remove-botton.true{
+		.search-recent__remove-botton.search-recent__remove-botton--on{
 			display: block;
 			cursor: pointer;
 			position: absolute;

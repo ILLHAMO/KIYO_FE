@@ -29,46 +29,46 @@ const NavigationBar = () => {
     return null;
 
   return (
-    <StyledWrapper active={active}>
+    <StyledWrapper active={active} className='navigation-bar'>
       <Link href="/">
-        <div className={`menu-wrap ${router.pathname === '/'}`}>
+        <div className={`navigation-bar__menu-wrap ${router.pathname === '/'}`}>
           <img
             src={`images/common/home_${
               router.pathname === '/' ? 'green' : 'gray'
             }.png`}
           />
-          <div className="title">메인홈</div>
+          <div className="navigation-bar__menu-title">메인홈</div>
         </div>
       </Link>
       <Link href="/map">
-        <div className={`menu-wrap ${router.pathname === '/map'}`}>
+        <div className={`navigation-bar__menu-wrap ${router.pathname === '/map'}`}>
           <img
             src={`images/common/map_${
               router.pathname === '/map' ? 'green' : 'gray'
             }.png`}
           />
-          <div className="title">지도탐색</div>
+          <div className="navigation-bar__menu-title">지도탐색</div>
         </div>
       </Link>
-      <div className="menu-wrap">
-        <img src="images/common/add_green.png" className="add-button" />
+      <div className="navigation-bar__menu-wrap">
+        <img src="images/common/add_green.png" className="navigation-bar__add-button" />
       </div>
       <Link href="/bookmark">
-        <div className={`menu-wrap ${router.pathname === '/bookmark'}`}>
+        <div className={`navigation-bar__menu-wrap ${router.pathname === '/bookmark'}`}>
           <img src={`images/common/bookmark_${
             router.pathname === '/bookmark' ? 'green' : 'gray'
           }.png`} />
-          <div className="title">북마크</div>
+          <div className="navigation-bar__menu-title">북마크</div>
         </div>
       </Link>
       <Link href="/mypage">
-        <div className={`menu-wrap ${router.pathname === '/mypage'}`}>
+        <div className={`navigation-bar__menu-wrap ${router.pathname === '/mypage'}`}>
           <img
             src={`images/common/mypage_${
               router.pathname === '/mypage' ? 'green' : 'gray'
             }.png`}
           />
-          <div className="title">내 정보</div>
+          <div className="navigation-bar__menu-title">내 정보</div>
         </div>
       </Link>
     </StyledWrapper>
@@ -90,9 +90,8 @@ const StyledWrapper = styled.div`
     height: 64px;
     border-top: 4px solid var(--color-gray-200);
     background-color: white;
-    transition: all 200ms;
 
-    &::after {
+    &::after {   
       transition: all 200ms;
       content: '';
       position: absolute;
@@ -103,7 +102,7 @@ const StyledWrapper = styled.div`
       width: 20%;
     }
 
-    .menu-wrap {
+    .navigation-bar__menu-wrap {
       width: 20%;
       cursor: pointer;
       display: flex;
@@ -112,7 +111,7 @@ const StyledWrapper = styled.div`
       justify-content: center;
 
       &.true {
-        .title {
+        .navigation-bar__menu-title {
           color: var(--color-main);
         }
       }
@@ -122,13 +121,13 @@ const StyledWrapper = styled.div`
         height: 36px;
       }
 
-      .add-button {
+      .navigation-bar__add-button {
         width: 40px;
         height: 40px;
         cursor: pointer;
       }
 
-      .title {
+      .navigation-bar__menu-title {
         font-size: 12px;
         color: var(--color-gray-200);
       }

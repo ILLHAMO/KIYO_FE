@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import HomeHeader from 'app.feature/home/HomeHeader';
 import HomeBanner from 'app.feature/home/HomeBanner';
-import HomeStoreFilter from 'app.feature/home/HomeStoreFilter';
+import HomeCategoryFilter from 'app.feature/home/HomeCategoryFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
-import HomeConvenienceFilter from 'app.feature/home/ HomeConvenienceFilter';
+import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 
 const PageHome = () => {
@@ -13,10 +13,10 @@ const PageHome = () => {
     <StyledWrapper>
       <HomeHeader />
       <HomeBanner />
-      <HomeStoreFilter />
+      <HomeCategoryFilter />
       <HomeStoreList />
       {/* <HomeConvenienceFilter /> */}
-      {/* <RegisterModal /> */}
+      {/* <RegisterModal />*/}
     </StyledWrapper>
   );
 };

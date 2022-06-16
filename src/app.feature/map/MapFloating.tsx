@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 const MapFloating = () => {
   return (
-    <StyledWrapper>
-      <div className="store-img"></div>
-      <div className="store-info-wrap">
-        <div className="store-info-top">
-          <div className="info-wrap">
-            <div className="store-name">버거킹 다산지금점</div>
-            <div className="store-address">경기도 남양주시</div>
-            <div className="user-score">
-              <div className="bookmark">
+    <StyledWrapper className='map-floating'>
+      <div className="map-floating__store-img"></div>
+      <div className="map-floating__store-info-wrap">
+        <div className="map-floating__store-info-top">
+          <div className="map-floating__info-wrap">
+            <div className="map-floating__store-name">버거킹 다산지금점</div>
+            <div className="map-floating__store-address">경기도 남양주시</div>
+            <div className="map-floating__user-score">
+              <div className="map-floating__bookmark">
                 <img src="/images/common/bookmark_on.png" />
                 58
               </div>
-              <div className="review">
+              <div className="map-floating__review">
                 <img src="/images/common/revisit.png" />
                 32
               </div>
@@ -23,10 +23,10 @@ const MapFloating = () => {
           </div>
           <img
             src="/images/common/bookmark_on.png"
-            className="bookmark-badge"
+            className="map-floating__bookmark-badge"
           />
         </div>
-        <div className="store-info-bottom">
+        <div className="map-floating__store-info-bottom">
           <img src="/images/common/kidszone_badge.png" />
         </div>
       </div>
@@ -48,7 +48,7 @@ const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  .store-img {
+  .map-floating__store-img {
     width: 96px;
     height: 96px;
     min-width: 96px;
@@ -58,7 +58,7 @@ const StyledWrapper = styled.div`
     margin-right: 16px;
   }
 
-  .store-info-wrap {
+  .map-floating__store-info-wrap {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -66,32 +66,32 @@ const StyledWrapper = styled.div`
     height: 100%;
     min-height: 96px;
 
-    .store-info-top {
+    .map-floating__store-info-top {
       font-size: 16px;
       display: flex;
       justify-content: space-between;
 
-      .bookmark-badge {
+      .map-floating__bookmark-badge {
         width: 20px;
         height: 20px;
         min-height: 20px;
         min-height: 20px;
       }
 
-      .info-wrap {
+      .map-floating__info-wrap {
         margin-right: 4px;
-        .store-name {
+        .map-floating__store-name {
           font-size: 16px;
           line-height: 22px;
           word-break: break-all;
         }
-        .store-address {
+        .map-floating__store-address {
           word-break: break-all;
           font-size: 12px;
           line-height: 16px;
         }
 
-        .user-score {
+        .map-floating__user-score {
           display: flex;
           align-items: center;
           font-size: 12px;
@@ -101,20 +101,20 @@ const StyledWrapper = styled.div`
             margin-right: 4px;
           }
 
-          .bookmark,
-          .review {
+          .map-floating__bookmark,
+          .map-floating__review {
             display: flex;
             align-items: center;
           }
 
-          .bookmark {
+          .map-floating__bookmark {
             margin-right: 8px;
           }
         }
       }
     }
 
-    .store-info-bottom {
+    .map-floating__store-info-bottom {
       padding: 0;
       width: 100%;
 

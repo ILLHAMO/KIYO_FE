@@ -3,34 +3,34 @@ import styled from 'styled-components';
 
 const SearchRecommend = () => {
   return (
-    <StyledWrapper>
-			<div className="recommend-title">
+    <StyledWrapper className='search-recommend'>
+			<div className="search-recommend__title">
 				추천 검색어
 			</div>
-			<div className="recommand-item">
-				<div className="recomend-item-container">
+			<div className="search-recommend__item-wrap">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">망고 케이크</div>
+					<div>망고 케이크</div>
 				</div>
-				<div className="recomend-item-container">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">곱창 전골</div>
+					<div>곱창 전골</div>
 				</div>
-				<div className="recomend-item-container">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">이나경송탄부대찌개</div>
+					<div>이나경송탄부대찌개</div>
 				</div>
-				<div className="recomend-item-container">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">한양대학교</div>
+					<div>한양대학교</div>
 				</div>
-				<div className="recomend-item-container">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">스테이크</div>
+					<div>스테이크</div>
 				</div>
-				<div className="recomend-item-container">
+				<div className="search-recommend__item-container">
 					<img src="/images/search/search.png" alt="" />
-					<div className="recomend-item-title">도너츠</div>
+					<div>도너츠</div>
 				</div>
 			</div>
 
@@ -41,26 +41,28 @@ const SearchRecommend = () => {
 export default SearchRecommend;
 
 const StyledWrapper = styled.div`
-  .recommend-title {
+  .search-recommend__title {
 		margin: 16px 20px 32px 20px;
 		font-size: 24px;
 		font-weight: 600;
 		color: var(--color-main);
 	}
-	.recommand-item {
+
+	.search-recommend__item-wrap {
 		padding: 0 32px;
 		display: flex;
 		flex-direction: column;
-	}
-	.recomend-item-container {
-		display: flex;
-		margin-bottom: 24px;
-	}
-	img {
-		width: 16px;
-		height: 16px;
-		margin-right: 16px;
-	}
 
+		.search-recommend__item-container {
+			display: flex;
+			align-items: center;
+			margin-bottom: 24px;
 
+			img {
+				width: 16px;
+				height: 16px;
+				margin-right: 16px;
+			}
+		}
+	}
 `;

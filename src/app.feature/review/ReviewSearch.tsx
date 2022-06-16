@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const ReviewSearch = () => {
   return (
-    <StyledWrapper>
-      <div className="search-input-wrap">
+    <StyledWrapper className='review-search'>
+      <div className="review-search__input">
         <img src="/images/review/search_gray.png" />
         <input placeholder="식당을 검색해주세요" />
       </div>
-      <div className="search-result-wrap">
-        <div className="search-result-item">
-          <div className="store-img"></div>
-          <div className="store-info">
-            <div className="name">홍길동네 돼지국밥</div>
-            <div className="address">용인시 기흥구</div>
+      <div className="review-search__result">
+        <div className="review-search__result-item">
+          <div className="review-search__store-image"></div>
+          <div className="review-search__store-info">
+            <div className="review-search__name">홍길동네 돼지국밥</div>
+            <div className="review-search__address">용인시 기흥구</div>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@ export default ReviewSearch;
 const StyledWrapper = styled.div`
   padding: 20px;
 
-  .search-input-wrap {
+  .review-search__input {
     position: relative;
     height: 40px;
     width: 100%;
@@ -53,8 +53,8 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .search-result-wrap {
-    .search-result-item {
+  .review-search__result {
+    .review-search__result-item {
       display: flex;
       align-items: center;
       padding: 8px;
@@ -64,7 +64,7 @@ const StyledWrapper = styled.div`
         border-bottom: none;
       }
 
-      .store-img {
+      .review-search__store-image {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -72,12 +72,12 @@ const StyledWrapper = styled.div`
         margin-right: 8px;
       }
 
-      .store-info {
-        .name {
+      .review-search__store-info {
+        .review-search__name {
           line-height: 23px;
         }
 
-        .address {
+        .review-search__address {
           line-height: 17px;
           font-size: 12px;
           color: var(--color-gray-300);

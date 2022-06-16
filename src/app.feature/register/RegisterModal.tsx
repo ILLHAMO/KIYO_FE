@@ -3,20 +3,20 @@ import styled from 'styled-components';
 
 const RegisterModal = () => {
   return (
-    <StyledWrapper>
-      <div className="register-button">
+    <StyledWrapper className='register-modal'>
+      <div className="register-modal__register-button">
         <img src="/images/register/pencil.png" alt="" />
          리뷰 작성하기
       </div>
-      <div className="register-button">
+      <div className="register-modal__register-button">
         <img src="/images/register/store.png" alt="" />
         장소 등록하기
       </div>
-      <div className="register-button">
+      <div className="register-modal__register-button">
         <img src="/images/register/send.png" alt="" />
         1:1 문의하기
       </div>
-      <div className="close-button">
+      <div className="register-modal__close-button">
         <img src="/images/register/close.png" alt="" />
       </div>
     </StyledWrapper>
@@ -41,10 +41,11 @@ const StyledWrapper = styled.div`
   justify-content: center;
   padding: 0 38px 0;
 
-  .register-button {
+  .register-modal__register-button {
     color: white;
     font-size: 18px;
     margin-bottom: 24px;
+    
     img {
       margin-right: 24px;
     }
@@ -55,9 +56,9 @@ const StyledWrapper = styled.div`
     height: 30px;
   }
 
-  .close-button {
+  .register-modal__close-button {
+    cursor: pointer;
     position: absolute;
-
     width: 30px;
     height: 30px;
     left: 122px;

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 const StoreTabBar = () => {
   return (
-    <StyledWrapper>
-      <div className="tab-item true">
+    <StyledWrapper className='store-tab-bar'>
+      <div className="store-tab-bar__tab-item store-tab-bar__tab-item--on">
         <span>About</span>
       </div>
-      <div className="tab-item">
+      <div className="store-tab-bar__tab-item">
         <span>Menu</span>
       </div>
-      <div className="tab-item">
+      <div className="store-tab-bar__tab-item">
         <span>Review</span>
       </div>
     </StyledWrapper>
@@ -26,13 +26,13 @@ const StyledWrapper = styled.div`
   padding: 16px 20px 0;
   background-color: var(--color-white);
   
-  .tab-item {
+  .store-tab-bar__tab-item {
     cursor: pointer;
     width: calc(100% / 3);
     text-align: center;
     padding: 0 0 4px;
 
-    &.true {
+    &.store-tab-bar__tab-item--on {
       span {
         border-bottom: 1px solid var(--color-black);
       }

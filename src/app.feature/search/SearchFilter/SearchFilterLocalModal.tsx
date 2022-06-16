@@ -4,8 +4,8 @@ import ButtonSquare from 'app.components/Button/ButtonSquare';
 
 const SearchFilterLocalModal = () => {
   return (
-    <StyledWrapper>
-      <div className="header">
+    <StyledWrapper className='search-filter-local-modal'>
+      <div className="search-filter-local-modal__header">
         <div className="local-name">내 근처</div>
         <div className="local-name">서울 - 강남</div>
         <div className="local-name">서울 - 강북</div>
@@ -17,7 +17,7 @@ const SearchFilterLocalModal = () => {
         <div className="local-name">서울 - 강남</div>
 
       </div>
-      <div className="body">
+      <div className="search-filter-local-modal__body">
         <div className="body__button-container">
           <ButtonSquare name="왕십리" />
           <ButtonSquare name="왕십리" />
@@ -34,9 +34,9 @@ const SearchFilterLocalModal = () => {
           <ButtonSquare name="왕십리" />
         </div>
       </div>
-      <div className="apply">
-        <div className="apply__button">적용</div>
-        <div className="apply__reset">취소하기</div>
+      <div className="search-filter-local-modal__footer">
+        <div className="search-filter-local-modal__apply-button">적용</div>
+        <div className="search-filter-local-modal__reset">취소하기</div>
       </div>
       
     </StyledWrapper>
@@ -57,7 +57,7 @@ const StyledWrapper = styled.div`
   border-top: 1px solid var(--color-gray-300);
   overflow: auto;
 
-  .header {
+  .search-filter-local-modal__header {
     display: flex;
     align-items: center;
     width: 100%;
@@ -75,7 +75,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .body {
+  .search-filter-local-modal__body {
     height: calc(100% - 56px - 88px);
     padding: 0 5% 0;
     overflow-x: hidden;
@@ -88,7 +88,7 @@ const StyledWrapper = styled.div`
     grid-gap: 10px;
   }
 
-  .apply {
+  .search-filter-local-modal__footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,7 +99,7 @@ const StyledWrapper = styled.div`
     height: 88px;
     background-color: white;
 
-    .apply__button {
+    .search-filter-local-modal__apply-button {
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -112,7 +112,7 @@ const StyledWrapper = styled.div`
       font-size: 18px;
     }
 
-    .apply__reset {
+    .search-filter-local-modal__reset {
       cursor: pointer;
       position: absolute;
       right: 5%;
