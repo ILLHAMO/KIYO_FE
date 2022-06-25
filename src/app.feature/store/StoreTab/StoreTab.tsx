@@ -9,9 +9,17 @@ const StoreTab = () => {
   const [reviewScroll, setReviewScroll] = useState(0);
 
   return (
-    <StyledWrapper className='store-tab'>
-      <StoreTabBar aboutScroll={aboutScroll} menuScroll={menuScroll} reviewScroll={reviewScroll}/>
-      <StoreTabPane setAboutScroll={setAboutScroll} setMenuScroll={setMenuScroll} setReviewScroll={setReviewScroll} />
+    <StyledWrapper className="store-tab">
+      <StoreTabBar
+        aboutScroll={aboutScroll}
+        menuScroll={menuScroll}
+        reviewScroll={reviewScroll}
+      />
+      <StoreTabPane
+        setAboutScroll={setAboutScroll}
+        setMenuScroll={setMenuScroll}
+        setReviewScroll={setReviewScroll}
+      />
     </StyledWrapper>
   );
 };

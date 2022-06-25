@@ -16,12 +16,16 @@ const SERVICE_OBJ = [
   { src: 'packing', title: '포장가능' },
 ];
 
-const StoreTabPaneAbout = ({ setAboutScroll }) => {
-  useEffect(() =>{
-    if (typeof window!=='undefined') {
-      setAboutScroll(document.getElementById('store-tab-about').offsetTop)
+type TProps = {
+  setAboutScroll: (scroll: number) => void;
+};
+
+const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setAboutScroll(document.getElementById('store-tab-about').offsetTop);
     }
-  }, [])
+  }, []);
 
   return (
     <StyledWrapper className="store-tab-pane-about" id="store-tab-about">

@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import StoreTabPaneReviewCard from './StoreTabPaneReviewCard';
 import Link from 'next/link';
 
-const StoreTabPaneReview = ({ setReviewScroll }) => {
+type TProps = {
+  setReviewScroll: (scroll: number) => void;
+};
+
+const StoreTabPaneReview: React.FC<TProps> = ({ setReviewScroll }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setReviewScroll(document.getElementById('store-tab-review').offsetTop);
     }
   }, []);
-  
+
   return (
     <StyledWrapper className="store-tab-pane-review" id="store-tab-review">
       <div className="store-tab-pane-review__menu">

@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Accordion } from 'react-bootstrap';
 
-const StoreTabPaneMenu = ({ setMenuScroll }) => {
+type TProps = {
+  setMenuScroll: (scroll: number) => void;
+};
+
+const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setMenuScroll(document.getElementById('store-tab-menu').offsetTop);
@@ -10,7 +14,7 @@ const StoreTabPaneMenu = ({ setMenuScroll }) => {
   }, []);
 
   return (
-    <StyledWrapper className="store-tab-pane-menu" id='store-tab-menu'>
+    <StyledWrapper className="store-tab-pane-menu" id="store-tab-menu">
       <div className="store-tab-pane-menu__title">Menu</div>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">

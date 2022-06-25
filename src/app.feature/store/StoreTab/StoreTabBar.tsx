@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const StoreTabBar = ({ aboutScroll, menuScroll, reviewScroll }) => {
+type TProps = {
+  aboutScroll: number;
+  menuScroll: number;
+  reviewScroll: number;
+};
+
+const StoreTabBar: React.FC<TProps> = ({
+  aboutScroll,
+  menuScroll,
+  reviewScroll,
+}) => {
   const [scroll, setScroll] = useState(0);
 
   const handleScroll = (scroll) => {
@@ -18,7 +28,7 @@ const StoreTabBar = ({ aboutScroll, menuScroll, reviewScroll }) => {
     <StyledWrapper className="store-tab-bar">
       <div
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
-          scroll < menuScroll-44 ? 'on' : 'off'
+          scroll < menuScroll - 44 ? 'on' : 'off'
         }`}
         onClick={() => handleScroll(aboutScroll)}
       >
@@ -26,7 +36,9 @@ const StoreTabBar = ({ aboutScroll, menuScroll, reviewScroll }) => {
       </div>
       <div
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
-          scroll >= menuScroll-44 && scroll <= reviewScroll-44 ? 'on' : 'off'
+          scroll >= menuScroll - 44 && scroll <= reviewScroll - 44
+            ? 'on'
+            : 'off'
         }`}
         onClick={() => handleScroll(menuScroll)}
       >
@@ -34,7 +46,7 @@ const StoreTabBar = ({ aboutScroll, menuScroll, reviewScroll }) => {
       </div>
       <div
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
-          scroll > reviewScroll-44 ? 'on' : 'off'
+          scroll > reviewScroll - 44 ? 'on' : 'off'
         }`}
         onClick={() => handleScroll(reviewScroll)}
       >
