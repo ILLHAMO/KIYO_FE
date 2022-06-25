@@ -7,25 +7,33 @@ import HomeCategoryFilter from 'app.feature/home/HomeCategoryFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
 import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
+import { Offcanvas } from 'react-bootstrap';
 
 const PageHome = () => {
   const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] = useState(false);
 
-  const handleConvenienceFilterVisible = () => {
-    setIsConvenienceFilterVisible(!isConvenienceFilterVisible);
-    console.log("클릭됨");
+  const handleConvenienceFilterVisibleShow = () => {
+    setIsConvenienceFilterVisible(true);
+  };
+
+  const handleConvenienceFilterVisibleClose = () => {
+    setIsConvenienceFilterVisible(false);
   };
 
   return (
     <StyledWrapper>
       <HomeHeader />
       <HomeBanner />
-      <HomeCategoryFilter onClick={handleConvenienceFilterVisible}/>
+      <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow}/>
       <HomeStoreList />
-      <HomeConvenienceFilter 
-        isConvenienceFilterVisible={isConvenienceFilterVisible} 
-        handleConvenienceFilterVisible={handleConvenienceFilterVisible}
-      />
+      <Offcanvas show={isConvenienceFilterVisible} onHide={handleConvenienceFilterVisibleClose}
+        placement="bottom">
+        <HomeConvenienceFilter 
+          isConvenienceFilterVisible={isConvenienceFilterVisible} 
+          handleConvenienceFilterVisible={handleConvenienceFilterVisibleClose}
+        />
+      </Offcanvas>
+
       {/* <RegisterModal />*/}
     </StyledWrapper>
   );
@@ -38,11 +46,4 @@ const StyledWrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   padding-bottom: 80px;
-
-  .home-convenience-filter.false{
-    display: none;
-  }
-  .home-convenience-filter.true {
-    display: block;
-  }
 `;

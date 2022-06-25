@@ -6,9 +6,11 @@ const HomeConvenienceFilter = ({
   isConvenienceFilterVisible, handleConvenienceFilterVisible
 }) => {
   return (
-    <StyledWrapper className={`home-convenience-filter ${isConvenienceFilterVisible}`} >
+    <StyledWrapper className={`home-convenience-filter`} >
       <div className='home-convenience-filter__filter-header'>
-        <img src="/images/common/close_gray.png" />
+        <div onClick={handleConvenienceFilterVisible}>
+          <img src="/images/common/close_gray.png" />
+        </div>
         <div className='home-convenience-filter__apply-button'>적용</div>
       </div>
       <div className='home-convenience-filter__title'>편의사항</div>
