@@ -10,7 +10,7 @@ type TProps = {
 const StoreTabPaneReview: React.FC<TProps> = ({ setReviewScroll }) => {
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
-      let scrollLocation = document.getElementById('scroll-review').offsetTop; // 현재 스크롤바 위
+      let scrollLocation = document.getElementById('scroll-review')?.offsetTop; // 현재 스크롤바 위
       setReviewScroll(scrollLocation);
     });
   

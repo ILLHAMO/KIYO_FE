@@ -23,7 +23,7 @@ type TProps = {
 const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
-      let scrollLocation = document.getElementById('scroll-about').offsetTop; // 현재 스크롤바 위
+      let scrollLocation = document.getElementById('scroll-about')?.offsetTop; // 현재 스크롤바 위
       setAboutScroll(scrollLocation);
     });
 

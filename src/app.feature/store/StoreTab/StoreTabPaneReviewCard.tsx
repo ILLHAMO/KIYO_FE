@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { useRouter } from 'next/router';
 
 type TProps = {
   isWriter: boolean;
@@ -11,6 +12,8 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isReportModalVisible, setIsReportModalVisible] = useState(false);
 
+  const router = useRouter();
+  
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
@@ -31,7 +34,7 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
       <ModalConfirm
         isModalVisible={isReportModalVisible}
         handleModalVisible={handleReportModalVisible}
-        handleConfirm={() => console.log('신고하기')}
+        handleConfirm={() => router.push('/report')}
       >
         해당 리뷰를 신고하시겠습니까?
       </ModalConfirm>

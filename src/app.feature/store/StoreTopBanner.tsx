@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import StoreTopBannerPanel from './StoreTopBannerPanel';
+import { useRouter } from 'next/router';
 
 const StoreTopBanner = () => {
+  const router = useRouter();
+
   return (
-    <StyledWrapper className='store-top-banner'>
+    <StyledWrapper className="store-top-banner">
       <div className="store-top-banner__back-button">
-        <img src="/images/store/back_button.png" />
+        <img
+          src="/images/store/back_button.png"
+          onClick={() => router.push('/')}
+        />
       </div>
       <div className="store-top-banner__image"></div>
       <StoreTopBannerPanel />
@@ -26,7 +32,7 @@ export default StoreTopBanner;
 
 const StyledWrapper = styled.div`
   position: relative;
-  
+
   .store-top-banner__back-button {
     position: absolute;
     width: 100%;
@@ -46,12 +52,12 @@ const StyledWrapper = styled.div`
     background-color: #ffe9ef;
     margin-bottom: 48px;
   }
-  
+
   .store-top-banner__operating-time {
     display: flex;
-    padding: 0 20px;      font-size: 12px;
+    padding: 0 20px;
+    font-size: 12px;
     line-height: 16px;
-
 
     .store-top-banner__title {
       margin-right: 8px;

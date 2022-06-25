@@ -6,6 +6,8 @@ type TProps = {
   isModalVisible: boolean;
   handleModalVisible: () => void;
   handleConfirm: () => void;
+  alert?: boolean;
+  confirmText?: string;
   children: React.ReactNode;
 };
 
@@ -13,35 +15,41 @@ const ModalConfirm: React.FC<TProps> = ({
   isModalVisible,
   handleModalVisible,
   handleConfirm,
+  alert = false,
+  confirmText = '네',
   children,
 }) => {
   return (
     <StyledWrapper
       centered
-      className="modal-store-review-delete"
+      className="modal-confirm"
       show={isModalVisible}
       size="sm"
       onHide={handleModalVisible}
+      alert={alert}
+      backdrop={alert ? 'static' : true}
     >
-      <Modal.Body>
-        <div className="modal-store-review-delete__title">{children}</div>
-        <div className="modal-store-review-delete__footer">
+      <Modal.Body className='modal-confirm__body'>
+        <div className="modal-confirm__title">{children}</div>
+        <div className="modal-confirm__footer">
           <Button
             onClick={async () => {
               await handleConfirm();
               handleModalVisible();
             }}
-            className="modal-store-review-delete__button modal-store-review-delete__button--confirm"
+            className="modal-confirm__button modal-confirm__button--confirm"
           >
-            네
+            {confirmText}
           </Button>
-          <Button
-            variant="light"
-            onClick={handleModalVisible}
-            className="modal-store-review-delete__button modal-store-review-delete__button--cancel"
-          >
-            아니오
-          </Button>
+          {!alert && (
+            <Button
+              variant="light"
+              onClick={handleModalVisible}
+              className="modal-confirm__button modal-confirm__button--cancel"
+            >
+              아니오
+            </Button>
+          )}
         </div>
       </Modal.Body>
     </StyledWrapper>
@@ -51,22 +59,22 @@ const ModalConfirm: React.FC<TProps> = ({
 export default ModalConfirm;
 
 const StyledWrapper = styled(Modal)`
-  .modal-store-review-delete__title {
+  .modal-confirm__title {
     margin-bottom: 12px;
   }
 
-  .modal-store-review-delete__footer {
+  .modal-confirm__footer {
     display: flex;
     justify-content: end;
   }
 
-  .modal-store-review-delete__button {
-    &.modal-store-review-delete__button--confirm {
+  .modal-confirm__button {
+    &.modal-confirm__button--confirm {
       color: var(--color-white);
       margin-right: 8px;
     }
 
-    &.modal-store-review-delete__button--cancel {
+    &.modal-confirm__button--cancel {
     }
   }
 `;

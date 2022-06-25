@@ -9,7 +9,7 @@ type TProps = {
 const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
-      let scrollLocation = document.getElementById('scroll-menu').offsetTop; // 현재 스크롤바 위
+      let scrollLocation = document.getElementById('scroll-menu')?.offsetTop; // 현재 스크롤바 위
       setMenuScroll(scrollLocation);
     });
   
