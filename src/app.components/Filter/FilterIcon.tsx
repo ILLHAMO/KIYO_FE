@@ -8,7 +8,7 @@ const FilterIcon = () => {
   return (
     <StyledWrapper>
       <div className="filter-container">
-        <SVGfilter />
+        <SVGfilter fill='var(--color-gray-300)' width='16' height='16'/>
         <div>필터</div>
       </div>
 
@@ -30,12 +30,6 @@ const StyledWrapper = styled.div`
     border: 1px solid var(--color-gray-300);
     font-size: 12px;
     color: var(--color-gray-300);
-
-    svg {
-      fill: var(--color-gray-300);
-      width: 16px;
-      height: 16px;
-    }
   
     &.true {
       border: 1px solid var(--color-main);
