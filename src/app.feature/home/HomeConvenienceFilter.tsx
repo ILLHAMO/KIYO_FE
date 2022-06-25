@@ -6,7 +6,7 @@ const HomeConvenienceFilter = ({
   isConvenienceFilterVisible, handleConvenienceFilterVisible
 }) => {
   return (
-    <StyledWrapper className={`home-convenience-filter`} >
+    <StyledWrapper className="home-convenience-filter" >
       <div className='home-convenience-filter__filter-header'>
         <div onClick={handleConvenienceFilterVisible}>
           <img src="/images/common/close_gray.png" />
@@ -14,7 +14,9 @@ const HomeConvenienceFilter = ({
         <div className='home-convenience-filter__apply-button'>적용</div>
       </div>
       <div className='home-convenience-filter__title'>편의사항</div>
-      <FilterConvenience />
+      <div className='home-convenience-filter__filter-container'>
+        <FilterConvenience />
+      </div> 
     </StyledWrapper>
   );
 };
@@ -25,7 +27,6 @@ const StyledWrapper = styled.div`
   position: fixed;
   bottom: 0;
   background-color: white;
-  max-width: 664px;
   width: 100%;
   border-top: 1px solid var(--color-gray-300);
   overflow: hidden;
@@ -65,6 +66,12 @@ const StyledWrapper = styled.div`
     width: 100%;
     text-align: center;
     padding: 16px 0;
+  }
+
+  .home-convenience-filter__filter-container {
+    max-width: 664px;
+    margin: 0 auto;
+
   }
   `;
 

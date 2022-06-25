@@ -26,8 +26,11 @@ const PageHome = () => {
       <HomeBanner />
       <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow}/>
       <HomeStoreList />
-      <Offcanvas show={isConvenienceFilterVisible} onHide={handleConvenienceFilterVisibleClose}
-        placement="bottom">
+      <Offcanvas
+        show={isConvenienceFilterVisible}
+        onHide={handleConvenienceFilterVisibleClose}
+        placement="bottom"
+      >
         <HomeConvenienceFilter 
           isConvenienceFilterVisible={isConvenienceFilterVisible} 
           handleConvenienceFilterVisible={handleConvenienceFilterVisibleClose}
@@ -46,4 +49,9 @@ const StyledWrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   padding-bottom: 80px;
+
+  .home-convenience-filter {
+    display: flex;
+    justify-content: center;
+  }
 `;
