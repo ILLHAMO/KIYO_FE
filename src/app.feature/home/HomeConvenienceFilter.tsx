@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 
-const HomeConvenienceFilter = () => {
+const HomeConvenienceFilter = ({
+  isConvenienceFilterVisible, handleConvenienceFilterVisible
+}) => {
   return (
-    <StyledWrapper className='home-convenience-filter'>
+    <StyledWrapper className={`home-convenience-filter ${isConvenienceFilterVisible}`} >
       <div className='home-convenience-filter__filter-header'>
         <img src="/images/common/close_gray.png" />
         <div className='home-convenience-filter__apply-button'>적용</div>

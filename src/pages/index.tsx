@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import HomeHeader from 'app.feature/home/HomeHeader';
@@ -9,13 +9,23 @@ import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 
 const PageHome = () => {
+  const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] = useState(false);
+
+  const handleConvenienceFilterVisible = () => {
+    setIsConvenienceFilterVisible(!isConvenienceFilterVisible);
+    console.log("클릭됨");
+  };
+
   return (
     <StyledWrapper>
       <HomeHeader />
       <HomeBanner />
-      <HomeCategoryFilter />
+      <HomeCategoryFilter onClick={handleConvenienceFilterVisible}/>
       <HomeStoreList />
-      {/* <HomeConvenienceFilter /> */}
+      <HomeConvenienceFilter 
+        isConvenienceFilterVisible={isConvenienceFilterVisible} 
+        handleConvenienceFilterVisible={handleConvenienceFilterVisible}
+      />
       {/* <RegisterModal />*/}
     </StyledWrapper>
   );
@@ -28,4 +38,11 @@ const StyledWrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   padding-bottom: 80px;
+
+  .home-convenience-filter.false{
+    display: none;
+  }
+  .home-convenience-filter.true {
+    display: block;
+  }
 `;
