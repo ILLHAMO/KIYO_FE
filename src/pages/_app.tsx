@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'app.styled/customBootstrap.scss'
 
 function App({ Component, pageProps }: AppProps) {
   return (

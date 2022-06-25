@@ -1,16 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const StoreTabBar = () => {
+const StoreTabBar = ({ aboutScroll, menuScroll, reviewScroll }) => {
+  const [scroll, setScroll] = useState(0);
+
+  const handleScroll = (scroll) => {
+    window.scrollTo(0, scroll - 44);
+  };
+
+  if (typeof window !== 'undefined')
+    window.addEventListener('scroll', () => {
+      let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위
+      setScroll(scrollLocation);
+    });
+
   return (
-    <StyledWrapper className='store-tab-bar'>
-      <div className="store-tab-bar__tab-item store-tab-bar__tab-item--on">
+    <StyledWrapper className="store-tab-bar">
+      <div
+        className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
+          scroll < menuScroll-44 ? 'on' : 'off'
+        }`}
+        onClick={() => handleScroll(aboutScroll)}
+      >
         <span>About</span>
       </div>
-      <div className="store-tab-bar__tab-item">
+      <div
+        className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
+          scroll >= menuScroll-44 && scroll <= reviewScroll-44 ? 'on' : 'off'
+        }`}
+        onClick={() => handleScroll(menuScroll)}
+      >
         <span>Menu</span>
       </div>
-      <div className="store-tab-bar__tab-item">
+      <div
+        className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
+          scroll > reviewScroll-44 ? 'on' : 'off'
+        }`}
+        onClick={() => handleScroll(reviewScroll)}
+      >
         <span>Review</span>
       </div>
     </StyledWrapper>
@@ -25,7 +52,8 @@ const StyledWrapper = styled.div`
   top: 0;
   padding: 16px 20px 0;
   background-color: var(--color-white);
-  
+  z-index: 2;
+
   .store-tab-bar__tab-item {
     cursor: pointer;
     width: calc(100% / 3);

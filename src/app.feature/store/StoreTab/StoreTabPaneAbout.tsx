@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const SERVICE_OBJ = [
@@ -16,9 +16,15 @@ const SERVICE_OBJ = [
   { src: 'packing', title: '포장가능' },
 ];
 
-const StoreTabPaneAbout = () => {
+const StoreTabPaneAbout = ({ setAboutScroll }) => {
+  useEffect(() =>{
+    if (typeof window!=='undefined') {
+      setAboutScroll(document.getElementById('store-tab-about').offsetTop)
+    }
+  }, [])
+
   return (
-    <StyledWrapper className="store-tab-pane-about">
+    <StyledWrapper className="store-tab-pane-about" id="store-tab-about">
       <div className="store-tab-pane-about__title">About</div>
       <div className="store-tab-pane-about__about">
         생생 정보통에 나왔던 국밥 맛집입니다. 돼지국밥을 시키면 수육을 서비스로

@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
+import ModalStoreReviewDelete from './ModalStoreReviewDelete';
 
 type TProps = {
   isWriter: boolean;
 };
 
 const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
+  const handleDeleteModalVisible = () => {
+    setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
   return (
     <StyledWrapper className="store-tab-pane-review-card">
+      <ModalStoreReviewDelete
+        isDeleteModalVisible={isDeleteModalVisible}
+        handleDeleteModalVisible={handleDeleteModalVisible}
+      />
       <div className="store-tab-pane-review-card__top">
         <div className="store-tab-pane-review-card__user">
           <div className="store-tab-pane-review-card__profile"></div>
@@ -16,10 +28,15 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
         <div className="store-tab-pane-review-card__method-button">
           {isWriter ? (
             <>
-              <div className="store-tab-pane-review-card__edit-button">
-                수정
-              </div>
-              <div className="store-tab-pane-review-card__remove-button">
+              <Link href={`/review/1`}>
+                <div className="store-tab-pane-review-card__edit-button">
+                  수정
+                </div>
+              </Link>
+              <div
+                className="store-tab-pane-review-card__remove-button"
+                onClick={handleDeleteModalVisible}
+              >
                 삭제
               </div>
             </>
