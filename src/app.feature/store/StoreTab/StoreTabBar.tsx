@@ -26,32 +26,31 @@ const StoreTabBar: React.FC<TProps> = ({
 
   return (
     <StyledWrapper className="store-tab-bar">
-      <div
+      <a
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
           scroll < menuScroll - 44 ? 'on' : 'off'
         }`}
-        onClick={() => handleScroll(aboutScroll)}
+        href="#store-tab-about"
+        // onClick={() => handleScroll(aboutScroll)}
       >
         <span>About</span>
-      </div>
-      <div
+      </a>
+      <a
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
-          scroll >= menuScroll - 44 && scroll <= reviewScroll - 44
-            ? 'on'
-            : 'off'
+          scroll >= menuScroll - 44 && scroll < reviewScroll - 44 ? 'on' : 'off'
         }`}
-        onClick={() => handleScroll(menuScroll)}
+        href="#store-tab-menu"
       >
         <span>Menu</span>
-      </div>
-      <div
+      </a>
+      <a
         className={`store-tab-bar__tab-item store-tab-bar__tab-item--${
-          scroll > reviewScroll - 44 ? 'on' : 'off'
+          scroll >= reviewScroll - 44 ? 'on' : 'off'
         }`}
-        onClick={() => handleScroll(reviewScroll)}
+        href="#store-tab-review"
       >
         <span>Review</span>
-      </div>
+      </a>
     </StyledWrapper>
   );
 };
@@ -66,6 +65,10 @@ const StyledWrapper = styled.div`
   background-color: var(--color-white);
   z-index: 2;
 
+  a{
+    text-decoration: none;
+    color: var(--color-black);
+  }
   .store-tab-bar__tab-item {
     cursor: pointer;
     width: calc(100% / 3);

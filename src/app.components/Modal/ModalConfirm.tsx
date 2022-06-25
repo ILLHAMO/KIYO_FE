@@ -6,12 +6,14 @@ type TProps = {
   isModalVisible: boolean;
   handleModalVisible: () => void;
   handleConfirm: () => void;
+  children: React.ReactNode;
 };
 
 const ModalConfirm: React.FC<TProps> = ({
   isModalVisible,
   handleModalVisible,
   handleConfirm,
+  children,
 }) => {
   return (
     <StyledWrapper
@@ -19,15 +21,16 @@ const ModalConfirm: React.FC<TProps> = ({
       className="modal-store-review-delete"
       show={isModalVisible}
       size="sm"
-      onHide={handleConfirm}
+      onHide={handleModalVisible}
     >
       <Modal.Body>
-        <div className="modal-store-review-delete__title">
-          정말 삭제하시겠습니까?
-        </div>
+        <div className="modal-store-review-delete__title">{children}</div>
         <div className="modal-store-review-delete__footer">
           <Button
-            onClick={handleConfirm}
+            onClick={async () => {
+              await handleConfirm();
+              handleModalVisible();
+            }}
             className="modal-store-review-delete__button modal-store-review-delete__button--confirm"
           >
             네
@@ -44,6 +47,8 @@ const ModalConfirm: React.FC<TProps> = ({
     </StyledWrapper>
   );
 };
+
+export default ModalConfirm;
 
 const StyledWrapper = styled(Modal)`
   .modal-store-review-delete__title {
