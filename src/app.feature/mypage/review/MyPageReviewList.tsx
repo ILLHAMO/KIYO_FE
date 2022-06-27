@@ -19,8 +19,9 @@ const MyPageReviewList = () => {
       >
         정말 삭제하시겠습니까?
       </ModalConfirm>
-      <MyPageReviewCard />
-      <MyPageReviewCard />
+      <MyPageReviewCard handleDeleteModalVisible={handleDeleteModalVisible}/>
+      <MyPageReviewCard handleDeleteModalVisible={handleDeleteModalVisible}/>
+      <MyPageReviewCard handleDeleteModalVisible={handleDeleteModalVisible}/>
     </StyledWrapper>
   );
 };

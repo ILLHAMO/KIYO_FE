@@ -15,6 +15,9 @@ const BookmarkList = () => {
         <StoreCard />
         <StoreCard />
         <StoreCard />
+        <StoreCard />
+        <StoreCard />
+        <StoreCard />
       </div>
     </StyledWrapper>
   );
@@ -24,11 +27,13 @@ export default BookmarkList;
 
 const StyledWrapper = styled.div`
   padding: 20px;
+  
   .bookmark-list__title {
     font-weight: 700;
     font-size: 24px;
     line-height: 35px;
     color: var(--color-black);
+    margin-bottom: 12px;
   }
 
   .bookmark-list__list-container {
