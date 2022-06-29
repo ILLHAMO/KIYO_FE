@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import FilterIcon from 'app.components/Filter/FilterIcon';
 import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
-const SearchFilter = ({onClick}) => {
+const SearchFilter = ({otherFilterOnClick, localFilterOnClick}) => {
   return (
     <StyledWrapper className='search-filter'>
 			<div className="search-filter__button-container">
-				<div><FilterLocalButton /></div>
-				<div onClick={onClick}><FilterIcon /></div>
+				<div onClick={localFilterOnClick}><FilterLocalButton /></div>
+				<div onClick={otherFilterOnClick}><FilterIcon /></div>
 			</div>
     </StyledWrapper>
   );

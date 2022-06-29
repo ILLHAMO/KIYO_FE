@@ -24,7 +24,6 @@ const HomeConvenienceFilter = ({
 export default HomeConvenienceFilter;
 
 const StyledWrapper = styled.div`
-  position: fixed;
   bottom: 0;
   background-color: white;
   width: 100%;

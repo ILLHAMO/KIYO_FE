@@ -26,7 +26,7 @@ const PageHome = () => {
       <HomeBanner />
       <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow}/>
       <HomeStoreList />
-      <Offcanvas
+      <StyledOffcanvas
         show={isConvenienceFilterVisible}
         onHide={handleConvenienceFilterVisibleClose}
         placement="bottom"
@@ -35,8 +35,7 @@ const PageHome = () => {
           isConvenienceFilterVisible={isConvenienceFilterVisible} 
           handleConvenienceFilterVisible={handleConvenienceFilterVisibleClose}
         />
-      </Offcanvas>
-
+      </StyledOffcanvas>
       {/* <RegisterModal />*/}
     </StyledWrapper>
   );
@@ -55,3 +54,9 @@ const StyledWrapper = styled.div`
     justify-content: center;
   }
 `;
+
+const StyledOffcanvas = styled(Offcanvas)`
+&.offcanvas-bottom {
+  height: auto;
+}
+`

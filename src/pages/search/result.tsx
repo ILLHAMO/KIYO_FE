@@ -9,32 +9,44 @@ import SearchFilterLocalModal from 'app.feature/search/SearchFilter/SearchFilter
 import { Modal, Offcanvas } from 'react-bootstrap';
 
 const PageSearchResult = () => {
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isOtherFilterVisible, setIsOtherFilterVisible] = useState(false);
+  const [isLocalFilterVisible, setIsLocalFilterVisible] = useState(false);
 
-  const handleFilterVisibleShow = () => {
-    setIsFilterVisible(true);
+  const handleOtherFilterVisibleShow = () => {
+    setIsOtherFilterVisible(!isOtherFilterVisible);
   };
-
-  const handleFilterVisibleClose = () => {
-    setIsFilterVisible(false);
+  const handleLocalFilterVisibleShow = () => {
+    setIsLocalFilterVisible(!isLocalFilterVisible);
   };
 
   return (
     <StyledWrapper>
       <SearchHeader />
-			<SearchFilter onClick={handleFilterVisibleShow}/>
+			<SearchFilter 
+        otherFilterOnClick={handleOtherFilterVisibleShow}
+        localFilterOnClick={handleLocalFilterVisibleShow}
+      />
 			<HomeStoreList />
-      <Offcanvas
-        show={isFilterVisible}
-        onHide={handleFilterVisibleClose}
+      <StyledOtherOffcanvas
+        className="other-modal"
+        show={isOtherFilterVisible}
+        onHide={handleOtherFilterVisibleShow}
         placement="bottom"
       >
-        <SearchFilterOtherModal  
-          isFilterVisible={isFilterVisible} 
-          handleFilterVisible={handleFilterVisibleClose}
+        <SearchFilterOtherModal
+        handleOtherFilterVisibleShow={handleOtherFilterVisibleShow}
         />
-      </Offcanvas>
-      {/* <SearchFilterLocalModal /> */}
+      </StyledOtherOffcanvas>
+      <StyledLocalOffcanvas
+        className="local-modal"
+        show={isLocalFilterVisible}
+        onHide={handleLocalFilterVisibleShow}
+        placement="bottom"
+      >
+        <SearchFilterLocalModal
+          handleLocalFilterVisibleShow={handleLocalFilterVisibleShow}
+        />
+      </StyledLocalOffcanvas>
     </StyledWrapper>
   );
 };
@@ -46,5 +58,16 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
+`;
 
+const StyledOtherOffcanvas = styled(Offcanvas)`;
+  &.offcanvas-bottom {
+    height : 70%;
+  }
+`;
+
+const StyledLocalOffcanvas = styled(Offcanvas)`;
+  &.offcanvas-bottom {
+    height : 50%;
+  }
 `;
