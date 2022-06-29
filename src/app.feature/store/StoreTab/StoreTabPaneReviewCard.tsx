@@ -13,7 +13,7 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
   const [isReportModalVisible, setIsReportModalVisible] = useState(false);
 
   const router = useRouter();
-  
+
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };

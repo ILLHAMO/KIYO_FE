@@ -13,12 +13,14 @@ const STORE_CATEGORY = [
   { src: 'bar', title: '주점' },
 ];
 
-const HomeCategoryFilter = () => {
+const HomeCategoryFilter = ({onClick}) => {
   return (
     <StyledWrapper className="home-store-filter">
       <div className="home-store-filter__top">
         <div className="home-store-filter__title">어디로 가시겠어요?</div>
-        <FilterIcon />
+        <div onClick={onClick}>
+          <FilterIcon />
+        </div>
       </div>
       <div className="home-store-filter__category">
         {STORE_CATEGORY.map((item, idx) => (

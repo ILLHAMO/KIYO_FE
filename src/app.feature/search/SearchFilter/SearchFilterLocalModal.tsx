@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
 
-const SearchFilterLocalModal = () => {
+const SearchFilterLocalModal = ({handleLocalFilterVisibleShow}) => {
   return (
     <StyledWrapper className='search-filter-local-modal'>
       <div className="search-filter-local-modal__header">
@@ -36,7 +36,11 @@ const SearchFilterLocalModal = () => {
       </div>
       <div className="search-filter-local-modal__footer">
         <div className="search-filter-local-modal__apply-button">적용</div>
-        <div className="search-filter-local-modal__reset">취소하기</div>
+        <div
+          onClick={handleLocalFilterVisibleShow}
+          className="search-filter-local-modal__reset">
+          취소하기
+        </div>
       </div>
       
     </StyledWrapper>
@@ -49,11 +53,9 @@ const StyledWrapper = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  bottom: 0;
   background-color: white;
   max-width: 664px;
   width: 100%;
-  height: 50%;
   border-top: 1px solid var(--color-gray-300);
   overflow: auto;
 

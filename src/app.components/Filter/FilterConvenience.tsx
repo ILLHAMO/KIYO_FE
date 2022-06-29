@@ -14,19 +14,18 @@ import SVGelec from '../../../public/images/convenience/elec.svg';
 import SVGpacking from '../../../public/images/convenience/packing.svg';
 
 const CONVENIENCE_CATEGORY = [
-
-  { src: <SVGwifi /> , title: '와이파이' },
-  { src: <SVGgroup /> , title: '단체석' },
-  { src: <SVGpets /> , title: '애견동반' },
-  { src: <SVGwc /> , title: '화장실' },
-  { src: <SVGparking /> , title: '주차가능' },
-  { src: <SVGdrive /> , title: '발렛가능' },
-  { src: <SVGcrib /> , title: '아기의자' },
-  { src: <SVGdeck /> , title: '야외좌석' },
-  { src: <SVGchild /> , title: '키즈메뉴' },
-  { src: <SVGchanging_station /> , title: '기저귀갈이' },
-  { src: <SVGelec /> , title: '콘센트' },
-  { src: <SVGpacking /> , title: '포장가능' }
+  { src: <SVGwifi  width='32' height='32'/> , title: '와이파이' },
+  { src: <SVGgroup  width='32' height='32'/> , title: '단체석' },
+  { src: <SVGpets  width='32' height='32'/> , title: '애견동반' },
+  { src: <SVGwc  width='32' height='32'/> , title: '화장실' },
+  { src: <SVGparking  width='32' height='32'/> , title: '주차가능' },
+  { src: <SVGdrive  width='32' height='32'/> , title: '발렛가능' },
+  { src: <SVGcrib  width='32' height='32'/> , title: '아기의자' },
+  { src: <SVGdeck  width='32' height='32'/> , title: '야외좌석' },
+  { src: <SVGchild  width='32' height='32'/> , title: '키즈메뉴' },
+  { src: <SVGchanging_station  width='32' height='32'/> , title: '기저귀갈이' },
+  { src: <SVGelec  width='32' height='32'/> , title: '콘센트' },
+  { src: <SVGpacking  width='32' height='32'/> , title: '포장가능' }
 ];
 
 const FilterConvenience = () => {
@@ -82,8 +81,6 @@ const StyledWrapper = styled.div`
 
         svg {
           fill: var(--color-gray-100);
-          width: 32px;
-          height: 32px;
         }
       }
 
