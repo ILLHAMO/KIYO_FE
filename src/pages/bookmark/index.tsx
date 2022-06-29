@@ -7,8 +7,8 @@ import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 const PageBookmark = () => {
   return (
     <StyledWrapper>
-      {/*<BookmarkList />*/}
-      <BookmarkNone />
+      <BookmarkList />
+      {/*<BookmarkNone />*/}
       <NavigationBar />
     </StyledWrapper>
   );

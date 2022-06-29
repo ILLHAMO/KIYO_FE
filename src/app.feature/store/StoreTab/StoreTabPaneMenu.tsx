@@ -7,14 +7,14 @@ type TProps = {
 };
 
 const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMenuScroll(document.getElementById('store-tab-menu').offsetTop);
-    }
-  }, []);
-
+  if (typeof window !== 'undefined')
+    window.addEventListener('scroll', () => {
+      let scrollLocation = document.getElementById('scroll-menu')?.offsetTop; // 현재 스크롤바 위
+      setMenuScroll(scrollLocation);
+    });
+  
   return (
-    <StyledWrapper className="store-tab-pane-menu" id="store-tab-menu">
+    <StyledWrapper className="store-tab-pane-menu" id='scroll-menu' >
       <div className="store-tab-pane-menu__title">Menu</div>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
@@ -41,6 +41,7 @@ const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+      <div id='store-tab-review' />
     </StyledWrapper>
   );
 };
@@ -51,7 +52,7 @@ const StyledWrapper = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  padding: 16px 20px;
+  padding: 20px;
   border-bottom: 0.5px solid var(--color-gray-100);
 
   .store-tab-pane-menu__title {

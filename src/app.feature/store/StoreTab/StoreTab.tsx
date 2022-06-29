@@ -10,6 +10,7 @@ const StoreTab = () => {
 
   return (
     <StyledWrapper className="store-tab">
+      <div id="store-tab-about" />
       <StoreTabBar
         aboutScroll={aboutScroll}
         menuScroll={menuScroll}

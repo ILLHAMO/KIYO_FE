@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import ModalStoreReviewDelete from './ModalStoreReviewDelete';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { useRouter } from 'next/router';
 
 type TProps = {
   isWriter: boolean;
@@ -9,17 +10,34 @@ type TProps = {
 
 const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [isReportModalVisible, setIsReportModalVisible] = useState(false);
+
+  const router = useRouter();
 
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
 
+  const handleReportModalVisible = () => {
+    setIsReportModalVisible(!isReportModalVisible);
+  };
+
   return (
     <StyledWrapper className="store-tab-pane-review-card">
-      <ModalStoreReviewDelete
-        isDeleteModalVisible={isDeleteModalVisible}
-        handleDeleteModalVisible={handleDeleteModalVisible}
-      />
+      <ModalConfirm
+        isModalVisible={isDeleteModalVisible}
+        handleModalVisible={handleDeleteModalVisible}
+        handleConfirm={() => console.log('삭제하기')}
+      >
+        정말 삭제하시겠습니까?
+      </ModalConfirm>
+      <ModalConfirm
+        isModalVisible={isReportModalVisible}
+        handleModalVisible={handleReportModalVisible}
+        handleConfirm={() => router.push('/report')}
+      >
+        해당 리뷰를 신고하시겠습니까?
+      </ModalConfirm>
       <div className="store-tab-pane-review-card__top">
         <div className="store-tab-pane-review-card__user">
           <div className="store-tab-pane-review-card__profile"></div>
@@ -41,7 +59,10 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
               </div>
             </>
           ) : (
-            <div className="store-tab-pane-review-card__decalre-button">
+            <div
+              className="store-tab-pane-review-card__decalre-button"
+              onClick={handleReportModalVisible}
+            >
               신고
             </div>
           )}

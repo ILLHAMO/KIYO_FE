@@ -1,11 +1,19 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
 const BookmarkNone = () => {
+  const router = useRouter();
+
   return (
     <StyledWrapper className="bookmark-none">
       <div className="bookmark-none__text">북마크한 키즈존이 없습니다.</div>
-      <div className="bookmark-none__add-button">북마크하러 가기</div>
+      <div
+        className="bookmark-none__add-button"
+        onClick={() => router.push('/')}
+      >
+        북마크하러 가기
+      </div>
     </StyledWrapper>
   );
 };
@@ -27,6 +35,7 @@ const StyledWrapper = styled.div`
   }
 
   .bookmark-none__add-button {
+    cursor: pointer;
     height: 48px;
     padding: 0 32px;
     line-height: 48px;

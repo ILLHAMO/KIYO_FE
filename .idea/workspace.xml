@@ -3,12 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="49526bdd-cd37-41c9-a48e-28920da1ff9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.components/Button/ButtonTest.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.components/NavigationBar/NavigationBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/settings/MyPageSettingsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/settings/MyPageSettingsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.styled/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.styled/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mypage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mypage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/search/result.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search/result.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/bookmark/BookmarkList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/bookmark/BookmarkList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/bookmark/BookmarkNone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/bookmark/BookmarkNone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/inquiry/MyPageInquiryCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/inquiry/MyPageInquiryCreate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/review/MyPageReviewCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/review/MyPageReviewCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/review/MyPageReviewList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/review/MyPageReviewList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/store/MyPageStoreCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/store/MyPageStoreCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.feature/mypage/store/MyPageStoreList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.feature/mypage/store/MyPageStoreList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/bookmark/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bookmark/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
@@ -50,6 +54,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/common" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
@@ -80,6 +85,7 @@
       <workItem from="1650874512316" duration="938000" />
       <workItem from="1650875470461" duration="439000" />
       <workItem from="1650887974437" duration="3641000" />
+      <workItem from="1656299901836" duration="2037000" />
     </task>
     <servers />
   </component>

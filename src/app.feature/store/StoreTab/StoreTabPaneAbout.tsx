@@ -21,14 +21,14 @@ type TProps = {
 };
 
 const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setAboutScroll(document.getElementById('store-tab-about').offsetTop);
-    }
-  }, []);
+  if (typeof window !== 'undefined')
+    window.addEventListener('scroll', () => {
+      let scrollLocation = document.getElementById('scroll-about')?.offsetTop; // 현재 스크롤바 위
+      setAboutScroll(scrollLocation);
+    });
 
   return (
-    <StyledWrapper className="store-tab-pane-about" id="store-tab-about">
+    <StyledWrapper className="store-tab-pane-about" id="scroll-about">
       <div className="store-tab-pane-about__title">About</div>
       <div className="store-tab-pane-about__about">
         생생 정보통에 나왔던 국밥 맛집입니다. 돼지국밥을 시키면 수육을 서비스로
@@ -71,6 +71,7 @@ const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
           ))}
         </div>
       </div>
+      <div id="store-tab-menu" />
     </StyledWrapper>
   );
 };
@@ -81,7 +82,7 @@ const StyledWrapper = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  padding: 16px 20px;
+  padding: 20px;
   border-bottom: 0.5px solid var(--color-gray-100);
 
   .store-tab-pane-about__title {

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
-const MyPageReviewCard = () => {
+const MyPageReviewCard = ({ handleDeleteModalVisible }) => {
   return (
     <StyledWrapper className="mypage-review-card">
       <div className="mypage-review-card__top">
@@ -13,8 +14,15 @@ const MyPageReviewCard = () => {
           </div>
         </div>
         <div className="mypage-review-card__method-button">
-          <div className="mypage-review-card__edit-button">수정</div>
-          <div className="mypage-review-card__remove-button">삭제</div>
+          <Link href="/review/1">
+            <div className="mypage-review-card__edit-button">수정</div>
+          </Link>
+          <div
+            className="mypage-review-card__remove-button"
+            onClick={handleDeleteModalVisible}
+          >
+            삭제
+          </div>
         </div>
       </div>
       <div className="mypage-review-card">

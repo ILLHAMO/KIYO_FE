@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MyPageStoreCard = () => {
+const MyPageStoreCard = ({ handleDeleteModalVisible }) => {
   return (
     <StyledWrapper className="mypage-store-card">
       <div className="mypage-store-card__info">
@@ -13,7 +13,12 @@ const MyPageStoreCard = () => {
       </div>
       <div className="mypage-store-card__button">
         <div className="mypage-store-card__watch-button">보기</div>
-        <div className="mypage-store-card__remove-button">삭제</div>
+        <div
+          className="mypage-store-card__remove-button"
+          onClick={handleDeleteModalVisible}
+        >
+          삭제
+        </div>
       </div>
     </StyledWrapper>
   );
@@ -31,11 +36,11 @@ const StyledWrapper = styled.div`
   @media only screen and (max-width: 375px) {
     padding: 16px 0;
   }
-  
+
   &:first-child {
     padding-top: 0;
   }
-  
+
   &:last-child {
     border-bottom: 0;
   }

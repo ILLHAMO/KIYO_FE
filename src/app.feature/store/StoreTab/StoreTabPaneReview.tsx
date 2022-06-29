@@ -8,14 +8,14 @@ type TProps = {
 };
 
 const StoreTabPaneReview: React.FC<TProps> = ({ setReviewScroll }) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setReviewScroll(document.getElementById('store-tab-review').offsetTop);
-    }
-  }, []);
-
+  if (typeof window !== 'undefined')
+    window.addEventListener('scroll', () => {
+      let scrollLocation = document.getElementById('scroll-review')?.offsetTop; // 현재 스크롤바 위
+      setReviewScroll(scrollLocation);
+    });
+  
   return (
-    <StyledWrapper className="store-tab-pane-review" id="store-tab-review">
+    <StyledWrapper className="store-tab-pane-review" id='scroll-review'>
       <div className="store-tab-pane-review__menu">
         <div>Review</div>
         <Link href="/review">
@@ -24,6 +24,14 @@ const StoreTabPaneReview: React.FC<TProps> = ({ setReviewScroll }) => {
       </div>
       <div className="store-tab-pane-review__review-card">
         <StoreTabPaneReviewCard isWriter={true} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
+        <StoreTabPaneReviewCard isWriter={false} />
         <StoreTabPaneReviewCard isWriter={false} />
         <StoreTabPaneReviewCard isWriter={false} />
       </div>
@@ -36,7 +44,7 @@ export default StoreTabPaneReview;
 const StyledWrapper = styled.div`
   font-weight: 400;
   font-size: 16px;
-  padding: 16px 20px;
+  padding: 20px;
 
   .store-tab-pane-review__menu {
     letter-spacing: 0.29em;

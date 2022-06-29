@@ -12,6 +12,7 @@
     "@svgr/webpack": "6.2.1",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.10.1",
+    "antd": "4.21.3",
     "babel-plugin-inline-react-svg": "2.0.1",
     "babel-plugin-styled-components": "2.0.7",
     "babel-plugin-transform-remove-console": "6.9.4",
