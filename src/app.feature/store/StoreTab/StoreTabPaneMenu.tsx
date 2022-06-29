@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { Accordion } from 'react-bootstrap';
 
-const StoreTabPaneMenu = () => {
+type TProps = {
+  setMenuScroll: (scroll: number) => void;
+};
+
+const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setMenuScroll(document.getElementById('store-tab-menu').offsetTop);
+    }
+  }, []);
+
   return (
-    <StyledWrapper className="store-tab-pane-menu">
+    <StyledWrapper className="store-tab-pane-menu" id="store-tab-menu">
       <div className="store-tab-pane-menu__title">Menu</div>
-      <div className="store-tab-pane-menu__menu">
-        <div className="store-tab-pane-menu__category">
-          <div>식사류</div>
-          <img src={`/images/store/expand_${false ? 'more' : 'less'}.png`} />
-        </div>
-        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--on">
-          <div className="store-tab-pane-menu__item">국밥1</div>
-          <div className="store-tab-pane-menu__item">국밥2</div>
-          <div className="store-tab-pane-menu__item">국밥3</div>
-        </div>
-      </div>
-      <div className="store-tab-pane-menu__menu">
-        <div className="store-tab-pane-menu__category">
-          <div>음료</div>
-          <img src={`/images/store/expand_${true ? 'more' : 'less'}.png`} />
-        </div>
-        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--off">
-          <div className="store-tab-pane-menu__item">콜라</div>
-          <div className="store-tab-pane-menu__item">사이다</div>
-          <div className="store-tab-pane-menu__item">소주</div>
-          <div className="store-tab-pane-menu__item">맥주</div>
-        </div>
-      </div>
-      <div className="store-tab-pane-menu__menu">
-        <div className="store-tab-pane-menu__category">
-          <div>키즈메뉴</div>
-          <img src={`/images/store/expand_${true ? 'more' : 'less'}.png`} />
-        </div>
-        <div className="store-tab-pane-menu__menu-wrap store-tab-pane-menu__menu-wrap--off">
-          <div className="store-tab-pane-menu__item">어린이 돈까스</div>
-        </div>
-      </div>
+      <Accordion alwaysOpen>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>식사류</Accordion.Header>
+          <Accordion.Body>
+            <div className="store-tab-pane-menu__item">국밥1</div>
+            <div className="store-tab-pane-menu__item">국밥2</div>
+            <div className="store-tab-pane-menu__item">국밥3</div>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>음료</Accordion.Header>
+          <Accordion.Body>
+            <div className="store-tab-pane-menu__item">콜라</div>
+            <div className="store-tab-pane-menu__item">사이다</div>
+            <div className="store-tab-pane-menu__item">소주</div>
+            <div className="store-tab-pane-menu__item">맥주</div>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>키즈메뉴</Accordion.Header>
+          <Accordion.Body>
+            <div className="store-tab-pane-menu__item">어린이 돈까스</div>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </StyledWrapper>
   );
 };
@@ -58,30 +62,35 @@ const StyledWrapper = styled.div`
     margin-bottom: 8px;
   }
 
-  .store-tab-pane-menu__menu {
-    .store-tab-pane-menu__category {
-      padding: 8px 0;
-      border-bottom: 0.5px solid var(--color-gray-100);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .accordion {
+    .accordion-item {
+      border: none;
 
-      img {
-        width: 24px;
-        height: 24px;
-      }
-    }
+      .accordion-header {
+        .accordion-button {
+          padding: 8px 0;
+          border: none;
+          color: var(--color-black);
+          box-shadow: none !important;
+          border-bottom: 0.5px solid var(--color-gray-100);
+        }
 
-    .store-tab-pane-menu__menu-wrap {
-      padding: 8px;
-      border-bottom: 0.5px solid var(--color-gray-100);
-      
-      &.store-tab-pane-menu__menu-wrap--off {
-        display: none;
+        .accordion-button:not(.collapsed) {
+          background-color: #ffffff;
+          box-shadow: none;
+        }
       }
 
-      .store-tab-pane-menu__item {
-        font-size: 12px;
+      .accordion-collapse {
+        border-bottom: 0.5px solid var(--color-gray-100);
+
+        .accordion-body {
+          padding: 8px;
+
+          .store-tab-pane-menu__item {
+            font-size: 12px;
+          }
+        }
       }
     }
   }

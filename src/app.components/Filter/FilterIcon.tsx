@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import SVGfilter from '../../../public/images/common/filter.svg';
 
 
+
 const FilterIcon = () => {
   return (
     <StyledWrapper>
       <div className="filter-container">
-        <SVGfilter />
+        <SVGfilter width='16' height='16'/>
         <div>필터</div>
       </div>
 
@@ -32,8 +33,6 @@ const StyledWrapper = styled.div`
 
     svg {
       fill: var(--color-gray-300);
-      width: 16px;
-      height: 16px;
     }
   
     &.true {

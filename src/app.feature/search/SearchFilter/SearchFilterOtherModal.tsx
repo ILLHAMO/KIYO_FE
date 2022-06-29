@@ -4,11 +4,15 @@ import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
 import FilterCategory from 'app.components/Filter/FilterCategory';
 
-const SearchFilterOtherModal = () => {
+const SearchFilterOtherModal = ({
+  handleOtherFilterVisibleShow
+}) => {
   return (
     <StyledWrapper className='search-filter-other-modal'>
       <div className='search-filter-other-modal__header'>
-        <img src="/images/common/close_gray.png" />
+        <div onClick={handleOtherFilterVisibleShow}>
+          <img src="/images/common/close_gray.png" />
+        </div>
         <div className='search-filter-other-modal__apply-button'>적용</div>
       </div>
       <div className="search-filter-other-modal__body">
@@ -36,12 +40,10 @@ export default SearchFilterOtherModal;
 
 const StyledWrapper = styled.div`
 
-  position: fixed;
   bottom: 0;
   background-color: white;
   max-width: 664px;
   width: 100%;
-  height: 70%;
   border-top: 1px solid var(--color-gray-300);
   overflow: auto;
 

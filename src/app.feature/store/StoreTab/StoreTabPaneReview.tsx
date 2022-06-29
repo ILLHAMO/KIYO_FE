@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import StoreTabPaneReviewCard from './StoreTabPaneReviewCard';
+import Link from 'next/link';
 
-const StoreTabPaneReview = () => {
+type TProps = {
+  setReviewScroll: (scroll: number) => void;
+};
+
+const StoreTabPaneReview: React.FC<TProps> = ({ setReviewScroll }) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setReviewScroll(document.getElementById('store-tab-review').offsetTop);
+    }
+  }, []);
+
   return (
-    <StyledWrapper className="store-tab-pane-review">
+    <StyledWrapper className="store-tab-pane-review" id="store-tab-review">
       <div className="store-tab-pane-review__menu">
         <div>Review</div>
-        <div className="store-tab-pane-review__plus-button">+</div>
+        <Link href="/review">
+          <div className="store-tab-pane-review__plus-button">+</div>
+        </Link>
       </div>
       <div className="store-tab-pane-review__review-card">
         <StoreTabPaneReviewCard isWriter={true} />
