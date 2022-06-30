@@ -13,6 +13,7 @@
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.10.1",
     "antd": "4.21.3",
+    "axios": "^0.27.2",
     "babel-plugin-inline-react-svg": "2.0.1",
     "babel-plugin-styled-components": "2.0.7",
     "babel-plugin-transform-remove-console": "6.9.4",
@@ -24,8 +25,10 @@
     "react": "18.0.0",
     "react-bootstrap": "2.3.1",
     "react-dom": "18.0.0",
+    "react-hook-form": "^7.33.0",
     "styled-components": "5.3.5",
-    "urlencoded-body-parser": "3.0.0"
+    "urlencoded-body-parser": "3.0.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "17.0.31",
