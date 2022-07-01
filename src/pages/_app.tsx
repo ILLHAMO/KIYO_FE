@@ -7,9 +7,12 @@ import {
   StoreProvider,
   useCreateStore,
 } from 'app.store/rootStore';
+import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
 
 function App({ Component, pageProps }: AppProps) {
   const createStore = useCreateStore(pageProps.initialZustandState);
+  const getUser = useGetUser();
+  console.log(getUser);
 
   return (
     <div className="app-layout">
