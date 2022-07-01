@@ -1,8 +1,10 @@
-import axios from "axios"
+import axios from "axios";
+import { ApiError } from "next/dist/server/api-utils";
+import API from 'app.modules/api';
 
 export const authorizationAPI = async () => {
     try {
-        // const userInfo = await axios.get('유저 정보 가져오는 API');
+        // const userInfo = await API.GET({url: '/auth/refresh', data: {}});
 
         return {
             login: true,

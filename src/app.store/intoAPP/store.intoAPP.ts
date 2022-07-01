@@ -5,7 +5,7 @@ export const useStoreIntoAPP = create<any>((set) => ({
     getUser: {
         login: false,
         info: null,
-        accessToken: null,
+        token: null,
         isLoading: true,
     },
 
@@ -24,9 +24,12 @@ export const useStoreIntoAPP = create<any>((set) => ({
     },
 
     setUserInfo: (data) => {
+        if (data.token) localStorage.setItem('token', data.token);
+
         set((state) => ({
             ...state,
             getUser: {
+                ...state.getUser,
                 ...data
             }
         }))

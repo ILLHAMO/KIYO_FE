@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
 
+const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+
 let axiosClient = axios.create({
     baseURL: "http://localhost:8080",
     headers: {
-        Application: `Bearer `
-    }
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true
 })
 
 export const request: any = async ({url, method, data = null}) => {
@@ -16,6 +19,10 @@ export const request: any = async ({url, method, data = null}) => {
             data,
           });
 
+          if (response.data.status === 401) {
+            const res = await axiosClient({method: 'GET', url: '/auth/refresh', data: {}});
+            localStorage.setItem('token', res.data.data.token);
+          }
         return response;
     } catch (err) {
         console.error(err.toString());
@@ -28,6 +35,8 @@ class API {
     }
 
     GET({ url, ...params }) {
+      console.log('asdf');
+      
       return this.CALL({
         method: 'GET',
         url: url + qs.stringURL(params.data),
