@@ -1,41 +1,62 @@
-import create from "zustand";
-import { authorizationAPI } from "app.modules/api/api.authroization";
+import create from 'zustand';
+import API from 'app.modules/api';
 
-export const useStoreIntoAPP = create<any>((set) => ({
-    getUser: {
-        login: false,
-        info: null,
-        token: null,
-        isLoading: true,
-    },
+const initialUserState = {
+  login: false,
+  info: null,
+  token: null,
+  isLoading: true,
+};
 
-    requestAuthUser: async (): Promise<any> => {
-        const result = await authorizationAPI();
-        console.log('result');
-        
+export const useStoreIntoAPP: any = create((set) => ({
+  getUser: { ...initialUserState },
+
+  requestAuthUser: async (): Promise<any> => {
+    try {
+      const response = await API.GET({ url: '/api/store', data: {} });
+      if (response.data.status === 401) {
         set((state) => ({
-            ...state,
-            getUser: {
-                ...state.getUser,
-                ...result,
-                isLoading: false
-            }
-        }))
-    },
-
-    setUserInfo: (data) => {
-        if (data.token) localStorage.setItem('token', data.token);
-
+          ...state,
+          getUser: {
+            ...initialUserState,
+            isLoading: false,
+          },
+        }));
+      } else {
         set((state) => ({
-            ...state,
-            getUser: {
-                ...state.getUser,
-                ...data
-            }
-        }))
+          ...state,
+          getUser: {
+            // TO DO
+            // 받아온 유저 정보 넣어주기
+            ...state.getUser,
+            login: true,
+            isLoading: false,
+          },
+        }));
+      }
+    } catch (err) {
+      console.log(err);
+      set((state) => ({
+        ...state,
+        getUser: {
+          ...initialUserState,
+          isLoadin: false,
+        },
+      }));
     }
-}))
+  },
+
+  setUserInfo: (data) => {
+    set((state) => ({
+      ...state,
+      getUser: {
+        ...state.getUser,
+        ...data,
+      },
+    }));
+  },
+}));
 
 export const useGetUser = () => {
-    return useStoreIntoAPP((state) => state.getUser);
-}
+  return useStoreIntoAPP((state) => state.getUser);
+};

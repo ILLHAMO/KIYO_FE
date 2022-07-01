@@ -1,31 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import API from 'app.modules/api';
-import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
 
 const HomeBanner = () => {
-  const getUser = useGetUser();
-
-  const requestStore = async () => {
-    try {
-      const res = await API.GET({
-        url: '/api/store',
-        data: {},
-        headers: {
-          Application: `Bearer ${getUser.token}`,
-        },
-      });
-      console.log('res', res);
-    } catch (err) {
-      console.log('err', err);
-    }
-  };
-
-  useEffect(() => {
-    console.log('asdfasdf');
-    requestStore();
-  }, []);
-
   return (
     <StyledWrapper className="home-banner">
       <img
