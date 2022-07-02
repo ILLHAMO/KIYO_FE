@@ -13,7 +13,6 @@ const PageOauthRedirect = () => {
     axiosClient.defaults.headers[
       'Authorization'
     ] = `Bearer ${router.query.token}`;
-    // localStorage.setItem('token', router.query.token.toString());
     router.push('/');
   }, []);
 };

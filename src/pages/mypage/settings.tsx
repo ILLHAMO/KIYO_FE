@@ -6,7 +6,7 @@ import MyPageSettingsList from 'app.feature/mypage/settings/MyPageSettingsList';
 const PageMyPageSettings = () => {
   return (
     <StyledWrapper>
-      <Header title="공지사항" />
+      <Header title="설정" />
       <MyPageSettingsList />
     </StyledWrapper>
   );

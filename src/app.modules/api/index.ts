@@ -4,9 +4,7 @@ import { qs } from 'app.modules/util/qs';
 export let axiosClient = axios.create({
   baseURL: 'http://localhost:8080',
   headers: {
-    Authorization: `Bearer ${
-      typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null
-    }`,
+    Authorization: `Bearer null`,
   },
   withCredentials: true,
 });
@@ -37,9 +35,12 @@ axiosClient.interceptors.response.use(
 
         return finalResponse;
       } else {
-        // TO DO
-        // 로그아웃 로직 추가!
-        if (response.data.path !== '/api/store') location.reload();
+        await axiosClient({
+          method: 'DELETE',
+          url: '/auth/logout',
+          data: {},
+        });
+        location.replace('/enter');
       }
     }
 
