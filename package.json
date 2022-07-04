@@ -28,6 +28,7 @@
     "react-bootstrap": "2.3.1",
     "react-dom": "18.0.0",
     "react-hook-form": "^7.33.0",
+    "react-query": "^3.39.1",
     "styled-components": "5.3.5",
     "urlencoded-body-parser": "3.0.0",
     "zustand": "^4.0.0-rc.1"

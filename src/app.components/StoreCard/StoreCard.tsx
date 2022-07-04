@@ -1,12 +1,17 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-const StoreCard = () => {
+const StoreCard = ({ storeInfo }) => {
+  const router = useRouter();
   return (
-    <StyledWrapper className="store-card">
+    <StyledWrapper
+      className="store-card"
+      onClick={() => router.push(`/store/${storeInfo.id}`)}
+    >
       <div className="store-card__image-container">
         <div className="store-card__image">
-          <img src='/images/sample/food_img.png' />
+          <img src={storeInfo.thumbnail} />
         </div>
         <div className="store-card__bookmark">
           <img
@@ -18,26 +23,25 @@ const StoreCard = () => {
           {/*  className="store-card__bookmark-btn store-card__bookmark-btn--off"*/}
           {/*/>*/}
         </div>
-        <div className="store-card__kidszone">
-          <img src="/images/common/kidszone_badge.png" />
-        </div>
+        {storeInfo.isKidsZone && (
+          <div className="store-card__kidszone">
+            <img src="/images/common/kidszone_badge.png" />
+          </div>
+        )}
       </div>
       <div className="store-card__info-container">
         <div className="store-card__info">
-          <div className="store-card__location">남양주시 다산동</div>
-          <div className="store-card__name">
-            이름이 길다면이름이 길다면이름이 길다면이름이 길다면이름이
-            길다면이름이 길다면이름이 길다면
-          </div>
+          <div className="store-card__location">{storeInfo.address}</div>
+          <div className="store-card__name">{storeInfo.name}</div>
         </div>
         <div className="store-card__user-score">
           <div className="store-card__bookmark">
             <img src="/images/common/bookmark_on.png" />
-            58
+            {storeInfo.bookmarkCount}
           </div>
           <div className="store-card__review">
             <img src="/images/common/revisit.png" />
-            32
+            {storeInfo.reviewCount}
           </div>
         </div>
       </div>
@@ -60,7 +64,7 @@ const StyledWrapper = styled.div`
       padding: 50%;
       position: relative;
       overflow: hidden;
-      
+
       img {
         object-fit: cover;
         position: absolute;
