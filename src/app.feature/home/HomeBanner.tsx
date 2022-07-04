@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const HomeBanner = () => {
   return (
     <StyledWrapper className="home-banner">
-      <img src="images/sample/home_banner.jpeg" className="home-banner__image" />
+      <img src="images/sample/home_banner.png" className="home-banner__image" />
     </StyledWrapper>
   );
 };

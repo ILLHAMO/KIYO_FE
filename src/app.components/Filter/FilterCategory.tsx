@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
+import styled, { css } from 'styled-components';
 
 const STORE_CATEGORY = [
   '카페',
@@ -13,12 +14,22 @@ const STORE_CATEGORY = [
 ];
 
 const StoreFilter = () => {
+  const { register } = useFormContext();
+
   return (
     <StyledWrapper>
       <div className="filter-wrap">
         {STORE_CATEGORY.map((item, idx) => (
           <div className="filter-item" key={`category-${idx}`}>
-            <div className="item-container">{item}</div>
+            <input
+              {...register('category')}
+              id={`store-filter-${idx}`}
+              type="checkbox"
+              value={String(idx)}
+            />
+            <label for={`store-filter-${idx}`}>
+              <div className="item-container">{item}</div>
+            </label>
           </div>
         ))}
       </div>
@@ -34,7 +45,7 @@ const StyledWrapper = styled.div`
     flex-wrap: wrap;
     padding: 0 40px 0px;
     width: 100%;
-    
+
     .filter-item {
       display: flex;
       flex-direction: column;
@@ -42,16 +53,20 @@ const StyledWrapper = styled.div`
       margin-bottom: 8px;
       color: var(--color-gray-100);
       width: 25%;
-      
+
+      input {
+        display: none;
+      }
+
       @media only screen and (max-width: 374px) {
         width: 33.3%;
       }
     }
-    
+
     .item-title {
       word-break: keep-all;
     }
-  
+
     .item-container {
       cursor: pointer;
       display: flex;
@@ -64,16 +79,12 @@ const StyledWrapper = styled.div`
       border: 2px solid var(--color-gray-100);
       background-color: white;
     }
-  
-    .filter-item.true {
-      color: var(--color-main);
 
+    input[type='checkbox']:checked + label {
       .item-container {
+        color: var(--color-main);
         border: 6px double var(--color-main);
       }
     }
-
   }
-
-  `;
-
+`;
