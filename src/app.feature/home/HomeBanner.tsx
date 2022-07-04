@@ -1,10 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Carousel } from 'antd';
 
 const HomeBanner = () => {
   return (
     <StyledWrapper className="home-banner">
-      <img src="images/sample/home_banner.png" className="home-banner__image" />
+      <Carousel autoplay>
+        <img
+          src="images/sample/home_banner_1.png"
+          className="home-banner__image"
+        />
+        <img
+          src="images/sample/home_banner_2.png"
+          className="home-banner__image"
+        />
+        <img
+          src="images/sample/home_banner_3.png"
+          className="home-banner__image"
+        />
+      </Carousel>
     </StyledWrapper>
   );
 };
