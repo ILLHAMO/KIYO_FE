@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const STORE_CATEGORY = [
   '카페',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import HomeHeader from 'app.feature/home/HomeHeader';
@@ -8,9 +8,32 @@ import HomeStoreList from 'app.feature/home/HomeStoreList';
 import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 import { Offcanvas } from 'react-bootstrap';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const PageHome = () => {
-  const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] = useState(false);
+  const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] =
+    useState(false);
+
+  const methods = useForm();
+
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const watchCategory = watch('category');
+
+  const onValidRegisterForm = (data) => {
+    try {
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onSubmit = handleSubmit(onValidRegisterForm);
 
   const handleConvenienceFilterVisibleShow = () => {
     setIsConvenienceFilterVisible(true);
@@ -20,24 +43,34 @@ const PageHome = () => {
     setIsConvenienceFilterVisible(false);
   };
 
+  useEffect(() => {
+    onSubmit();
+  }, [watchCategory]);
+
   return (
-    <StyledWrapper>
-      <HomeHeader />
-      <HomeBanner />
-      <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow}/>
-      <HomeStoreList />
-      <StyledOffcanvas
-        show={isConvenienceFilterVisible}
-        onHide={handleConvenienceFilterVisibleClose}
-        placement="bottom"
-      >
-        <HomeConvenienceFilter 
-          isConvenienceFilterVisible={isConvenienceFilterVisible} 
-          handleConvenienceFilterVisible={handleConvenienceFilterVisibleClose}
-        />
-      </StyledOffcanvas>
-      {/* <RegisterModal />*/}
-    </StyledWrapper>
+    <FormProvider {...methods}>
+      <form onSubmit={onSubmit}>
+        <StyledWrapper>
+          <HomeHeader />
+          <HomeBanner />
+          <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow} />
+          <HomeStoreList />
+          <StyledOffcanvas
+            show={isConvenienceFilterVisible}
+            onHide={handleConvenienceFilterVisibleClose}
+            placement="bottom"
+          >
+            <HomeConvenienceFilter
+              onSubmit={onSubmit}
+              handleConvenienceFilterVisible={
+                handleConvenienceFilterVisibleClose
+              }
+            />
+          </StyledOffcanvas>
+          {/* <RegisterModal />*/}
+        </StyledWrapper>
+      </form>
+    </FormProvider>
   );
 };
 
@@ -56,7 +89,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledOffcanvas = styled(Offcanvas)`
-&.offcanvas-bottom {
-  height: auto;
-}
-`
+  &.offcanvas-bottom {
+    height: auto;
+  }
+`;

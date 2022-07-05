@@ -12,32 +12,46 @@ import SVGchild from '../../../public/images/convenience/child.svg';
 import SVGchanging_station from '../../../public/images/convenience/changing_station.svg';
 import SVGelec from '../../../public/images/convenience/elec.svg';
 import SVGpacking from '../../../public/images/convenience/packing.svg';
+import { useFormContext } from 'react-hook-form';
 
 const CONVENIENCE_CATEGORY = [
-  { src: <SVGwifi  width='32' height='32'/> , title: '와이파이' },
-  { src: <SVGgroup  width='32' height='32'/> , title: '단체석' },
-  { src: <SVGpets  width='32' height='32'/> , title: '애견동반' },
-  { src: <SVGwc  width='32' height='32'/> , title: '화장실' },
-  { src: <SVGparking  width='32' height='32'/> , title: '주차가능' },
-  { src: <SVGdrive  width='32' height='32'/> , title: '발렛가능' },
-  { src: <SVGcrib  width='32' height='32'/> , title: '아기의자' },
-  { src: <SVGdeck  width='32' height='32'/> , title: '야외좌석' },
-  { src: <SVGchild  width='32' height='32'/> , title: '키즈메뉴' },
-  { src: <SVGchanging_station  width='32' height='32'/> , title: '기저귀갈이' },
-  { src: <SVGelec  width='32' height='32'/> , title: '콘센트' },
-  { src: <SVGpacking  width='32' height='32'/> , title: '포장가능' }
+  { src: <SVGwifi width="32" height="32" />, title: '와이파이' },
+  { src: <SVGgroup width="32" height="32" />, title: '단체석' },
+  { src: <SVGpets width="32" height="32" />, title: '애견동반' },
+  { src: <SVGwc width="32" height="32" />, title: '화장실' },
+  { src: <SVGparking width="32" height="32" />, title: '주차가능' },
+  { src: <SVGdrive width="32" height="32" />, title: '발렛가능' },
+  { src: <SVGcrib width="32" height="32" />, title: '아기의자' },
+  { src: <SVGdeck width="32" height="32" />, title: '야외좌석' },
+  { src: <SVGchild width="32" height="32" />, title: '키즈메뉴' },
+  { src: <SVGchanging_station width="32" height="32" />, title: '기저귀갈이' },
+  { src: <SVGelec width="32" height="32" />, title: '콘센트' },
+  { src: <SVGpacking width="32" height="32" />, title: '포장가능' },
 ];
 
 const FilterConvenience = () => {
+  const { register } = useFormContext();
+
   return (
-    <StyledWrapper className='convenience-filter'>
+    <StyledWrapper className="convenience-filter">
       <div className="convenience-filter__filter-wrap">
         {CONVENIENCE_CATEGORY.map((item, idx) => (
-          <div className="convenience-filter__filter-item" key={`filter-${idx}`}>
-            <div className="convenience-filter__item-container">
-              <>{item.src}</>
-            </div>
-            <div className="convenience-filter__item-title">{item.title}</div>
+          <div
+            className="convenience-filter__filter-item"
+            key={`filter-${idx}`}
+          >
+            <input
+              {...register('convenience')}
+              id={`convenience-filter-${idx}`}
+              type="checkbox"
+              value={String(idx)}
+            />
+            <label for={`convenience-filter-${idx}`}>
+              <div className="convenience-filter__item-container">
+                <>{item.src}</>
+              </div>
+              <div className="convenience-filter__item-title">{item.title}</div>
+            </label>
           </div>
         ))}
       </div>
@@ -66,6 +80,26 @@ const StyledWrapper = styled.div`
         width: 33.3%;
       }
 
+      input {
+        display: none;
+      }
+
+      input[type='checkbox']:checked + label {
+        .convenience-filter__item-title {
+          color: var(--color-main);
+        }
+
+        .convenience-filter__item-container {
+          border: 6px double var(--color-main);
+
+     
+
+          svg {
+            fill: var(--color-main);
+          }
+        }
+      }
+
       .convenience-filter__item-container {
         cursor: pointer;
         display: flex;
@@ -86,22 +120,7 @@ const StyledWrapper = styled.div`
 
       .convenience-filter__item-title {
         word-break: keep-all;
-      }
-    }
-  
-    .convenience-filter__filter-item.convenience-filter__filter-item--on {
-
-      .convenience-filter__item-container {
-        border: 6px double var(--color-main);
-      }
-
-      svg {
-        fill: var(--color-main);
-      }
-
-      .convenience-filter__item-title {
-        color: var(--color-main);
+        text-align: center;
       }
     }
   `;
-
