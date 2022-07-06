@@ -27,7 +27,7 @@ const StoreFilter = () => {
               type="checkbox"
               value={String(idx)}
             />
-            <label for={`store-filter-${idx}`}>
+            <label htmlFor={`store-filter-${idx}`}>
               <div className="item-container">{item}</div>
             </label>
           </div>

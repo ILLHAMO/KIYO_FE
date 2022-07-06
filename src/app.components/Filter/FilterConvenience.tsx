@@ -46,7 +46,7 @@ const FilterConvenience = () => {
               type="checkbox"
               value={String(idx)}
             />
-            <label for={`convenience-filter-${idx}`}>
+            <label htmlFor={`convenience-filter-${idx}`}>
               <div className="convenience-filter__item-container">
                 <>{item.src}</>
               </div>

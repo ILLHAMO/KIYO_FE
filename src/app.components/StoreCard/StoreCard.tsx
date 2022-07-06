@@ -1,29 +1,52 @@
+import { Skeleton } from 'antd';
+import { TypeStoreInfo } from 'app.modules/type/type';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-const StoreCard = ({ storeInfo }) => {
+type TProps = {
+  storeInfo: TypeStoreInfo;
+};
+
+const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
+  if (!storeInfo.id) return <Skeleton />;
+
   const router = useRouter();
+
+  const {
+    id,
+    images,
+    booked,
+    kids,
+    address,
+    name,
+    reviewCount,
+    bookmarkCount,
+  } = storeInfo;
+
   return (
     <StyledWrapper
       className="store-card"
-      onClick={() => router.push(`/store/${storeInfo.id}`)}
+      onClick={() => router.push(`/store/${id}`)}
     >
       <div className="store-card__image-container">
         <div className="store-card__image">
-          <img src={storeInfo.thumbnail} />
+          <img src={images[0].path} />
         </div>
         <div className="store-card__bookmark">
-          <img
-            src="/images/common/bookmark_on.png"
-            className="store-card__bookmark-btn store-card__bookmark-btn--on"
-          />
-          {/*<img*/}
-          {/*  src="/images/common/bookmark_off.png"*/}
-          {/*  className="store-card__bookmark-btn store-card__bookmark-btn--off"*/}
-          {/*/>*/}
+          {booked ? (
+            <img
+              src="/images/common/bookmark_on.png"
+              className="store-card__bookmark-btn store-card__bookmark-btn--on"
+            />
+          ) : (
+            <img
+              src="/images/common/bookmark_off.png"
+              className="store-card__bookmark-btn store-card__bookmark-btn--off"
+            />
+          )}
         </div>
-        {storeInfo.isKidsZone && (
+        {kids && (
           <div className="store-card__kidszone">
             <img src="/images/common/kidszone_badge.png" />
           </div>
@@ -31,17 +54,17 @@ const StoreCard = ({ storeInfo }) => {
       </div>
       <div className="store-card__info-container">
         <div className="store-card__info">
-          <div className="store-card__location">{storeInfo.address}</div>
-          <div className="store-card__name">{storeInfo.name}</div>
+          <div className="store-card__location">{address}</div>
+          <div className="store-card__name">{name}</div>
         </div>
         <div className="store-card__user-score">
           <div className="store-card__bookmark">
             <img src="/images/common/bookmark_on.png" />
-            {storeInfo.bookmarkCount}
+            {bookmarkCount}
           </div>
           <div className="store-card__review">
             <img src="/images/common/revisit.png" />
-            {storeInfo.reviewCount}
+            {reviewCount}
           </div>
         </div>
       </div>

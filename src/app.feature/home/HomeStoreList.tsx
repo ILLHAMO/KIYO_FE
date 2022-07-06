@@ -7,8 +7,10 @@ import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 const HomeStoreList = () => {
   const lastStoreRef = useRef();
 
-  const { data, isFetching, isSuccess, fetchNextPage, hasNextPage } =
+  const { data, isFetching, status, fetchNextPage, hasNextPage } =
     useQueryStoreList();
+
+  const isSuccess = status === 'success';
 
   useIntersectionObserver({
     root: null,
@@ -27,6 +29,10 @@ const HomeStoreList = () => {
   const SkeletonArray = Array.from(Array(20).keys());
 
   if (isFetching) dataset = [...dataset, ...SkeletonArray];
+
+  if (isSuccess && isFetching) {
+    dataset = [...dataset, ...SkeletonArray];
+  }
 
   return isSuccess && !dataset.length ? (
     <div>없을 때</div>

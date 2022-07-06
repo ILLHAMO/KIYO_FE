@@ -34,7 +34,7 @@ const HomeCategoryFilter = ({ onClick }) => {
               value={String(idx)}
               id={`category-item-${idx}`}
             />
-            <label for={`category-item-${idx}`}>
+            <label htmlFor={`category-item-${idx}`}>
               <div className="category-item__img">
                 <img src={`/images/sample/category_${item.src}.png`} />
               </div>
