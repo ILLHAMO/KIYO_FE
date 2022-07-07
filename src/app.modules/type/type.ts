@@ -1,6 +1,8 @@
 export type TypeStoreInfo = {
   id?: number;
-  images: Array<object>;
+  images: Array<{
+    path: string;
+  }>;
   booked: boolean;
   kids: boolean;
   address?: string;

@@ -5,11 +5,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 type TProps = {
-  storeInfo: TypeStoreInfo;
+  storeInfo?: TypeStoreInfo;
 };
 
 const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
-  if (!storeInfo.id) return <Skeleton />;
+  if (!storeInfo?.id) return <Skeleton />;
 
   const router = useRouter();
 
