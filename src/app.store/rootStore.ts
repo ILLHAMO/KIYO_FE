@@ -5,8 +5,7 @@ import { devtools } from 'zustand/middleware';
 
 const processEnv = process.env.KIYO_NODE_ENV ?? 'development';
 
-export const isTestEnvironment =
-  processEnv === 'development' || processEnv === 'development-qa';
+export const isTestEnvironment = processEnv === 'development';
 
 let store;
 
