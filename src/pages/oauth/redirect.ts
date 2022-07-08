@@ -17,8 +17,6 @@ const PageOauthRedirect = () => {
 
     if (queries.token) {
       setUserInfo({ token: router.query.token });
-      console.log(router.query.token);
-
       axiosClient.defaults.headers[
         'Authorization'
       ] = `Bearer ${router.query.token}`;
