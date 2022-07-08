@@ -1,12 +1,11 @@
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { axiosClient } from 'app.modules/api';
 import { Alert, message } from 'antd';
 
-const PageOauthRedirect = (props) => {
-  const { token } = props;
-
+const PageOauthRedirect = ({ token }) => {
   const router = useRouter();
   const { setUserInfo } = useStoreIntoAPP();
 
@@ -25,7 +24,7 @@ const PageOauthRedirect = (props) => {
   }, []);
 };
 
-export const getServerSideProps = (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
 
   return {
