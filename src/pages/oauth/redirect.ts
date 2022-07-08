@@ -5,18 +5,17 @@ import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { axiosClient } from 'app.modules/api';
 import { Alert, message } from 'antd';
 
-const PageOauthRedirect = () => {
+const PageOauthRedirect = ({ token }) => {
   const router = useRouter();
   const { setUserInfo } = useStoreIntoAPP();
 
-  console.log('token:::::::::', router.query.token);
+  console.log('token:::::::::');
+  console.log('token:::::::::', token);
 
   useEffect(() => {
-    if (router.query.token) {
-      setUserInfo({ token: router.query.token });
-      axiosClient.defaults.headers[
-        'Authorization'
-      ] = `Bearer ${router.query.token}`;
+    if (token) {
+      setUserInfo({ token });
+      axiosClient.defaults.headers['Authorization'] = `Bearer ${token}`;
       router.push('/');
     } else {
       // TEST
@@ -26,14 +25,14 @@ const PageOauthRedirect = () => {
   }, [router.isReady]);
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const { query } = context;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
 
-//   return {
-//     props: {
-//       token: query.token,
-//     },
-//   };
-// };
+  return {
+    props: {
+      token: query.token,
+    },
+  };
+};
 
 export default PageOauthRedirect;
