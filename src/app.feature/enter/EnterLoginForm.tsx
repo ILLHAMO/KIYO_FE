@@ -7,7 +7,7 @@ const EnterLoginForm = () => {
 
   useEffect(() => {
     if (!(typeof window === 'undefined')) {
-      setHost(window.location.host);
+      setHost(window.location.protocol + '//' + window.location.host);
     }
   });
 
