@@ -4,22 +4,18 @@ import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { axiosClient } from 'app.modules/api';
 import { Alert, message } from 'antd';
 
-const PageOauthRedirect = () => {
+const PageOauthRedirect = ({ token }) => {
   const router = useRouter();
-  const queries = router.query;
-
   const { setUserInfo } = useStoreIntoAPP();
+
+  console.log('token:::::::::', token);
 
   useEffect(() => {
     if (!router.isReady) return;
 
-    console.log(queries);
-
-    if (queries.token) {
-      setUserInfo({ token: router.query.token });
-      axiosClient.defaults.headers[
-        'Authorization'
-      ] = `Bearer ${router.query.token}`;
+    if (token) {
+      setUserInfo({ token });
+      axiosClient.defaults.headers['Authorization'] = `Bearer ${token}`;
       router.push('/');
     } else {
       // TEST
@@ -27,6 +23,12 @@ const PageOauthRedirect = () => {
       message.error('로그인 실패!!!');
     }
   }, [router.isReady]);
+};
+
+PageOauthRedirect.getInitialProps = ({ query }) => {
+  return {
+    token: query.token,
+  };
 };
 
 export default PageOauthRedirect;
