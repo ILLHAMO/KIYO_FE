@@ -10,6 +10,8 @@ const PageOauthRedirect = () => {
   const { setUserInfo } = useStoreIntoAPP();
 
   useEffect(() => {
+    if (!router.isReady) return;
+
     if (router?.query?.token) {
       setUserInfo({ token: router.query.token });
       console.log(router.query.token);
@@ -23,7 +25,7 @@ const PageOauthRedirect = () => {
       console.log('로그인 실패!!!');
       message.error('로그인 실패!!!');
     }
-  }, []);
+  }, [router.isReady]);
 };
 
 export default PageOauthRedirect;
