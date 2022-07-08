@@ -6,13 +6,16 @@ import { Alert, message } from 'antd';
 
 const PageOauthRedirect = () => {
   const router = useRouter();
+  const queries = router.query;
 
   const { setUserInfo } = useStoreIntoAPP();
 
   useEffect(() => {
     if (!router.isReady) return;
 
-    if (router?.query?.token) {
+    console.log(queries);
+
+    if (queries.token) {
       setUserInfo({ token: router.query.token });
       console.log(router.query.token);
 
