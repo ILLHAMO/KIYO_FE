@@ -2,7 +2,7 @@ import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
 
 export let axiosClient = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://www.jmsteady.net',
   headers: {
     Authorization: `Bearer null`,
   },
