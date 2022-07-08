@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd -f ./env/.dev next dev",
-    "build": "env-cmd -f ./env/.prod next build",
+    "build": "env-cmd -f ./env/.prod next build && next export",
+    "netlify": "env-cmd -f ./env/.prod next build",
     "vercel": "env-cmd -f ./env/.prod next build && next export",
     "deploy": "env-cmd -f ./env/.prod next export",
     "start": "env-cmd -f ./env/.prod next start",
