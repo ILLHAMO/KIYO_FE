@@ -2,7 +2,7 @@ import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
 
 export let axiosClient = axios.create({
-  baseURL: 'https://www.jmsteady.net',
+  baseURL: process.env.KIYO_API_END_POINT,
   headers: {
     Authorization: `Bearer null`,
   },

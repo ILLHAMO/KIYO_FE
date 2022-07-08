@@ -16,7 +16,11 @@ const NEXT_CONFIG = {
     return config;
   },
 
-  env: {},
+  env: {
+    KIYO_NODE_ENV: processEnv.KIYO_NODE_ENV,
+    KIYO_CLIENT_API_URI: processEnv.KIYO_CLIENT_API_URI,
+    KIYO_API_END_POINT: processEnv.KIYO_API_END_POINT,
+  },
 };
 
 const PLUGINS = [[withTM]];
