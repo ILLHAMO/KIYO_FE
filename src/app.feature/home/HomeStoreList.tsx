@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
+import useQueryStoreList from 'app.query/useQueryStoreList';
+import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 
 const HomeStoreList = () => {
-  return (
+  const lastStoreRef = useRef();
+
+  const { data, isFetching, status, fetchNextPage, hasNextPage } =
+    useQueryStoreList();
+
+  const isSuccess = status === 'success';
+
+  useIntersectionObserver({
+    root: null,
+    target: lastStoreRef,
+    enabled: hasNextPage,
+    onIntersect: fetchNextPage,
+  });
+
+  let dataset = data?.pages
+    ? data?.pages.reduce((acc: any, cur: any) => {
+        acc.push(...cur.edges);
+        return acc;
+      }, [])
+    : [];
+
+  const SkeletonArray = Array.from(Array(20).keys());
+
+  if (isFetching) dataset = [...dataset, ...SkeletonArray];
+
+  if (isSuccess && isFetching) {
+    dataset = [...dataset, ...SkeletonArray];
+  }
+
+  return isSuccess && !dataset.length ? (
+    <div>없을 때</div>
+  ) : (
     <StyledWrapper className="home-store-list">
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
-      <StoreCard />
+      {dataset.map((item, idx) => (
+        <StoreCard storeInfo={item} key={`store-card-${idx}`} />
+      ))}
+      <div className="last-item-flag" ref={lastStoreRef} />
     </StyledWrapper>
   );
 };
@@ -36,4 +56,15 @@ const StyledWrapper = styled.div`
   gap: 16px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: min-content;
+  position: relative;
+
+  .last-item-flag {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 100px;
+    // visibility: hidden;
+    background: #000;
+  }
 `;

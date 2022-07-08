@@ -1,43 +1,70 @@
+import { Skeleton } from 'antd';
+import { TypeStoreInfo } from 'app.modules/type/type';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-const StoreCard = () => {
+type TProps = {
+  storeInfo?: TypeStoreInfo;
+};
+
+const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
+  if (!storeInfo?.id) return <Skeleton />;
+
+  const router = useRouter();
+
+  const {
+    id,
+    images,
+    booked,
+    kids,
+    address,
+    name,
+    reviewCount,
+    bookmarkCount,
+  } = storeInfo;
+
   return (
-    <StyledWrapper className="store-card">
+    <StyledWrapper
+      className="store-card"
+      onClick={() => router.push(`/store/${id}`)}
+    >
       <div className="store-card__image-container">
         <div className="store-card__image">
-          <img src='/images/sample/food_img.png' />
+          <img src={images[0].path} />
         </div>
         <div className="store-card__bookmark">
-          <img
-            src="/images/common/bookmark_on.png"
-            className="store-card__bookmark-btn store-card__bookmark-btn--on"
-          />
-          {/*<img*/}
-          {/*  src="/images/common/bookmark_off.png"*/}
-          {/*  className="store-card__bookmark-btn store-card__bookmark-btn--off"*/}
-          {/*/>*/}
+          {booked ? (
+            <img
+              src="/images/common/bookmark_on.png"
+              className="store-card__bookmark-btn store-card__bookmark-btn--on"
+            />
+          ) : (
+            <img
+              src="/images/common/bookmark_off.png"
+              className="store-card__bookmark-btn store-card__bookmark-btn--off"
+            />
+          )}
         </div>
-        <div className="store-card__kidszone">
-          <img src="/images/common/kidszone_badge.png" />
-        </div>
+        {kids && (
+          <div className="store-card__kidszone">
+            <img src="/images/common/kidszone_badge.png" />
+          </div>
+        )}
       </div>
       <div className="store-card__info-container">
         <div className="store-card__info">
-          <div className="store-card__location">남양주시 다산동</div>
-          <div className="store-card__name">
-            이름이 길다면이름이 길다면이름이 길다면이름이 길다면이름이
-            길다면이름이 길다면이름이 길다면
-          </div>
+          <div className="store-card__location">{address}</div>
+          <div className="store-card__name">{name}</div>
         </div>
         <div className="store-card__user-score">
           <div className="store-card__bookmark">
             <img src="/images/common/bookmark_on.png" />
-            58
+            {bookmarkCount}
           </div>
           <div className="store-card__review">
             <img src="/images/common/revisit.png" />
-            32
+            {reviewCount}
           </div>
         </div>
       </div>
@@ -60,7 +87,7 @@ const StyledWrapper = styled.div`
       padding: 50%;
       position: relative;
       overflow: hidden;
-      
+
       img {
         object-fit: cover;
         position: absolute;

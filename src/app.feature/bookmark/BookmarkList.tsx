@@ -27,7 +27,7 @@ export default BookmarkList;
 
 const StyledWrapper = styled.div`
   padding: 20px;
-  
+
   .bookmark-list__title {
     font-weight: 700;
     font-size: 24px;

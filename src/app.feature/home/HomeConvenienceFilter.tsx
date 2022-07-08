@@ -3,20 +3,26 @@ import styled from 'styled-components';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 
 const HomeConvenienceFilter = ({
-  isConvenienceFilterVisible, handleConvenienceFilterVisible
+  onSubmit,
+  handleConvenienceFilterVisible,
 }) => {
   return (
-    <StyledWrapper className="home-convenience-filter" >
-      <div className='home-convenience-filter__filter-header'>
+    <StyledWrapper className="home-convenience-filter">
+      <div className="home-convenience-filter__filter-header">
         <div onClick={handleConvenienceFilterVisible}>
           <img src="/images/common/close_gray.png" />
         </div>
-        <div className='home-convenience-filter__apply-button'>적용</div>
+        <div
+          className="home-convenience-filter__apply-button"
+          onClick={onSubmit}
+        >
+          적용
+        </div>
       </div>
-      <div className='home-convenience-filter__title'>편의사항</div>
-      <div className='home-convenience-filter__filter-container'>
+      <div className="home-convenience-filter__title">편의사항</div>
+      <div className="home-convenience-filter__filter-container">
         <FilterConvenience />
-      </div> 
+      </div>
     </StyledWrapper>
   );
 };
@@ -70,7 +76,5 @@ const StyledWrapper = styled.div`
   .home-convenience-filter__filter-container {
     max-width: 664px;
     margin: 0 auto;
-
   }
-  `;
-
+`;

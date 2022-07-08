@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const STORE_CATEGORY = [
   '카페',
@@ -27,7 +27,7 @@ const StoreFilter = () => {
               type="checkbox"
               value={String(idx)}
             />
-            <label for={`store-filter-${idx}`}>
+            <label htmlFor={`store-filter-${idx}`}>
               <div className="item-container">{item}</div>
             </label>
           </div>

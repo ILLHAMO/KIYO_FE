@@ -2,16 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import SVGfilter from '../../../public/images/common/filter.svg';
 
-
-
 const FilterIcon = () => {
   return (
     <StyledWrapper>
       <div className="filter-container">
-        <SVGfilter width='16' height='16'/>
+        <SVGfilter width="16" height="16" />
         <div>필터</div>
       </div>
-
     </StyledWrapper>
   );
 };
@@ -34,7 +31,7 @@ const StyledWrapper = styled.div`
     svg {
       fill: var(--color-gray-300);
     }
-  
+
     &.true {
       border: 1px solid var(--color-main);
       color: var(--color-main);
@@ -44,5 +41,4 @@ const StyledWrapper = styled.div`
       }
     }
   }
-
 `;
