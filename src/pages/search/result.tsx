@@ -22,11 +22,11 @@ const PageSearchResult = () => {
   return (
     <StyledWrapper>
       <SearchHeader />
-			<SearchFilter 
+      <SearchFilter
         otherFilterOnClick={handleOtherFilterVisibleShow}
         localFilterOnClick={handleLocalFilterVisibleShow}
       />
-			<HomeStoreList />
+      <HomeStoreList />
       <StyledOtherOffcanvas
         className="other-modal"
         show={isOtherFilterVisible}
@@ -34,7 +34,7 @@ const PageSearchResult = () => {
         placement="bottom"
       >
         <SearchFilterOtherModal
-        handleOtherFilterVisibleShow={handleOtherFilterVisibleShow}
+          handleOtherFilterVisibleShow={handleOtherFilterVisibleShow}
         />
       </StyledOtherOffcanvas>
       <StyledLocalOffcanvas
@@ -60,14 +60,14 @@ const StyledWrapper = styled.div`
   height: 100vh;
 `;
 
-const StyledOtherOffcanvas = styled(Offcanvas)`;
+const StyledOtherOffcanvas = styled(Offcanvas)`
   &.offcanvas-bottom {
-    height : 70%;
+    height: 70%;
   }
 `;
 
-const StyledLocalOffcanvas = styled(Offcanvas)`;
+const StyledLocalOffcanvas = styled(Offcanvas)`
   &.offcanvas-bottom {
-    height : 50%;
+    height: 50%;
   }
 `;

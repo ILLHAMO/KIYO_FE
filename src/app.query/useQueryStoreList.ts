@@ -1,16 +1,16 @@
-import { useInfiniteQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import API from 'app.modules/api';
 import { API_STORES } from 'app.modules/api/keyFactory';
 
-const requestStoreList = async ({ pageParam = null, filter }) => {
-  console.log(filter);
-
+export const requestStoreList = async ({ pageParam = null, filter }) => {
   try {
     const dataset = await API.GET({
       url: API_STORES,
       data: {
-        ...(filter?.convenience && { convenienceId: filter?.convenience }),
-        ...(filter?.category && { convenienceId: filter?.category }),
+        ...(filter?.convenience.length > 0 && {
+          convenienceIds: filter?.convenience,
+        }),
+        ...(filter?.category.length > 0 && { categoryIds: filter?.category }),
         ...(pageParam ? { lastStoreId: pageParam, size: 6 } : { size: 6 }),
       },
     });
@@ -27,7 +27,7 @@ const requestStoreList = async ({ pageParam = null, filter }) => {
 
 const useQueryStoreList = (filter) => {
   return useInfiniteQuery(
-    API_STORES,
+    [API_STORES, filter],
     async ({ pageParam = null }) => {
       return await requestStoreList({ pageParam, filter });
     },

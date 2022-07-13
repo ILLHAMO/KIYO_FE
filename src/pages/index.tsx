@@ -9,12 +9,18 @@ import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 import { Offcanvas } from 'react-bootstrap';
 import { FormProvider, useForm } from 'react-hook-form';
+import HomeStoreListMemo from 'app.feature/home/HomeStoreListMemo';
 
 const PageHome = () => {
   const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] =
     useState(false);
 
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      category: [],
+      convenience: [],
+    },
+  });
 
   const {
     register,
@@ -52,12 +58,13 @@ const PageHome = () => {
 
   return (
     <FormProvider {...methods}>
+      <button onClick={onSubmit}>sdasdfkljasdklf</button>
       <form onSubmit={onSubmit}>
         <StyledWrapper>
           <HomeHeader />
           <HomeBanner />
           <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow} />
-          <HomeStoreList filter={filter} />
+          {filter !== null && <HomeStoreList filter={filter} />}
           <StyledOffcanvas
             show={isConvenienceFilterVisible}
             onHide={handleConvenienceFilterVisibleClose}
