@@ -26,17 +26,24 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
     bookmarkCount,
   } = storeInfo;
 
-  const [isBoookmark, setIsBookmark] = useState(booked);
+  const [isBookmark, setIsBookmark] = useState(booked);
 
-  const handleBookmark = async () => {
+  const handleBookmark = async (isBookmark) => {
     try {
-      setIsBookmark(!isBoookmark);
+      setIsBookmark(!isBookmark);
 
-      const response = await API.PUT({ url: API_BOOKMARK(id), data: {} });
+      // TO DO
+      // 북마크 해제 / 설정 시 bookmarkCount 업데이트
+
+      if (isBookmark) {
+        const response = await API.DELETE({ url: API_BOOKMARK(id), data: {} });
+      } else {
+        const response = await API.PUT({ url: API_BOOKMARK(id), data: {} });
+      }
 
       // 성공했을 때
     } catch (err) {
-      setIsBookmark(!isBoookmark);
+      setIsBookmark(!isBookmark);
     }
   };
 
@@ -51,11 +58,11 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
         </div>
         <div className="store-card__bookmark">
           <img
-            src={`/images/common/bookmark_${booked ? 'on' : 'off'}`}
+            src={`/images/common/bookmark_${isBookmark ? 'on' : 'off'}.png`}
             className={`store-card__bookmark-btn store-card__bookmark-btn--${
-              booked ? 'on' : 'off'
+              isBookmark ? 'on' : 'off'
             }`}
-            onClick={handleBookmark}
+            onClick={() => handleBookmark(isBookmark)}
           />
         </div>
         {kids && (
