@@ -7,7 +7,7 @@ import API from 'app.modules/api';
 import { API_STORES } from 'app.modules/api/keyFactory';
 import { QueryClient, useQueryClient } from 'react-query';
 
-const HomeStoreList = ({ filter }) => {
+const HomeStoreList = ({ filter = null }) => {
   const lastStoreRef = useRef();
 
   console.log(filter);
