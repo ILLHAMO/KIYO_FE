@@ -9,7 +9,6 @@ import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 import { Offcanvas } from 'react-bootstrap';
 import { FormProvider, useForm } from 'react-hook-form';
-import HomeStoreListMemo from 'app.feature/home/HomeStoreListMemo';
 
 const PageHome = () => {
   const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] =
