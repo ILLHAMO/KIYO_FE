@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
+import { API_AUTH_LOGOUT, API_AUTH_REFRESH } from './keyFactory';
 
 export let axiosClient = axios.create({
   baseURL: process.env.KIYO_API_END_POINT,
@@ -16,7 +17,7 @@ axiosClient.interceptors.response.use(
 
       const res = await axiosClient({
         method: 'GET',
-        url: '/auth/refresh',
+        url: API_AUTH_REFRESH,
         data: {},
       });
 
@@ -35,11 +36,11 @@ axiosClient.interceptors.response.use(
 
         return finalResponse;
       } else {
-        // await axiosClient({
-        //   method: 'DELETE',
-        //   url: '/auth/logout',
-        //   data: {},
-        // });
+        await axiosClient({
+          method: 'DELETE',
+          url: API_AUTH_LOGOUT,
+          data: {},
+        });
         // location.replace('/enter');
       }
     }

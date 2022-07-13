@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from 'react-query';
 import API from 'app.modules/api';
-import { API_STORE_LIST } from 'app.modules/api/keyFactory';
+import { API_STORES } from 'app.modules/api/keyFactory';
 
 const requestStoreList = async ({ pageParam = null }) => {
   try {
     const dataset = await API.GET({
-      url: '/api/stores',
+      url: API_STORES,
       data: {
         ...(pageParam ? { lastStoreId: pageParam, size: 6 } : { size: 6 }),
       },
@@ -23,14 +23,14 @@ const requestStoreList = async ({ pageParam = null }) => {
 
 const useQueryStoreList = () => {
   return useInfiniteQuery(
-    API_STORE_LIST,
+    API_STORES,
     async ({ pageParam = null }) => {
       return await requestStoreList({ pageParam });
     },
     {
       getNextPageParam: (lastPage, page) => {
         if (lastPage?.last) return false;
-        return lastPage.edges[5].id;
+        return lastPage?.edges[5].id;
       },
     }
   );

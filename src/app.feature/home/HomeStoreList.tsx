@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQueryStoreList from 'app.query/useQueryStoreList';
@@ -21,7 +21,9 @@ const HomeStoreList = () => {
 
   let dataset = data?.pages
     ? data?.pages.reduce((acc: any, cur: any) => {
-        acc.push(...cur.edges);
+        if (cur?.edges) {
+          acc.push(...cur?.edges);
+        }
         return acc;
       }, [])
     : [];
@@ -35,7 +37,7 @@ const HomeStoreList = () => {
   }
 
   return isSuccess && !dataset.length ? (
-    <div>없을 때</div>
+    <StyledWrapper>없을 때</StyledWrapper>
   ) : (
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) => (

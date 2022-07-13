@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import FilterCategory from 'app.components/Filter/FilterCategory';
@@ -27,7 +27,6 @@ const RegisterForm = () => {
         message.error('기본 정보를 입력해주세요!');
 
       // 등록 API
-      console.log('등록하기');
       console.log(data);
     } catch (err) {
       console.log(err);

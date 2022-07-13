@@ -27,7 +27,8 @@ const PageHome = () => {
 
   const onValidRegisterForm = (data) => {
     try {
-      console.log(data);
+      // console.log(data);
+      handleConvenienceFilterVisibleClose();
     } catch (err) {
       console.log(err);
     }

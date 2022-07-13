@@ -1,8 +1,10 @@
 import { Skeleton } from 'antd';
+import { API_BOOKMARK } from 'app.modules/api/keyFactory';
 import { TypeStoreInfo } from 'app.modules/type/type';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
 
 type TProps = {
   storeInfo?: TypeStoreInfo;
@@ -24,27 +26,37 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
     bookmarkCount,
   } = storeInfo;
 
+  const [isBoookmark, setIsBookmark] = useState(booked);
+
+  const handleBookmark = async () => {
+    try {
+      setIsBookmark(!isBoookmark);
+
+      const response = await API.PUT({ url: API_BOOKMARK(id), data: {} });
+
+      // 성공했을 때
+    } catch (err) {
+      setIsBookmark(!isBoookmark);
+    }
+  };
+
   return (
     <StyledWrapper
       className="store-card"
-      onClick={() => router.push(`/store/${id}`)}
+      // onClick={() => router.push(`/store/${id}`)}
     >
       <div className="store-card__image-container">
         <div className="store-card__image">
           <img src={images[0].path} />
         </div>
         <div className="store-card__bookmark">
-          {booked ? (
-            <img
-              src="/images/common/bookmark_on.png"
-              className="store-card__bookmark-btn store-card__bookmark-btn--on"
-            />
-          ) : (
-            <img
-              src="/images/common/bookmark_off.png"
-              className="store-card__bookmark-btn store-card__bookmark-btn--off"
-            />
-          )}
+          <img
+            src={`/images/common/bookmark_${booked ? 'on' : 'off'}`}
+            className={`store-card__bookmark-btn store-card__bookmark-btn--${
+              booked ? 'on' : 'off'
+            }`}
+            onClick={handleBookmark}
+          />
         </div>
         {kids && (
           <div className="store-card__kidszone">
@@ -106,6 +118,13 @@ const StyledWrapper = styled.div`
 
       img {
         width: 20px;
+      }
+
+      .store-card__bookmark-btn {
+      }
+
+      .store-card__bookmark-btn--on {
+        animation: fadein 200ms;
       }
     }
 
@@ -170,6 +189,15 @@ const StyledWrapper = styled.div`
           margin-right: 4px;
         }
       }
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
     }
   }
 `;
