@@ -57,7 +57,6 @@ const PageHome = () => {
 
   return (
     <FormProvider {...methods}>
-      <button onClick={onSubmit}>sdasdfkljasdklf</button>
       <form onSubmit={onSubmit}>
         <StyledWrapper>
           <HomeHeader />
