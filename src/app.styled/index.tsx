@@ -37,6 +37,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto !important;
   }
+
+  .navigation-bar__offcanvas-backdrop {
+    height: calc(100vh - 64px) !important;
+  }
 `;
 
 export const GlobalStyleHeight100 = createGlobalStyle`
