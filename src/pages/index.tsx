@@ -99,5 +99,7 @@ const StyledWrapper = styled.div`
 const StyledOffcanvas = styled(Offcanvas)`
   &.offcanvas-bottom {
     height: auto;
+    z-index: 1501;
+    padding-bottom: 24px;
   }
 `;

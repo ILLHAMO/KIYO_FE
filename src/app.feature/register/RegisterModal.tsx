@@ -1,21 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const RegisterModal = () => {
   return (
     <StyledWrapper className="register-modal">
-      <div className="register-modal__register-button">
-        <img src="/images/register/pencil_gray.png" alt="" />
-        리뷰 작성하기
-      </div>
-      <div className="register-modal__register-button">
-        <img src="/images/register/store_gray.png" alt="" />
-        장소 등록하기
-      </div>
-      <div className="register-modal__register-button">
-        <img src="/images/register/send_gray.png" alt="" />
-        1:1 문의하기
-      </div>
+      <Link href="/review">
+        <div className="register-modal__register-button">
+          <img src="/images/register/pencil_gray.png" alt="" />
+          리뷰 작성하기
+        </div>
+      </Link>
+      <Link href="/register">
+        <div className="register-modal__register-button">
+          <img src="/images/register/store_gray.png" alt="" />
+          장소 등록하기
+        </div>
+      </Link>
+      <Link href="/mypage/inquiry/create">
+        <div className="register-modal__register-button">
+          <img src="/images/register/send_gray.png" alt="" />
+          1:1 문의하기
+        </div>
+      </Link>
     </StyledWrapper>
   );
 };
