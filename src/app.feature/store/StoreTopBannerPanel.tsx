@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StoreTopBannerPanel = () => {
+type TProps = {
+  storeDetailInfo: any;
+};
+
+const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
+  const { name, simpleComment, tag, address, detailComment, addressMap } =
+    // 우리 디테일 코멘트 삭제된거였나?? 어쩌기로했더라
+    storeDetailInfo;
+
   const handleClickMap = () => {
     console.log('map');
   };
@@ -20,11 +28,12 @@ const StoreTopBannerPanel = () => {
 
   return (
     <StyledWrapper className="store-top-banner-panel">
-      <div className="store-top-banner-panel__name">홍길동네 돼지국밥</div>
-      <div className="store-top-banner-panel__sub-name">홍길동네 돼지국밥</div>
+      <div className="store-top-banner-panel__name">{name}</div>
+      <div className="store-top-banner-panel__sub-name">{simpleComment}</div>
       <div className="store-top-banner-panel__info">
         <div className="food">돼지국밥</div>
-        <div className="location">용인시 기흥구</div>
+        {/* 여기에 태그 */}
+        <div className="location">{address}</div>
       </div>
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}
       <div className="store-top-banner-panel__func-wrap">
@@ -32,6 +41,7 @@ const StoreTopBannerPanel = () => {
           <div onClick={handleClickMap}>
             <img src="/images/store/place_black.png" />
             <div className="store-top-banner-panel__text">길찾기</div>
+            {/* 길찾기에 addressMap 넣어서 검색한 지도 페이지 연결*/}
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">

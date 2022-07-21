@@ -10,6 +10,7 @@ type TProps = {
 const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
   const router = useRouter();
 
+  const { time } = storeDetailInfo;
   return (
     <StyledWrapper className="store-top-banner">
       <div className="store-top-banner__back-button">
@@ -19,13 +20,14 @@ const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
         />
       </div>
       <div className="store-top-banner__image"></div>
-      <StoreTopBannerPanel />
+      <StoreTopBannerPanel storeDetailInfo={storeDetailInfo} />
       <div className="store-top-banner__operating-time">
         <div className="store-top-banner__title">운영시간</div>
         <div className="store-top-banner__time">
           <div>월 ~ 금 12:00 ~ 22:00</div>
           <div>토 12:00 ~ 22:00</div>
           <div>일 12:00 ~ 22:00</div>
+          {/* {time} */}
         </div>
       </div>
     </StyledWrapper>
