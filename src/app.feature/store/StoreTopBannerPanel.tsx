@@ -2,8 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StoreTopBannerPanel = () => {
+  const handleClickMap = () => {
+    console.log('map');
+  };
+  const handleClickPhone = () => {
+    console.log('phone');
+    // 클립보드 복사하기
+  };
+  const handleClickBookmark = () => {
+    console.log('bookmark');
+    // API 연결하기
+  };
+  const handleClickShare = () => {
+    console.log('share');
+    // 공유 API
+  };
+
   return (
-    <StyledWrapper className='store-top-banner-panel'>
+    <StyledWrapper className="store-top-banner-panel">
       <div className="store-top-banner-panel__name">홍길동네 돼지국밥</div>
       <div className="store-top-banner-panel__sub-name">홍길동네 돼지국밥</div>
       <div className="store-top-banner-panel__info">
@@ -13,25 +29,25 @@ const StoreTopBannerPanel = () => {
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}
       <div className="store-top-banner-panel__func-wrap">
         <div className="store-top-banner-panel__func-item">
-          <div>
+          <div onClick={handleClickMap}>
             <img src="/images/store/place_black.png" />
             <div className="store-top-banner-panel__text">길찾기</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
-          <div>
+          <div onClick={handleClickPhone}>
             <img src="/images/store/call_black.png" />
             <div className="store-top-banner-panel__text">전화</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
-          <div>
+          <div onClick={handleClickBookmark}>
             <img src="/images/store/bookmark_black_off.png" />
             <div className="store-top-banner-panel__text">찜</div>
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
-          <div>
+          <div onClick={handleClickShare}>
             <img src="/images/store/share_black.png" />
             <div className="store-top-banner-panel__text">공유</div>
           </div>
@@ -104,9 +120,8 @@ const StyledWrapper = styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
-
       }
-      
+
       .store-top-banner-panel__text {
         font-size: 12px;
       }
