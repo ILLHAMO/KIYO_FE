@@ -50,7 +50,7 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
   return (
     <StyledWrapper
       className="store-card"
-      // onClick={() => router.push(`/store/${id}`)}
+      onClick={() => router.push(`/store/${id}`)}
     >
       <div className="store-card__image-container">
         <div className="store-card__image">
@@ -122,6 +122,7 @@ const StyledWrapper = styled.div`
       position: absolute;
       top: 8px;
       right: 8px;
+      z-index: 10;
 
       img {
         width: 20px;

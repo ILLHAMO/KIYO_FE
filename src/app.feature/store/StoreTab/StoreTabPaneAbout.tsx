@@ -18,43 +18,39 @@ const SERVICE_OBJ = [
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
+  storeDetailInfo: any;
 };
 
-const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
+const StoreTabPaneAbout: React.FC<TProps> = ({
+  setAboutScroll,
+  storeDetailInfo,
+}) => {
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
       let scrollLocation = document.getElementById('scroll-about')?.offsetTop; // 현재 스크롤바 위
       setAboutScroll(scrollLocation);
     });
 
+  const { address, detailComment, images } = storeDetailInfo;
+
   return (
     <StyledWrapper className="store-tab-pane-about" id="scroll-about">
       <div className="store-tab-pane-about__title">About</div>
-      <div className="store-tab-pane-about__about">
-        생생 정보통에 나왔던 국밥 맛집입니다. 돼지국밥을 시키면 수육을 서비스로
-        주는 혜자 맛집입니다.
-      </div>
+      <div className="store-tab-pane-about__about">{detailComment}</div>
       <div className="divider" />
       <div className="store-info">
         <div className="store-info__title address">Address</div>
-        <div className="store-info__content address">
-          경기도 용인시 기흥구 기흥중앙로 80안길 101
-        </div>
+        <div className="store-info__content address">{address}</div>
       </div>
       <div className="divider" />
       <div className="store-info">
         <div className="store-info__title store-info__title--photo">Photo</div>
         <div className="store-info__photo-slide">
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
+          {images.map((item, idx) => (
+            <div className="store-info__photo-item">
+              <img src={item.path} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="divider" />
@@ -120,10 +116,21 @@ const StyledWrapper = styled.div`
       }
 
       .store-info__photo-item {
-        background-color: #ffe9ef;
         min-width: 80px;
         min-height: 80px;
-        border: 1px solid black;
+        max-width: 80px;
+        min-height: 80px;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+          min-width: 100%;
+          min-height: 100%;
+        }
       }
     }
 

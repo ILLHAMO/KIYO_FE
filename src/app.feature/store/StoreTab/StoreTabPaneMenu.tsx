@@ -12,9 +12,9 @@ const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
       let scrollLocation = document.getElementById('scroll-menu')?.offsetTop; // 현재 스크롤바 위
       setMenuScroll(scrollLocation);
     });
-  
+
   return (
-    <StyledWrapper className="store-tab-pane-menu" id='scroll-menu' >
+    <StyledWrapper className="store-tab-pane-menu" id="scroll-menu">
       <div className="store-tab-pane-menu__title">Menu</div>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
@@ -41,7 +41,7 @@ const StoreTabPaneMenu: React.FC<TProps> = ({ setMenuScroll }) => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <div id='store-tab-review' />
+      <div id="store-tab-review" />
     </StyledWrapper>
   );
 };
@@ -74,6 +74,10 @@ const StyledWrapper = styled.div`
           color: var(--color-black);
           box-shadow: none !important;
           border-bottom: 0.5px solid var(--color-gray-100);
+        }
+
+        .accordion-button:hover {
+          z-index: 0;
         }
 
         .accordion-button:not(.collapsed) {
