@@ -18,7 +18,9 @@ const PageOauthRedirect = () => {
       axiosClient.defaults.headers['Authorization'] = `Bearer ${urlParams.get(
         'token'
       )}`;
-      router.push('/');
+
+      if (urlParams.get('nickname')) router.push('/');
+      else router.push('/enter/signin');
     } else {
       // TEST
       console.log('로그인 실패!!!');
