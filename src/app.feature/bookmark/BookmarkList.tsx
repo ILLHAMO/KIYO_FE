@@ -2,22 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 
-const BookmarkList = () => {
+const BookmarkList = ({ bookmarkList }) => {
+  console.log(bookmarkList);
+
   return (
     <StyledWrapper className="bookmark-list">
       <div className="bookmark-list__title">내가 저장한 장소</div>
       <div className="bookmark-list__list-container">
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
-        <StoreCard />
+        {bookmarkList.map((item, idx) => (
+          <StoreCard storeInfo={item} key={`bookmark-list-${idx}`} />
+        ))}
       </div>
     </StyledWrapper>
   );

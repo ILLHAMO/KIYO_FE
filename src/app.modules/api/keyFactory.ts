@@ -12,6 +12,7 @@ export const API_STORES = '/api/stores';
 export const API_STORE_INFO = (storeId) => `/api/store/${storeId}`;
 
 // 북마크
+export const API_STORE_BOOKMARK = '/api/store/bookmark';
 export const API_BOOKMARK = (storeId) => `/api/store/${storeId}/bookmark`;
 
 // 마이페이지
