@@ -6,6 +6,7 @@ export const API_USER_NICKNAME = '/api/user/nickname';
 /**
  * 메인 페이지
  **/
+export const API_CATEGORY = '/api/category';
 
 // 스토어 리스트 받아오기
 export const API_STORES = '/api/stores';
