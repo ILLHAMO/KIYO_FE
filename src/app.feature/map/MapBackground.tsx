@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useGetLocation } from 'app.store/location/store.loaction';
 
+declare let kakao: any;
+
 const MapBackground = () => {
   const { latitude, longitude, loading } = useGetLocation();
 

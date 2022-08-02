@@ -1,5 +1,7 @@
 import create from 'zustand';
 
+declare let kakao: any;
+
 export const useStoreLocation: any = create((set) => ({
   location: {
     latitude: 0,
