@@ -35,11 +35,11 @@ axiosClient.interceptors.response.use(
 
         return finalResponse;
       } else {
-        // await axiosClient({
-        //   method: 'DELETE',
-        //   url: '/auth/logout',
-        //   data: {},
-        // });
+        await axiosClient({
+          method: 'DELETE',
+          url: '/auth/logout',
+          data: {},
+        });
         // location.replace('/enter');
       }
     }

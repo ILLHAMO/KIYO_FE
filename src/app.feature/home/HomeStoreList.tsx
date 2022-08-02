@@ -21,7 +21,9 @@ const HomeStoreList = () => {
 
   let dataset = data?.pages
     ? data?.pages.reduce((acc: any, cur: any) => {
-        acc.push(...cur.edges);
+        if (cur?.edges) {
+          acc.push(...cur?.edges);
+        }
         return acc;
       }, [])
     : [];

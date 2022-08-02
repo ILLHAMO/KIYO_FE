@@ -1,7 +1,9 @@
 import { Skeleton } from 'antd';
+import api from 'app.modules/api';
+import { API_BOOK_MARK } from 'app.modules/api/keyFactory';
 import { TypeStoreInfo } from 'app.modules/type/type';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 type TProps = {
@@ -24,6 +26,20 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
     bookmarkCount,
   } = storeInfo;
 
+  const [isBoookmark, setIsBookmark] = useState(booked);
+
+  const handleBookmark = async () => {
+    try {
+      setIsBookmark(!isBoookmark);
+
+      // const response = await api.POST({ url: API_BOOK_MARK, data: {} });
+
+      // 성공했을 때
+    } catch (err) {
+      setIsBookmark(!isBoookmark);
+    }
+  };
+
   return (
     <StyledWrapper
       className="store-card"
@@ -38,11 +54,13 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
             <img
               src="/images/common/bookmark_on.png"
               className="store-card__bookmark-btn store-card__bookmark-btn--on"
+              onClick={handleBookmark}
             />
           ) : (
             <img
               src="/images/common/bookmark_off.png"
               className="store-card__bookmark-btn store-card__bookmark-btn--off"
+              onClick={handleBookmark}
             />
           )}
         </div>

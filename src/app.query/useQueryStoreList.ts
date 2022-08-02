@@ -30,7 +30,7 @@ const useQueryStoreList = () => {
     {
       getNextPageParam: (lastPage, page) => {
         if (lastPage?.last) return false;
-        return lastPage.edges[5].id;
+        return lastPage?.edges[5].id;
       },
     }
   );
