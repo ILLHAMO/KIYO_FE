@@ -1,10 +1,15 @@
 import { Skeleton } from 'antd';
-import api from 'app.modules/api';
-import { API_BOOK_MARK } from 'app.modules/api/keyFactory';
+import {
+  API_BOOKMARK,
+  API_STORES,
+  API_STORE_BOOKMARK,
+} from 'app.modules/api/keyFactory';
 import { TypeStoreInfo } from 'app.modules/type/type';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
+import { useQueryClient } from 'react-query';
 
 type TProps = {
   storeInfo?: TypeStoreInfo;
@@ -26,51 +31,67 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
     bookmarkCount,
   } = storeInfo;
 
-  const [isBoookmark, setIsBookmark] = useState(booked);
+  const [isBookmark, setIsBookmark] = useState(booked);
+  const [bookmarkCnt, setBookmarkCnt] = useState(bookmarkCount);
 
-  const handleBookmark = async () => {
+  const queryClient = useQueryClient();
+
+  const handleBookmark = async (isBookmark) => {
     try {
-      setIsBookmark(!isBoookmark);
+      // TO DO
+      // 북마크 해제 / 설정 시 bookmarkCount 업데이트
 
-      // const response = await api.POST({ url: API_BOOK_MARK, data: {} });
+      if (isBookmark) {
+        setIsBookmark(!isBookmark);
+        setBookmarkCnt((prev) => prev - 1);
+        await API.DELETE({ url: API_BOOKMARK(id), data: {} });
+      } else {
+        setIsBookmark(!isBookmark);
+        setBookmarkCnt((prev) => prev + 1);
+        await API.PUT({ url: API_BOOKMARK(id), data: {} });
+      }
+
+      if (router.pathname !== '/bookmark')
+        queryClient.resetQueries(API_STORE_BOOKMARK);
 
       // 성공했을 때
     } catch (err) {
-      setIsBookmark(!isBoookmark);
+      setIsBookmark(!isBookmark);
+      setBookmarkCnt(bookmarkCnt);
     }
   };
 
   return (
-    <StyledWrapper
-      className="store-card"
-      onClick={() => router.push(`/store/${id}`)}
-    >
+    <StyledWrapper className="store-card">
       <div className="store-card__image-container">
-        <div className="store-card__image">
+        <div
+          className="store-card__image"
+          onClick={() => router.push(`/store/${id}`)}
+        >
           <img src={images[0].path} />
         </div>
         <div className="store-card__bookmark">
-          {booked ? (
-            <img
-              src="/images/common/bookmark_on.png"
-              className="store-card__bookmark-btn store-card__bookmark-btn--on"
-              onClick={handleBookmark}
-            />
-          ) : (
-            <img
-              src="/images/common/bookmark_off.png"
-              className="store-card__bookmark-btn store-card__bookmark-btn--off"
-              onClick={handleBookmark}
-            />
-          )}
+          <img
+            src={`/images/common/bookmark_${isBookmark ? 'on' : 'off'}.png`}
+            className={`store-card__bookmark-btn store-card__bookmark-btn--${
+              isBookmark ? 'on' : 'off'
+            }`}
+            onClick={() => handleBookmark(isBookmark)}
+          />
         </div>
         {kids && (
-          <div className="store-card__kidszone">
+          <div
+            className="store-card__kidszone"
+            onClick={() => router.push(`/store/${id}`)}
+          >
             <img src="/images/common/kidszone_badge.png" />
           </div>
         )}
       </div>
-      <div className="store-card__info-container">
+      <div
+        className="store-card__info-container"
+        onClick={() => router.push(`/store/${id}`)}
+      >
         <div className="store-card__info">
           <div className="store-card__location">{address}</div>
           <div className="store-card__name">{name}</div>
@@ -78,7 +99,7 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
         <div className="store-card__user-score">
           <div className="store-card__bookmark">
             <img src="/images/common/bookmark_on.png" />
-            {bookmarkCount}
+            {bookmarkCnt}
           </div>
           <div className="store-card__review">
             <img src="/images/common/revisit.png" />
@@ -121,9 +142,17 @@ const StyledWrapper = styled.div`
       position: absolute;
       top: 8px;
       right: 8px;
+      z-index: 10;
 
       img {
         width: 20px;
+      }
+
+      .store-card__bookmark-btn {
+      }
+
+      .store-card__bookmark-btn--on {
+        animation: fadein 200ms;
       }
     }
 
@@ -188,6 +217,15 @@ const StyledWrapper = styled.div`
           margin-right: 4px;
         }
       }
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
     }
   }
 `;

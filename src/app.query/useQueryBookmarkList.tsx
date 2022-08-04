@@ -1,16 +1,12 @@
 import { useInfiniteQuery } from 'react-query';
 import API from 'app.modules/api';
-import { API_STORES } from 'app.modules/api/keyFactory';
+import { API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
 
-export const requestStoreList = async ({ pageParam = null, filter }) => {
+export const requestBookmarkList = async ({ pageParam = null }) => {
   try {
     const dataset = await API.GET({
-      url: API_STORES,
+      url: API_STORE_BOOKMARK,
       data: {
-        ...(filter?.convenience.length > 0 && {
-          convenienceIds: filter?.convenience,
-        }),
-        ...(filter?.category.length > 0 && { categoryIds: filter?.category }),
         ...(pageParam ? { lastStoreId: pageParam, size: 6 } : { size: 6 }),
       },
     });
@@ -25,11 +21,11 @@ export const requestStoreList = async ({ pageParam = null, filter }) => {
   }
 };
 
-const useQueryStoreList = (filter) => {
+const useQueryBookmarkList = () => {
   return useInfiniteQuery(
-    [API_STORES, filter],
+    [API_STORE_BOOKMARK],
     async ({ pageParam = null }) => {
-      return await requestStoreList({ pageParam, filter });
+      return await requestBookmarkList({ pageParam });
     },
     {
       getNextPageParam: (lastPage, page) => {
@@ -40,4 +36,4 @@ const useQueryStoreList = (filter) => {
   );
 };
 
-export default useQueryStoreList;
+export default useQueryBookmarkList;

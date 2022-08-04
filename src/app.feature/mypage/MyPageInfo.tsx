@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const MypageInfo = () => {
+const MypageInfo = ({ userInfo }) => {
   return (
     <StyledWrapper className="mypage-info">
       <div className="mypage-info__profile">
-        <div className="mypage-info__profile-img"></div>
+        <div className="mypage-info__profile-img">
+          <img src={userInfo.userProfileImagePath} />
+        </div>
         <div className="mypage-info__profile-name">
-          <span>홍길동</span>님
+          <span>{userInfo.nickname}</span>님
         </div>
       </div>
       <Link href="/mypage/edit">
@@ -42,6 +44,7 @@ const StyledWrapper = styled.div`
       margin-right: 16px;
       background: #ffe9ef;
       border-radius: 50%;
+      overflow: hidden;
     }
 
     .mypage-info__profile-name {

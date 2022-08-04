@@ -2,59 +2,56 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const SERVICE_OBJ = [
-  { src: 'wifi', title: '와이파이' },
-  { src: 'group', title: '단체석' },
-  { src: 'pets', title: '애견동반' },
-  { src: 'wc', title: '화장실' },
-  { src: 'parking', title: '주차가능' },
-  { src: 'drive', title: '발렛가능' },
-  { src: 'crib', title: '아기의자' },
-  { src: 'deck', title: '야외좌석' },
-  { src: 'child', title: '키즈메뉴' },
-  { src: 'changing_station', title: '기저귀갈이' },
-  { src: 'elec', title: '콘센트' },
-  { src: 'packing', title: '포장가능' },
+  // 위에서부터 인덱스 1 줘서 이미지 파일 수정
+  { src: 'convenience_1', title: '와이파이' },
+  { src: 'convenience_2', title: '단체석' },
+  { src: 'convenience_3', title: '애견동반' },
+  { src: 'convenience_4', title: '화장실' },
+  { src: 'convenience_5', title: '주차가능' },
+  { src: 'convenience_6', title: '발렛가능' },
+  { src: 'convenience_7', title: '아기의자' },
+  { src: 'convenience_8', title: '야외좌석' },
+  { src: 'convenience_9', title: '키즈메뉴' },
+  { src: 'convenience_10', title: '기저귀갈이' },
+  { src: 'convenience_11', title: '콘센트' },
+  { src: 'convenience_12', title: '포장가능' },
 ];
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
+  storeDetailInfo: any;
 };
 
-const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
+const StoreTabPaneAbout: React.FC<TProps> = ({
+  setAboutScroll,
+  storeDetailInfo,
+}) => {
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
       let scrollLocation = document.getElementById('scroll-about')?.offsetTop; // 현재 스크롤바 위
       setAboutScroll(scrollLocation);
     });
 
+  const { address, images, convenienceIds } = storeDetailInfo;
+
   return (
     <StyledWrapper className="store-tab-pane-about" id="scroll-about">
       <div className="store-tab-pane-about__title">About</div>
-      <div className="store-tab-pane-about__about">
-        생생 정보통에 나왔던 국밥 맛집입니다. 돼지국밥을 시키면 수육을 서비스로
-        주는 혜자 맛집입니다.
-      </div>
+      <div className="store-tab-pane-about__about"></div>
       <div className="divider" />
       <div className="store-info">
         <div className="store-info__title address">Address</div>
-        <div className="store-info__content address">
-          경기도 용인시 기흥구 기흥중앙로 80안길 101
-        </div>
+        <div className="store-info__content address">{address}</div>
       </div>
       <div className="divider" />
       <div className="store-info">
         <div className="store-info__title store-info__title--photo">Photo</div>
         <div className="store-info__photo-slide">
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
-          <div className="store-info__photo-item"></div>
+          {images.map((item, idx) => (
+            <div className="store-info__photo-item">
+              <img src={item.path} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="divider" />
@@ -63,6 +60,7 @@ const StoreTabPaneAbout: React.FC<TProps> = ({ setAboutScroll }) => {
           Service
         </div>
         <div className="store-info__service-slide">
+          {/* 편의사항 API로 가져오는거 수정 후 변경 필요  */}
           {SERVICE_OBJ.map((service, idx) => (
             <div className="store-info__service-item" key={`service-${idx}`}>
               <img src={`/images/common/${service.src}.png`} />
@@ -120,10 +118,21 @@ const StyledWrapper = styled.div`
       }
 
       .store-info__photo-item {
-        background-color: #ffe9ef;
         min-width: 80px;
         min-height: 80px;
-        border: 1px solid black;
+        max-width: 80px;
+        min-height: 80px;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+          min-width: 100%;
+          min-height: 100%;
+        }
       }
     }
 

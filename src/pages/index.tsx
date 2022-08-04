@@ -14,7 +14,12 @@ const PageHome = () => {
   const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] =
     useState(false);
 
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      category: [],
+      convenience: [],
+    },
+  });
 
   const {
     register,
@@ -25,9 +30,12 @@ const PageHome = () => {
 
   const watchCategory = watch('category');
 
+  const [filter, setFilter] = useState(null);
+
   const onValidRegisterForm = (data) => {
     try {
-      console.log(data);
+      setFilter(data);
+      handleConvenienceFilterVisibleClose();
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +62,7 @@ const PageHome = () => {
           <HomeHeader />
           <HomeBanner />
           <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow} />
-          <HomeStoreList />
+          {filter !== null && <HomeStoreList filter={filter} />}
           <StyledOffcanvas
             show={isConvenienceFilterVisible}
             onHide={handleConvenienceFilterVisibleClose}
@@ -91,5 +99,7 @@ const StyledWrapper = styled.div`
 const StyledOffcanvas = styled(Offcanvas)`
   &.offcanvas-bottom {
     height: auto;
+    z-index: 1501;
+    padding-bottom: 24px;
   }
 `;

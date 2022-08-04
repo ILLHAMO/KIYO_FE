@@ -7,9 +7,8 @@ const ModalStoreReviewDelete = ({
   handleDeleteModalVisible,
 }) => {
   const handleConfirmDelete = async () => {
-    console.log("삭제");
     handleDeleteModalVisible();
-  }
+  };
 
   return (
     <StyledWrapper

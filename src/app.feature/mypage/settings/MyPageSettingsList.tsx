@@ -2,10 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Accordion, Button, FormCheck } from 'react-bootstrap';
 import API from 'app.modules/api';
+import { API_AUTH_LOGOUT } from 'app.modules/api/keyFactory';
+import { useRouter } from 'next/router';
 
 const MyPageSettingsList = () => {
+  const router = useRouter();
+
   const handleLogout = async () => {
-    await API.DELETE({ url: '/auth/logout', data: {} });
+    await API.DELETE({ url: API_AUTH_LOGOUT, data: {} });
+    router.push('/');
   };
 
   return (

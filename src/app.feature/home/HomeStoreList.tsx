@@ -4,11 +4,11 @@ import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQueryStoreList from 'app.query/useQueryStoreList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 
-const HomeStoreList = () => {
+const HomeStoreList = ({ filter = { category: [], convenience: [] } }) => {
   const lastStoreRef = useRef();
 
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
-    useQueryStoreList();
+    useQueryStoreList(filter);
 
   const isSuccess = status === 'success';
 
@@ -37,7 +37,7 @@ const HomeStoreList = () => {
   }
 
   return isSuccess && !dataset.length ? (
-    <div>없을 때</div>
+    <StyledWrapper>없을 때</StyledWrapper>
   ) : (
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) => (

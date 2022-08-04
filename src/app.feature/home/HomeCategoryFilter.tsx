@@ -2,20 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import FilterIcon from 'app.components/Filter/FilterIcon';
 import { useFormContext } from 'react-hook-form';
-
-const STORE_CATEGORY = [
-  { src: 'cafe', title: '카페' },
-  { src: 'korean', title: '한식' },
-  { src: 'japanese', title: '일식' },
-  { src: 'chinese', title: '중식' },
-  { src: 'western', title: '양식' },
-  { src: 'asian', title: '아시안' },
-  { src: 'vegan', title: '비건' },
-  { src: 'bar', title: '주점' },
-];
+import useQueryFn from 'app.query/useQueryFn';
+import { API_CATEGORY } from 'app.modules/api/keyFactory';
 
 const HomeCategoryFilter = ({ onClick }) => {
   const { register } = useFormContext();
+  const { data: categoryList, isLoading } = useQueryFn([API_CATEGORY]);
+
+  if (isLoading || !categoryList) return null;
 
   return (
     <StyledWrapper className="home-store-filter">
@@ -26,7 +20,7 @@ const HomeCategoryFilter = ({ onClick }) => {
         </div>
       </div>
       <div className="home-store-filter__category">
-        {STORE_CATEGORY.map((item, idx) => (
+        {categoryList.map((item, idx) => (
           <div className="category-item" key={`category-${idx}`}>
             <input
               {...register('category')}
@@ -36,10 +30,10 @@ const HomeCategoryFilter = ({ onClick }) => {
             />
             <label htmlFor={`category-item-${idx}`}>
               <div className="category-item__img">
-                <img src={`/images/sample/category_${item.src}.png`} />
+                <img src={`/images/common/category/category_${item.id}.png`} />
               </div>
             </label>
-            {item.title}
+            {item.categoryName}
           </div>
         ))}
       </div>

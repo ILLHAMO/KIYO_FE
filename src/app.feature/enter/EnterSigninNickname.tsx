@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
 
 const EnterSigninNickname = () => {
+  const { register } = useFormContext();
+
   const ErrorAlert = () => {
     return (
       <div className="enter-sign-nickname__alert enter-sign-nickname__alert--error">
@@ -23,7 +26,7 @@ const EnterSigninNickname = () => {
   return (
     <StyledWrapper className="enter-sign-nickname">
       <div className="enter-sign-nickname__label">닉네임을 입력해주세요.</div>
-      <input className="enter-sign-nickname__input" />
+      <input className="enter-sign-nickname__input" {...register('nickname')} />
     </StyledWrapper>
   );
 };
