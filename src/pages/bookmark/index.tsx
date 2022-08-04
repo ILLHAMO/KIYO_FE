@@ -5,8 +5,19 @@ import BookmarkNone from 'app.feature/bookmark/BookmarkNone';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import useQueryBookmarkList from 'app.query/useQueryBookmarkList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import NotLogin from 'app.components/NotLogin/NotLogin';
+import useQueryFn from 'app.query/useQueryFn';
+import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
 
 const PageBookmark = () => {
+  const { data: userInfo, isLoading } = useQueryFn([API_USER_PROFILE]);
+
+  if (isLoading) return <StyledWrapper>로딩중</StyledWrapper>;
+  if (!userInfo?.nickname) return <NotLogin />;
+  return <Bookmark />;
+};
+
+const Bookmark = () => {
   const lastStoreRef = useRef();
 
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
@@ -39,7 +50,9 @@ const PageBookmark = () => {
   }
 
   return isSuccess && !dataset.length ? (
-    <StyledWrapper>없을 때</StyledWrapper>
+    <StyledWrapper>
+      <BookmarkNone />
+    </StyledWrapper>
   ) : (
     <StyledWrapper>
       <BookmarkList bookmarkList={dataset} />

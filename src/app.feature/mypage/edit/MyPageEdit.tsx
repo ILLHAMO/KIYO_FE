@@ -1,21 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FormProvider, useForm } from 'react-hook-form';
+import API from 'app.modules/api';
+import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
 
-const MyPageEdit = () => {
+const MyPageEdit = ({ userInfo }) => {
+  const methods = useForm();
+  const { register, handleSubmit } = methods;
+
+  const onValidRegisterForm = async (data) => {
+    try {
+      // const response = await API.PUT({
+      //   url: API_USER_PROFILE,
+      //   data: {
+      //     meta_data: { nickname: data.nickname },
+      //     profileImage: userInfo?.userProfileImagePath,
+      //   },
+      // });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onSubmit = handleSubmit(onValidRegisterForm);
+
   return (
-    <StyledWrapper className="mypage-edit">
-      <div className="mypage-edit__profile">
-        <div className="mypage-edit__profile-img"></div>
-        <div className="mypage-edit__profile-edit">
-          <img src="/images/mypage/edit_black.png" />
-        </div>
-      </div>
-      <div className="mypage-edit__info">
-        <div className="mypage-edit__input-label">닉네임</div>
-        <input />
-      </div>
-      <div className="mypage-edit__edit-button">수정하기</div>
-    </StyledWrapper>
+    <FormProvider {...methods}>
+      <form onSubmit={onSubmit}>
+        <StyledWrapper className="mypage-edit">
+          <div className="mypage-edit__profile">
+            <div className="mypage-edit__profile-img"></div>
+            <div className="mypage-edit__profile-edit">
+              <img src="/images/mypage/edit_black.png" />
+            </div>
+          </div>
+          <div className="mypage-edit__info">
+            <div className="mypage-edit__input-label">닉네임</div>
+            <input {...register('nickname')} />
+          </div>
+          <button className="mypage-edit__edit-button" type="submit">
+            수정하기
+          </button>
+        </StyledWrapper>
+      </form>
+    </FormProvider>
   );
 };
 

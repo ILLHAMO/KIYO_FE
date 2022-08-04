@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import MapHeader from 'app.feature/map/MapHeader';
-import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import MapFloating from 'app.feature/map/MapFloating';
 
 const PageMap = () => {

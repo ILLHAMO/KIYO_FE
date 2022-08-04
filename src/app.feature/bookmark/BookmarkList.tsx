@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 
 const BookmarkList = ({ bookmarkList }) => {
-  console.log(bookmarkList);
-
   return (
     <StyledWrapper className="bookmark-list">
       <div className="bookmark-list__title">내가 저장한 장소</div>

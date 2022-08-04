@@ -44,11 +44,11 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
       if (isBookmark) {
         setIsBookmark(!isBookmark);
         setBookmarkCnt((prev) => prev - 1);
-        const response = await API.DELETE({ url: API_BOOKMARK(id), data: {} });
+        await API.DELETE({ url: API_BOOKMARK(id), data: {} });
       } else {
         setIsBookmark(!isBookmark);
         setBookmarkCnt((prev) => prev + 1);
-        const response = await API.PUT({ url: API_BOOKMARK(id), data: {} });
+        await API.PUT({ url: API_BOOKMARK(id), data: {} });
       }
 
       if (router.pathname !== '/bookmark')
@@ -60,8 +60,6 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
       setBookmarkCnt(bookmarkCnt);
     }
   };
-
-  console.log(router);
 
   return (
     <StyledWrapper className="store-card">
