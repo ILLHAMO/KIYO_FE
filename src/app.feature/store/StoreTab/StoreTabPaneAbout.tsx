@@ -3,18 +3,18 @@ import styled from 'styled-components';
 
 const SERVICE_OBJ = [
   // 위에서부터 인덱스 1 줘서 이미지 파일 수정
-  { src: 'wifi', title: '와이파이' },
-  { src: 'group', title: '단체석' },
-  { src: 'pets', title: '애견동반' },
-  { src: 'wc', title: '화장실' },
-  { src: 'parking', title: '주차가능' },
-  { src: 'drive', title: '발렛가능' },
-  { src: 'crib', title: '아기의자' },
-  { src: 'deck', title: '야외좌석' },
-  { src: 'child', title: '키즈메뉴' },
-  { src: 'changing_station', title: '기저귀갈이' },
-  { src: 'elec', title: '콘센트' },
-  { src: 'packing', title: '포장가능' },
+  { src: 'convenience_1', title: '와이파이' },
+  { src: 'convenience_2', title: '단체석' },
+  { src: 'convenience_3', title: '애견동반' },
+  { src: 'convenience_4', title: '화장실' },
+  { src: 'convenience_5', title: '주차가능' },
+  { src: 'convenience_6', title: '발렛가능' },
+  { src: 'convenience_7', title: '아기의자' },
+  { src: 'convenience_8', title: '야외좌석' },
+  { src: 'convenience_9', title: '키즈메뉴' },
+  { src: 'convenience_10', title: '기저귀갈이' },
+  { src: 'convenience_11', title: '콘센트' },
+  { src: 'convenience_12', title: '포장가능' },
 ];
 
 type TProps = {
