@@ -16,6 +16,7 @@ import {
   QueryClientProvider,
 } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { useStoreLocation } from 'app.store/location/store.loaction';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,12 +30,20 @@ const queryClient = new QueryClient({
   },
 });
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 function App({ Component, pageProps }: AppProps) {
   const createStore = useCreateStore(pageProps.initialZustandState);
   const { requestAuthUser } = useStoreIntoAPP();
+  const { setLocation } = useStoreLocation();
 
   useEffect(() => {
     requestAuthUser();
+    setLocation(navigator);
   }, []);
 
   return (

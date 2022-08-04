@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useGetLocation } from 'app.store/location/store.loaction';
 
 const HomeHeader = () => {
+  const { latitude, longitude, loading, geocoder } = useGetLocation();
+
   return (
     <StyledWrapper className="home-header">
       <img src="/images/home/logo.png" className="home-header__logo" />
       <div className="home-header__right">
-        <div className="home_header__location">
-          in
-          <span>남양주시 다산동</span>
-        </div>
+        {!loading && (
+          <div className="home_header__location">
+            in
+            <span>{geocoder[0].region_2depth_name}</span>
+          </div>
+        )}
         <Link href="/search">
           <img
             src="/images/home/search_gray.png"
