@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import StoreTopBannerPanel from './StoreTopBannerPanel';
 import { useRouter } from 'next/router';
 
-type TProps = {
-  storeDetailInfo: any;
-};
-
-const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
+const StoreTopBanner: React.FC = () => {
   const router = useRouter();
 
   const { time } = storeDetailInfo;
