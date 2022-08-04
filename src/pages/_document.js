@@ -24,6 +24,8 @@ class _AppDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
+          <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b9c12625660d559bf867321cde2e6853&libraries=services"></script>
+
           <meta charSet="utf-8" />
           <meta name="robots" content="noindex, nofollow" />
           {this.props.styleTags}
