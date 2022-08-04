@@ -31,8 +31,8 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
       <div className="store-top-banner-panel__name">{name}</div>
       <div className="store-top-banner-panel__sub-name">{simpleComment}</div>
       <div className="store-top-banner-panel__info">
-        <div className="food">돼지국밥</div>
-        {/* 여기에 태그 */}
+        <div className="food">돼지국밥 {tag}</div>
+
         <div className="location">{address}</div>
       </div>
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}

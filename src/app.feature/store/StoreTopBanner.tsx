@@ -24,10 +24,8 @@ const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
       <div className="store-top-banner__operating-time">
         <div className="store-top-banner__title">운영시간</div>
         <div className="store-top-banner__time">
-          <div>월 ~ 금 12:00 ~ 22:00</div>
-          <div>토 12:00 ~ 22:00</div>
-          <div>일 12:00 ~ 22:00</div>
-          {/* {time} */}
+          <div>월 ~ 금 {time}</div>
+          {/* 월 ~ 금 지우고.. 애초에 DB에서 가져오는 값에 포함되어있게 수정 필요 */}
         </div>
       </div>
     </StyledWrapper>

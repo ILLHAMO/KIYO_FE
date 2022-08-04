@@ -30,7 +30,10 @@ const StoreTabPane: React.FC<TProps> = ({
         setAboutScroll={setAboutScroll}
         storeDetailInfo={storeDetailInfo}
       />
-      <StoreTabPaneMenu setMenuScroll={setMenuScroll} />
+      <StoreTabPaneMenu
+        setMenuScroll={setMenuScroll}
+        storeDetailInfo={storeDetailInfo}
+      />
       <StoreTabPaneReview setReviewScroll={setReviewScroll} />
     </StyledWrapper>
   );

@@ -19,7 +19,7 @@ const PageStore = () => {
   if (isLoading) return <div>로딩중</div>;
   return (
     <StyledWrapper>
-      <StoreTopBanner />
+      <StoreTopBanner storeDetailInfo={storeData} />
       <StoreTab />
     </StyledWrapper>
   );

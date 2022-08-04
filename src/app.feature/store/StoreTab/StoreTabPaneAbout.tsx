@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const SERVICE_OBJ = [
+  // 위에서부터 인덱스 1 줘서 이미지 파일 수정
   { src: 'wifi', title: '와이파이' },
   { src: 'group', title: '단체석' },
   { src: 'pets', title: '애견동반' },
@@ -31,12 +32,12 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
       setAboutScroll(scrollLocation);
     });
 
-  const { address, detailComment, images } = storeDetailInfo;
+  const { address, images, convenienceIds } = storeDetailInfo;
 
   return (
     <StyledWrapper className="store-tab-pane-about" id="scroll-about">
       <div className="store-tab-pane-about__title">About</div>
-      <div className="store-tab-pane-about__about">{detailComment}</div>
+      <div className="store-tab-pane-about__about"></div>
       <div className="divider" />
       <div className="store-info">
         <div className="store-info__title address">Address</div>
@@ -59,6 +60,7 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
           Service
         </div>
         <div className="store-info__service-slide">
+          {/* 편의사항 API로 가져오는거 수정 후 변경 필요  */}
           {SERVICE_OBJ.map((service, idx) => (
             <div className="store-info__service-item" key={`service-${idx}`}>
               <img src={`/images/common/${service.src}.png`} />
