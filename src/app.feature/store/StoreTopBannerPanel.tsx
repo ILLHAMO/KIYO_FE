@@ -31,8 +31,12 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
       <div className="store-top-banner-panel__name">{name}</div>
       <div className="store-top-banner-panel__sub-name">{simpleComment}</div>
       <div className="store-top-banner-panel__info">
-        <div className="food">돼지국밥 {tag}</div>
-
+        <div className="food">
+          {tag.map((item, tdx) => (
+            <div>{item.name}</div>
+          ))}
+        </div>
+        {/* 갯수제한 필요함,, 몇개까지 할 지 논의 */}
         <div className="location">{address}</div>
       </div>
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}
@@ -96,10 +100,16 @@ const StyledWrapper = styled.div`
     margin-bottom: 16px;
 
     .food {
+      display: flex;
+      justify-content: center;
       text-align: center;
       width: 50%;
       color: var(--color-gray-300);
       border-right: 0.5px solid var(--color-gray-300);
+
+      div {
+        margin-left: 10px;
+      }
     }
 
     .location {
