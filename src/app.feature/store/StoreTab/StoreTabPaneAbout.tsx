@@ -60,13 +60,12 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
           Service
         </div>
         <div className="store-info__service-slide">
-          {/* 편의사항 API로 가져오는거 수정 후 변경 필요  */}
-          {SERVICE_OBJ.map((service, idx) => (
+          {/* {SERVICE_OBJ.map((service, idx) => (
             <div className="store-info__service-item" key={`service-${idx}`}>
-              <img src={`/images/common/${service.src}.png`} />
+              <img src={`/images/convenience/${service.src}.svg`} />
               <div className="store-info__text">{service.title}</div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
       <div id="store-tab-menu" />
