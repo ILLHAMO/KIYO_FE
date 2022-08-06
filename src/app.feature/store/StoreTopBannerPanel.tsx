@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
+import { useQueryClient } from 'react-query';
+import {
+  API_BOOKMARK,
+  API_STORES,
+  API_STORE_BOOKMARK,
+} from 'app.modules/api/keyFactory';
+import { useRouter } from 'next/router';
 
 type TProps = {
   storeDetailInfo: any;
 };
 
 const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
-  const { name, simpleComment, tag, address, detailComment, addressMap } =
-    // 우리 디테일 코멘트 삭제된거였나?? 어쩌기로했더라
+  const queryClient = useQueryClient();
+
+  const router = useRouter();
+  const { storeId: id } = router.query;
+
+  const { name, simpleComment, tag, address, booked, addressMap } =
     storeDetailInfo;
+
+  const [isBookmark, setIsBookmark] = useState(booked);
 
   const handleClickMap = () => {
     console.log('map');
@@ -17,9 +31,27 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
     console.log('phone');
     // 클립보드 복사하기
   };
-  const handleClickBookmark = () => {
-    console.log('bookmark');
-    // API 연결하기
+  const handleClickBookmark = async (isBookmark) => {
+    try {
+      console.log('bookmark');
+      // TO DO
+      // 북마크 해제 / 설정 시 bookmarkCount 업데이트
+
+      if (isBookmark) {
+        setIsBookmark(!isBookmark);
+        await API.DELETE({ url: API_BOOKMARK(id), data: {} });
+      } else {
+        setIsBookmark(!isBookmark);
+        await API.PUT({ url: API_BOOKMARK(id), data: {} });
+      }
+
+      if (router.pathname !== '/bookmark')
+        queryClient.resetQueries(API_STORE_BOOKMARK);
+
+      // 성공했을 때
+    } catch (err) {
+      setIsBookmark(!isBookmark);
+    }
   };
   const handleClickShare = () => {
     console.log('share');
@@ -55,7 +87,7 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
-          <div onClick={handleClickBookmark}>
+          <div onClick={() => handleClickBookmark(isBookmark)}>
             <img src="/images/store/bookmark_black_off.png" />
             <div className="store-top-banner-panel__text">찜</div>
           </div>
