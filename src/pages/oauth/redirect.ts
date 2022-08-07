@@ -19,7 +19,8 @@ const PageOauthRedirect = () => {
         'token'
       )}`;
 
-      if (urlParams.get('nickname')) document.location.href('/');
+      if (urlParams.get('nickname')) location.href = '/';
+      else router.push('/enter/signin');
     } else {
       console.log('로그인 실패!!!');
       message.error('로그인 실패!!!');
