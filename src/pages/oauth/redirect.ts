@@ -15,6 +15,7 @@ const PageOauthRedirect = () => {
       const urlParams = url.searchParams;
 
       setUserInfo({ token: urlParams.get('token') });
+      localStorage.setItem('KIYO_TOKEN', urlParams.get('token'));
       axiosClient.defaults.headers['Authorization'] = `Bearer ${urlParams.get(
         'token'
       )}`;

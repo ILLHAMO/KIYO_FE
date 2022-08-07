@@ -2,10 +2,15 @@ import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
 import { API_AUTH_LOGOUT, API_AUTH_REFRESH } from './keyFactory';
 
+const token =
+  typeof localStorage !== 'undefined'
+    ? localStorage.getItem('KIYO_TOKEN')
+    : null;
+
 export let axiosClient = axios.create({
   baseURL: process.env.KIYO_API_END_POINT,
   headers: {
-    Authorization: `Bearer null`,
+    Authorization: `Bearer ${token}`,
   },
   withCredentials: true,
 });
@@ -13,35 +18,37 @@ export let axiosClient = axios.create({
 axiosClient.interceptors.response.use(
   async (response) => {
     if (response?.data?.status === 401) {
-      const { config } = response;
-
-      const res = await axiosClient({
-        method: 'GET',
-        url: API_AUTH_REFRESH,
-        data: {},
-      });
-
-      if (res?.data?.data?.token) {
-        localStorage.setItem('token', res.data.data.token);
-        axiosClient.defaults.headers[
-          'Authorization'
-        ] = `Bearer ${res.data.data.token}`;
-
-        const finalResponse: any = await axiosClient({
-          ...config,
-          headers: {
-            Authorization: `Bearer ${res.data.data.token}`,
+      if (response?.data?.message === '토큰 기한 만료') {
+        const { config } = response;
+        const res = await axios.post(
+          'https://www.jmsteady.net/auth/refresh',
+          {
+            expiredToken: localStorage
+              ? localStorage.getItem('KIYO_TOKEN')
+              : null,
           },
-        });
+          { withCredentials: true }
+        );
 
-        return finalResponse;
-      } else {
-        await axiosClient({
-          method: 'DELETE',
-          url: API_AUTH_LOGOUT,
-          data: {},
-        });
-        // location.replace('/enter');
+        if (res?.data?.data?.token) {
+          localStorage.setItem('KIYO_TOKEN', res.data.data.token);
+          const finalResponse: any = await axiosClient({
+            ...config,
+            headers: {
+              Authorization: `Bearer ${res.data.data.token}`,
+            },
+          });
+
+          return finalResponse;
+        } else if (res?.data?.message === '재로그인 필요') {
+          // 재로그인 필요라는 메시지 받았을 때 로컬스토리지 지우고 로그아웃 시키고 enter페이지 이동
+          // await axiosClient({
+          //   method: 'DELETE',
+          //   url: API_AUTH_LOGOUT,
+          //   data: {},
+          // });
+          // // location.replace('/enter');
+        }
       }
     }
 
