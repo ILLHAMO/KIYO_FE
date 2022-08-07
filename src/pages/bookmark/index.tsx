@@ -8,8 +8,12 @@ import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import NotLogin from 'app.components/NotLogin/NotLogin';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
+import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
 
 const PageBookmark = () => {
+  const getUser = useGetUser();
+  console.log(getUser);
+
   const { data: userInfo, isLoading } = useQueryFn([API_USER_PROFILE]);
 
   if (isLoading) return <StyledWrapper>로딩중</StyledWrapper>;

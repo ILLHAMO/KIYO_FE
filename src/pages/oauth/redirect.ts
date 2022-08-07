@@ -6,7 +6,6 @@ import { message } from 'antd';
 
 const PageOauthRedirect = () => {
   const router = useRouter();
-
   const { setUserInfo } = useStoreIntoAPP();
 
   useEffect(() => {
@@ -20,10 +19,8 @@ const PageOauthRedirect = () => {
         'token'
       )}`;
 
-      if (urlParams.get('nickname')) router.push('/');
-      else router.push('/enter/signin');
+      if (urlParams.get('nickname')) document.location.href('/');
     } else {
-      // TEST
       console.log('로그인 실패!!!');
       message.error('로그인 실패!!!');
     }

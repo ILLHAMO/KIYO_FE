@@ -2,15 +2,17 @@ import axios from 'axios';
 import { qs } from 'app.modules/util/qs';
 import { API_AUTH_LOGOUT, API_AUTH_REFRESH } from './keyFactory';
 
-const token =
-  typeof localStorage !== 'undefined'
-    ? localStorage.getItem('KIYO_TOKEN')
-    : null;
-
 export let axiosClient = axios.create({
   baseURL: process.env.KIYO_API_END_POINT,
   headers: {
-    Authorization: `Bearer ${token}`,
+    ...(typeof localStorage !== 'undefined' && {
+      Authorization: `Bearer ${localStorage.getItem('KIYO_TOKEN')}`,
+    }),
+    // Authorization: `Bearer ${
+    //   typeof localStorage !== 'undefined'
+    //     ? localStorage.getItem('KIYO_TOKEN')
+    //     : null
+    // }`,
   },
   withCredentials: true,
 });
@@ -21,7 +23,7 @@ axiosClient.interceptors.response.use(
       if (response?.data?.message === '토큰 기한 만료') {
         const { config } = response;
         const res = await axios.post(
-          'https://www.jmsteady.net/auth/refresh',
+          `${process.env.KIYO_API_END_POINT}${API_AUTH_REFRESH}`,
           {
             expiredToken: localStorage
               ? localStorage.getItem('KIYO_TOKEN')
@@ -41,14 +43,18 @@ axiosClient.interceptors.response.use(
 
           return finalResponse;
         } else if (res?.data?.message === '재로그인 필요') {
-          // 재로그인 필요라는 메시지 받았을 때 로컬스토리지 지우고 로그아웃 시키고 enter페이지 이동
-          // await axiosClient({
-          //   method: 'DELETE',
-          //   url: API_AUTH_LOGOUT,
-          //   data: {},
-          // });
-          // // location.replace('/enter');
+          await axiosClient({
+            method: 'DELETE',
+            url: API_AUTH_LOGOUT,
+            data: {},
+          });
+          location.replace('/enter');
         }
+      } else if (
+        response?.data?.message ===
+        'Full authentication is required to access this resource'
+      ) {
+        location.replace('/enter');
       }
     }
 

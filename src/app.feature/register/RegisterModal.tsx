@@ -1,8 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const RegisterModal = () => {
+  const router = useRouter();
+
+  const handleRouter = (link) => {
+    // 로그인 되어있을 경우
+    router.push(link);
+
+    // 안되어있을 경우
+    // router.push('/enter');
+    //
+  };
   return (
     <StyledWrapper className="register-modal">
       <Link href="/review">
