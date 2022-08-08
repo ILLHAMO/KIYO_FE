@@ -11,6 +11,7 @@ export const API_CATEGORY = '/api/category';
 // 스토어 리스트 받아오기
 export const API_STORES = '/api/stores';
 export const API_STORE_INFO = (storeId) => `/api/store/${storeId}`;
+export const API_STORE = '/api/store';
 
 // 북마크
 export const API_STORE_BOOKMARK = '/api/store/bookmark';

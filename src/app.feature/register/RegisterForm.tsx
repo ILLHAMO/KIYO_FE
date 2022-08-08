@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import ImgCrop from 'antd-img-crop';
 import styled from 'styled-components';
-import FilterConvenience from 'app.components/Filter/FilterConvenience';
-import FilterCategory from 'app.components/Filter/FilterCategory';
+import { useRouter } from 'next/router';
 import { useForm, FormProvider } from 'react-hook-form';
 import { message, Upload, UploadProps } from 'antd';
+import API from 'app.modules/api';
+import FilterConvenience from 'app.components/Filter/FilterConvenience';
+import FilterCategory from 'app.components/Filter/FilterCategory';
+import { API_STORE } from 'app.modules/api/keyFactory';
 
 const RegisterForm = () => {
   const [fileList, setFileList] = useState([]);
+
+  const router = useRouter();
 
   const methods = useForm();
   const {
@@ -18,17 +24,36 @@ const RegisterForm = () => {
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
     setFileList(newFileList);
 
-  const onValidRegisterForm = (data) => {
+  const onValidRegisterForm = async (data) => {
     try {
       data.name = data.name.trim();
       data.address = data.address.trim();
 
-      if (!data.name || !data.address || !data.isKidsZone)
+      if (!data.name || !data.address || !data.kids)
         message.error('기본 정보를 입력해주세요!');
 
-      // 등록 API
-      console.log(data);
+      const formData = new FormData();
+
+      for (let i = 0; i < fileList.length; i++)
+        formData.append('multipartFiles', fileList[i].originFileObj);
+
+      formData.append(
+        'meta_data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+
+      const response = await API.POST({
+        url: API_STORE,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      if (response?.data?.success) {
+        message.success('식당 등록을 성공했습니다.');
+        router.push('/');
+      } else throw response;
     } catch (err) {
+      message.error('식당 등록에 실패했습니다. 잠시 후 다시 시도해주세요!');
       console.log(err);
     }
   };
@@ -70,22 +95,22 @@ const RegisterForm = () => {
             <div className="register-form__input">
               <div className="register-form__small-title">운영 방식 :</div>
               <div className="register-form__radio">
-                <input {...register('isKidsZone')} type="radio" value="true" />
+                <input {...register('kids')} type="radio" value="true" />
                 <div className="register-form__radio-title">키즈존</div>
-                <input {...register('isKidsZone')} type="radio" value="false" />
+                <input {...register('kids')} type="radio" value="false" />
                 <div className="register-form__radio-title">일반식당</div>
               </div>
             </div>
             <div className="register-form__big-title">추가 정보</div>
             <div className="register-form__input">
               <div className="register-form__small-title">전화번호 :</div>
-              <input type="text" />
+              <input type="text" {...register('call')} />
             </div>
             <div className="review-photo-wrap">
               <div className="title">사진 추가하기</div>
-
+              {/* <ImgCrop rotate> */}
               <Upload
-                {...register('image')}
+                // {...register('image')}
                 listType="picture-card"
                 fileList={fileList}
                 // onPreview={handlePreview}
@@ -97,6 +122,7 @@ const RegisterForm = () => {
                   <div style={{ marginTop: 8 }}>Upload</div>
                 </div>
               </Upload>
+              {/* </ImgCrop> */}
               <div className="review-warn">
                 <li>가게 내/외부,음식,메뉴판 등 사진을 추가해주세요.</li>
                 <li>사진은 10개까지 등록하실 수 있습니다.</li>

@@ -16,16 +16,15 @@ export const useStoreIntoAPP: any = create((set) => ({
     try {
       const response = await API.GET({
         url: API_USER_PROFILE,
+        data: {},
       });
 
-      console.log(response);
-
-      if (response.data.data) {
+      if (response.data) {
         set((state) => ({
           ...state,
           getUser: {
             ...state.getUser,
-            info: response.data.data,
+            info: response.data,
             login: true,
             isLoading: false,
           },

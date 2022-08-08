@@ -50,12 +50,14 @@ axiosClient.interceptors.response.use(
           });
           location.replace('/enter');
         }
-      } else if (
-        response?.data?.message ===
-        'Full authentication is required to access this resource'
-      ) {
-        location.replace('/enter');
       }
+
+      // else if (
+      //   response?.data?.message ===
+      //   'Full authentication is required to access this resource'
+      // ) {
+      //   location.replace('/enter');
+      // }
     }
 
     return response;
@@ -65,12 +67,18 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export const request: any = async ({ url, method, data = null }) => {
+export const request: any = async ({
+  url,
+  method,
+  data = {},
+  headers = {},
+}) => {
   try {
     const response: any = await axiosClient({
       method,
       url,
       data,
+      headers,
     });
 
     return response;
@@ -80,8 +88,8 @@ export const request: any = async ({ url, method, data = null }) => {
 };
 
 class API {
-  async CALL({ method, url, data = null }) {
-    return request({ method, url, data });
+  async CALL({ method, url, data = {}, headers = {} }) {
+    return request({ method, url, data, headers });
   }
 
   GET({ url, ...params }) {
