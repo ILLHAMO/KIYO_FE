@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
+import { API_STORE_SEARCH } from 'app.modules/api/keyFactory';
 
 const ReviewSearch = () => {
+  const [keyword, setKeyword] = useState(null);
+
+  const handleSearchStore = async (event) => {
+    try {
+      console.log(event.target.value);
+      const response = await API.GET({
+        url: API_STORE_SEARCH,
+        data: {
+          keyword: event.target.value,
+          pageable: {
+            page: 0,
+            size: 1,
+          },
+          storeSearchCond: {
+            categoryIds: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+            convenienceIds: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+          },
+        },
+      });
+    } catch (err) {}
+  };
+
   return (
-    <StyledWrapper className='review-search'>
+    <StyledWrapper className="review-search">
       <div className="review-search__input">
         <img src="/images/review/search_gray.png" />
-        <input placeholder="식당을 검색해주세요" />
+        <input placeholder="식당을 검색해주세요" onChange={handleSearchStore} />
       </div>
       <div className="review-search__result">
         <div className="review-search__result-item">

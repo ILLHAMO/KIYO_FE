@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MyPageStoreCard = ({ handleDeleteModalVisible }) => {
+const MyPageStoreCard = ({ handleDeleteModalVisible, storeInfo }) => {
+  const { name, address, assigned } = storeInfo;
   return (
     <StyledWrapper className="mypage-store-card">
       <div className="mypage-store-card__info">
         <div className="mypage-store-card__img" />
         <div className="mypage-store-card__store">
-          <div className="mypage-store-card__name">홍길동네 돼지 국밥</div>
-          <div className="mypage-store-card__address">용인시 기흥구</div>
+          <div className="mypage-store-card__name">{name}</div>
+          <div className="mypage-store-card__address">{address}</div>
         </div>
       </div>
       <div className="mypage-store-card__button">

@@ -30,7 +30,7 @@ const RegisterForm = () => {
       data.address = data.address.trim();
 
       if (!data.name || !data.address || !data.kids)
-        message.error('기본 정보를 입력해주세요!');
+        throw '기본 정보를 입력해주세요!';
 
       const formData = new FormData();
 
@@ -53,8 +53,9 @@ const RegisterForm = () => {
         router.push('/');
       } else throw response;
     } catch (err) {
-      message.error('식당 등록에 실패했습니다. 잠시 후 다시 시도해주세요!');
-      console.log(err);
+      if (err.message) message.error(err.message);
+      else
+        message.error('식당 등록에 실패했습니다. 잠시 후 다시 시도해주세요!');
     }
   };
 

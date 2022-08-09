@@ -1,20 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { scoreComment, scoreStatus } from 'app.modules/constant/score';
 
-const MyPageReviewCard = ({ handleDeleteModalVisible }) => {
+const MyPageReviewCard = ({ reviewInfo, handleDeleteModalVisible }) => {
+  const { address, content, reviewId, score, storeName, updateTime } =
+    reviewInfo;
+
   return (
     <StyledWrapper className="mypage-review-card">
       <div className="mypage-review-card__top">
         <div className="mypage-review-card__user">
           <div className="mypage-review-card__profile"></div>
           <div className="mypage-review-card__store">
-            <div className="mypage-review-card__name">홍길동네 돼지 국밥</div>
-            <div className="mypage-review-card__address">용인시 기흥구</div>
+            <div className="mypage-review-card__name">{storeName}</div>
+            <div className="mypage-review-card__address">{address}</div>
           </div>
         </div>
         <div className="mypage-review-card__method-button">
-          <Link href="/review/1">
+          <Link href={`/review/${reviewId}`}>
             <div className="mypage-review-card__edit-button">수정</div>
           </Link>
           <div
@@ -26,16 +30,15 @@ const MyPageReviewCard = ({ handleDeleteModalVisible }) => {
         </div>
       </div>
       <div className="mypage-review-card">
-        <div className="mypage-review-card__title mypage-review-card__title--revisit">
-          <img src="/images/common/revisit.png" />
-          재방문 의사 있어요!
+        <div
+          className={`mypage-review-card__title mypage-review-card__title--${scoreStatus[score]}`}
+        >
+          <img src={`/images/common/${scoreStatus[score]}.png`} />
+          {scoreComment[score]}
         </div>
-        <div className="mypage-review-card__content">
-          아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수 있는
-          키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고 무엇보다
-          맛있었습니다!
-        </div>
-        <div className="mypage-review-card__date">2022-05-03</div>
+        <div className="mypage-review-card__content">{content}</div>
+        {/* TO DO 리뷰 리스트에서 이미지 필요! */}
+        <div className="mypage-review-card__date">{updateTime}</div>
       </div>
     </StyledWrapper>
   );
