@@ -27,3 +27,4 @@ export const API_USER_STORE = '/api/user/store';
 
 // 리뷰
 export const API_REVIEW_STORE = (storeId) => `/api/review/store/${storeId}`;
+export const API_REVIEW = (reviewId) => `/api/review/${reviewId}`;

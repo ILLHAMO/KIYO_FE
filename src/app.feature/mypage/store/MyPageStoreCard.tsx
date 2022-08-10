@@ -1,10 +1,26 @@
-import React from 'react';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const MyPageStoreCard = ({ handleDeleteModalVisible, storeInfo }) => {
+const MyPageStoreCard = ({ storeInfo }) => {
   const { name, address, assigned } = storeInfo;
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
+  const handleDeleteModalVisible = () => {
+    setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
+  const handleDeleteStore = () => {};
+
   return (
     <StyledWrapper className="mypage-store-card">
+      <ModalConfirm
+        isModalVisible={isDeleteModalVisible}
+        handleModalVisible={handleDeleteModalVisible}
+        handleConfirm={() => console.log('삭제하기')}
+      >
+        정말 삭제하시겠습니까?
+      </ModalConfirm>
       <div className="mypage-store-card__info">
         <div className="mypage-store-card__img" />
         <div className="mypage-store-card__store">

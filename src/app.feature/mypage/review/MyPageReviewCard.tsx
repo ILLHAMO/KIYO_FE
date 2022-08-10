@@ -1,14 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useQueryClient } from 'react-query';
+import API from 'app.modules/api';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import { scoreComment, scoreStatus } from 'app.modules/constant/score';
+import { API_REVIEW, API_USER_REVIEW } from 'app.modules/api/keyFactory';
+import { message } from 'antd';
 
-const MyPageReviewCard = ({ reviewInfo, handleDeleteModalVisible }) => {
+const MyPageReviewCard = ({ reviewInfo }) => {
   const { address, content, reviewId, score, storeName, updateTime } =
     reviewInfo;
 
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const handleDeleteModalVisible = () => {
+    setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
+  const handleDeleteReview = async () => {
+    try {
+      const response = await API.DELETE({ url: API_REVIEW(reviewId) });
+      queryClient.resetQueries(API_USER_REVIEW);
+      if (response.data === 'delete success')
+        message.success('리뷰 삭제에 성공했습니다.');
+      else throw response;
+      // TO DO 데이터에 그냥 delete success 만 내려오는데 이거 수정 필요할지?
+      console.log(response);
+    } catch (err) {
+      message.error('리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
   return (
     <StyledWrapper className="mypage-review-card">
+      <ModalConfirm
+        isModalVisible={isDeleteModalVisible}
+        handleModalVisible={handleDeleteModalVisible}
+        handleConfirm={handleDeleteReview}
+      >
+        정말 삭제하시겠습니까?
+      </ModalConfirm>
+
       <div className="mypage-review-card__top">
         <div className="mypage-review-card__user">
           <div className="mypage-review-card__profile"></div>

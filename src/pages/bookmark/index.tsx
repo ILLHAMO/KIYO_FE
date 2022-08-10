@@ -56,7 +56,6 @@ const Bookmark = () => {
   ) : (
     <StyledWrapper>
       <BookmarkList bookmarkList={dataset} />
-      {/*<BookmarkNone />*/}
       <NavigationBar />
       <div className="last-item-flag" ref={lastStoreRef} />
     </StyledWrapper>
@@ -67,6 +66,7 @@ export default PageBookmark;
 
 const StyledWrapper = styled.div`
   height: 100vh;
+  padding-bottom: 64px;
   position: relative;
 
   .last-item-flag {
