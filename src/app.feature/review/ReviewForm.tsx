@@ -14,15 +14,16 @@ import { API_REVIEW_STORE, API_USER_REVIEW } from 'app.modules/api/keyFactory';
 import { useQueryClient } from 'react-query';
 
 type TProps = {
-  storeId: number;
+  reviewStore: any;
 };
 
-const ReviewForm: React.FC<TProps> = ({ storeId }) => {
+const ReviewForm: React.FC<TProps> = ({ reviewStore }) => {
   const [fileList, setFileList] = useState([]);
   const [score, setScore] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+  const { reviewId } = router.query;
 
   const queryClient = useQueryClient();
 
@@ -58,7 +59,7 @@ const ReviewForm: React.FC<TProps> = ({ storeId }) => {
       );
 
       const response = await API.POST({
-        url: API_REVIEW_STORE(storeId),
+        url: API_REVIEW_STORE(reviewStore?.id),
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
@@ -77,13 +78,17 @@ const ReviewForm: React.FC<TProps> = ({ storeId }) => {
     }
   };
 
+  console.log(reviewId);
+
   return (
     <FormProvider {...methods}>
       <StyledWrapper className="review-form">
         <Spin spinning={isLoading} className="review-spin">
           <form onSubmit={handleSubmit(handleAddReview)}>
-            <div className="review-form__store-name">홍길동네 돼지국밥</div>
-            <div className="review-form__store-address">용인시 기흥구</div>
+            <div className="review-form__store-name">{reviewStore?.name}</div>
+            <div className="review-form__store-address">
+              {reviewStore?.address}
+            </div>
             <div className="review-form__review-score">
               {['HIGH', 'MIDDLE', 'LOW'].map((item) => (
                 <div
@@ -135,7 +140,7 @@ const ReviewForm: React.FC<TProps> = ({ storeId }) => {
               />
             </div>
             <button type="submit" className="review-form__create-button">
-              리뷰 등록하기
+              리뷰 {reviewId ? '수정' : '등록'}하기
             </button>
           </form>
         </Spin>
