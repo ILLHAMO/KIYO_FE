@@ -1,23 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import useQuerySearchStore from 'app.query/useQuerySearchStore';
+import { FormProvider, useForm } from 'react-hook-form';
+import { message } from 'antd';
 
-const SearchHeader = () => {
+const SearchHeader = ({ keyword, setKeyword, queryData }) => {
+  const { data, isFetching, status, fetchNextPage, hasNextPage } = queryData;
+
+  const methods = useForm();
+  const { handleSubmit, register } = methods;
+
+  const onValidSearchForm = (data) => {
+    setKeyword(data.keyword);
+    const searchHistory =
+      JSON.parse(localStorage.getItem('KIYO_SEARCH_HISTORY')) ?? [];
+    localStorage.setItem(
+      'KIYO_SEARCH_HISTORY',
+      JSON.stringify([...searchHistory, data.keyword])
+    );
+  };
+
   return (
-    <StyledWrapper className='search-header'>
-      <input className="search-header__input" placeholder="  검색어를 입력 해 보세요" />
-      <Link href="/">
-        <img
-          className="search-header__back"
-          src="/images/search/arrow.png"
-          alt="뒤로가기 버튼"
-        />
-      </Link>
-      <img
-        className="search-header__search"
-        src="/images/search/search.png"
-        alt="검색하기 버튼"
-      />
+    <StyledWrapper className="search-header">
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onValidSearchForm)}>
+          <input
+            {...register('keyword')}
+            className="search-header__input"
+            placeholder="  검색어를 입력 해 보세요"
+          />
+          <Link href="/">
+            <img
+              className="search-header__back"
+              src="/images/search/arrow.png"
+              alt="뒤로가기 버튼"
+            />
+          </Link>
+          <img
+            className="search-header__search"
+            src="/images/search/search.png"
+            alt="검색하기 버튼"
+            onClick={handleSubmit(onValidSearchForm)}
+          />
+        </form>
+      </FormProvider>
     </StyledWrapper>
   );
 };

@@ -15,6 +15,7 @@ export const API_STORE = '/api/store';
 
 // 검색
 export const API_STORE_SEARCH = '/api/store/search';
+export const API_SEARCH_KEYWORD_RANK = '/api/search/keyword/rank';
 
 // 북마크
 export const API_STORE_BOOKMARK = '/api/store/bookmark';

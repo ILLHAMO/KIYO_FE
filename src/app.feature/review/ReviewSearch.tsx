@@ -1,16 +1,15 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import API from 'app.modules/api';
 import useQuerySearchStore from 'app.query/useQuerySearchStore';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import { Skeleton } from 'antd';
+import { FormProvider } from 'rc-field-form';
+import { useForm } from 'react-hook-form';
 
 const ReviewSearch = ({ setReviewStore }) => {
   const lastStoreRef = useRef();
 
   const [keyword, setKeyword] = useState(null);
-
-  const handleSearchStore = async (event) => setKeyword(event.target.value);
 
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
     useQuerySearchStore(keyword);
@@ -43,12 +42,26 @@ const ReviewSearch = ({ setReviewStore }) => {
     dataset = [...dataset, ...SkeletonArray];
   }
 
+  const methods = useForm();
+  const { handleSubmit, register } = methods;
+
+  const onValidSearchForm = (data) => {
+    setKeyword(data.keyword);
+  };
+
   return (
     <StyledWrapper className="review-search">
-      <div className="review-search__input">
-        <img src="/images/review/search_gray.png" />
-        <input placeholder="식당을 검색해주세요" onChange={handleSearchStore} />
-      </div>
+      <FormProvider>
+        <form onSubmit={handleSubmit(onValidSearchForm)}>
+          <div className="review-search__input">
+            <input {...register('keyword')} placeholder="식당을 검색해주세요" />
+            <img
+              src="/images/review/search_gray.png"
+              onClick={handleSubmit(onValidSearchForm)}
+            />
+          </div>
+        </form>
+      </FormProvider>
       <div className="review-search__result">
         {isSuccess && !!dataset.length && (
           <div>
@@ -92,7 +105,7 @@ const StyledWrapper = styled.div`
       width: 18px;
       height: 18px;
       top: 11px;
-      left: 8px;
+      right: 8px;
       position: absolute;
     }
 
@@ -100,7 +113,7 @@ const StyledWrapper = styled.div`
       height: 40px;
       width: 100%;
       border-bottom: 0.5px solid var(--color-gray-300);
-      padding-left: 40px;
+      padding: 0 10px;
 
       &::placeholder {
         color: var(--color-gray-300);
