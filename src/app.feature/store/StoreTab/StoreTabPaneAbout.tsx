@@ -1,21 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-const SERVICE_OBJ = [
-  // 위에서부터 인덱스 1 줘서 이미지 파일 수정
-  { src: 'convenience_1', title: '와이파이' },
-  { src: 'convenience_2', title: '단체석' },
-  { src: 'convenience_3', title: '애견동반' },
-  { src: 'convenience_4', title: '화장실' },
-  { src: 'convenience_5', title: '주차가능' },
-  { src: 'convenience_6', title: '발렛가능' },
-  { src: 'convenience_7', title: '아기의자' },
-  { src: 'convenience_8', title: '야외좌석' },
-  { src: 'convenience_9', title: '키즈메뉴' },
-  { src: 'convenience_10', title: '기저귀갈이' },
-  { src: 'convenience_11', title: '콘센트' },
-  { src: 'convenience_12', title: '포장가능' },
-];
+import useQueryFn from 'app.query/useQueryFn';
+import { API_CONVENIENCE } from 'app.modules/api/keyFactory';
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
@@ -32,7 +18,8 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
       setAboutScroll(scrollLocation);
     });
 
-  const { address, images, convenienceIds } = storeDetailInfo;
+  const { address, images } = storeDetailInfo;
+  const { data: serviceList, isLoading } = useQueryFn([API_CONVENIENCE]);
 
   return (
     <StyledWrapper className="store-tab-pane-about" id="scroll-about">
@@ -60,12 +47,18 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
           Service
         </div>
         <div className="store-info__service-slide">
-          {/* {SERVICE_OBJ.map((service, idx) => (
-            <div className="store-info__service-item" key={`service-${idx}`}>
-              <img src={`/images/convenience/${service.src}.svg`} />
-              <div className="store-info__text">{service.title}</div>
-            </div>
-          ))} */}
+          {!isLoading &&
+            !!serviceList.length &&
+            serviceList.map((service, idx) => (
+              <div className="store-info__service-item" key={`service-${idx}`}>
+                <img
+                  src={`/images/convenience/convenience_${service.convenienceId}.svg`}
+                />
+                <div className="store-info__text">
+                  {service.convenienceName}
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <div id="store-tab-menu" />

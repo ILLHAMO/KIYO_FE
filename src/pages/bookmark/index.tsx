@@ -66,7 +66,7 @@ export default PageBookmark;
 
 const StyledWrapper = styled.div`
   height: 100vh;
-  padding-bottom: 64px;
+  padding: 0 20px 64px;
   position: relative;
 
   .last-item-flag {
@@ -75,7 +75,6 @@ const StyledWrapper = styled.div`
     right: 0;
     width: 0;
     height: 100px;
-    // visibility: hidden;
     background: #000;
   }
 `;

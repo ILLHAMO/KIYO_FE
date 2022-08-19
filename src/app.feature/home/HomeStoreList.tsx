@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQueryStoreList from 'app.query/useQueryStoreList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import { useGetLocation } from 'app.store/location/store.loaction';
 
 const HomeStoreList = ({ filter = { category: [], convenience: [] } }) => {
   const lastStoreRef = useRef();
+  const { loading, geocoder } = useGetLocation();
 
+  if (loading) return null;
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
-    useQueryStoreList(filter);
+    useQueryStoreList(filter, geocoder);
 
   const isSuccess = status === 'success';
 

@@ -4,10 +4,10 @@ import Link from 'next/link';
 import useQuerySearchStore from 'app.query/useQuerySearchStore';
 import { FormProvider, useForm } from 'react-hook-form';
 import { message } from 'antd';
+import { useRouter } from 'next/router';
 
-const SearchHeader = ({ keyword, setKeyword, queryData }) => {
-  const { data, isFetching, status, fetchNextPage, hasNextPage } = queryData;
-
+const SearchHeader = ({ keyword = null, setKeyword = (data) => {} }) => {
+  const router = useRouter();
   const methods = useForm();
   const { handleSubmit, register } = methods;
 
@@ -19,6 +19,7 @@ const SearchHeader = ({ keyword, setKeyword, queryData }) => {
       'KIYO_SEARCH_HISTORY',
       JSON.stringify([...searchHistory, data.keyword])
     );
+    router.push(`/search/result?keyword=${data.keyword}`);
   };
 
   return (

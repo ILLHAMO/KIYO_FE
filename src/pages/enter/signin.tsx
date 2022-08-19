@@ -25,7 +25,7 @@ const PageEnterSignin = () => {
         },
       });
 
-      router.push('/');
+      location.href = '/';
     } catch (err) {
       console.log(err);
     }

@@ -1,13 +1,38 @@
+import { Switch } from 'antd';
+import { useStoreAutoSave } from 'app.store/autoSave/useStoreAutoSave';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const SearchRecent = () => {
+  const [autoSave, setAutoSave] = useState(true);
   const [recentSearch, setRecentSearch] = useState([]);
+
+  const { updateAutoSave } = useStoreAutoSave();
+
+  const handleAutoSave = () => {
+    const isAutoSave = !autoSave;
+    localStorage.setItem('KIYO_AUTO_SAVE', String(isAutoSave));
+    setAutoSave(isAutoSave);
+    updateAutoSave(isAutoSave);
+  };
+
+  const handleRemoveHistory = () => {
+    localStorage.removeItem('KIYO_SEARCH_HISTORY');
+    const result =
+      JSON.parse(localStorage.getItem('KIYO_SEARCH_HISTORY')) ?? [];
+    setRecentSearch(result);
+  };
 
   useEffect(() => {
     const result =
       JSON.parse(localStorage.getItem('KIYO_SEARCH_HISTORY')) ?? [];
     setRecentSearch(result);
+
+    const isAutoSave = localStorage.getItem('KIYO_AUTO_SAVE')
+      ? Boolean(localStorage.getItem('KIYO_AUTO_SAVE'))
+      : true;
+    setAutoSave(isAutoSave);
+    updateAutoSave(isAutoSave);
   }, []);
 
   return (
@@ -29,23 +54,14 @@ const SearchRecent = () => {
         )}
       </div>
       <div className="search-recent__bottom">
-        <div className="search-recent__save-toggle search-recent__save-toggle--on">
-          <img
-            src="/images/search/toggle_on.png"
-            alt=""
-            className="toggle-on"
-          />
-          <div className="toggle-text">자동 저장 ON</div>
+        <div className={`search-recent__save-toggle`}>
+          <Switch checked={autoSave} size="small" onChange={handleAutoSave} />
+          <div className="toggle-text">자동 저장 {autoSave ? 'ON' : 'OFF'}</div>
         </div>
-        <div className="search-recent__save-toggle">
-          <img
-            src="/images/search/toggle_off.png"
-            alt=""
-            className="toggle-off"
-          />
-          <div className="toggle-text">자동 저장 OFF</div>
-        </div>
-        <div className="search-recent__remove-botton search-recent__remove-botton--on">
+        <div
+          className="search-recent__remove-button"
+          onClick={handleRemoveHistory}
+        >
           전체 삭제
         </div>
       </div>
@@ -77,44 +93,32 @@ const StyledWrapper = styled.div`
   }
 
   .search-recent__bottom {
+    padding: 0 20px;
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     color: var(--color-gray-300);
     font-size: 12px;
     height: 40px;
     border-top: 0.5px solid var(--color-gray-100);
     border-bottom: 0.5px solid var(--color-gray-300);
 
-    img {
-      width: 24px;
-      height: 24px;
-      margin: 0 8px 0;
+    .ant-switch {
+      margin-right: 8px;
     }
 
-    .search-recent__save-toggle.true {
-      display: flex;
-      align-items: center;
+    .ant-switch-checked {
+      background: var(--color-main);
     }
+
     .search-recent__save-toggle {
-      display: none;
-    }
-
-    .search-recent__save-toggle.search-recent__save-toggle--on {
       display: flex;
       align-items: center;
     }
 
-    .search-recent__remove-botton {
-      display: none;
-    }
-
-    .search-recent__remove-botton.search-recent__remove-botton--on {
-      display: block;
+    .search-recent__remove-button {
       cursor: pointer;
-      position: absolute;
-      top: 12px;
-      right: 8px;
     }
   }
 `;

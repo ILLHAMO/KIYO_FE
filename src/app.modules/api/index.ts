@@ -8,11 +8,6 @@ export let axiosClient = axios.create({
     ...(typeof localStorage !== 'undefined' && {
       Authorization: `Bearer ${localStorage.getItem('KIYO_TOKEN')}`,
     }),
-    // Authorization: `Bearer ${
-    //   typeof localStorage !== 'undefined'
-    //     ? localStorage.getItem('KIYO_TOKEN')
-    //     : null
-    // }`,
   },
   withCredentials: true,
 });
@@ -73,18 +68,14 @@ export const request: any = async ({
   data = {},
   headers = {},
 }) => {
-  try {
-    const response: any = await axiosClient({
-      method,
-      url,
-      data,
-      headers,
-    });
+  const response: any = await axiosClient({
+    method,
+    url,
+    data,
+    headers,
+  });
 
-    return response;
-  } catch (err) {
-    console.error(err.toString());
-  }
+  return response;
 };
 
 class API {

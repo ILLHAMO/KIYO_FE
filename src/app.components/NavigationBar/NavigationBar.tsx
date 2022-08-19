@@ -106,7 +106,9 @@ const NavigationBar = () => {
         onHide={handleRegisterModalVisible}
         placement="bottom"
       >
-        <RegisterModal />
+        <RegisterModal
+          handleRegisterModalVisible={handleRegisterModalVisible}
+        />
       </StyledOffcanvas>
     </StyledWrapper>
   );

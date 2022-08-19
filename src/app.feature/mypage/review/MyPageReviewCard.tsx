@@ -9,8 +9,15 @@ import { API_REVIEW, API_USER_REVIEW } from 'app.modules/api/keyFactory';
 import { message } from 'antd';
 
 const MyPageReviewCard = ({ reviewInfo }) => {
-  const { address, content, reviewId, score, storeName, updateTime } =
-    reviewInfo;
+  const {
+    address,
+    content,
+    reviewId,
+    score,
+    storeName,
+    updateTime,
+    storeImage,
+  } = reviewInfo;
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
@@ -46,7 +53,9 @@ const MyPageReviewCard = ({ reviewInfo }) => {
 
       <div className="mypage-review-card__top">
         <div className="mypage-review-card__user">
-          <div className="mypage-review-card__profile"></div>
+          <div className="mypage-review-card__profile">
+            <img src={storeImage.imagePath} alt="store-image" />
+          </div>
           <div className="mypage-review-card__store">
             <div className="mypage-review-card__name">{storeName}</div>
             <div className="mypage-review-card__address">{address}</div>
@@ -116,6 +125,12 @@ const StyledWrapper = styled.div`
         margin-right: 16px;
         background-color: #ffe9ef;
         border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .mypage-review-card__store {

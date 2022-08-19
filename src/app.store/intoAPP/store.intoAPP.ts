@@ -19,7 +19,7 @@ export const useStoreIntoAPP: any = create((set) => ({
         data: {},
       });
 
-      if (response.data) {
+      if (response.data?.nickname) {
         set((state) => ({
           ...state,
           getUser: {

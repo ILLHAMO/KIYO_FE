@@ -9,10 +9,13 @@ import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
 import RegisterModal from 'app.feature/register/RegisterModal';
 import { Offcanvas } from 'react-bootstrap';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useGetLocation } from 'app.store/location/store.loaction';
+import PageLoading from 'app.components/Loading/PageLoading';
 
 const PageHome = () => {
   const [isConvenienceFilterVisible, setIsConvenienceFilterVisible] =
     useState(false);
+  const { loading, geocoder } = useGetLocation();
 
   const methods = useForm({
     defaultValues: {
@@ -55,6 +58,7 @@ const PageHome = () => {
     onSubmit();
   }, [watchCategory]);
 
+  if (loading) return <PageLoading />;
   return (
     <FormProvider {...methods}>
       <form onSubmit={onSubmit}>
@@ -62,7 +66,9 @@ const PageHome = () => {
           <HomeHeader />
           <HomeBanner />
           <HomeCategoryFilter onClick={handleConvenienceFilterVisibleShow} />
-          {filter !== null && <HomeStoreList filter={filter} />}
+          {filter !== null && (
+            <HomeStoreList filter={filter} geocoder={geocoder} />
+          )}
           <StyledOffcanvas
             show={isConvenienceFilterVisible}
             onHide={handleConvenienceFilterVisibleClose}

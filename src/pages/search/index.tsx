@@ -41,14 +41,11 @@ const PageSearch = () => {
   if (isSuccess && isFetching) {
     dataset = [...dataset, ...SkeletonArray];
   }
+  // const { data, isFetching, status, fetchNextPage, hasNextPage } = queryData;
 
   return (
     <StyledWrapper>
-      <SearchHeader
-        keyword={keyword}
-        setKeyword={setKeyword}
-        queryData={queryData}
-      />
+      <SearchHeader keyword={keyword} setKeyword={setKeyword} />
       <SearchRecent />
       <SearchRecommend />
       {/* <SearchSearching lastStoreRef={lastStoreRef} dataset={dataset} /> */}

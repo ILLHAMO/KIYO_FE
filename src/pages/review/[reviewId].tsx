@@ -3,16 +3,28 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Header from 'app.components/Header/Header';
 import ReviewForm from 'app.feature/review/ReviewForm';
+import useQueryFn from 'app.query/useQueryFn';
+import PageLoading from 'app.components/Loading/PageLoading';
+import { API_REVIEW_UPDATE } from 'app.modules/api/keyFactory';
 
 const PageReviewEdit = () => {
   const router = useRouter();
+  const { reviewId } = router.query;
 
-  const { create } = router.query;
+  const { data, isLoading } = useQueryFn([API_REVIEW_UPDATE(reviewId)]);
 
+  if (isLoading) return <PageLoading />;
   return (
     <StyledWrapper>
       <Header title="리뷰 수정하기" />
-      <ReviewForm />
+      <ReviewForm
+        editInfo={data}
+        reviewStore={{
+          name: data?.storeName,
+          address: data?.address,
+          reviewImages: data?.reviewImages,
+        }}
+      />
     </StyledWrapper>
   );
 };

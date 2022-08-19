@@ -28,6 +28,7 @@ const useQueryBookmarkList = () => {
       return await requestBookmarkList({ pageParam });
     },
     {
+      cacheTime: 0,
       getNextPageParam: (lastPage, page) => {
         if (lastPage?.last) return false;
         return lastPage?.edges[5].id;

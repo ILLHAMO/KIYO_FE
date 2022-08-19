@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Offcanvas } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import SearchHeader from 'app.feature/search/SearchHeader';
-import NavigationBar from 'app.components/NavigationBar/NavigationBar';
-import HomeStoreList from 'app.feature/home/HomeStoreList';
 import SearchFilter from 'app.feature/search/SearchFilter/SearchFilter';
 import SearchFilterOtherModal from 'app.feature/search/SearchFilter/SearchFilterOtherModal';
 import SearchFilterLocalModal from 'app.feature/search/SearchFilter/SearchFilterLocalModal';
-import { Modal, Offcanvas } from 'react-bootstrap';
+import useQuerySearchStore from 'app.query/useQuerySearchStore';
+import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import SearchStoreList from 'app.feature/search/SearchStoreList';
 
 const PageSearchResult = () => {
+  const lastStoreRef = useRef();
+  const router = useRouter();
+  const { keyword } = router.query;
+
   const [isOtherFilterVisible, setIsOtherFilterVisible] = useState(false);
   const [isLocalFilterVisible, setIsLocalFilterVisible] = useState(false);
 
@@ -19,6 +25,36 @@ const PageSearchResult = () => {
     setIsLocalFilterVisible(!isLocalFilterVisible);
   };
 
+  const queryData = useQuerySearchStore(keyword);
+
+  const { data, isFetching, status, fetchNextPage, hasNextPage } = queryData;
+
+  const isSuccess = status === 'success';
+
+  useIntersectionObserver({
+    root: null,
+    target: lastStoreRef,
+    enabled: hasNextPage,
+    onIntersect: fetchNextPage,
+  });
+
+  let dataset = data?.pages
+    ? data?.pages.reduce((acc: any, cur: any) => {
+        if (cur?.edges) {
+          acc.push(...cur?.edges);
+        }
+        return acc;
+      }, [])
+    : [];
+
+  const SkeletonArray = Array.from(Array(20).keys());
+
+  if (isFetching) dataset = [...dataset, ...SkeletonArray];
+
+  if (isSuccess && isFetching) {
+    dataset = [...dataset, ...SkeletonArray];
+  }
+
   return (
     <StyledWrapper>
       <SearchHeader />
@@ -26,7 +62,11 @@ const PageSearchResult = () => {
         otherFilterOnClick={handleOtherFilterVisibleShow}
         localFilterOnClick={handleLocalFilterVisibleShow}
       />
-      <HomeStoreList />
+      <SearchStoreList
+        isSuccess={isSuccess}
+        dataset={dataset}
+        lastStoreRef={lastStoreRef}
+      />
       <StyledOtherOffcanvas
         className="other-modal"
         show={isOtherFilterVisible}

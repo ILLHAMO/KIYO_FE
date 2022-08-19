@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
-import { message, Spin, Upload, UploadProps } from 'antd';
+import { Image, message, Spin, Upload, UploadProps } from 'antd';
 import API from 'app.modules/api';
 import {
   scoreColor,
@@ -12,14 +12,17 @@ import {
 } from 'app.modules/constant/score';
 import { API_REVIEW_STORE, API_USER_REVIEW } from 'app.modules/api/keyFactory';
 import { useQueryClient } from 'react-query';
+import { isTemplateMiddle } from 'typescript';
 
 type TProps = {
-  reviewStore: any;
+  reviewStore?: any;
+  editInfo?: any;
 };
 
-const ReviewForm: React.FC<TProps> = ({ reviewStore }) => {
+const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
+  const [defaultFileList, setDefaultFileList] = useState([]);
   const [fileList, setFileList] = useState([]);
-  const [score, setScore] = useState(null);
+  const [score, setScore] = useState(editInfo?.score ?? null);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -27,11 +30,31 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore }) => {
 
   const queryClient = useQueryClient();
 
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      content: editInfo?.content ?? null,
+      score: editInfo?.score ?? null,
+      isConfirm: false,
+    },
+  });
   const { register, handleSubmit } = methods;
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
     setFileList(newFileList);
+
+  const handleDefaultFileList = () => {
+    const list = [];
+    reviewStore?.reviewImages?.map((item) => {
+      list.push({ uid: item.id, thumbUrl: item.path });
+    });
+    setDefaultFileList(list);
+  };
+
+  console.log(defaultFileList);
+
+  useEffect(() => {
+    handleDefaultFileList();
+  }, []);
 
   const handleAddReview = async (data) => {
     try {
@@ -78,8 +101,6 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore }) => {
     }
   };
 
-  console.log(reviewId);
-
   return (
     <FormProvider {...methods}>
       <StyledWrapper className="review-form">
@@ -112,17 +133,19 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore }) => {
             />
             <div className="review-form__photo">
               <div className="review-form__title">사진 추가하기</div>
-              <Upload
-                listType="picture-card"
-                fileList={fileList}
-                onChange={handleChange}
-                className="review-photo-slide"
-              >
-                <div>
-                  +<br />
-                  <div style={{ marginTop: 8 }}>Upload</div>
-                </div>
-              </Upload>
+              <div className="review-form__slide">
+                <Upload
+                  listType="picture-card"
+                  fileList={[...defaultFileList, ...fileList]}
+                  onChange={handleChange}
+                  className="review-photo-slide"
+                >
+                  <div>
+                    +<br />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </div>
+                </Upload>
+              </div>
               <div className="review-form__warn">
                 <li>
                   리뷰에 업로드해주신 사진은 키요의 식당 상세페이지에서 사용될
