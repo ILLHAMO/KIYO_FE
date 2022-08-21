@@ -74,7 +74,7 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ reviewInfo }) => {
         <div className="store-tab-pane-review-card__method-button">
           {currentUserReview ? (
             <>
-              <Link href={`/review/${id}`}>
+              <Link href={`/review/edit?reviewId=${id}`}>
                 <div className="store-tab-pane-review-card__edit-button">
                   수정
                 </div>

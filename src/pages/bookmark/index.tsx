@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import BookmarkList from 'app.feature/bookmark/BookmarkList';
 import BookmarkNone from 'app.feature/bookmark/BookmarkNone';
-import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import useQueryBookmarkList from 'app.query/useQueryBookmarkList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import NotLogin from 'app.components/NotLogin/NotLogin';
@@ -56,7 +55,6 @@ const Bookmark = () => {
   ) : (
     <StyledWrapper>
       <BookmarkList bookmarkList={dataset} />
-      <NavigationBar />
       <div className="last-item-flag" ref={lastStoreRef} />
     </StyledWrapper>
   );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Image, message, Spin, Upload, UploadProps } from 'antd';
+import { message, Spin, Upload, UploadProps } from 'antd';
 import API from 'app.modules/api';
 import {
   scoreColor,
@@ -12,7 +12,6 @@ import {
 } from 'app.modules/constant/score';
 import { API_REVIEW_STORE, API_USER_REVIEW } from 'app.modules/api/keyFactory';
 import { useQueryClient } from 'react-query';
-import { isTemplateMiddle } from 'typescript';
 
 type TProps = {
   reviewStore?: any;
@@ -21,12 +20,12 @@ type TProps = {
 
 const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
   const [defaultFileList, setDefaultFileList] = useState([]);
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState([...defaultFileList]);
   const [score, setScore] = useState(editInfo?.score ?? null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const isEdit = !!editInfo;
   const router = useRouter();
-  const { reviewId } = router.query;
 
   const queryClient = useQueryClient();
 
@@ -37,6 +36,7 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
       isConfirm: false,
     },
   });
+
   const { register, handleSubmit } = methods;
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
@@ -48,9 +48,8 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
       list.push({ uid: item.id, thumbUrl: item.path });
     });
     setDefaultFileList(list);
+    setFileList(list);
   };
-
-  console.log(defaultFileList);
 
   useEffect(() => {
     handleDefaultFileList();
@@ -61,12 +60,25 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
       if (!data.isConfirm)
         throw { message: '내용을 확인하고 아래 체크박스에 체크해주세요!' };
 
+      const deleteIds = [];
+      const addFiles = [];
+
+      fileList.map((item) => {
+        const isFind = defaultFileList.find(
+          (value) => item?.uid === value?.uid
+        );
+        if (!isFind) {
+          if (typeof item.uid == 'number') deleteIds.push(isFind?.uid);
+          else addFiles.push(item);
+        }
+      });
+
       setIsLoading(true);
 
       const formData = new FormData();
 
-      for (let i = 0; i < fileList.length; i++)
-        formData.append('multipartFiles', fileList[i].originFileObj);
+      for (let i = 0; i < addFiles.length; i++)
+        formData.append('multipartFiles', addFiles[i].originFileObj);
 
       formData.append(
         'meta_data',
@@ -75,6 +87,7 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
             JSON.stringify({
               score,
               content: data.content,
+              deleteIds,
             }),
           ],
           { type: 'application/json' }
@@ -133,19 +146,17 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
             />
             <div className="review-form__photo">
               <div className="review-form__title">사진 추가하기</div>
-              <div className="review-form__slide">
-                <Upload
-                  listType="picture-card"
-                  fileList={[...defaultFileList, ...fileList]}
-                  onChange={handleChange}
-                  className="review-photo-slide"
-                >
-                  <div>
-                    +<br />
-                    <div style={{ marginTop: 8 }}>Upload</div>
-                  </div>
-                </Upload>
-              </div>
+              <Upload
+                listType="picture-card"
+                fileList={[...fileList]}
+                onChange={handleChange}
+                className="review-photo-slide"
+              >
+                <div>
+                  +<br />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              </Upload>
               <div className="review-form__warn">
                 <li>
                   리뷰에 업로드해주신 사진은 키요의 식당 상세페이지에서 사용될
@@ -163,7 +174,7 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
               />
             </div>
             <button type="submit" className="review-form__create-button">
-              리뷰 {reviewId ? '수정' : '등록'}하기
+              리뷰 {isEdit ? '수정' : '등록'}하기
             </button>
           </form>
         </Spin>
@@ -265,9 +276,13 @@ const StyledWrapper = styled.div`
     }
 
     .review-photo-slide {
+      width: 100%;
+      display: flex;
+      overflow: auto;
+
       .ant-upload-list {
+        width: 100%;
         display: flex;
-        overflow: auto;
         flex-flow: row-reverse;
         justify-content: flex-end;
       }

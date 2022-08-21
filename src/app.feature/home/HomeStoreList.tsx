@@ -5,11 +5,9 @@ import useQueryStoreList from 'app.query/useQueryStoreList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import { useGetLocation } from 'app.store/location/store.loaction';
 
-const HomeStoreList = ({ filter = { category: [], convenience: [] } }) => {
+const HomeStoreList = ({ filter = { category: [], convenience: [] }, geocoder }) => {
   const lastStoreRef = useRef();
-  const { loading, geocoder } = useGetLocation();
 
-  if (loading) return null;
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
     useQueryStoreList(filter, geocoder);
 

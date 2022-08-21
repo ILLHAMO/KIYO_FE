@@ -5,16 +5,21 @@ import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import { Skeleton } from 'antd';
 import { FormProvider } from 'rc-field-form';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
-const ReviewSearch = ({ setReviewStore }) => {
+const ReviewSearch = () => {
   const lastStoreRef = useRef();
+  const router = useRouter();
 
   const [keyword, setKeyword] = useState(null);
 
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
     useQuerySearchStore(keyword);
 
-  const handleSelectStore = (storeInfo) => setReviewStore(storeInfo);
+  const handleSelectStore = (storeInfo) =>
+    router.push(
+      `/review/create?storeName=${storeInfo.name}&storeAddress=${storeInfo.address}`
+    );
 
   const isSuccess = status === 'success';
 

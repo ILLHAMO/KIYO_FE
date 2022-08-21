@@ -145,6 +145,7 @@ const StyledWrapper = styled.div`
     .navigation-bar__menu-wrap {
       position: relative;
       width: 20%;
+      height: 100%;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -158,10 +159,9 @@ const StyledWrapper = styled.div`
       }
 
       .navigation-bar__menu-icon {
-        top: -23px;
-        position: absolute;
         width: 36px;
         height: 36px;
+        margin-bottom: -4px;
       }
 
       .navigation-bar__add-button {
@@ -176,9 +176,6 @@ const StyledWrapper = styled.div`
       }
 
       .navigation-bar__menu-title {
-        position: absolute;
-        bottom: -25px;
-
         font-size: 12px;
         color: var(--color-gray-200);
       }

@@ -62,7 +62,7 @@ const MyPageReviewCard = ({ reviewInfo }) => {
           </div>
         </div>
         <div className="mypage-review-card__method-button">
-          <Link href={`/review/${reviewId}`}>
+          <Link href={`/review/edit?reviewId=${reviewId}`}>
             <div className="mypage-review-card__edit-button">수정</div>
           </Link>
           <div

@@ -20,6 +20,7 @@ const PageReviewEdit = () => {
       <ReviewForm
         editInfo={data}
         reviewStore={{
+          id: reviewId,
           name: data?.storeName,
           address: data?.address,
           reviewImages: data?.reviewImages,

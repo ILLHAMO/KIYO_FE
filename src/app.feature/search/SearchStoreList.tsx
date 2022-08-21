@@ -1,8 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
-import useQueryStoreList from 'app.query/useQueryStoreList';
-import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 
 const SearchStoreList = ({ lastStoreRef, isSuccess, dataset }) => {
   return isSuccess && !dataset.length ? (
@@ -11,7 +9,10 @@ const SearchStoreList = ({ lastStoreRef, isSuccess, dataset }) => {
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) => (
         <StoreCard
-          storeInfo={{ ...item, images: [item.storeImage] }}
+          storeInfo={{
+            ...item,
+            images: [{ path: item?.storeImage?.imagePath }],
+          }}
           key={`store-card-${idx}`}
         />
       ))}

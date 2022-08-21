@@ -6,16 +6,19 @@ import { useRouter } from 'next/router';
 const StoreTopBanner = ({ storeDetailInfo }) => {
   const router = useRouter();
 
-  const { time } = storeDetailInfo;
+  const { time, images } = storeDetailInfo;
+
   return (
     <StyledWrapper className="store-top-banner">
       <div className="store-top-banner__back-button">
         <img
           src="/images/store/back_button.png"
-          onClick={() => router.push('/')}
+          onClick={() => router.back()}
         />
       </div>
-      <div className="store-top-banner__image"></div>
+      <div className="store-top-banner__image">
+        {!!images?.length && <img src={images[0].path} />}
+      </div>
       <StoreTopBannerPanel storeDetailInfo={storeDetailInfo} />
       <div className="store-top-banner__operating-time">
         <div className="store-top-banner__title">운영시간</div>
@@ -52,6 +55,13 @@ const StyledWrapper = styled.div`
     height: 280px;
     background-color: #ffe9ef;
     margin-bottom: 48px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .store-top-banner__operating-time {

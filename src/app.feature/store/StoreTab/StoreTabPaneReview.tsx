@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import StoreTabPaneReviewCard from './StoreTabPaneReviewCard';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type TProps = {
   storeDetailInfo: any;
@@ -12,19 +13,24 @@ const StoreTabPaneReview: React.FC<TProps> = ({
   storeDetailInfo,
   setReviewScroll,
 }) => {
+  const router = useRouter();
+  const { storeId } = router.query;
+
   if (typeof window !== 'undefined')
     window.addEventListener('scroll', () => {
       let scrollLocation = document.getElementById('scroll-review')?.offsetTop; // 현재 스크롤바 위
       setReviewScroll(scrollLocation);
     });
 
-  const { reviewResponses } = storeDetailInfo;
+  const { reviewResponses, name, address } = storeDetailInfo;
 
   return (
     <StyledWrapper className="store-tab-pane-review" id="scroll-review">
       <div className="store-tab-pane-review__menu">
         <div>Review</div>
-        <Link href="/review">
+        <Link
+          href={`/review/create?id=${storeId}&name=${name}&address=${address}`}
+        >
           <div className="store-tab-pane-review__plus-button">+</div>
         </Link>
       </div>
