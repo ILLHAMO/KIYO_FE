@@ -1,48 +1,65 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Alert, Toast } from 'react-bootstrap';
-import { message } from 'antd';
 import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { API_REPORT_REVIEW } from 'app.modules/api/keyFactory';
+import { message } from 'antd';
 
 const ReportCreate = () => {
   const [isReportModalVisible, setIsReportModalVisible] = useState(false);
 
   const router = useRouter();
+  const methods = useForm();
+  const { register, handleSubmit } = methods;
 
   const handleReportModalVisible = () => {
     setIsReportModalVisible(!isReportModalVisible);
   };
 
-  const handleConfirmReport = async () => {
-    router.back();
+  const handleConfirmReport = async (data) => {
+    try {
+      const response = await API.POST({ url: API_REPORT_REVIEW(1), data });
+      if (response.data.success) {
+        message.success('리뷰를 신고했습니다.');
+        router.back();
+      } else throw response;
+    } catch (err) {
+      message.error('리뷰 신고에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (
     <StyledWrapper className="report-create">
-      <ModalConfirm
-        isModalVisible={isReportModalVisible}
-        handleModalVisible={() =>
-          setIsReportModalVisible(!isReportModalVisible)
-        }
-        handleConfirm={handleConfirmReport}
-        alert={true}
-        confirmText="알겠습니다"
-      >
-        해당 신고 내용을 운영진에게 전달하였습니다.
-        작성하신 내용을 바탕으로 리뷰 검토 후,
-        커뮤니티 가이드에 따라 처리하도록 하겠습니다.
-        감사합니다.
-      </ModalConfirm>
-      <div className="report-create__report">
-        <textarea placeholder="신고 내용을 작성해주세요." />
-      </div>
-      <div
-        className="report-create__create-btn"
-        onClick={handleReportModalVisible}
-      >
-        리뷰 신고하기
-      </div>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(handleConfirmReport)}>
+          <ModalConfirm
+            isModalVisible={isReportModalVisible}
+            handleModalVisible={() =>
+              setIsReportModalVisible(!isReportModalVisible)
+            }
+            handleConfirm={handleSubmit(handleConfirmReport)}
+            confirmText="알겠습니다"
+          >
+            해당 신고 내용을 운영진에게 전달하였습니다. 작성하신 내용을 바탕으로
+            리뷰 검토 후, 커뮤니티 가이드에 따라 처리하도록 하겠습니다.
+            감사합니다.
+          </ModalConfirm>
+          <div className="report-create__report">
+            <textarea
+              {...register('content')}
+              placeholder="신고 내용을 작성해주세요."
+            />
+          </div>
+          <div
+            className="report-create__create-btn"
+            onClick={handleReportModalVisible}
+          >
+            리뷰 신고하기
+          </div>
+        </form>
+      </FormProvider>
     </StyledWrapper>
   );
 };
@@ -68,7 +85,7 @@ const StyledWrapper = styled.div`
     textarea {
       padding: 20px;
       width: 100%;
-      height: 100%;
+      height: calc(100vh - 88px);
 
       &::placeholder {
         color: var(--color-gray-300);

@@ -26,8 +26,11 @@ export const API_BOOKMARK = (storeId) => `/api/store/${storeId}/bookmark`;
 export const API_USER_PROFILE = '/api/user/profile';
 export const API_USER_REVIEW = '/api/user/review';
 export const API_USER_STORE = '/api/user/store';
+export const API_QNA = '/api/qna';
+export const API_NOTICE = '/api/notice';
 
 // 리뷰
 export const API_REVIEW_STORE = (storeId) => `/api/review/store/${storeId}`;
 export const API_REVIEW = (reviewId) => `/api/review/${reviewId}`;
 export const API_REVIEW_UPDATE = (reviewId) => `/api/review/${reviewId}/update`;
+export const API_REPORT_REVIEW = (reviewId) => `/api/report/review/${reviewId}`;
