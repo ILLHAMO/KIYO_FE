@@ -103,7 +103,7 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
       if (response?.data?.success) {
         message.success('리뷰 등록을 성공했습니다.');
         queryClient.resetQueries(API_USER_REVIEW);
-        router.push('/');
+        router.back();
       } else throw response;
     } catch (err) {
       if (err.message) message.warn(err.message);

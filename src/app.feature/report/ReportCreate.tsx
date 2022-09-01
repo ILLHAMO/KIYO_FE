@@ -14,13 +14,19 @@ const ReportCreate = () => {
   const methods = useForm();
   const { register, handleSubmit } = methods;
 
+  const { reviewId } = router.query;
+
   const handleReportModalVisible = () => {
     setIsReportModalVisible(!isReportModalVisible);
   };
 
   const handleConfirmReport = async (data) => {
     try {
-      const response = await API.POST({ url: API_REPORT_REVIEW(1), data });
+      const response = await API.POST({
+        url: API_REPORT_REVIEW(reviewId),
+        data,
+      });
+
       if (response.data.success) {
         message.success('리뷰를 신고했습니다.');
         router.back();
