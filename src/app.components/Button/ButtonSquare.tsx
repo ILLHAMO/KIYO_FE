@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonSquare = ({ name }) => {
+const ButtonSquare = ({ name, isOn = false, onClick = () => {} }) => {
   return (
-    <StyledWrapper className="button-square button-square--on">
+    <StyledWrapper
+      onClick={onClick}
+      className={`button-square button-square--${isOn ? 'on' : 'off'}`}
+    >
       <img src="/images/search/check.png" alt="" />
       {name}
     </StyledWrapper>

@@ -9,6 +9,7 @@ const StoreFilter = () => {
   const { register } = useFormContext();
 
   if (isLoading) return null;
+  if (!categoryList?.length) return null;
   return (
     <StyledWrapper>
       <div className="filter-wrap">

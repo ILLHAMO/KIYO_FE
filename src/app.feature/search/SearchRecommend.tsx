@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_SEARCH_KEYWORD_RANK } from 'app.modules/api/keyFactory';
 
 const SearchRecommend = () => {
+  const router = useRouter();
+
   const { data: recommendKeyword, isLoading } = useQueryFn(
     API_SEARCH_KEYWORD_RANK
   );
 
+  if (isLoading) return null;
   return (
     <StyledWrapper className="search-recommend">
       <div className="search-recommend__title">추천 검색어</div>
@@ -17,6 +21,9 @@ const SearchRecommend = () => {
             <div
               key={`search-recommend-${idx}`}
               className="search-recommend__item-container"
+              onClick={() =>
+                router.push(`/search/result?keyword=${item.rank_Keyword}`)
+              }
             >
               <img src="/images/search/search.png" alt="" />
               <div>{item.rank_Keyword}</div>
@@ -30,22 +37,25 @@ const SearchRecommend = () => {
 export default SearchRecommend;
 
 const StyledWrapper = styled.div`
+  padding: 16px 20px;
+
   .search-recommend__title {
-    margin: 16px 20px 32px 20px;
+    margin-bottom: 8px;
     font-size: 24px;
     font-weight: 600;
     color: var(--color-main);
   }
 
   .search-recommend__item-wrap {
-    padding: 0 32px;
     display: flex;
+    padding: 0 12px;
     flex-direction: column;
 
     .search-recommend__item-container {
       display: flex;
       align-items: center;
-      margin-bottom: 24px;
+      padding: 8px 0;
+      cursor: pointer;
 
       img {
         width: 16px;

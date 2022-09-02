@@ -43,6 +43,7 @@ axiosClient.interceptors.response.use(
             url: API_AUTH_LOGOUT,
             data: {},
           });
+          localStorage.removeItem('KIYO_TOKEN');
           location.replace('/enter');
         }
       }

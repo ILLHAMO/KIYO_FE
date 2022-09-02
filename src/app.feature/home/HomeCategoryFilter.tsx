@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import FilterIcon from 'app.components/Filter/FilterIcon';
 import { useFormContext } from 'react-hook-form';
+import FilterIcon from 'app.components/Filter/FilterIcon';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_CATEGORY } from 'app.modules/api/keyFactory';
 
@@ -9,8 +9,8 @@ const HomeCategoryFilter = ({ onClick }) => {
   const { register } = useFormContext();
   const { data: categoryList, isLoading } = useQueryFn([API_CATEGORY]);
 
-  if (isLoading || !categoryList) return null;
-
+  if (isLoading) return null;
+  if (!categoryList?.length) return null;
   return (
     <StyledWrapper className="home-store-filter">
       <div className="home-store-filter__top">

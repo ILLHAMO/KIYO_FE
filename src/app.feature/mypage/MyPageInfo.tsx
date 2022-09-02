@@ -29,7 +29,6 @@ const StyledWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 32px;
-  //margin-bottom: 40px;
 
   .mypage-info__profile {
     display: flex;

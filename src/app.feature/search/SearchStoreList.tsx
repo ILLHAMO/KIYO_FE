@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
+import useQuerySearchStore from 'app.query/useQuerySearchStore';
+import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 
-const SearchStoreList = ({ lastStoreRef, isSuccess, dataset }) => {
+const SearchStoreList = ({ keyword, filter }) => {
+  const lastStoreRef = useRef();
+  const { data, isFetching, status, fetchNextPage, hasNextPage } =
+    useQuerySearchStore(keyword, filter);
+
+  const isSuccess = status === 'success';
+
+  useIntersectionObserver({
+    root: null,
+    target: lastStoreRef,
+    enabled: hasNextPage,
+    onIntersect: fetchNextPage,
+  });
+
+  let dataset = data?.pages
+    ? data?.pages.reduce((acc: any, cur: any) => {
+        if (cur?.edges) {
+          acc.push(...cur?.edges);
+        }
+        return acc;
+      }, [])
+    : [];
+
+  const SkeletonArray = Array.from(Array(20).keys());
+
+  if (isFetching) dataset = [...dataset, ...SkeletonArray];
+
+  if (isSuccess && isFetching) {
+    dataset = [...dataset, ...SkeletonArray];
+  }
+
   return isSuccess && !dataset.length ? (
     <StyledWrapper>없을 때</StyledWrapper>
   ) : (
@@ -24,7 +56,7 @@ const SearchStoreList = ({ lastStoreRef, isSuccess, dataset }) => {
 export default SearchStoreList;
 
 const StyledWrapper = styled.div`
-  padding: 0 20px;
+  padding: 0 20px 20px;
   width: 100%;
   height: 100%;
   display: grid;

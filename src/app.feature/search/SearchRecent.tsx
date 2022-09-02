@@ -1,11 +1,14 @@
 import { Switch } from 'antd';
 import { useStoreAutoSave } from 'app.store/autoSave/useStoreAutoSave';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const SearchRecent = () => {
   const [autoSave, setAutoSave] = useState(true);
   const [recentSearch, setRecentSearch] = useState([]);
+
+  const router = useRouter();
 
   const { updateAutoSave } = useStoreAutoSave();
 
@@ -45,8 +48,12 @@ const SearchRecent = () => {
         )}
         {!!recentSearch?.length && (
           <div className="search-recent__item-container">
-            {recentSearch.map((item, idx) => (
-              <div key={`search-recent-${idx}`} className="search-recent__item">
+            {recentSearch.reverse().map((item, idx) => (
+              <div
+                key={`search-recent-${idx}`}
+                className="search-recent__item"
+                onClick={() => router.push(`/search/result?keyword=${item}`)}
+              >
                 {item}
               </div>
             ))}
@@ -85,11 +92,12 @@ const StyledWrapper = styled.div`
   }
 
   .search-recent__item-container {
-    margin: 16px 20px 0 20px;
+    padding: 8px 20px;
   }
 
   .search-recent__item {
-    margin-bottom: 16px;
+    padding: 8px 0;
+    cursor: pointer;
   }
 
   .search-recent__bottom {
