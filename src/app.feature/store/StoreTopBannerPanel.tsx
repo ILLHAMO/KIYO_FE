@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { message } from 'antd';
 import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import API from 'app.modules/api';
 import { TypeStoreDetailInfo } from 'app.modules/type/type';
 import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
@@ -16,26 +18,22 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
   const router = useRouter();
   const { storeId: id } = router.query;
 
-  const { name, simpleComment, tag, address, booked, addressMap } =
+  const { name, simpleComment, tag, call, address, booked, addressMap } =
     storeDetailInfo;
 
   const [isBookmark, setIsBookmark] = useState(booked);
 
   const handleClickMap = () => {
-    console.log('map');
+    router.push(`https://map.kakao.com/link/search/${addressMap}`);
   };
 
-  const handleClickPhone = () => {
-    console.log('phone');
-    // 클립보드 복사하기
+  const handleClickPhone = async () => {
+    await navigator.clipboard.writeText(call);
+    message.success('클립보드에 복사되었습니다!');
   };
 
   const handleClickBookmark = async (isBookmark) => {
     try {
-      console.log('bookmark');
-      // TO DO
-      // 북마크 해제 / 설정 시 bookmarkCount 업데이트
-
       if (isBookmark) {
         setIsBookmark(!isBookmark);
         await API.DELETE({ url: API_BOOKMARK(id), data: {} });
@@ -46,8 +44,6 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
 
       if (router.pathname !== '/bookmark')
         queryClient.resetQueries(API_STORE_BOOKMARK);
-
-      // 성공했을 때
     } catch (err) {
       setIsBookmark(!isBookmark);
     }
@@ -55,7 +51,7 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
 
   const handleClickShare = () => {
     console.log('share');
-    // 공유 API
+    // TO DO 공유 API
   };
 
   return (
@@ -88,7 +84,11 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
         </div>
         <div className="store-top-banner-panel__func-item">
           <div onClick={() => handleClickBookmark(isBookmark)}>
-            <img src="/images/store/bookmark_black_off.png" />
+            {isBookmark ? (
+              <HeartFilled className="store-top-banner-panel__icon" />
+            ) : (
+              <HeartOutlined className="store-top-banner-panel__icon" />
+            )}
             <div className="store-top-banner-panel__text">찜</div>
           </div>
         </div>
@@ -172,6 +172,10 @@ const StyledWrapper = styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
+      }
+
+      .store-top-banner-panel__icon {
+        margin-right: 4px;
       }
 
       .store-top-banner-panel__text {

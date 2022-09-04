@@ -55,7 +55,7 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
       <div className="store-card__image-container">
         <div
           className="store-card__image"
-          onClick={() => router.push(`/store/${id}`)}
+          onClick={() => router.push(`/store/${id}?pathname=${router.asPath}`)}
         >
           <img src={images[0].path} />
         </div>
@@ -71,7 +71,9 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
         {kids && (
           <div
             className="store-card__kidszone"
-            onClick={() => router.push(`/store/${id}`)}
+            onClick={() =>
+              router.push(`/store/${id}?pathname=${router.asPath}`)
+            }
           >
             <img src="/images/common/kidszone_badge.png" />
           </div>
@@ -79,7 +81,7 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
       </div>
       <div
         className="store-card__info-container"
-        onClick={() => router.push(`/store/${id}`)}
+        onClick={() => router.push(`/store/${id}?pathname=${router.asPath}`)}
       >
         <div className="store-card__info">
           <div className="store-card__location">{address}</div>

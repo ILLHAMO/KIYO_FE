@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useQueryFn from 'app.query/useQueryFn';
+import IconConvenience from './IconConvenience';
 import { API_CONVENIENCE } from 'app.modules/api/keyFactory';
 import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
@@ -52,9 +53,7 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
             !!serviceList.length &&
             serviceList.map((service, idx) => (
               <div className="store-info__service-item" key={`service-${idx}`}>
-                <img
-                  src={`/images/convenience/convenience_${service.convenienceId}.svg`}
-                />
+                <IconConvenience iconId={service.convenienceId} />
                 <div className="store-info__text">
                   {service.convenienceName}
                 </div>
@@ -143,12 +142,6 @@ const StyledWrapper = styled.div`
 
       .store-info__service-item {
         width: 100%;
-
-        img {
-          width: 40px;
-          min-width: 40px;
-          min-height: 40px;
-        }
 
         .store-info__text {
           line-height: 16px;

@@ -11,7 +11,9 @@ const PageReviewEdit = () => {
   const router = useRouter();
   const { reviewId } = router.query;
 
-  const { data, isLoading } = useQueryFn([API_REVIEW_UPDATE(reviewId)]);
+  const { data, isLoading } = useQueryFn([API_REVIEW_UPDATE(reviewId)], {
+    cacheTime: 0,
+  });
 
   if (isLoading) return <PageLoading />;
   return (

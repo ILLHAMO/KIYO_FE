@@ -10,7 +10,11 @@ import {
   scoreLongComment,
   scoreStatus,
 } from 'app.modules/constant/score';
-import { API_REVIEW_STORE, API_USER_REVIEW } from 'app.modules/api/keyFactory';
+import {
+  API_REVIEW,
+  API_REVIEW_STORE,
+  API_USER_REVIEW,
+} from 'app.modules/api/keyFactory';
 import { useQueryClient } from 'react-query';
 
 type TProps = {
@@ -19,8 +23,6 @@ type TProps = {
 };
 
 const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
-  console.log(reviewStore, editInfo);
-
   const [defaultFileList, setDefaultFileList] = useState([]);
   const [fileList, setFileList] = useState([...defaultFileList]);
   const [score, setScore] = useState(editInfo?.score ?? null);
@@ -56,6 +58,8 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
   useEffect(() => {
     handleDefaultFileList();
   }, []);
+
+  console.log(editInfo);
 
   const handleAddReview = async (data) => {
     try {
@@ -96,11 +100,17 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
         )
       );
 
-      const response = await API.POST({
-        url: API_REVIEW_STORE(reviewStore?.id),
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = isEdit
+        ? await API.PUT({
+            url: API_REVIEW(reviewStore?.id),
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+        : await API.POST({
+            url: API_REVIEW_STORE(reviewStore?.id),
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
 
       if (response?.data?.success) {
         message.success('리뷰 등록을 성공했습니다.');

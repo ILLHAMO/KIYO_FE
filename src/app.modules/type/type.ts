@@ -15,15 +15,20 @@ export type TypeStoreDetailInfo = {
   address: string;
   addressMap: string;
   booked: boolean;
+  call: string;
   convenienceIds: number[];
   detailComment: string;
-  images: any[];
+  images: { id: number; path: string }[];
   kids: boolean;
-  menuResponses: any[];
+  menuResponses: {
+    id: number;
+    name: string;
+    menuOptionResponses: { id: number; name: string }[];
+  }[];
   name: string;
-  reviewResponses: any[];
+  reviewResponses: TypeReviewInfo[];
   simpleComment: string;
-  tag: any[];
+  tag: { name: string }[];
   time: string[];
 };
 
@@ -36,7 +41,7 @@ export type TypeUserReviewInfo = {
   address: string;
   content: string;
   reviewId: number;
-  reviewImages: Array<any>;
+  reviewImages: { id: number; path: string }[];
   score: string;
   storeImage: {
     id: number;

@@ -13,6 +13,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@netlify/plugin-nextjs": "^4.11.1",
     "@svgr/webpack": "6.2.1",
     "@typescript-eslint/eslint-plugin": "5.23.0",
