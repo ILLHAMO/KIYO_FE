@@ -8,7 +8,8 @@ import API from 'app.modules/api';
 import { API_QNA } from 'app.modules/api/keyFactory';
 
 const MyPageInquiryCreate = () => {
-  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
+  const [isCreateModalVisible, setIsCreateModalVisible] =
+    useState<boolean>(false);
 
   const router = useRouter();
 

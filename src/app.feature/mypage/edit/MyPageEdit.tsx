@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FormProvider, useForm } from 'react-hook-form';
-import API from 'app.modules/api';
-import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
-import { Avatar, message, Upload, UploadProps } from 'antd';
 import { RcFile } from 'antd/lib/upload/interface';
-import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Avatar, message, Upload, UploadProps } from 'antd';
+import API from 'app.modules/api';
+import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
+import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
+import { TypeUserInfo } from 'app.modules/type/type';
 
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
-  reader.readAsDataURL(img);
+type TProps = {
+  userInfo: TypeUserInfo;
 };
 
-const MyPageEdit = ({ userInfo }) => {
+const MyPageEdit: React.FC<TProps> = ({ userInfo }) => {
   const [fileList, setFileList] = useState([]);
   const [imageUrl, setImageUrl] = useState<string>();
   const { setUserInfo } = useStoreIntoAPP();
@@ -29,6 +28,12 @@ const MyPageEdit = ({ userInfo }) => {
   });
 
   const { register, handleSubmit } = methods;
+
+  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+  };
 
   const onValidRegisterForm = async (data) => {
     try {

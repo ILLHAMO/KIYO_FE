@@ -1,11 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
 import FilterCategory from 'app.components/Filter/FilterCategory';
-import { useFormContext } from 'react-hook-form';
 
-const SearchFilterOtherModal = ({ onSubmit, handleOtherFilterVisibleShow }) => {
+type TProps = {
+  onSubmit: () => void;
+  handleOtherFilterVisibleShow: () => void;
+};
+
+const SearchFilterOtherModal: React.FC<TProps> = ({
+  onSubmit,
+  handleOtherFilterVisibleShow,
+}) => {
   const { watch, setValue } = useFormContext();
 
   return (

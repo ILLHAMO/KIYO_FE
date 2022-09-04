@@ -1,15 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Skeleton } from 'antd';
 import StoreCard from 'app.components/StoreCard/StoreCard';
+import { TypeStoreInfo } from 'app.modules/type/type';
 
-const BookmarkList = ({ bookmarkList }) => {
+type TProps = {
+  bookmarkList: Array<number | TypeStoreInfo>;
+};
+
+const BookmarkList: React.FC<TProps> = ({ bookmarkList }) => {
   return (
     <StyledWrapper className="bookmark-list">
       <div className="bookmark-list__title">내가 저장한 장소</div>
       <div className="bookmark-list__list-container">
-        {bookmarkList.map((item, idx) => (
-          <StoreCard storeInfo={item} key={`bookmark-list-${idx}`} />
-        ))}
+        {bookmarkList.map((item, idx) =>
+          typeof item === 'number' ? (
+            <Skeleton />
+          ) : (
+            <StoreCard storeInfo={item} key={`bookmark-list-${idx}`} />
+          )
+        )}
       </div>
     </StyledWrapper>
   );

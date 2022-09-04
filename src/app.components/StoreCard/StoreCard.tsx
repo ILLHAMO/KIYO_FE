@@ -1,23 +1,16 @@
-import { Skeleton } from 'antd';
-import {
-  API_BOOKMARK,
-  API_STORES,
-  API_STORE_BOOKMARK,
-} from 'app.modules/api/keyFactory';
-import { TypeStoreInfo } from 'app.modules/type/type';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import API from 'app.modules/api';
+import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
+import API from 'app.modules/api';
+import { TypeStoreInfo } from 'app.modules/type/type';
+import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
 
 type TProps = {
   storeInfo?: TypeStoreInfo;
 };
 
 const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
-  if (!storeInfo?.id) return <Skeleton />;
-
   const router = useRouter();
 
   const {
@@ -38,9 +31,6 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
 
   const handleBookmark = async (isBookmark) => {
     try {
-      // TO DO
-      // 북마크 해제 / 설정 시 bookmarkCount 업데이트
-
       if (isBookmark) {
         setIsBookmark(!isBookmark);
         setBookmarkCnt((prev) => prev - 1);
@@ -53,14 +43,13 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
 
       if (router.pathname !== '/bookmark')
         queryClient.resetQueries(API_STORE_BOOKMARK);
-
-      // 성공했을 때
     } catch (err) {
       setIsBookmark(!isBookmark);
       setBookmarkCnt(bookmarkCnt);
     }
   };
 
+  if (!storeInfo.id) return null;
   return (
     <StyledWrapper className="store-card">
       <div className="store-card__image-container">

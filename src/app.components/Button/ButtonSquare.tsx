@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonSquare = ({ name, isOn = false, onClick = () => {} }) => {
+type TProps = {
+  name: string;
+  isOn?: boolean;
+  onClick?: () => void;
+};
+
+const ButtonSquare: React.FC<TProps> = ({
+  name,
+  isOn = false,
+  onClick = () => {},
+}) => {
   return (
     <StyledWrapper
       onClick={onClick}

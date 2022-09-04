@@ -5,7 +5,7 @@ import FilterIcon from 'app.components/Filter/FilterIcon';
 
 const MapHeader = () => {
   return (
-    <StyledWrapper className='map-header'>
+    <StyledWrapper className="map-header">
       <div className="map-header__location-wrap">
         <div>현재 보고 있는 곳은</div>
         <div className="map-header__location">
@@ -42,7 +42,7 @@ const StyledWrapper = styled.div`
   .map-header__filter-wrap {
     display: flex;
     align-items: center;
-    
+
     .filter-local-button {
       margin-right: 8px;
     }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const MapFloating = () => {
   return (
-    <StyledWrapper className='map-floating'>
+    <StyledWrapper className="map-floating">
       <div className="map-floating__store-img"></div>
       <div className="map-floating__store-info-wrap">
         <div className="map-floating__store-info-top">

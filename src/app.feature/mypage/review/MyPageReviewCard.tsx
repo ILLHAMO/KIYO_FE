@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Image, message } from 'antd';
 import { useQueryClient } from 'react-query';
 import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { TypeUserReviewInfo } from 'app.modules/type/type';
 import { scoreComment, scoreStatus } from 'app.modules/constant/score';
 import { API_REVIEW, API_USER_REVIEW } from 'app.modules/api/keyFactory';
-import { message } from 'antd';
 
-const MyPageReviewCard = ({ reviewInfo }) => {
+type TProps = {
+  reviewInfo: TypeUserReviewInfo;
+};
+
+const MyPageReviewCard: React.FC<TProps> = ({ reviewInfo }) => {
   const {
     address,
     content,
@@ -17,9 +22,11 @@ const MyPageReviewCard = ({ reviewInfo }) => {
     storeName,
     updateTime,
     storeImage,
+    reviewImages,
   } = reviewInfo;
 
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -81,7 +88,12 @@ const MyPageReviewCard = ({ reviewInfo }) => {
           {scoreComment[score]}
         </div>
         <div className="mypage-review-card__content">{content}</div>
-        {/* TO DO 리뷰 리스트에서 이미지 필요! */}
+        <div className="mypage-review-card__photo-slide">
+          {!!reviewImages?.length &&
+            reviewImages?.map((item) => (
+              <Image className="photo-slide-item" src={item.path} />
+            ))}
+        </div>
         <div className="mypage-review-card__date">{updateTime}</div>
       </div>
     </StyledWrapper>
@@ -211,6 +223,18 @@ const StyledWrapper = styled.div`
 
     .mypage-review-card__content {
       margin-bottom: 4px;
+    }
+
+    .mypage-review-card__photo-slide {
+      display: flex;
+      overflow: auto;
+      margin-bottom: 8px;
+
+      .photo-slide-item {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
     }
 
     .mypage-review-card__date {

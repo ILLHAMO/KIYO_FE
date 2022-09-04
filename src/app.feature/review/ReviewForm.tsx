@@ -19,6 +19,8 @@ type TProps = {
 };
 
 const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
+  console.log(reviewStore, editInfo);
+
   const [defaultFileList, setDefaultFileList] = useState([]);
   const [fileList, setFileList] = useState([...defaultFileList]);
   const [score, setScore] = useState(editInfo?.score ?? null);

@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
 
-const RegisterModal = ({ handleRegisterModalVisible }) => {
+type TProps = {
+  handleRegisterModalVisible: () => void;
+};
+
+const RegisterModal: React.FC<TProps> = ({ handleRegisterModalVisible }) => {
   const router = useRouter();
   const { isLoading, login } = useGetUser();
 
   if (isLoading) return null;
 
-  const handleRouter = (link) => {
+  const handleRouter = (link: string) => {
     handleRegisterModalVisible();
     if (login) router.push(link);
     else router.push('/enter');

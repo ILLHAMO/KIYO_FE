@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MyPageStoreCard from './MyPageStoreCard';
 import useQueryFn from 'app.query/useQueryFn';
-import { API_USER_STORE } from 'app.modules/api/keyFactory';
 import PageLoading from 'app.components/Loading/PageLoading';
 import NoneList from 'app.components/NoneList/NoneList';
+import { API_USER_STORE } from 'app.modules/api/keyFactory';
 
 const MyPageStoreList = () => {
   const { isLoading, data: storeList } = useQueryFn([API_USER_STORE]);

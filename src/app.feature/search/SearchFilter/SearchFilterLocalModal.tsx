@@ -2,9 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
 
-const SearchFilterLocalModal = ({handleLocalFilterVisibleShow}) => {
+type TProps = {
+  handleLocalFilterVisibleShow: () => void;
+};
+
+const SearchFilterLocalModal: React.FC<TProps> = ({
+  handleLocalFilterVisibleShow,
+}) => {
   return (
-    <StyledWrapper className='search-filter-local-modal'>
+    <StyledWrapper className="search-filter-local-modal">
       <div className="search-filter-local-modal__header">
         <div className="local-name">내 근처</div>
         <div className="local-name">서울 - 강남</div>
@@ -15,7 +21,6 @@ const SearchFilterLocalModal = ({handleLocalFilterVisibleShow}) => {
         <div className="local-name">서울 - 강남</div>
         <div className="local-name">서울 - 강남</div>
         <div className="local-name">서울 - 강남</div>
-
       </div>
       <div className="search-filter-local-modal__body">
         <div className="body__button-container">
@@ -38,11 +43,11 @@ const SearchFilterLocalModal = ({handleLocalFilterVisibleShow}) => {
         <div className="search-filter-local-modal__apply-button">적용</div>
         <div
           onClick={handleLocalFilterVisibleShow}
-          className="search-filter-local-modal__reset">
+          className="search-filter-local-modal__reset"
+        >
           취소하기
         </div>
       </div>
-      
     </StyledWrapper>
   );
 };

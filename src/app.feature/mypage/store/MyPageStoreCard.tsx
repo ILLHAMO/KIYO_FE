@@ -1,23 +1,34 @@
-import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { TypeUserStoreInfo } from 'app.modules/type/type';
+import { API_USER_STORE_DELETE } from 'app.modules/api/keyFactory';
 
-const MyPageStoreCard = ({ storeInfo }) => {
-  const { name, address, assigned } = storeInfo;
+type TProps = {
+  storeInfo: TypeUserStoreInfo;
+};
+
+const MyPageStoreCard: React.FC<TProps> = ({ storeInfo }) => {
+  const { storeId, name, address } = storeInfo;
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
 
-  const handleDeleteStore = () => {};
+  const handleDeleteStore = async () => {
+    try {
+      await API.DELETE({ url: API_USER_STORE_DELETE(storeId) });
+    } catch (err) {}
+  };
 
   return (
     <StyledWrapper className="mypage-store-card">
       <ModalConfirm
         isModalVisible={isDeleteModalVisible}
         handleModalVisible={handleDeleteModalVisible}
-        handleConfirm={() => console.log('삭제하기')}
+        handleConfirm={handleDeleteStore}
       >
         정말 삭제하시겠습니까?
       </ModalConfirm>

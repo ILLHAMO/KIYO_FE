@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import StoreTabPaneReviewCard from './StoreTabPaneReviewCard';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import StoreTabPaneReviewCard from './StoreTabPaneReviewCard';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
 type TProps = {
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
   setReviewScroll: (scroll: number) => void;
 };
 

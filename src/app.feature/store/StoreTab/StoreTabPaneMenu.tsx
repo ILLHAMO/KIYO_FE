@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Accordion } from 'react-bootstrap';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
 type TProps = {
   setMenuScroll: (scroll: number) => void;
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
 };
 
 const StoreTabPaneMenu: React.FC<TProps> = ({

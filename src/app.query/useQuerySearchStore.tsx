@@ -34,7 +34,10 @@ export const requestSearchStore = async ({
   }
 };
 
-const useQuerySearchStore = (keyword, filter) => {
+const useQuerySearchStore = (
+  keyword,
+  filter = { categoryIds: [], convenienceIds: [] }
+) => {
   return useInfiniteQuery(
     [API_STORE_SEARCH, keyword, filter],
     async ({ pageParam = null }) => {

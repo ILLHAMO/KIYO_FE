@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import MyPageReviewCard from './MyPageReviewCard';
-import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_USER_REVIEW } from 'app.modules/api/keyFactory';
 import PageLoading from 'app.components/Loading/PageLoading';

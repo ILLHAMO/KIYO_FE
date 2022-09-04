@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import FilterIcon from 'app.components/Filter/FilterIcon';
 import FilterLocalButton from 'app.components/Filter/FilterLocalButton';
 
-const SearchFilter = ({ otherFilterOnClick, localFilterOnClick }) => {
+type TProps = {
+  otherFilterOnClick: (event) => void;
+  localFilterOnClick: (event) => void;
+};
+
+const SearchFilter: React.FC<TProps> = ({
+  otherFilterOnClick,
+  localFilterOnClick,
+}) => {
   return (
     <StyledWrapper className="search-filter">
       <div className="search-filter__button-container">

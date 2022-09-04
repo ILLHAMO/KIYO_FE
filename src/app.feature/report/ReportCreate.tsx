@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { message } from 'antd';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import { API_REPORT_REVIEW } from 'app.modules/api/keyFactory';
-import { message } from 'antd';
 
 const ReportCreate = () => {
-  const [isReportModalVisible, setIsReportModalVisible] = useState(false);
+  const [isReportModalVisible, setIsReportModalVisible] =
+    useState<boolean>(false);
 
   const router = useRouter();
   const methods = useForm();

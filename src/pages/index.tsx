@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import HomeHeader from 'app.feature/home/HomeHeader';
 import HomeBanner from 'app.feature/home/HomeBanner';
 import HomeCategoryFilter from 'app.feature/home/HomeCategoryFilter';
 import HomeStoreList from 'app.feature/home/HomeStoreList';
 import HomeConvenienceFilter from 'app.feature/home/HomeConvenienceFilter';
-import RegisterModal from 'app.feature/register/RegisterModal';
 import { Offcanvas } from 'react-bootstrap';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useGetLocation } from 'app.store/location/store.loaction';
@@ -25,7 +23,6 @@ const PageHome = () => {
   });
 
   const {
-    register,
     watch,
     handleSubmit,
     formState: { errors },

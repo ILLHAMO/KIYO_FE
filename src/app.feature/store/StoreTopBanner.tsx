@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import StoreTopBannerPanel from './StoreTopBannerPanel';
 import { useRouter } from 'next/router';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
-const StoreTopBanner = ({ storeDetailInfo }) => {
+type TProps = {
+  storeDetailInfo: TypeStoreDetailInfo;
+};
+
+const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
   const router = useRouter();
 
   const { time, images } = storeDetailInfo;
@@ -24,7 +29,7 @@ const StoreTopBanner = ({ storeDetailInfo }) => {
         <div className="store-top-banner__title">운영시간</div>
         <div className="store-top-banner__time">
           {time.map((item, idx) => (
-            <div>{item}</div>
+            <div key={`store-top-banner__time-${idx}`}>{item}</div>
           ))}
         </div>
       </div>

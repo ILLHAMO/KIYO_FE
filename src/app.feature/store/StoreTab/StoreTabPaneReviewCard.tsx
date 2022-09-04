@@ -7,9 +7,10 @@ import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import API from 'app.modules/api';
 import { scoreStatus } from 'app.modules/constant/score';
 import { API_REVIEW } from 'app.modules/api/keyFactory';
+import { TypeReviewInfo } from 'app.modules/type/type';
 
 type TProps = {
-  reviewInfo: any;
+  reviewInfo: TypeReviewInfo;
 };
 
 const StoreTabPaneReviewCard: React.FC<TProps> = ({ reviewInfo }) => {

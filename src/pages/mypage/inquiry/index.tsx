@@ -5,7 +5,7 @@ import Header from 'app.components/Header/Header';
 
 const PageMyPageInquiry = () => {
   return (
-    <StyledWrapper className='page-mypage-inquiry'>
+    <StyledWrapper className="page-mypage-inquiry">
       <Header title="1:1 문의" />
       <Link href="/mypage/inquiry/my">
         <div className="page-mypage-inquiry__list-item">내가 작성한 문의</div>

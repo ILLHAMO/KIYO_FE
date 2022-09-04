@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_CONVENIENCE } from 'app.modules/api/keyFactory';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
 };
 
 const StoreTabPaneAbout: React.FC<TProps> = ({

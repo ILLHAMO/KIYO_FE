@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import API from 'app.modules/api';
-import { useQueryClient } from 'react-query';
-import {
-  API_BOOKMARK,
-  API_STORES,
-  API_STORE_BOOKMARK,
-} from 'app.modules/api/keyFactory';
 import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
+import API from 'app.modules/api';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
+import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
 
 type TProps = {
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
 };
 
 const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
@@ -27,10 +24,12 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
   const handleClickMap = () => {
     console.log('map');
   };
+
   const handleClickPhone = () => {
     console.log('phone');
     // 클립보드 복사하기
   };
+
   const handleClickBookmark = async (isBookmark) => {
     try {
       console.log('bookmark');
@@ -53,6 +52,7 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
       setIsBookmark(!isBookmark);
     }
   };
+
   const handleClickShare = () => {
     console.log('share');
     // 공유 API

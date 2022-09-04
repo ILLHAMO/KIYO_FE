@@ -4,7 +4,15 @@ import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQuerySearchStore from 'app.query/useQuerySearchStore';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 
-const SearchStoreList = ({ keyword, filter }) => {
+type TProps = {
+  keyword: string[] | string;
+  filter: {
+    categoryIds: number[];
+    convenienceIds: number[];
+  };
+};
+
+const SearchStoreList: React.FC<TProps> = ({ keyword, filter }) => {
   const lastStoreRef = useRef();
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
     useQuerySearchStore(keyword, filter);

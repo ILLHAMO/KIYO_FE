@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-const SearchHeader = ({ keyword = null, setKeyword = (data) => {} }) => {
+type TProps = {
+  keyword: string[] | string;
+  setKeyword?: (data) => void;
+};
+
+const SearchHeader: React.FC<TProps> = ({
+  keyword = null,
+  setKeyword = (data) => {},
+}) => {
   const router = useRouter();
   const [keywordInput, setKeywordInput] = useState(keyword);
 
