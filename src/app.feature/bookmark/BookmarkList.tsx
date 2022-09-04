@@ -15,7 +15,7 @@ const BookmarkList: React.FC<TProps> = ({ bookmarkList }) => {
       <div className="bookmark-list__list-container">
         {bookmarkList.map((item, idx) =>
           typeof item === 'number' ? (
-            <Skeleton />
+            <Skeleton key={`bookmark-list-skeleton-${idx}`} />
           ) : (
             <StoreCard storeInfo={item} key={`bookmark-list-${idx}`} />
           )

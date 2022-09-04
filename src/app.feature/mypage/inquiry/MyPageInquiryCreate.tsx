@@ -6,6 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import API from 'app.modules/api';
 import { API_QNA } from 'app.modules/api/keyFactory';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 
 const MyPageInquiryCreate = () => {
   const [isCreateModalVisible, setIsCreateModalVisible] =
@@ -54,12 +55,12 @@ const MyPageInquiryCreate = () => {
               placeholder="문의 내용을 작성해주세요."
             />
           </div>
-          <div
+          <ButtonFullWidth
             className="mypage-inquiry-create__create-btn"
             onClick={handleCreateModalVisible}
           >
             문의 등록하기
-          </div>
+          </ButtonFullWidth>
         </form>
       </FormProvider>
     </StyledWrapper>
@@ -86,21 +87,5 @@ const StyledWrapper = styled.div`
         font-size: 16px;
       }
     }
-  }
-
-  .mypage-inquiry-create__create-btn {
-    cursor: pointer;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 48px;
-    max-width: 664px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-main);
-    color: var(--color-white);
-    font-weight: 500;
-    font-size: 18px;
   }
 `;

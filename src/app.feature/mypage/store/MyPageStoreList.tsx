@@ -7,7 +7,9 @@ import NoneList from 'app.components/NoneList/NoneList';
 import { API_USER_STORE } from 'app.modules/api/keyFactory';
 
 const MyPageStoreList = () => {
-  const { isLoading, data: storeList } = useQueryFn([API_USER_STORE]);
+  const { isLoading, data: storeList } = useQueryFn([API_USER_STORE], {
+    cacheTime: 0,
+  });
 
   if (isLoading) return <PageLoading />;
   else if (!storeList.length)

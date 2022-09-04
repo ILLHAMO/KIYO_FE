@@ -16,6 +16,7 @@ import {
   API_USER_REVIEW,
 } from 'app.modules/api/keyFactory';
 import { useQueryClient } from 'react-query';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 
 type TProps = {
   reviewStore?: any;
@@ -58,8 +59,6 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
   useEffect(() => {
     handleDefaultFileList();
   }, []);
-
-  console.log(editInfo);
 
   const handleAddReview = async (data) => {
     try {
@@ -121,7 +120,6 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
       if (err.message) message.warn(err.message);
       else
         message.error('리뷰 등록에 실패했습니다. 잠시 후 다시 시도해주세요.');
-    } finally {
       setIsLoading(false);
     }
   };
@@ -185,9 +183,13 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
                 label="직접 방문한 경험과 사실을 기반으로 작성한 리뷰입니다."
               />
             </div>
-            <button type="submit" className="review-form__create-button">
+            <ButtonFullWidth
+              type="submit"
+              loading={isLoading}
+              disabled={isLoading}
+            >
               리뷰 {isEdit ? '수정' : '등록'}하기
-            </button>
+            </ButtonFullWidth>
           </form>
         </Spin>
       </StyledWrapper>

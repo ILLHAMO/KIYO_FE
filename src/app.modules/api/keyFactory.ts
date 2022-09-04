@@ -26,7 +26,7 @@ export const API_BOOKMARK = (storeId) => `/api/store/${storeId}/bookmark`;
 export const API_USER_PROFILE = '/api/user/profile';
 export const API_USER_REVIEW = '/api/user/review';
 export const API_USER_STORE = '/api/user/store';
-export const API_USER_STORE_DELETE = (storeId) => `/api/user/${storeId}`;
+export const API_USER_STORE_DELETE = (storeId) => `/api/store/${storeId}`;
 export const API_QNA = '/api/qna';
 export const API_NOTICE = '/api/notice';
 

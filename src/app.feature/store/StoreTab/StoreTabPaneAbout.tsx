@@ -37,7 +37,10 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
         <div className="store-info__title store-info__title--photo">Photo</div>
         <div className="store-info__photo-slide">
           {images.map((item, idx) => (
-            <div className="store-info__photo-item">
+            <div
+              key={`store-info-photo-item-${idx}`}
+              className="store-info__photo-item"
+            >
               <img src={item.path} />
             </div>
           ))}

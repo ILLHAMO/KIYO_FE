@@ -8,6 +8,7 @@ import API from 'app.modules/api';
 import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
 import { TypeUserInfo } from 'app.modules/type/type';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 
 type TProps = {
   userInfo: TypeUserInfo;
@@ -103,9 +104,9 @@ const MyPageEdit: React.FC<TProps> = ({ userInfo }) => {
             <div className="mypage-edit__input-label">닉네임</div>
             <input {...register('nickname')} />
           </div>
-          <button className="mypage-edit__edit-button" type="submit">
+          <ButtonFullWidth type="submit" className="mypage-edit__edit-button">
             수정하기
-          </button>
+          </ButtonFullWidth>
         </StyledWrapper>
       </form>
     </FormProvider>
@@ -176,7 +177,7 @@ const StyledWrapper = styled.div`
   }
 
   .mypage-edit__edit-button {
-    cursor: pointer;
+    /* cursor: pointer;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -188,6 +189,6 @@ const StyledWrapper = styled.div`
     background-color: var(--color-main);
     color: var(--color-white);
     font-weight: 500;
-    font-size: 18px;
+    font-size: 18px; */
   }
 `;

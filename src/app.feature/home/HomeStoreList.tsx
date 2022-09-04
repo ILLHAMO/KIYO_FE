@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQueryStoreList from 'app.query/useQueryStoreList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
-import { Skeleton } from 'antd';
+import { Empty, Skeleton } from 'antd';
+import NoneList from 'app.components/NoneList/NoneList';
 
 const HomeStoreList = ({
   filter = { category: [], convenience: [] },
@@ -41,7 +42,7 @@ const HomeStoreList = ({
   }
 
   return isSuccess && !dataset.length ? (
-    <StyledWrapper>없을 때</StyledWrapper>
+    <NoneList link="/register" />
   ) : (
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) =>

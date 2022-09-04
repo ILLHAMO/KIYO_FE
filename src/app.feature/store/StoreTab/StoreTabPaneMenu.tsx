@@ -25,8 +25,11 @@ const StoreTabPaneMenu: React.FC<TProps> = ({
       <div className="store-tab-pane-menu__title">Menu</div>
       <Accordion alwaysOpen>
         {!!menuResponses &&
-          menuResponses.map((menu) => (
-            <Accordion.Item eventKey={menu.id}>
+          menuResponses.map((menu, idx) => (
+            <Accordion.Item
+              key={`store-tab-pane-menu-accordion-item-${idx}`}
+              eventKey={String(menu.id)}
+            >
               <Accordion.Header>{menu.name}</Accordion.Header>
               <Accordion.Body>
                 {menu?.menuOptionResponses &&

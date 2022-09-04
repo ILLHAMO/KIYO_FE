@@ -4,22 +4,26 @@ import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import { TypeUserStoreInfo } from 'app.modules/type/type';
 import { API_USER_STORE_DELETE } from 'app.modules/api/keyFactory';
+import { useQueryClient } from 'react-query';
 
 type TProps = {
   storeInfo: TypeUserStoreInfo;
 };
 
 const MyPageStoreCard: React.FC<TProps> = ({ storeInfo }) => {
-  const { storeId, name, address } = storeInfo;
+  const { storeId, name, address, storeImage } = storeInfo;
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
 
+  const queryClient = useQueryClient();
+
   const handleDeleteStore = async () => {
     try {
       await API.DELETE({ url: API_USER_STORE_DELETE(storeId) });
+      queryClient.removeQueries(API_USER_STORE_DELETE(storeId));
     } catch (err) {}
   };
 
@@ -33,7 +37,9 @@ const MyPageStoreCard: React.FC<TProps> = ({ storeInfo }) => {
         정말 삭제하시겠습니까?
       </ModalConfirm>
       <div className="mypage-store-card__info">
-        <div className="mypage-store-card__img" />
+        <div className="mypage-store-card__img">
+          <img src={storeImage.imagePath} />
+        </div>
         <div className="mypage-store-card__store">
           <div className="mypage-store-card__name">{name}</div>
           <div className="mypage-store-card__address">{address}</div>
@@ -86,6 +92,7 @@ const StyledWrapper = styled.div`
       margin-right: 16px;
       background-color: #ffe9ef;
       border-radius: 50%;
+      overflow: hidden;
     }
 
     .mypage-store-card__store {

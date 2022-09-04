@@ -15,18 +15,18 @@ import SVGConvenienceTwelve from '../../../../public/images/convenience/convenie
 
 const IconConvenience = ({ iconId }) => {
   const ConvenienceObj = {
-    1: <SVGConvenienceOne />,
-    2: <SVGConvenienceTwo />,
-    3: <SVGConvenienceThree />,
-    4: <SVGConvenienceFour />,
-    5: <SVGConvenienceFive />,
-    6: <SVGConvenienceSix />,
-    7: <SVGConvenienceSeven />,
-    8: <SVGConvenienceEight />,
-    9: <SVGConvenienceNine />,
-    10: <SVGConvenienceTen />,
-    11: <SVGConvenienceEleven />,
-    12: <SVGConvenienceTwelve />,
+    1: <SVGConvenienceOne width="40px" height="40px" />,
+    2: <SVGConvenienceTwo width="40px" height="40px" />,
+    3: <SVGConvenienceThree width="40px" height="40px" />,
+    4: <SVGConvenienceFour width="40px" height="40px" />,
+    5: <SVGConvenienceFive width="40px" height="40px" />,
+    6: <SVGConvenienceSix width="40px" height="40px" />,
+    7: <SVGConvenienceSeven width="40px" height="40px" />,
+    8: <SVGConvenienceEight width="40px" height="40px" />,
+    9: <SVGConvenienceNine width="40px" height="40px" />,
+    10: <SVGConvenienceTen width="40px" height="40px" />,
+    11: <SVGConvenienceEleven width="40px" height="40px" />,
+    12: <SVGConvenienceTwelve width="40px" height="40px" />,
   };
 
   return <StyledWrapper>{ConvenienceObj[iconId]}</StyledWrapper>;

@@ -60,8 +60,8 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
       <div className="store-top-banner-panel__sub-name">{simpleComment}</div>
       <div className="store-top-banner-panel__info">
         <div className="food">
-          {tag.map((item, tdx) => (
-            <div>{item.name}</div>
+          {tag.map((item, idx) => (
+            <div key={`tag-${idx}`}>{item.name}</div>
           ))}
         </div>
         {/* 갯수제한 필요함,, 몇개까지 할 지 논의 */}

@@ -6,10 +6,12 @@ import { message, Upload, UploadProps } from 'antd';
 import API from 'app.modules/api';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import FilterCategory from 'app.components/Filter/FilterCategory';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 import { API_STORE } from 'app.modules/api/keyFactory';
 
 const RegisterForm = () => {
   const [fileList, setFileList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -30,6 +32,8 @@ const RegisterForm = () => {
 
       if (!data.name || !data.address || !data.kids)
         throw '기본 정보를 입력해주세요!';
+
+      setIsLoading(true);
 
       const formData = new FormData();
 
@@ -55,6 +59,7 @@ const RegisterForm = () => {
       if (err.message) message.error(err.message);
       else
         message.error('식당 등록에 실패했습니다. 잠시 후 다시 시도해주세요!');
+      setIsLoading(false);
     }
   };
 
@@ -140,9 +145,14 @@ const RegisterForm = () => {
               · 검토 후 장소 등록이 완료됩니다.
             </div>
           </div>
-          <button type="submit" className="register-form__button">
+          <ButtonFullWidth
+            type="submit"
+            disabled={isLoading}
+            loading={isLoading}
+            className="register-form__button"
+          >
             장소 등록하기
-          </button>
+          </ButtonFullWidth>
         </StyledWrapper>
       </form>
     </FormProvider>
@@ -262,21 +272,5 @@ const StyledWrapper = styled.div`
         padding: 0 20px 0;
       }
     }
-  }
-
-  .register-form__button {
-    cursor: pointer;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-main);
-    color: var(--color-white);
-    font-weight: 500;
-    font-size: 18px;
   }
 `;

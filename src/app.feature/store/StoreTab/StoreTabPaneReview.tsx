@@ -37,8 +37,11 @@ const StoreTabPaneReview: React.FC<TProps> = ({
       </div>
       <div className="store-tab-pane-review__review-card">
         {!!reviewResponses.length &&
-          reviewResponses.map((item) => (
-            <StoreTabPaneReviewCard reviewInfo={item} />
+          reviewResponses.map((item, idx) => (
+            <StoreTabPaneReviewCard
+              key={`store-tab-pane-review-card-${idx}`}
+              reviewInfo={item}
+            />
           ))}
       </div>
     </StyledWrapper>
