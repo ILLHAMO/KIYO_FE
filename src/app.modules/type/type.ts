@@ -12,24 +12,24 @@ export type TypeStoreInfo = {
 };
 
 export type TypeStoreDetailInfo = {
-  address: string;
-  addressMap: string;
-  booked: boolean;
-  call: string;
-  convenienceIds: number[];
-  detailComment: string;
-  images: { id: number; path: string }[];
-  kids: boolean;
-  menuResponses: {
+  address?: string;
+  addressMap?: string;
+  booked?: boolean;
+  call?: string;
+  convenienceIds?: number[];
+  detailComment?: string;
+  images?: { id: number; path: string }[];
+  kids?: boolean;
+  menuResponses?: {
     id: number;
     name: string;
     menuOptionResponses: { id: number; name: string }[];
   }[];
-  name: string;
-  reviewResponses: TypeReviewInfo[];
-  simpleComment: string;
-  tag: { name: string }[];
-  time: string[];
+  name?: string;
+  reviewResponses?: TypeReviewInfo[];
+  simpleComment?: string;
+  tag?: { name: string }[];
+  time?: string[];
 };
 
 export type TypeUserInfo = {

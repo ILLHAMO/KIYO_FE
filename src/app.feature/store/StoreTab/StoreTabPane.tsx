@@ -22,10 +22,7 @@ const StoreTabPane: React.FC<TProps> = ({
   const { storeId } = router.query;
 
   const queryClient = useQueryClient();
-  const storeDetailInfo = queryClient.getQueryData(
-    [API_STORE_INFO(storeId)],
-    {}
-  );
+  const storeDetailInfo = queryClient.getQueryData([API_STORE_INFO(storeId)]);
 
   return (
     <StyledWrapper className="store-tab-pane">
