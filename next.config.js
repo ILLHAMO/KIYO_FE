@@ -16,6 +16,9 @@ const NEXT_CONFIG = {
     return config;
   },
 
+  images: {
+    domains: ['kiyoimage.s3.ap-northeast-2.amazonaws.com'],
+  },
   env: {
     KIYO_NODE_ENV: processEnv.KIYO_NODE_ENV,
     KIYO_CLIENT_API_URI: processEnv.KIYO_CLIENT_API_URI,

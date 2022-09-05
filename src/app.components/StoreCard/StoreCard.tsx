@@ -6,7 +6,7 @@ import API from 'app.modules/api';
 import { TypeStoreInfo } from 'app.modules/type/type';
 import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
 import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
-import { message } from 'antd';
+import Image from 'app.components/Image/Image';
 
 type TProps = {
   storeInfo?: TypeStoreInfo;
@@ -64,14 +64,15 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
           className="store-card__image"
           onClick={() => router.push(`/store/${id}?pathname=${router.asPath}`)}
         >
-          <img src={images[0].path} />
+          <Image src={images[0].path} layout="fill" />
         </div>
         <div className="store-card__bookmark">
-          <img
+          <Image
             src={`/images/common/bookmark_${isBookmark ? 'on' : 'off'}.png`}
             className={`store-card__bookmark-btn store-card__bookmark-btn--${
               isBookmark ? 'on' : 'off'
             }`}
+            layout="fill"
             onClick={() => handleBookmark(isBookmark)}
           />
         </div>
@@ -141,10 +142,8 @@ const StyledWrapper = styled.div`
       top: 8px;
       right: 8px;
       z-index: 10;
-
-      img {
-        width: 20px;
-      }
+      width: 20px;
+      height: 20px;
 
       .store-card__bookmark-btn {
       }

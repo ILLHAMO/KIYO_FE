@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import FilterIcon from 'app.components/Filter/FilterIcon';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_CATEGORY } from 'app.modules/api/keyFactory';
+import Image from 'app.components/Image/Image';
 
 const HomeCategoryFilter = ({ onClick }) => {
   const { register } = useFormContext();
@@ -30,7 +31,11 @@ const HomeCategoryFilter = ({ onClick }) => {
             />
             <label htmlFor={`category-item-${idx}`}>
               <div className="category-item__img">
-                <img src={`/images/common/category/category_${item.id}.png`} />
+                <Image
+                  width={60}
+                  height={60}
+                  src={`/images/common/category/category_${item.id}.png`}
+                />
               </div>
             </label>
             {item.categoryName}
@@ -89,14 +94,17 @@ const StyledWrapper = styled.div`
       }
 
       .category-item__img {
-        border-radius: 50%;
-        background-color: #ffe9ef;
         width: 60px;
         height: 60px;
-        margin-bottom: 8px;
         overflow: hidden;
-        object-fit: cover;
+        border-radius: 50%;
+        background-color: #ffe9ef;
+        margin-bottom: 8px;
         transition: 200ms;
+
+        img {
+          object-fit: cover;
+        }
       }
     }
   }

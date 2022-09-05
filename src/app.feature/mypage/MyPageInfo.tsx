@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { TypeUserInfo } from 'app.modules/type/type';
+import Image from 'app.components/Image/Image';
 
 type TProps = {
   userInfo: TypeUserInfo;
@@ -12,7 +13,7 @@ const MypageInfo: React.FC<TProps> = ({ userInfo }) => {
     <StyledWrapper className="mypage-info">
       <div className="mypage-info__profile">
         <div className="mypage-info__profile-img">
-          <img src={userInfo.userProfileImagePath} />
+          <Image src={userInfo.userProfileImagePath} width={100} height={100} />
         </div>
         <div className="mypage-info__profile-name">
           <span>{userInfo.nickname}</span>님
@@ -45,6 +46,8 @@ const StyledWrapper = styled.div`
       height: 100px;
       min-width: 100px;
       min-height: 100px;
+      max-width: 100px;
+      max-height: 100px;
       margin-right: 16px;
       background: #ffe9ef;
       border-radius: 50%;
