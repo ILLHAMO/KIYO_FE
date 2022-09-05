@@ -10,7 +10,7 @@ const PageMyPageStore = () => {
       <MyPageStoreList />
     </StyledWrapper>
   );
-}
+};
 
 export default PageMyPageStore;
 

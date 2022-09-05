@@ -1,34 +1,28 @@
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
-
-const STORE_CATEGORY = [
-  '카페',
-  '한식',
-  '일식',
-  '중식',
-  '양식',
-  '아시안',
-  '비건',
-  '주점',
-];
+import { useFormContext } from 'react-hook-form';
+import useQueryFn from 'app.query/useQueryFn';
+import { API_CATEGORY } from 'app.modules/api/keyFactory';
 
 const StoreFilter = () => {
+  const { data: categoryList, isLoading } = useQueryFn([API_CATEGORY]);
   const { register } = useFormContext();
 
+  if (isLoading) return null;
+  if (!categoryList?.length) return null;
   return (
     <StyledWrapper>
       <div className="filter-wrap">
-        {STORE_CATEGORY.map((item, idx) => (
-          <div className="filter-item" key={`category-${idx}`}>
+        {categoryList.map((item, idx) => (
+          <div className="filter-item" key={`category-${item.id}`}>
             <input
-              {...register('category')}
-              id={`store-filter-${idx}`}
+              {...register('categoryIds')}
+              id={`store-filter-${item.id}`}
               type="checkbox"
-              value={String(idx)}
+              value={String(item.id)}
             />
-            <label htmlFor={`store-filter-${idx}`}>
-              <div className="item-container">{item}</div>
+            <label htmlFor={`store-filter-${item.id}`}>
+              <div className="item-container">{item.categoryName}</div>
             </label>
           </div>
         ))}

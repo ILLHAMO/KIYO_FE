@@ -1,29 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { message } from 'antd';
+import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
+import API from 'app.modules/api';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
+import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
 
 type TProps = {
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
 };
 
 const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
-  const { name, simpleComment, tag, address, detailComment, addressMap } =
-    // 우리 디테일 코멘트 삭제된거였나?? 어쩌기로했더라
+  const queryClient = useQueryClient();
+
+  const router = useRouter();
+  const { storeId: id } = router.query;
+
+  const { name, simpleComment, tag, call, address, booked, addressMap } =
     storeDetailInfo;
 
+  const [isBookmark, setIsBookmark] = useState(booked);
+
   const handleClickMap = () => {
-    console.log('map');
+    router.push(`https://map.kakao.com/link/search/${addressMap}`);
   };
-  const handleClickPhone = () => {
-    console.log('phone');
-    // 클립보드 복사하기
+
+  const handleClickPhone = async () => {
+    await navigator.clipboard.writeText(call);
+    message.success('클립보드에 복사되었습니다!');
   };
-  const handleClickBookmark = () => {
-    console.log('bookmark');
-    // API 연결하기
+
+  const handleClickBookmark = async (isBookmark) => {
+    try {
+      if (isBookmark) {
+        setIsBookmark(!isBookmark);
+        await API.DELETE({ url: API_BOOKMARK(id), data: {} });
+      } else {
+        setIsBookmark(!isBookmark);
+        await API.PUT({ url: API_BOOKMARK(id), data: {} });
+      }
+
+      if (router.pathname !== '/bookmark')
+        queryClient.resetQueries(API_STORE_BOOKMARK);
+    } catch (err) {
+      setIsBookmark(!isBookmark);
+    }
   };
+
   const handleClickShare = () => {
     console.log('share');
-    // 공유 API
+    // TO DO 공유 API
   };
 
   return (
@@ -31,8 +59,12 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
       <div className="store-top-banner-panel__name">{name}</div>
       <div className="store-top-banner-panel__sub-name">{simpleComment}</div>
       <div className="store-top-banner-panel__info">
-        <div className="food">돼지국밥 {tag}</div>
-
+        <div className="food">
+          {tag.map((item, idx) => (
+            <div key={`tag-${idx}`}>{item.name}</div>
+          ))}
+        </div>
+        {/* 갯수제한 필요함,, 몇개까지 할 지 논의 */}
         <div className="location">{address}</div>
       </div>
       {/*TODO : 로직 집어넣었을 경우 코드 길어지면 파일 분리 필요함*/}
@@ -51,8 +83,12 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
           </div>
         </div>
         <div className="store-top-banner-panel__func-item">
-          <div onClick={handleClickBookmark}>
-            <img src="/images/store/bookmark_black_off.png" />
+          <div onClick={() => handleClickBookmark(isBookmark)}>
+            {isBookmark ? (
+              <HeartFilled className="store-top-banner-panel__icon" />
+            ) : (
+              <HeartOutlined className="store-top-banner-panel__icon" />
+            )}
             <div className="store-top-banner-panel__text">찜</div>
           </div>
         </div>
@@ -96,10 +132,16 @@ const StyledWrapper = styled.div`
     margin-bottom: 16px;
 
     .food {
+      display: flex;
+      justify-content: center;
       text-align: center;
       width: 50%;
       color: var(--color-gray-300);
       border-right: 0.5px solid var(--color-gray-300);
+
+      div {
+        margin-left: 10px;
+      }
     }
 
     .location {
@@ -130,6 +172,10 @@ const StyledWrapper = styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
+      }
+
+      .store-top-banner-panel__icon {
+        margin-right: 4px;
       }
 
       .store-top-banner-panel__text {

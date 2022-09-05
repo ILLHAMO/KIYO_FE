@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import type { AppProps } from 'next/app';
 import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import type { AppProps } from 'next/app';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import 'app.styled/customBootstrap.scss';
 import {
   initializeStore,
@@ -15,7 +16,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { useStoreLocation } from 'app.store/location/store.loaction';
 
 const queryClient = new QueryClient({

@@ -2,26 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 import StoreTopBannerPanel from './StoreTopBannerPanel';
 import { useRouter } from 'next/router';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
-const StoreTopBanner = ({ storeDetailInfo }) => {
+type TProps = {
+  storeDetailInfo: TypeStoreDetailInfo;
+};
+
+const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
   const router = useRouter();
 
-  const { time } = storeDetailInfo;
+  const { time, images } = storeDetailInfo;
+
   return (
     <StyledWrapper className="store-top-banner">
       <div className="store-top-banner__back-button">
         <img
           src="/images/store/back_button.png"
-          onClick={() => router.push('/')}
+          onClick={() => router.back()}
         />
       </div>
-      <div className="store-top-banner__image"></div>
+      <div className="store-top-banner__image">
+        {!!images?.length && <img src={images[0].path} />}
+      </div>
       <StoreTopBannerPanel storeDetailInfo={storeDetailInfo} />
       <div className="store-top-banner__operating-time">
         <div className="store-top-banner__title">운영시간</div>
         <div className="store-top-banner__time">
-          <div>월 ~ 금 {time}</div>
-          {/* 월 ~ 금 지우고.. 애초에 DB에서 가져오는 값에 포함되어있게 수정 필요 */}
+          {time.map((item, idx) => (
+            <div key={`store-top-banner__time-${idx}`}>{item}</div>
+          ))}
         </div>
       </div>
     </StyledWrapper>
@@ -51,6 +60,13 @@ const StyledWrapper = styled.div`
     height: 280px;
     background-color: #ffe9ef;
     margin-bottom: 48px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .store-top-banner__operating-time {

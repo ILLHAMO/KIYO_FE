@@ -6,7 +6,6 @@ import { message } from 'antd';
 
 const PageOauthRedirect = () => {
   const router = useRouter();
-
   const { setUserInfo } = useStoreIntoAPP();
 
   useEffect(() => {
@@ -15,14 +14,14 @@ const PageOauthRedirect = () => {
       const urlParams = url.searchParams;
 
       setUserInfo({ token: urlParams.get('token') });
+      localStorage.setItem('KIYO_TOKEN', urlParams.get('token'));
       axiosClient.defaults.headers['Authorization'] = `Bearer ${urlParams.get(
         'token'
       )}`;
 
-      if (urlParams.get('nickname')) router.push('/');
+      if (urlParams.get('nickname')) location.href = '/';
       else router.push('/enter/signin');
     } else {
-      // TEST
       console.log('로그인 실패!!!');
       message.error('로그인 실패!!!');
     }

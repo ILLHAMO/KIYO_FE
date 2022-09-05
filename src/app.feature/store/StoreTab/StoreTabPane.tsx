@@ -1,11 +1,11 @@
-import { API_STORE_INFO } from 'app.modules/api/keyFactory';
-import { useRouter } from 'next/router';
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import StoreTabPaneAbout from './StoreTabPaneAbout';
 import StoreTabPaneMenu from './StoreTabPaneMenu';
 import StoreTabPaneReview from './StoreTabPaneReview';
+import { API_STORE_INFO } from 'app.modules/api/keyFactory';
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
@@ -34,7 +34,10 @@ const StoreTabPane: React.FC<TProps> = ({
         setMenuScroll={setMenuScroll}
         storeDetailInfo={storeDetailInfo}
       />
-      <StoreTabPaneReview setReviewScroll={setReviewScroll} />
+      <StoreTabPaneReview
+        setReviewScroll={setReviewScroll}
+        storeDetailInfo={storeDetailInfo}
+      />
     </StyledWrapper>
   );
 };

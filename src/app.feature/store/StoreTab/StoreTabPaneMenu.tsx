@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Accordion } from 'react-bootstrap';
+import { TypeStoreDetailInfo } from 'app.modules/type/type';
 
 type TProps = {
   setMenuScroll: (scroll: number) => void;
-  storeDetailInfo: any;
+  storeDetailInfo: TypeStoreDetailInfo;
 };
 
 const StoreTabPaneMenu: React.FC<TProps> = ({
@@ -17,33 +18,29 @@ const StoreTabPaneMenu: React.FC<TProps> = ({
       setMenuScroll(scrollLocation);
     });
 
+  const { menuResponses } = storeDetailInfo;
+
   return (
     <StyledWrapper className="store-tab-pane-menu" id="scroll-menu">
       <div className="store-tab-pane-menu__title">Menu</div>
       <Accordion alwaysOpen>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>식사류</Accordion.Header>
-          <Accordion.Body>
-            <div className="store-tab-pane-menu__item">국밥1</div>
-            <div className="store-tab-pane-menu__item">국밥2</div>
-            <div className="store-tab-pane-menu__item">국밥3</div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>음료</Accordion.Header>
-          <Accordion.Body>
-            <div className="store-tab-pane-menu__item">콜라</div>
-            <div className="store-tab-pane-menu__item">사이다</div>
-            <div className="store-tab-pane-menu__item">소주</div>
-            <div className="store-tab-pane-menu__item">맥주</div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>키즈메뉴</Accordion.Header>
-          <Accordion.Body>
-            <div className="store-tab-pane-menu__item">어린이 돈까스</div>
-          </Accordion.Body>
-        </Accordion.Item>
+        {!!menuResponses &&
+          menuResponses.map((menu, idx) => (
+            <Accordion.Item
+              key={`store-tab-pane-menu-accordion-item-${idx}`}
+              eventKey={String(menu.id)}
+            >
+              <Accordion.Header>{menu.name}</Accordion.Header>
+              <Accordion.Body>
+                {menu?.menuOptionResponses &&
+                  menu.menuOptionResponses.map((option) => (
+                    <div className="store-tab-pane-menu__item" key={option.id}>
+                      {option.name}
+                    </div>
+                  ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
       </Accordion>
       <div id="store-tab-review" />
     </StyledWrapper>

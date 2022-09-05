@@ -1,21 +1,48 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { Image, message } from 'antd';
 import { useRouter } from 'next/router';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import API from 'app.modules/api';
+import { scoreStatus } from 'app.modules/constant/score';
+import { API_REVIEW } from 'app.modules/api/keyFactory';
+import { TypeReviewInfo } from 'app.modules/type/type';
 
 type TProps = {
-  isWriter: boolean;
+  reviewInfo: TypeReviewInfo;
 };
 
-const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
+const StoreTabPaneReviewCard: React.FC<TProps> = ({ reviewInfo }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isReportModalVisible, setIsReportModalVisible] = useState(false);
+
+  const {
+    id,
+    reviewerName,
+    reviewerImage,
+    score,
+    updatedDate,
+    currentUserReview,
+    content,
+    reviewImages,
+  } = reviewInfo;
 
   const router = useRouter();
 
   const handleDeleteModalVisible = () => {
     setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      const response = await API.DELETE({ url: API_REVIEW(id) });
+      if (response?.status === 200)
+        message.success('해당 리뷰를 삭제했습니다.');
+      else throw response;
+    } catch (err) {
+      message.error('리뷰 삭제에 실패했습니다.');
+    }
   };
 
   const handleReportModalVisible = () => {
@@ -27,26 +54,28 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
       <ModalConfirm
         isModalVisible={isDeleteModalVisible}
         handleModalVisible={handleDeleteModalVisible}
-        handleConfirm={() => console.log('삭제하기')}
+        handleConfirm={handleDeleteConfirm}
       >
         정말 삭제하시겠습니까?
       </ModalConfirm>
       <ModalConfirm
         isModalVisible={isReportModalVisible}
         handleModalVisible={handleReportModalVisible}
-        handleConfirm={() => router.push('/report')}
+        handleConfirm={() => router.push(`/report?reviewId=${id}`)}
       >
         해당 리뷰를 신고하시겠습니까?
       </ModalConfirm>
       <div className="store-tab-pane-review-card__top">
         <div className="store-tab-pane-review-card__user">
-          <div className="store-tab-pane-review-card__profile"></div>
-          <div className="store-tab-pane-review-card__name">파워맘</div>
+          <div className="store-tab-pane-review-card__profile">
+            <img src={reviewerImage} alt="profile-image" />
+          </div>
+          <div className="store-tab-pane-review-card__name">{reviewerName}</div>
         </div>
         <div className="store-tab-pane-review-card__method-button">
-          {isWriter ? (
+          {currentUserReview ? (
             <>
-              <Link href={`/review/1`}>
+              <Link href={`/review/edit?reviewId=${id}`}>
                 <div className="store-tab-pane-review-card__edit-button">
                   수정
                 </div>
@@ -69,16 +98,19 @@ const StoreTabPaneReviewCard: React.FC<TProps> = ({ isWriter = true }) => {
         </div>
       </div>
       <div className="store-tab-pane-review-card__bottom">
-        <div className="store-tab-pane-review-card__title store-tab-pane-review-card__title--neutral">
-          <img src="/images/common/neutral.png" />
-          {/*<img src='/images/common/novisit.png' />*/}
-          {/*<img src='/images/common/revisit.png' />*/}
+        <div
+          className={`store-tab-pane-review-card__title store-tab-pane-review-card__title--${scoreStatus[score]}`}
+        >
+          <img src={`/images/common/${scoreStatus[score]}.png`} />
           평범해요!
         </div>
-        <div className="store-tab-pane-review-card__content">
-          매장도 깨끗하고 키즈메뉴도 아이가 잘 먹었습니다!
+        <div className="store-tab-pane-review-card__content">{content}</div>
+        <div className="store-tab-pane-review-card__photo-slide">
+          {reviewImages.map((item) => (
+            <Image className="photo-slide-item" src={item.path} key={item.id} />
+          ))}
         </div>
-        <div className="store-tab-pane-review-card__date">2022-04-09</div>
+        <div className="store-tab-pane-review-card__date">{updatedDate}</div>
       </div>
     </StyledWrapper>
   );
@@ -111,6 +143,7 @@ const StyledWrapper = styled.div`
         margin-right: 16px;
         background-color: #ffe9ef;
         border-radius: 50%;
+        overflow: hidden;
       }
 
       .store-tab-pane-review-card__name {
@@ -174,7 +207,19 @@ const StyledWrapper = styled.div`
     }
 
     .store-tab-pane-review-card__content {
-      margin-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .store-tab-pane-review-card__photo-slide {
+      display: flex;
+      overflow: auto;
+      margin-bottom: 8px;
+
+      .photo-slide-item {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
     }
 
     .store-tab-pane-review-card__date {

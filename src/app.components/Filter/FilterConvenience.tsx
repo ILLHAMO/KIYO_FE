@@ -41,7 +41,7 @@ const FilterConvenience = () => {
             key={`filter-${idx}`}
           >
             <input
-              {...register('convenience')}
+              {...register('convenienceIds')}
               id={`convenience-filter-${idx}`}
               type="checkbox"
               value={String(idx)}

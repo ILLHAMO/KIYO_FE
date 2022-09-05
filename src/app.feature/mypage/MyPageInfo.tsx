@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { TypeUserInfo } from 'app.modules/type/type';
 
-const MypageInfo = ({ userInfo }) => {
+type TProps = {
+  userInfo: TypeUserInfo;
+};
+
+const MypageInfo: React.FC<TProps> = ({ userInfo }) => {
   return (
     <StyledWrapper className="mypage-info">
       <div className="mypage-info__profile">
@@ -29,7 +34,6 @@ const StyledWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 32px;
-  //margin-bottom: 40px;
 
   .mypage-info__profile {
     display: flex;

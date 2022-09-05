@@ -16,27 +16,21 @@ export const useStoreIntoAPP: any = create((set) => ({
     try {
       const response = await API.GET({
         url: API_USER_PROFILE,
+        data: {},
       });
 
-      if (response.data.status === 401) {
+      if (response.data?.nickname) {
         set((state) => ({
           ...state,
           getUser: {
-            ...initialUserState,
-            isLoading: false,
-          },
-        }));
-      } else {
-        set((state) => ({
-          ...state,
-          getUser: {
-            // TO DO
-            // 받아온 유저 정보 넣어주기
             ...state.getUser,
+            info: response.data,
             login: true,
             isLoading: false,
           },
         }));
+      } else {
+        throw response.data;
       }
     } catch (err) {
       console.log(err);

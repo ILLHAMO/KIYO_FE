@@ -2,7 +2,11 @@ import { useInfiniteQuery } from 'react-query';
 import API from 'app.modules/api';
 import { API_STORES } from 'app.modules/api/keyFactory';
 
-export const requestStoreList = async ({ pageParam = null, filter }) => {
+export const requestStoreList = async ({
+  pageParam = null,
+  filter,
+  geocoder,
+}) => {
   try {
     const dataset = await API.GET({
       url: API_STORES,
@@ -10,6 +14,7 @@ export const requestStoreList = async ({ pageParam = null, filter }) => {
         ...(filter?.convenience.length > 0 && {
           convenienceIds: filter?.convenience,
         }),
+        address: encodeURI(geocoder[0].region_2depth_name),
         ...(filter?.category.length > 0 && { categoryIds: filter?.category }),
         ...(pageParam ? { lastStoreId: pageParam, size: 6 } : { size: 6 }),
       },
@@ -25,13 +30,14 @@ export const requestStoreList = async ({ pageParam = null, filter }) => {
   }
 };
 
-const useQueryStoreList = (filter) => {
+const useQueryStoreList = (filter, geocoder) => {
   return useInfiniteQuery(
-    [API_STORES, filter],
+    [API_STORES, filter, geocoder],
     async ({ pageParam = null }) => {
-      return await requestStoreList({ pageParam, filter });
+      return await requestStoreList({ pageParam, filter, geocoder });
     },
     {
+      cacheTime: 0,
       getNextPageParam: (lastPage, page) => {
         if (lastPage?.last) return false;
         return lastPage?.edges[5].id;

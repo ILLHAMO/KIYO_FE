@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import API from 'app.modules/api';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { TypeUserStoreInfo } from 'app.modules/type/type';
+import { API_USER_STORE_DELETE } from 'app.modules/api/keyFactory';
+import { useQueryClient } from 'react-query';
 
-const MyPageStoreCard = ({ handleDeleteModalVisible }) => {
+type TProps = {
+  storeInfo: TypeUserStoreInfo;
+};
+
+const MyPageStoreCard: React.FC<TProps> = ({ storeInfo }) => {
+  const { storeId, name, address, storeImage } = storeInfo;
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
+  const handleDeleteModalVisible = () => {
+    setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
+  const queryClient = useQueryClient();
+
+  const handleDeleteStore = async () => {
+    try {
+      await API.DELETE({ url: API_USER_STORE_DELETE(storeId) });
+      queryClient.removeQueries(API_USER_STORE_DELETE(storeId));
+    } catch (err) {}
+  };
+
   return (
     <StyledWrapper className="mypage-store-card">
+      <ModalConfirm
+        isModalVisible={isDeleteModalVisible}
+        handleModalVisible={handleDeleteModalVisible}
+        handleConfirm={handleDeleteStore}
+      >
+        정말 삭제하시겠습니까?
+      </ModalConfirm>
       <div className="mypage-store-card__info">
-        <div className="mypage-store-card__img" />
+        <div className="mypage-store-card__img">
+          <img src={storeImage.imagePath} />
+        </div>
         <div className="mypage-store-card__store">
-          <div className="mypage-store-card__name">홍길동네 돼지 국밥</div>
-          <div className="mypage-store-card__address">용인시 기흥구</div>
+          <div className="mypage-store-card__name">{name}</div>
+          <div className="mypage-store-card__address">{address}</div>
         </div>
       </div>
       <div className="mypage-store-card__button">
@@ -58,6 +92,7 @@ const StyledWrapper = styled.div`
       margin-right: 16px;
       background-color: #ffe9ef;
       border-radius: 50%;
+      overflow: hidden;
     }
 
     .mypage-store-card__store {

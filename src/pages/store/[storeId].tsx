@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import StoreTopBanner from 'app.feature/store/StoreTopBanner';
 import StoreTab from 'app.feature/store/StoreTab/StoreTab';
-import { useRouter } from 'next/router';
 import useQueryFn from 'app.query/useQueryFn';
 import { API_STORE_INFO } from 'app.modules/api/keyFactory';
+import PageLoading from 'app.components/Loading/PageLoading';
 
 const PageStore = () => {
   const router = useRouter();
@@ -14,9 +15,9 @@ const PageStore = () => {
     data: storeData,
     isLoading,
     error,
-  } = useQueryFn([API_STORE_INFO(storeId)]);
+  } = useQueryFn([API_STORE_INFO(storeId)], { cacheTime: 0 });
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <PageLoading />;
   return (
     <StyledWrapper>
       <StoreTopBanner storeDetailInfo={storeData} />

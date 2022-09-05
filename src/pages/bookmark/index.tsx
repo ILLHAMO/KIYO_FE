@@ -2,18 +2,17 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import BookmarkList from 'app.feature/bookmark/BookmarkList';
 import BookmarkNone from 'app.feature/bookmark/BookmarkNone';
-import NavigationBar from 'app.components/NavigationBar/NavigationBar';
 import useQueryBookmarkList from 'app.query/useQueryBookmarkList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
 import NotLogin from 'app.components/NotLogin/NotLogin';
-import useQueryFn from 'app.query/useQueryFn';
-import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
+import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
+import PageLoading from 'app.components/Loading/PageLoading';
 
 const PageBookmark = () => {
-  const { data: userInfo, isLoading } = useQueryFn([API_USER_PROFILE]);
+  const { isLoading, login } = useGetUser();
 
-  if (isLoading) return <StyledWrapper>로딩중</StyledWrapper>;
-  if (!userInfo?.nickname) return <NotLogin />;
+  if (isLoading) return <PageLoading />;
+  if (!login) return <NotLogin />;
   return <Bookmark />;
 };
 
@@ -56,8 +55,6 @@ const Bookmark = () => {
   ) : (
     <StyledWrapper>
       <BookmarkList bookmarkList={dataset} />
-      {/*<BookmarkNone />*/}
-      <NavigationBar />
       <div className="last-item-flag" ref={lastStoreRef} />
     </StyledWrapper>
   );
@@ -67,6 +64,7 @@ export default PageBookmark;
 
 const StyledWrapper = styled.div`
   height: 100vh;
+  padding: 0 20px 64px;
   position: relative;
 
   .last-item-flag {
@@ -75,7 +73,6 @@ const StyledWrapper = styled.div`
     right: 0;
     width: 0;
     height: 100px;
-    // visibility: hidden;
     background: #000;
   }
 `;

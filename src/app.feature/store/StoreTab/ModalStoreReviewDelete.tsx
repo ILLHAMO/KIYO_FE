@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Modal, Button } from 'react-bootstrap';
 
-const ModalStoreReviewDelete = ({
+type TProps = {
+  isDeleteModalVisible: boolean;
+  handleDeleteModalVisible: () => void;
+};
+
+const ModalStoreReviewDelete: React.FC<TProps> = ({
   isDeleteModalVisible,
   handleDeleteModalVisible,
 }) => {

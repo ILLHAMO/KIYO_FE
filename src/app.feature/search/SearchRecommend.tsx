@@ -1,39 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import useQueryFn from 'app.query/useQueryFn';
+import { API_SEARCH_KEYWORD_RANK } from 'app.modules/api/keyFactory';
 
 const SearchRecommend = () => {
-  return (
-    <StyledWrapper className='search-recommend'>
-			<div className="search-recommend__title">
-				추천 검색어
-			</div>
-			<div className="search-recommend__item-wrap">
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>망고 케이크</div>
-				</div>
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>곱창 전골</div>
-				</div>
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>이나경송탄부대찌개</div>
-				</div>
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>한양대학교</div>
-				</div>
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>스테이크</div>
-				</div>
-				<div className="search-recommend__item-container">
-					<img src="/images/search/search.png" alt="" />
-					<div>도너츠</div>
-				</div>
-			</div>
+  const router = useRouter();
 
+  const { data: recommendKeyword, isLoading } = useQueryFn(
+    API_SEARCH_KEYWORD_RANK
+  );
+
+  if (isLoading) return null;
+  return (
+    <StyledWrapper className="search-recommend">
+      <div className="search-recommend__title">추천 검색어</div>
+      <div className="search-recommend__item-wrap">
+        {!!recommendKeyword?.length &&
+          recommendKeyword.map((item, idx) => (
+            <div
+              key={`search-recommend-${idx}`}
+              className="search-recommend__item-container"
+              onClick={() =>
+                router.push(`/search/result?keyword=${item.rank_Keyword}`)
+              }
+            >
+              <img src="/images/search/search.png" alt="" />
+              <div>{item.rank_Keyword}</div>
+            </div>
+          ))}
+      </div>
     </StyledWrapper>
   );
 };
@@ -41,28 +37,31 @@ const SearchRecommend = () => {
 export default SearchRecommend;
 
 const StyledWrapper = styled.div`
+  padding: 16px 20px;
+
   .search-recommend__title {
-		margin: 16px 20px 32px 20px;
-		font-size: 24px;
-		font-weight: 600;
-		color: var(--color-main);
-	}
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-main);
+  }
 
-	.search-recommend__item-wrap {
-		padding: 0 32px;
-		display: flex;
-		flex-direction: column;
+  .search-recommend__item-wrap {
+    display: flex;
+    padding: 0 12px;
+    flex-direction: column;
 
-		.search-recommend__item-container {
-			display: flex;
-			align-items: center;
-			margin-bottom: 24px;
+    .search-recommend__item-container {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      cursor: pointer;
 
-			img {
-				width: 16px;
-				height: 16px;
-				margin-right: 16px;
-			}
-		}
-	}
+      img {
+        width: 16px;
+        height: 16px;
+        margin-right: 16px;
+      }
+    }
+  }
 `;

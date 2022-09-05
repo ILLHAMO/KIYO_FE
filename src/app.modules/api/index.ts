@@ -5,7 +5,9 @@ import { API_AUTH_LOGOUT, API_AUTH_REFRESH } from './keyFactory';
 export let axiosClient = axios.create({
   baseURL: process.env.KIYO_API_END_POINT,
   headers: {
-    Authorization: `Bearer null`,
+    ...(typeof localStorage !== 'undefined' && {
+      Authorization: `Bearer ${localStorage.getItem('KIYO_TOKEN')}`,
+    }),
   },
   withCredentials: true,
 });
@@ -13,36 +15,45 @@ export let axiosClient = axios.create({
 axiosClient.interceptors.response.use(
   async (response) => {
     if (response?.data?.status === 401) {
-      const { config } = response;
-
-      const res = await axiosClient({
-        method: 'GET',
-        url: API_AUTH_REFRESH,
-        data: {},
-      });
-
-      if (res?.data?.data?.token) {
-        localStorage.setItem('token', res.data.data.token);
-        axiosClient.defaults.headers[
-          'Authorization'
-        ] = `Bearer ${res.data.data.token}`;
-
-        const finalResponse: any = await axiosClient({
-          ...config,
-          headers: {
-            Authorization: `Bearer ${res.data.data.token}`,
+      if (response?.data?.message === '토큰 기한 만료') {
+        const { config } = response;
+        const res = await axios.post(
+          `${process.env.KIYO_API_END_POINT}${API_AUTH_REFRESH}`,
+          {
+            expiredToken: localStorage
+              ? localStorage.getItem('KIYO_TOKEN')
+              : null,
           },
-        });
+          { withCredentials: true }
+        );
 
-        return finalResponse;
-      } else {
-        await axiosClient({
-          method: 'DELETE',
-          url: API_AUTH_LOGOUT,
-          data: {},
-        });
-        // location.replace('/enter');
+        if (res?.data?.data?.token) {
+          localStorage.setItem('KIYO_TOKEN', res.data.data.token);
+          const finalResponse: any = await axiosClient({
+            ...config,
+            headers: {
+              Authorization: `Bearer ${res.data.data.token}`,
+            },
+          });
+
+          return finalResponse;
+        } else if (res?.data?.message === '재로그인 필요') {
+          await axiosClient({
+            method: 'DELETE',
+            url: API_AUTH_LOGOUT,
+            data: {},
+          });
+          localStorage.removeItem('KIYO_TOKEN');
+          location.replace('/enter');
+        }
       }
+
+      // else if (
+      //   response?.data?.message ===
+      //   'Full authentication is required to access this resource'
+      // ) {
+      //   location.replace('/enter');
+      // }
     }
 
     return response;
@@ -52,23 +63,25 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export const request: any = async ({ url, method, data = null }) => {
-  try {
-    const response: any = await axiosClient({
-      method,
-      url,
-      data,
-    });
+export const request: any = async ({
+  url,
+  method,
+  data = {},
+  headers = {},
+}) => {
+  const response: any = await axiosClient({
+    method,
+    url,
+    data,
+    headers,
+  });
 
-    return response;
-  } catch (err) {
-    console.error(err.toString());
-  }
+  return response;
 };
 
 class API {
-  async CALL({ method, url, data = null }) {
-    return request({ method, url, data });
+  async CALL({ method, url, data = {}, headers = {} }) {
+    return request({ method, url, data, headers });
   }
 
   GET({ url, ...params }) {

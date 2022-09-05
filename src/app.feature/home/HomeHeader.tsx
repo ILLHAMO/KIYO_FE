@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useGetLocation } from 'app.store/location/store.loaction';
 
 const HomeHeader = () => {
-  const { latitude, longitude, loading, geocoder } = useGetLocation();
+  const { loading, geocoder } = useGetLocation();
 
   return (
     <StyledWrapper className="home-header">

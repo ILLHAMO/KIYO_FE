@@ -12,6 +12,4 @@ const PageRegisterComplete = () => {
 
 export default PageRegisterComplete;
 
-const StyledWrapper = styled.div`
-
-`;
+const StyledWrapper = styled.div``;

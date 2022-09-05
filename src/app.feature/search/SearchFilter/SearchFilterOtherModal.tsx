@@ -1,19 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
 import FilterConvenience from 'app.components/Filter/FilterConvenience';
 import ButtonSquare from 'app.components/Button/ButtonSquare';
 import FilterCategory from 'app.components/Filter/FilterCategory';
 
-const SearchFilterOtherModal = ({
-  handleOtherFilterVisibleShow
+type TProps = {
+  onSubmit: () => void;
+  handleOtherFilterVisibleShow: () => void;
+};
+
+const SearchFilterOtherModal: React.FC<TProps> = ({
+  onSubmit,
+  handleOtherFilterVisibleShow,
 }) => {
+  const { watch, setValue } = useFormContext();
+
   return (
-    <StyledWrapper className='search-filter-other-modal'>
-      <div className='search-filter-other-modal__header'>
+    <StyledWrapper className="search-filter-other-modal">
+      <div className="search-filter-other-modal__header">
         <div onClick={handleOtherFilterVisibleShow}>
           <img src="/images/common/close_gray.png" />
         </div>
-        <div className='search-filter-other-modal__apply-button'>적용</div>
+        <div
+          onClick={() => {
+            onSubmit();
+            handleOtherFilterVisibleShow();
+          }}
+          className="search-filter-other-modal__apply-button"
+        >
+          적용
+        </div>
       </div>
       <div className="search-filter-other-modal__body">
         <div className="search-filter-other-modal__container">
@@ -25,13 +42,21 @@ const SearchFilterOtherModal = ({
           <FilterConvenience />
         </div>
         <div className="search-filter-other-modal__container">
-          <div className ="search-filter-other-modal__title">운영 방식</div>
+          <div className="search-filter-other-modal__title">운영 방식</div>
           <div className="search-filter-other-modal__kidszone-filter">
-            <ButtonSquare name="키즈존" />
-            <ButtonSquare name="일반 식당" />
-          </div>
+            <ButtonSquare
+              name="키즈존"
+              isOn={watch('isKids')}
+              onClick={() => setValue('isKids', !watch('isKids'))}
+            />
+            <ButtonSquare
+              name="일반 식당"
+              isOn={!watch('isKids')}
+              onClick={() => setValue('isKids', !watch('isKids'))}
+            />
           </div>
         </div>
+      </div>
     </StyledWrapper>
   );
 };
@@ -39,7 +64,6 @@ const SearchFilterOtherModal = ({
 export default SearchFilterOtherModal;
 
 const StyledWrapper = styled.div`
-
   bottom: 0;
   background-color: white;
   max-width: 664px;
@@ -83,7 +107,7 @@ const StyledWrapper = styled.div`
   }
 
   .search-filter-other-modal__title {
-    fontsize: 16px;
+    font-size: 16px;
     color: var(--color-gray-300);
     width: 100%;
     text-align: center;
@@ -101,5 +125,4 @@ const StyledWrapper = styled.div`
     grid-gap: 10px;
     padding: 0 10% 0;
   }
-
 `;

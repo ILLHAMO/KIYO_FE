@@ -1,21 +1,95 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import useQuerySearchStore from 'app.query/useQuerySearchStore';
+import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import { Skeleton } from 'antd';
+import { FormProvider } from 'rc-field-form';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 const ReviewSearch = () => {
+  const lastStoreRef = useRef();
+  const router = useRouter();
+
+  const [keyword, setKeyword] = useState(null);
+
+  const { data, isFetching, status, fetchNextPage, hasNextPage } =
+    useQuerySearchStore(keyword);
+
+  const handleSelectStore = (storeInfo) =>
+    router.push(
+      `/review/create?storeName=${storeInfo.name}&storeAddress=${storeInfo.address}`
+    );
+
+  const isSuccess = status === 'success';
+
+  useIntersectionObserver({
+    root: null,
+    target: lastStoreRef,
+    enabled: hasNextPage,
+    onIntersect: fetchNextPage,
+  });
+
+  let dataset = data?.pages
+    ? data?.pages.reduce((acc: any, cur: any) => {
+        if (cur?.edges) {
+          acc.push(...cur?.edges);
+        }
+        return acc;
+      }, [])
+    : [];
+
+  const SkeletonArray = Array.from(Array(20).keys());
+
+  if (isFetching) dataset = [...dataset, ...SkeletonArray];
+
+  if (isSuccess && isFetching) {
+    dataset = [...dataset, ...SkeletonArray];
+  }
+
+  const methods = useForm();
+  const { handleSubmit, register } = methods;
+
+  const onValidSearchForm = (data) => {
+    setKeyword(data.keyword);
+  };
+
   return (
-    <StyledWrapper className='review-search'>
-      <div className="review-search__input">
-        <img src="/images/review/search_gray.png" />
-        <input placeholder="식당을 검색해주세요" />
-      </div>
-      <div className="review-search__result">
-        <div className="review-search__result-item">
-          <div className="review-search__store-image"></div>
-          <div className="review-search__store-info">
-            <div className="review-search__name">홍길동네 돼지국밥</div>
-            <div className="review-search__address">용인시 기흥구</div>
+    <StyledWrapper className="review-search">
+      <FormProvider>
+        <form onSubmit={handleSubmit(onValidSearchForm)}>
+          <div className="review-search__input">
+            <input {...register('keyword')} placeholder="식당을 검색해주세요" />
+            <img
+              src="/images/review/search_gray.png"
+              onClick={handleSubmit(onValidSearchForm)}
+            />
           </div>
-        </div>
+        </form>
+      </FormProvider>
+      <div className="review-search__result">
+        {isSuccess && !!dataset.length && (
+          <div>
+            {dataset.map((item) => {
+              if (!item?.id) return <Skeleton />;
+              return (
+                <div
+                  className="review-search__result-item"
+                  onClick={() => handleSelectStore(item)}
+                >
+                  <div className="review-search__store-image">
+                    <img src={item?.storeImage?.imagePath} alt="store-image" />
+                  </div>
+                  <div className="review-search__store-info">
+                    <div className="review-search__name">{item.name}</div>
+                    <div className="review-search__address">{item.address}</div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="last-item-flag" ref={lastStoreRef} />
+          </div>
+        )}
       </div>
     </StyledWrapper>
   );
@@ -36,7 +110,7 @@ const StyledWrapper = styled.div`
       width: 18px;
       height: 18px;
       top: 11px;
-      left: 8px;
+      right: 8px;
       position: absolute;
     }
 
@@ -44,7 +118,7 @@ const StyledWrapper = styled.div`
       height: 40px;
       width: 100%;
       border-bottom: 0.5px solid var(--color-gray-300);
-      padding-left: 40px;
+      padding: 0 10px;
 
       &::placeholder {
         color: var(--color-gray-300);
@@ -70,6 +144,13 @@ const StyledWrapper = styled.div`
         border-radius: 50%;
         background: #ffe9ef;
         margin-right: 8px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       .review-search__store-info {

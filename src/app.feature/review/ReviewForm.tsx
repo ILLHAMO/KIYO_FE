@@ -1,71 +1,215 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+import { message, Spin, Upload, UploadProps } from 'antd';
+import API from 'app.modules/api';
+import {
+  scoreColor,
+  scoreLongComment,
+  scoreStatus,
+} from 'app.modules/constant/score';
+import {
+  API_REVIEW,
+  API_REVIEW_STORE,
+  API_USER_REVIEW,
+} from 'app.modules/api/keyFactory';
+import { useQueryClient } from 'react-query';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 
-const ReviewForm = () => {
+type TProps = {
+  reviewStore?: any;
+  editInfo?: any;
+};
+
+const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
+  const [defaultFileList, setDefaultFileList] = useState([]);
+  const [fileList, setFileList] = useState([...defaultFileList]);
+  const [score, setScore] = useState(editInfo?.score ?? null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isEdit = !!editInfo;
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  const methods = useForm({
+    defaultValues: {
+      content: editInfo?.content ?? null,
+      score: editInfo?.score ?? null,
+      isConfirm: false,
+    },
+  });
+
+  const { register, handleSubmit } = methods;
+
+  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
+
+  const handleDefaultFileList = () => {
+    const list = [];
+    reviewStore?.reviewImages?.map((item) => {
+      list.push({ uid: item.id, thumbUrl: item.path });
+    });
+    setDefaultFileList(list);
+    setFileList(list);
+  };
+
+  useEffect(() => {
+    handleDefaultFileList();
+  }, []);
+
+  const handleAddReview = async (data) => {
+    try {
+      if (!data.isConfirm)
+        throw { message: '내용을 확인하고 아래 체크박스에 체크해주세요!' };
+
+      const deleteIds = [];
+      const addFiles = [];
+
+      fileList.map((item) => {
+        const isFind = defaultFileList.find(
+          (value) => item?.uid === value?.uid
+        );
+        if (!isFind) {
+          if (typeof item.uid == 'number') deleteIds.push(isFind?.uid);
+          else addFiles.push(item);
+        }
+      });
+
+      setIsLoading(true);
+
+      const formData = new FormData();
+
+      for (let i = 0; i < addFiles.length; i++)
+        formData.append('multipartFiles', addFiles[i].originFileObj);
+
+      formData.append(
+        'meta_data',
+        new Blob(
+          [
+            JSON.stringify({
+              score,
+              content: data.content,
+              deleteIds,
+            }),
+          ],
+          { type: 'application/json' }
+        )
+      );
+
+      const response = isEdit
+        ? await API.PUT({
+            url: API_REVIEW(reviewStore?.id),
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+        : await API.POST({
+            url: API_REVIEW_STORE(reviewStore?.id),
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+
+      if (response?.data?.success) {
+        message.success('리뷰 등록을 성공했습니다.');
+        queryClient.resetQueries(API_USER_REVIEW);
+        router.back();
+      } else throw response;
+    } catch (err) {
+      if (err.message) message.warn(err.message);
+      else
+        message.error('리뷰 등록에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <StyledWrapper className="review-form">
-      <div className="review-form__store-name">홍길동네 돼지국밥</div>
-      <div className="review-form__store-address">용인시 기흥구</div>
-      <div className="review-form__review-score">
-        <div className="review-form__score-item">
-          <img src="/images/common/revisit.png" />
-          <div className="review-form__score-title review-form__score-title--yellow">
-            재방문 의사
-            <br />
-            있어요!
-          </div>
-        </div>
-        <div className="review-form__score-item">
-          <img src="/images/common/neutral.png" />
-          <div className="review-form__score-title review-form__score-title--blue">괜찮아요!</div>
-        </div>
-        <div className="review-form__score-item">
-          <img src="/images/common/novisit.png" />
-          <div className="review-form__score-title review-form__score-title--red">
-            재방문 의사
-            <br />
-            없어요!
-          </div>
-        </div>
-      </div>
-      <textarea placeholder="사실과 다르거나 비방목적의 글을 작성할 경우 처벌을 받을 수 있습니다." />
-      <div className="review-form__photo">
-        <div className="review-form__title">사진 추가하기</div>
-        <div className="review-form__photo-slide">
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-          <div className="review-form__photo-item"></div>
-        </div>
-        <div className="review-form__warn">
-          <li>
-            리뷰에 업로드해주신 사진은 키요의 식당 상세페이지에서 사용될 수
-            있습니다.
-          </li>
-          <li>사진은 10개까지 등록하실 수 있습니다.</li>
-        </div>
-      </div>
-      <div className="review-form__check">
-        <Form.Check
-          type="checkbox"
-          id="review-check"
-          label="직접 방문한 경험과 사실을 기반으로 작성한 리뷰입니다."
-        />
-      </div>
-      <div className="review-form__create-button">리뷰 등록하기</div>
-    </StyledWrapper>
+    <FormProvider {...methods}>
+      <StyledWrapper className="review-form">
+        <Spin spinning={isLoading} className="review-spin">
+          <form onSubmit={handleSubmit(handleAddReview)}>
+            <div className="review-form__store-name">{reviewStore?.name}</div>
+            <div className="review-form__store-address">
+              {reviewStore?.address}
+            </div>
+            <div className="review-form__review-score">
+              {['HIGH', 'MIDDLE', 'LOW'].map((item) => (
+                <div
+                  onClick={(e) => setScore(item)}
+                  className={`review-form__score-item review-form__score-item--${
+                    !score || score === item ? 'checked' : 'unchecked'
+                  }`}
+                >
+                  <img src={`/images/common/${scoreStatus[item]}.png`} />
+                  <div
+                    className={`review-form__score-title review-form__score-title--${scoreColor[item]}`}
+                  >
+                    {scoreLongComment[item]}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <textarea
+              {...register('content')}
+              placeholder="사실과 다르거나 비방목적의 글을 작성할 경우 처벌을 받을 수 있습니다."
+            />
+            <div className="review-form__photo">
+              <div className="review-form__title">사진 추가하기</div>
+              <Upload
+                listType="picture-card"
+                fileList={[...fileList]}
+                onChange={handleChange}
+                className="review-photo-slide"
+              >
+                <div>
+                  +<br />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              </Upload>
+              <div className="review-form__warn">
+                <li>
+                  리뷰에 업로드해주신 사진은 키요의 식당 상세페이지에서 사용될
+                  수 있습니다.
+                </li>
+                <li>사진은 10개까지 등록하실 수 있습니다.</li>
+              </div>
+            </div>
+            <div className="review-form__check">
+              <Form.Check
+                {...register('isConfirm')}
+                type="checkbox"
+                id="review-check"
+                label="직접 방문한 경험과 사실을 기반으로 작성한 리뷰입니다."
+              />
+            </div>
+            <ButtonFullWidth
+              type="submit"
+              loading={isLoading}
+              disabled={isLoading}
+            >
+              리뷰 {isEdit ? '수정' : '등록'}하기
+            </ButtonFullWidth>
+          </form>
+        </Spin>
+      </StyledWrapper>
+    </FormProvider>
   );
 };
 
 export default ReviewForm;
 
 const StyledWrapper = styled.div`
-  padding: 20px;
+  .review-spin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh !important;
+  }
+
+  form {
+    padding: 20px 20px 40px;
+  }
 
   .review-form__store-name {
     line-height: 26px;
@@ -86,10 +230,16 @@ const StyledWrapper = styled.div`
     .review-form__score-item {
       width: calc(100% / 3);
       text-align: center;
+      cursor: pointer;
+      transition: opacity 200ms;
 
       img {
         width: 60px;
         height: 60px;
+      }
+
+      &.review-form__score-item--unchecked {
+        opacity: 0.2;
       }
 
       .review-form__score-title {
@@ -139,32 +289,35 @@ const StyledWrapper = styled.div`
       line-height: 23px;
     }
 
-    .review-form__photo-slide {
+    .review-photo-slide {
+      width: 100%;
       display: flex;
-      align-items: center;
       overflow: auto;
-      margin: 0 -20px 8px;
-      padding: 0 20px;
 
-      .review-form__photo-item {
-        min-width: 80px;
-        border: 1px solid var(--color-black);
-        border-right: none;
-        width: 80px;
-        height: 80px;
-        background: #ffe9ef;
+      .ant-upload-list {
+        width: 100%;
+        display: flex;
+        flex-flow: row-reverse;
+        justify-content: flex-end;
+      }
 
-        &:last-child {
-          border-right: 1px solid var(--color-black);
-        }
+      .ant-upload-list-picture-card-container,
+      .ant-upload {
+        flex-shrink: 0;
       }
     }
 
-    .review-form__warn {
+    .review-warn {
       font-size: 12px;
       line-height: 17px;
       color: var(--color-gray-300);
     }
+  }
+
+  .review-form__warn {
+    font-size: 12px;
+    line-height: 17px;
+    color: var(--color-gray-300);
   }
 
   .review-form__check {

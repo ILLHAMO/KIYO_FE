@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQueryStoreList from 'app.query/useQueryStoreList';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import { Empty, Skeleton } from 'antd';
+import NoneList from 'app.components/NoneList/NoneList';
 
-const HomeStoreList = ({ filter = { category: [], convenience: [] } }) => {
+const HomeStoreList = ({
+  filter = { category: [], convenience: [] },
+  geocoder,
+}) => {
   const lastStoreRef = useRef();
 
   const { data, isFetching, status, fetchNextPage, hasNextPage } =
-    useQueryStoreList(filter);
+    useQueryStoreList(filter, geocoder);
 
   const isSuccess = status === 'success';
 
@@ -37,12 +42,16 @@ const HomeStoreList = ({ filter = { category: [], convenience: [] } }) => {
   }
 
   return isSuccess && !dataset.length ? (
-    <StyledWrapper>없을 때</StyledWrapper>
+    <NoneList link="/register" />
   ) : (
     <StyledWrapper className="home-store-list">
-      {dataset.map((item, idx) => (
-        <StoreCard storeInfo={item} key={`store-card-${idx}`} />
-      ))}
+      {dataset.map((item, idx) =>
+        typeof item === 'number' ? (
+          <Skeleton />
+        ) : (
+          <StoreCard storeInfo={item} key={`store-card-${idx}`} />
+        )
+      )}
       <div className="last-item-flag" ref={lastStoreRef} />
     </StyledWrapper>
   );

@@ -7,12 +7,14 @@ import ReviewForm from 'app.feature/review/ReviewForm';
 const PageReviewEdit = () => {
   const router = useRouter();
 
-  const { create } = router.query;
-
   return (
     <StyledWrapper>
-      <Header title="리뷰 수정하기" />
-      <ReviewForm />
+      <Header title="리뷰 등록하기" />
+      <ReviewForm
+        reviewStore={{
+          ...router.query,
+        }}
+      />
     </StyledWrapper>
   );
 };

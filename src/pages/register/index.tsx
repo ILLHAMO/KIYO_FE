@@ -6,7 +6,7 @@ import Header from 'app.components/Header/Header';
 const PageRegister = () => {
   return (
     <StyledWrapper>
-			<Header title="장소 등록하기" />
+      <Header title="장소 등록하기" />
       <RegisterForm />
     </StyledWrapper>
   );
@@ -14,6 +14,4 @@ const PageRegister = () => {
 
 export default PageRegister;
 
-const StyledWrapper = styled.div`
-
-`;
+const StyledWrapper = styled.div``;

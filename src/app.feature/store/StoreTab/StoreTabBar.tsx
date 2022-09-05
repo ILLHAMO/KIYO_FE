@@ -65,7 +65,7 @@ const StyledWrapper = styled.div`
   background-color: var(--color-white);
   z-index: 2;
 
-  a{
+  a {
     text-decoration: none;
     color: var(--color-black);
   }

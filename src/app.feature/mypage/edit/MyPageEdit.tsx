@@ -1,25 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { RcFile } from 'antd/lib/upload/interface';
+import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { Avatar, message, Upload, UploadProps } from 'antd';
 import API from 'app.modules/api';
+import { useStoreIntoAPP } from 'app.store/intoAPP/store.intoAPP';
 import { API_USER_PROFILE } from 'app.modules/api/keyFactory';
+import { TypeUserInfo } from 'app.modules/type/type';
+import ButtonFullWidth from 'app.components/Button/ButtonFullWidth';
 
-const MyPageEdit = ({ userInfo }) => {
-  const methods = useForm();
+type TProps = {
+  userInfo: TypeUserInfo;
+};
+
+const MyPageEdit: React.FC<TProps> = ({ userInfo }) => {
+  const [fileList, setFileList] = useState([]);
+  const [imageUrl, setImageUrl] = useState<string>();
+  const { setUserInfo } = useStoreIntoAPP();
+  const { userProfileImagePath, nickname } = userInfo;
+
+  const router = useRouter();
+
+  const methods = useForm({
+    defaultValues: {
+      nickname: nickname,
+    },
+  });
+
   const { register, handleSubmit } = methods;
+
+  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+  };
 
   const onValidRegisterForm = async (data) => {
     try {
-      // const response = await API.PUT({
-      //   url: API_USER_PROFILE,
-      //   data: {
-      //     meta_data: { nickname: data.nickname },
-      //     profileImage: userInfo?.userProfileImagePath,
-      //   },
-      // });
+      const formData = new FormData();
+
+      for (let i = 0; i < fileList.length; i++)
+        formData.append('profileImage', fileList[i].originFileObj);
+
+      formData.append(
+        'meta_data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+
+      const response = await API.PUT({
+        url: API_USER_PROFILE,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      if (response.status === 200) {
+        setUserInfo({
+          info: {
+            nickname: response.data.nickname,
+            userProfileImagePath: response.data.profileImageUrl,
+          },
+        });
+        router.back();
+        message.success('내 정보 수정을 성공했습니다!');
+      } else {
+        message.error('정보 수정에 실패했습니다. 다시 시도해주세요.');
+      }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    getBase64(newFileList[0].originFileObj as RcFile, (url) => {
+      setImageUrl(url);
+    });
   };
 
   const onSubmit = handleSubmit(onValidRegisterForm);
@@ -29,18 +85,28 @@ const MyPageEdit = ({ userInfo }) => {
       <form onSubmit={onSubmit}>
         <StyledWrapper className="mypage-edit">
           <div className="mypage-edit__profile">
-            <div className="mypage-edit__profile-img"></div>
-            <div className="mypage-edit__profile-edit">
-              <img src="/images/mypage/edit_black.png" />
-            </div>
+            <Upload
+              listType="picture-card"
+              onChange={handleChange}
+              maxCount={1}
+              showUploadList={false}
+            >
+              <Avatar
+                className="mypage-edit__profile-img"
+                src={imageUrl ?? userProfileImagePath}
+              />
+              <div className="mypage-edit__profile-edit">
+                <img src="/images/mypage/edit_black.png" />
+              </div>
+            </Upload>
           </div>
           <div className="mypage-edit__info">
             <div className="mypage-edit__input-label">닉네임</div>
             <input {...register('nickname')} />
           </div>
-          <button className="mypage-edit__edit-button" type="submit">
+          <ButtonFullWidth type="submit" className="mypage-edit__edit-button">
             수정하기
-          </button>
+          </ButtonFullWidth>
         </StyledWrapper>
       </form>
     </FormProvider>
@@ -62,6 +128,13 @@ const StyledWrapper = styled.div`
       width: 100px;
       height: 100px;
       background: #ffe9ef;
+      border-radius: 50%;
+    }
+
+    .ant-upload {
+      background: none;
+      margin: 0;
+      border: none;
       border-radius: 50%;
     }
 
@@ -104,7 +177,7 @@ const StyledWrapper = styled.div`
   }
 
   .mypage-edit__edit-button {
-    cursor: pointer;
+    /* cursor: pointer;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -116,6 +189,6 @@ const StyledWrapper = styled.div`
     background-color: var(--color-main);
     color: var(--color-white);
     font-weight: 500;
-    font-size: 18px;
+    font-size: 18px; */
   }
 `;

@@ -6,7 +6,7 @@ import ReportCreate from 'app.feature/report/ReportCreate';
 const PageReport = () => {
   return (
     <StyledWrapper>
-      <Header title='리뷰 신고하기' />
+      <Header title="리뷰 신고하기" />
       <ReportCreate />
     </StyledWrapper>
   );

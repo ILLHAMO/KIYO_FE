@@ -1,20 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Image, message } from 'antd';
+import { useQueryClient } from 'react-query';
+import API from 'app.modules/api';
+import ModalConfirm from 'app.components/Modal/ModalConfirm';
+import { TypeUserReviewInfo } from 'app.modules/type/type';
+import { scoreComment, scoreStatus } from 'app.modules/constant/score';
+import { API_REVIEW, API_USER_REVIEW } from 'app.modules/api/keyFactory';
 
-const MyPageReviewCard = ({ handleDeleteModalVisible }) => {
+type TProps = {
+  reviewInfo: TypeUserReviewInfo;
+};
+
+const MyPageReviewCard: React.FC<TProps> = ({ reviewInfo }) => {
+  const {
+    address,
+    content,
+    reviewId,
+    score,
+    storeName,
+    updateTime,
+    storeImage,
+    reviewImages,
+  } = reviewInfo;
+
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
+
+  const queryClient = useQueryClient();
+
+  const handleDeleteModalVisible = () => {
+    setIsDeleteModalVisible(!isDeleteModalVisible);
+  };
+
+  const handleDeleteReview = async () => {
+    try {
+      const response = await API.DELETE({ url: API_REVIEW(reviewId) });
+      queryClient.resetQueries(API_USER_REVIEW);
+      if (response.data === 'delete success')
+        message.success('리뷰 삭제에 성공했습니다.');
+      else throw response;
+      // TO DO 데이터에 그냥 delete success 만 내려오는데 이거 수정 필요할지?
+      console.log(response);
+    } catch (err) {
+      message.error('리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
   return (
     <StyledWrapper className="mypage-review-card">
+      <ModalConfirm
+        isModalVisible={isDeleteModalVisible}
+        handleModalVisible={handleDeleteModalVisible}
+        handleConfirm={handleDeleteReview}
+      >
+        정말 삭제하시겠습니까?
+      </ModalConfirm>
+
       <div className="mypage-review-card__top">
         <div className="mypage-review-card__user">
-          <div className="mypage-review-card__profile"></div>
+          <div className="mypage-review-card__profile">
+            <img src={storeImage.imagePath} alt="store-image" />
+          </div>
           <div className="mypage-review-card__store">
-            <div className="mypage-review-card__name">홍길동네 돼지 국밥</div>
-            <div className="mypage-review-card__address">용인시 기흥구</div>
+            <div className="mypage-review-card__name">{storeName}</div>
+            <div className="mypage-review-card__address">{address}</div>
           </div>
         </div>
         <div className="mypage-review-card__method-button">
-          <Link href="/review/1">
+          <Link href={`/review/edit?reviewId=${reviewId}`}>
             <div className="mypage-review-card__edit-button">수정</div>
           </Link>
           <div
@@ -26,16 +81,20 @@ const MyPageReviewCard = ({ handleDeleteModalVisible }) => {
         </div>
       </div>
       <div className="mypage-review-card">
-        <div className="mypage-review-card__title mypage-review-card__title--revisit">
-          <img src="/images/common/revisit.png" />
-          재방문 의사 있어요!
+        <div
+          className={`mypage-review-card__title mypage-review-card__title--${scoreStatus[score]}`}
+        >
+          <img src={`/images/common/${scoreStatus[score]}.png`} />
+          {scoreComment[score]}
         </div>
-        <div className="mypage-review-card__content">
-          아이를 가지고 나서 국밥집은 잘 찾지 못했는데 아이들도 잘 먹을 수 있는
-          키즈메뉴들도 있고 사장님의 배려도 느껴져서 너무 좋았고 무엇보다
-          맛있었습니다!
+        <div className="mypage-review-card__content">{content}</div>
+        <div className="mypage-review-card__photo-slide">
+          {!!reviewImages?.length &&
+            reviewImages?.map((item) => (
+              <Image className="photo-slide-item" src={item.path} />
+            ))}
         </div>
-        <div className="mypage-review-card__date">2022-05-03</div>
+        <div className="mypage-review-card__date">{updateTime}</div>
       </div>
     </StyledWrapper>
   );
@@ -78,6 +137,12 @@ const StyledWrapper = styled.div`
         margin-right: 16px;
         background-color: #ffe9ef;
         border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .mypage-review-card__store {
@@ -158,6 +223,18 @@ const StyledWrapper = styled.div`
 
     .mypage-review-card__content {
       margin-bottom: 4px;
+    }
+
+    .mypage-review-card__photo-slide {
+      display: flex;
+      overflow: auto;
+      margin-bottom: 8px;
+
+      .photo-slide-item {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
     }
 
     .mypage-review-card__date {

@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import EnterSigninNickname from 'app.feature/enter/EnterSigninNickname';
 import { useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
 import API from 'app.modules/api';
-import { useRouter } from 'next/router';
+import EnterSigninNickname from 'app.feature/enter/EnterSigninNickname';
 import { API_USER_NICKNAME } from 'app.modules/api/keyFactory';
 
 const PageEnterSignin = () => {
-  const router = useRouter();
-
   const methods = useForm();
   const {
     handleSubmit,
@@ -25,7 +22,7 @@ const PageEnterSignin = () => {
         },
       });
 
-      router.push('/');
+      location.href = '/';
     } catch (err) {
       console.log(err);
     }
