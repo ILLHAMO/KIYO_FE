@@ -9,7 +9,7 @@ const PageMap = () => {
     <StyledWrapper>
       <MapHeader />
       <MapBackground />
-      <MapFloating />
+      {/* <MapFloating /> */}
     </StyledWrapper>
   );
 };
