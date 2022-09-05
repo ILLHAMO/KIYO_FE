@@ -49,6 +49,12 @@ const StyledWrapper = styled.div`
       background: #ffe9ef;
       border-radius: 50%;
       overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .mypage-info__profile-name {

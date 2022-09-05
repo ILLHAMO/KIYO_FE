@@ -46,8 +46,8 @@ const MyPageInquiryMyList = () => {
   ) : (
     <StyledWrapper className="mypage-inquiry-mylist">
       <Accordion alwaysOpen>
-        {dataset?.map((item) => (
-          <Accordion.Item eventKey="0">
+        {dataset?.map((item, idx) => (
+          <Accordion.Item key={`my-inquiry-${idx}`} eventKey={idx}>
             <Accordion.Header>
               <div className="title">{item.content}</div>
             </Accordion.Header>

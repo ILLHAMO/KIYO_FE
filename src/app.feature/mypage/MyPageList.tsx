@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import { message } from 'antd';
 
 const MyPageList = () => {
   const router = useRouter();
@@ -41,8 +42,18 @@ const MyPageList = () => {
       >
         설정
       </div>
-      <div className="mypage-list__route">키즈존 가요 정보</div>
-      <div className="mypage-list__route">키즈존 가요 후원하기</div>
+      <div
+        className="mypage-list__route"
+        onClick={() => message.info('서비스 준비중입니다.')}
+      >
+        키즈존 가요 정보
+      </div>
+      <div
+        className="mypage-list__route"
+        onClick={() => message.info('서비스 준비중입니다.')}
+      >
+        키즈존 가요 후원하기
+      </div>
     </StyledWrapper>
   );
 };
