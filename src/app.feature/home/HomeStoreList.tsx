@@ -42,7 +42,13 @@ const HomeStoreList = ({
   }
 
   return isSuccess && !dataset.length ? (
-    <NoneList link="/register" />
+    <StyledNoneWrapper>
+      <NoneList
+        link="/register"
+        title="등록된 데이터가 없습니다."
+        button="등록하러 가기"
+      />
+    </StyledNoneWrapper>
   ) : (
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) =>
@@ -58,6 +64,14 @@ const HomeStoreList = ({
 };
 
 export default HomeStoreList;
+
+const StyledNoneWrapper = styled.div`
+  padding-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
 
 const StyledWrapper = styled.div`
   padding: 0 20px;
