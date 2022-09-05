@@ -18,7 +18,7 @@ const PageHome = () => {
   const methods = useForm({
     defaultValues: {
       category: [],
-      convenience: [],
+      convenienceIds: [],
     },
   });
 
@@ -29,6 +29,7 @@ const PageHome = () => {
   } = methods;
 
   const watchCategory = watch('category');
+  const watchConvenience = watch('convenienceIds');
 
   const [filter, setFilter] = useState(null);
 
@@ -41,7 +42,16 @@ const PageHome = () => {
     }
   };
 
+  const onValidJustRegisterForm = (data) => {
+    try {
+      setFilter(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onSubmit = handleSubmit(onValidRegisterForm);
+  const onJustSubmit = handleSubmit(onValidJustRegisterForm);
 
   const handleConvenienceFilterVisibleShow = () => {
     setIsConvenienceFilterVisible(true);
@@ -54,6 +64,10 @@ const PageHome = () => {
   useEffect(() => {
     onSubmit();
   }, [watchCategory]);
+
+  useEffect(() => {
+    onJustSubmit();
+  }, [watchConvenience]);
 
   if (loading) return <PageLoading />;
   return (

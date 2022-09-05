@@ -28,7 +28,7 @@ const MyPageInquiryCreate = () => {
         data,
       });
 
-      if (response.data.status === 200) {
+      if (response.data.success) {
         router.back();
         message.success('문의 등록에 성공했습니다.');
       } else throw response;

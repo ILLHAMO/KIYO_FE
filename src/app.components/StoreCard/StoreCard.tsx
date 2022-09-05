@@ -5,6 +5,8 @@ import { useQueryClient } from 'react-query';
 import API from 'app.modules/api';
 import { TypeStoreInfo } from 'app.modules/type/type';
 import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
+import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
+import { message } from 'antd';
 
 type TProps = {
   storeInfo?: TypeStoreInfo;
@@ -12,6 +14,10 @@ type TProps = {
 
 const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
   const router = useRouter();
+
+  const { isLoading, login } = useGetUser();
+
+  if (isLoading) return null;
 
   const {
     id,
@@ -31,6 +37,7 @@ const StoreCard: React.FC<TProps> = ({ storeInfo }) => {
 
   const handleBookmark = async (isBookmark) => {
     try {
+      if (!login) router.push('/enter');
       if (isBookmark) {
         setIsBookmark(!isBookmark);
         setBookmarkCnt((prev) => prev - 1);

@@ -41,6 +41,8 @@ const HomeStoreList = ({
     dataset = [...dataset, ...SkeletonArray];
   }
 
+  console.log(filter);
+
   return isSuccess && !dataset.length ? (
     <StyledNoneWrapper>
       <NoneList

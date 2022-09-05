@@ -7,6 +7,7 @@ import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import API from 'app.modules/api';
 import { TypeStoreDetailInfo } from 'app.modules/type/type';
 import { API_BOOKMARK, API_STORE_BOOKMARK } from 'app.modules/api/keyFactory';
+import { useGetUser } from 'app.store/intoAPP/store.intoAPP';
 
 type TProps = {
   storeDetailInfo: TypeStoreDetailInfo;
@@ -17,6 +18,9 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
 
   const router = useRouter();
   const { storeId: id } = router.query;
+
+  const { isLoading, login } = useGetUser();
+  if (isLoading) return null;
 
   const { name, simpleComment, tag, call, address, booked, addressMap } =
     storeDetailInfo;
@@ -34,6 +38,7 @@ const StoreTopBannerPanel: React.FC<TProps> = ({ storeDetailInfo }) => {
 
   const handleClickBookmark = async (isBookmark) => {
     try {
+      if (!login) router.push('/enter');
       if (isBookmark) {
         setIsBookmark(!isBookmark);
         await API.DELETE({ url: API_BOOKMARK(id), data: {} });

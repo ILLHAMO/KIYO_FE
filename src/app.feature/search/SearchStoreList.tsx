@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StoreCard from 'app.components/StoreCard/StoreCard';
 import useQuerySearchStore from 'app.query/useQuerySearchStore';
 import useIntersectionObserver from 'app.hooks/useIntersectionObserver';
+import NoneList from 'app.components/NoneList/NoneList';
 
 type TProps = {
   keyword: string[] | string;
@@ -44,7 +45,13 @@ const SearchStoreList: React.FC<TProps> = ({ keyword, filter }) => {
   }
 
   return isSuccess && !dataset.length ? (
-    <StyledWrapper>없을 때</StyledWrapper>
+    <StyledNoneWrapper>
+      <NoneList
+        link="/register"
+        title="등록된 데이터가 없습니다."
+        button="등록하러 가기"
+      />
+    </StyledNoneWrapper>
   ) : (
     <StyledWrapper className="home-store-list">
       {dataset.map((item, idx) => (
@@ -62,6 +69,15 @@ const SearchStoreList: React.FC<TProps> = ({ keyword, filter }) => {
 };
 
 export default SearchStoreList;
+
+const StyledNoneWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+`;
 
 const StyledWrapper = styled.div`
   padding: 0 20px 20px;

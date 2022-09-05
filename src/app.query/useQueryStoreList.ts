@@ -11,8 +11,8 @@ export const requestStoreList = async ({
     const dataset = await API.GET({
       url: API_STORES,
       data: {
-        ...(filter?.convenience.length > 0 && {
-          convenienceIds: filter?.convenience,
+        ...(filter?.convenienceIds.length > 0 && {
+          convenienceIds: filter?.convenienceIds,
         }),
         address: encodeURI(geocoder[0].region_2depth_name),
         ...(filter?.category.length > 0 && { categoryIds: filter?.category }),

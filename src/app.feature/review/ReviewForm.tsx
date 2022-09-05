@@ -92,7 +92,6 @@ const ReviewForm: React.FC<TProps> = ({ reviewStore, editInfo }) => {
             JSON.stringify({
               score,
               content: data.content,
-              deleteIds,
             }),
           ],
           { type: 'application/json' }
