@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Image, message } from 'antd';
+import { message } from 'antd';
 import { useQueryClient } from 'react-query';
+import Image from 'app.components/Image/ImageTest';
 import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import { TypeUserReviewInfo } from 'app.modules/type/type';
@@ -61,7 +62,7 @@ const MyPageReviewCard: React.FC<TProps> = ({ reviewInfo }) => {
       <div className="mypage-review-card__top">
         <div className="mypage-review-card__user">
           <div className="mypage-review-card__profile">
-            <img src={storeImage.imagePath} alt="store-image" />
+            <Image src={storeImage.imagePath} alt="store-image" />
           </div>
           <div className="mypage-review-card__store">
             <div className="mypage-review-card__name">{storeName}</div>

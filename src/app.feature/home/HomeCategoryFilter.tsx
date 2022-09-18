@@ -94,6 +94,7 @@ const StyledWrapper = styled.div`
       }
 
       .category-item__img {
+        position: relative;
         width: 60px;
         height: 60px;
         overflow: hidden;

@@ -4,6 +4,7 @@ import useQueryFn from 'app.query/useQueryFn';
 import IconConvenience from './IconConvenience';
 import { API_CONVENIENCE } from 'app.modules/api/keyFactory';
 import { TypeStoreDetailInfo } from 'app.modules/type/type';
+import Image from 'app.components/Image/Image';
 
 type TProps = {
   setAboutScroll: (scroll: number) => void;
@@ -41,7 +42,7 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
               key={`store-info-photo-item-${idx}`}
               className="store-info__photo-item"
             >
-              <img src={item.path} />
+              <Image src={item.path} />
             </div>
           ))}
         </div>

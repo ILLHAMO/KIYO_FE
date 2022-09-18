@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StoreTopBannerPanel from './StoreTopBannerPanel';
 import { useRouter } from 'next/router';
 import { TypeStoreDetailInfo } from 'app.modules/type/type';
+import Image from 'app.components/Image/Image';
 
 type TProps = {
   storeDetailInfo: TypeStoreDetailInfo;
@@ -22,7 +23,7 @@ const StoreTopBanner: React.FC<TProps> = ({ storeDetailInfo }) => {
         />
       </div>
       <div className="store-top-banner__image">
-        {!!images?.length && <img src={images[0].path} />}
+        {!!images?.length && <Image src={images[0].path} />}
       </div>
       <StoreTopBannerPanel storeDetailInfo={storeDetailInfo} />
       <div className="store-top-banner__operating-time">
@@ -47,6 +48,7 @@ const StyledWrapper = styled.div`
     width: 100%;
     top: 0;
     padding: 8px;
+    z-index: 1;
 
     img {
       cursor: pointer;
@@ -61,12 +63,7 @@ const StyledWrapper = styled.div`
     background-color: #ffe9ef;
     margin-bottom: 48px;
     overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    position: relative;
   }
 
   .store-top-banner__operating-time {

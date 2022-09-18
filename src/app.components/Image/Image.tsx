@@ -8,6 +8,9 @@ const Image = ({ src, ...imageProps }: ImageProps) => {
       src={src}
       blurDataURL={src}
       placeholder="blur"
+      width="100%"
+      height="100%"
+      layout="fill"
       {...imageProps}
     />
   );
@@ -18,4 +21,5 @@ export default Image;
 const StyledWrapper = styled(OriginalImage)`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;

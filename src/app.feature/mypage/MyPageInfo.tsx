@@ -42,6 +42,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
 
     .mypage-info__profile-img {
+      position: relative;
       width: 100px;
       height: 100px;
       min-width: 100px;

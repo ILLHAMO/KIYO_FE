@@ -17,7 +17,7 @@ const NEXT_CONFIG = {
   },
 
   images: {
-    domains: ['kiyoimage.s3.ap-northeast-2.amazonaws.com'],
+    domains: ['kiyoimage.s3.ap-northeast-2.amazonaws.com', 'k.kakaocdn.net'],
   },
   env: {
     KIYO_NODE_ENV: processEnv.KIYO_NODE_ENV,
