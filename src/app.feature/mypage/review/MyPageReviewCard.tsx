@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { message } from 'antd';
 import { useQueryClient } from 'react-query';
-import Image from 'app.components/Image/ImageTest';
+import Image from 'app.components/Image/Image';
 import API from 'app.modules/api';
 import ModalConfirm from 'app.components/Modal/ModalConfirm';
 import { TypeUserReviewInfo } from 'app.modules/type/type';
