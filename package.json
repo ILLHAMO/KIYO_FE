@@ -16,6 +16,7 @@
     "@ant-design/icons": "^4.7.0",
     "@netlify/plugin-nextjs": "^4.11.1",
     "@svgr/webpack": "6.2.1",
+    "@types/navermaps": "^3.0.17",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.10.1",
     "antd": "4.21.3",

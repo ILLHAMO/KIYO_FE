@@ -24,6 +24,8 @@ const StoreTabPaneAbout: React.FC<TProps> = ({
   const { address, images } = storeDetailInfo;
   const { data: serviceList, isLoading } = useQueryFn([API_CONVENIENCE]);
 
+  console.log(serviceList, storeDetailInfo.convenienceIds);
+
   return (
     <StyledWrapper className="store-tab-pane-about" id="scroll-about">
       <div className="store-tab-pane-about__title">About</div>
