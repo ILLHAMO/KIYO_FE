@@ -37,22 +37,22 @@ export default function Map() {
         ].join(','),
       },
       (status, response) => {
-        // if (status === naver.maps.Service.Status.ERROR)
-        //   window.ReactNativeWebView.postMessage(
-        //     JSON.stringify({
-        //       status,
-        //     })
-        //   );
-        // else
-        //   window.ReactNativeWebView.postMessage(
-        //     JSON.stringify({
-        //       status,
-        //       coords: new naver.maps.LatLng(lat, lng),
-        //       jibunAddress: response.v2.address.jibunAddress,
-        //       roadAddress: response.v2.address.roadAddress,
-        //       area: response?.v2.results[0].region.area3.name,
-        //     })
-        //   );
+        if (status === naver.maps.Service.Status.ERROR)
+          window.ReactNativeWebView.postMessage(
+            JSON.stringify({
+              status,
+            })
+          );
+        else
+          window.ReactNativeWebView.postMessage(
+            JSON.stringify({
+              status,
+              coords: new naver.maps.LatLng(lat, lng),
+              jibunAddress: response.v2.address.jibunAddress,
+              roadAddress: response.v2.address.roadAddress,
+              area: response?.v2.results[0].region.area3.name,
+            })
+          );
       }
     );
   }, []);
