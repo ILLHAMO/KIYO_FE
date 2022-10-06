@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import styled from 'styled-components';
-import { LatLng } from './gis';
+import { LatLng } from '../../app.modules/util/gis';
 import { useRouter } from 'next/router';
-import { queryToNumber } from './query';
+import { queryToNumber } from 'app.modules/util/query';
+
 // 대한민국 대충 중심 어딘가
 export const DEFAULT_LATITUDE = 35.95;
 export const DEFAULT_LONGITUDE = 128.25;
